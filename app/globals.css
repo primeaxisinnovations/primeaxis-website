@@ -56,6 +56,14 @@ body {
   to { opacity: 1; }
 }
 
+@keyframes water-drift {
+  0%   { transform: scale(1.12) translate(0%,   0%); }
+  25%  { transform: scale(1.12) translate(-2.5%, 1%); }
+  50%  { transform: scale(1.12) translate(-4%,   0%); }
+  75%  { transform: scale(1.12) translate(-2%,  -1%); }
+  100% { transform: scale(1.12) translate(0%,    0%); }
+}
+
 /* ── ANIMATION UTILITY CLASSES ───────────────────────────────── */
 .animate-ticker     { animation: ticker 30s linear infinite; }
 .animate-pulse-dot  { animation: pulse-dot 2s ease-in-out infinite; }
@@ -76,6 +84,9 @@ body {
   transition: opacity 0.65s cubic-bezier(0.16,1,0.3,1), transform 0.65s cubic-bezier(0.16,1,0.3,1);
 }
 .fade-in.show { opacity: 1; transform: none; }
+
+/* Animated water background */
+.animate-water-drift { animation: water-drift 24s ease-in-out infinite; }
 
 /* Misc utilities not in Tailwind core */
 .scrollbar-none                  { scrollbar-width: none; }

@@ -11,10 +11,13 @@ function ArrowRight({ size = 14, strokeWidth = 2 }: { size?: number; strokeWidth
 }
 
 // ── Hero carousel slides (preloaded — all rendered in DOM) ─────
+// TODO slide 3: replace with direct lh3.googleusercontent.com URL from share.google/yunlHzabLTsWq9QmO
+// TODO slide 4: replace with "/imcremex-2024.jpg" once that file is saved to /public/
 const CAROUSEL_SLIDES = [
   "https://images.unsplash.com/photo-1605745341112-85968b19335b?w=1920&q=85&fit=crop&auto=format",
   "https://images.unsplash.com/photo-1678182451047-196f22a4143e?w=1920&q=85&fit=crop&auto=format",
-  "https://images.unsplash.com/photo-1590496793907-4d66e2994b4d?w=1920&q=85&fit=crop&auto=format",
+  "https://images.unsplash.com/photo-1567427017947-545c5f8d16ad?w=1920&q=85&fit=crop&auto=format",
+  "https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=1920&q=85&fit=crop&auto=format",
 ];
 
 // ── Intelligence card data ─────────────────────────────────────
@@ -57,7 +60,6 @@ export default function Home() {
   const [scrolled, setScrolled]       = useState(false);
   const [mobileOpen, setMobileOpen]   = useState(false);
   const [activeSlide, setActiveSlide] = useState(0);
-  const [isPaused, setIsPaused]       = useState(false);
   const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
 
   // Nav background: transparent → frosted glass on scroll
@@ -82,17 +84,13 @@ export default function Home() {
     return () => io.disconnect();
   }, []);
 
-  // Hero carousel: auto-advance every 5 s, pauses on hover
+  // Hero carousel: auto-advance every 5 s unconditionally (no pause on hover)
   useEffect(() => {
-    if (isPaused) {
-      if (intervalRef.current) clearInterval(intervalRef.current);
-      return;
-    }
     intervalRef.current = setInterval(() => {
       setActiveSlide((prev) => (prev + 1) % CAROUSEL_SLIDES.length);
     }, 5000);
     return () => { if (intervalRef.current) clearInterval(intervalRef.current); };
-  }, [isPaused]);
+  }, []);
 
   // Lock body scroll when mobile menu is open
   useEffect(() => {
@@ -214,8 +212,6 @@ export default function Home() {
       {/* ── HERO — full-screen fade carousel ──────────────────── */}
       <section
         className="min-h-screen grid grid-rows-[1fr_auto] bg-deep relative overflow-hidden"
-        onMouseEnter={() => setIsPaused(true)}
-        onMouseLeave={() => setIsPaused(false)}
       >
         {/* ── Carousel slides: <img> ensures all 3 images preload on mount */}
         {CAROUSEL_SLIDES.map((url, i) => (
@@ -306,8 +302,14 @@ export default function Home() {
 
               {/* Right: featured analysis card */}
               <div
-                className="hero-card-anim hidden lg:block relative p-9 border border-gold/30"
-                style={{ background: "rgba(0,12,26,.78)", backdropFilter: "blur(22px)" }}
+                className="hero-card-anim hidden lg:block relative p-9"
+                style={{
+                  background: "rgba(10,20,35,0.48)",
+                  backdropFilter: "blur(22px)",
+                  WebkitBackdropFilter: "blur(22px)",
+                  border: "1px solid rgba(255,255,255,0.13)",
+                  boxShadow: "0 8px 40px rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,255,255,0.08)",
+                }}
               >
                 <div
                   className="absolute top-0 left-0 right-0 h-[2px]"
@@ -491,9 +493,21 @@ export default function Home() {
                   <span className="w-[5px] h-[5px] rounded-full bg-gold flex-shrink-0" />
                   Policy & Regulation
                 </span>
-                <h3 className="font-display text-[clamp(19px,1.9vw,26px)] font-bold text-ink leading-[1.22] mb-[14px] flex-1">
+                <h3 className="font-display text-[clamp(19px,1.9vw,26px)] font-bold text-ink leading-[1.22] mb-5">
                   Nigeria's Cabotage Regime at a Crossroads: What the 2025 Amendments Mean for Indigenous Shipping and the Future of Local Capacity
                 </h3>
+
+                {/* IMCREMEX 2024 — Nigerian Defence Ministry source */}
+                <div className="relative -mx-11 max-sm:-mx-6 mb-5 overflow-hidden flex-shrink-0">
+                  <img
+                    src="https://defence.gov.ng/wp-content/uploads/2023/05/IMG-20230520-WA0093-1024x683.jpg"
+                    alt="5th International Maritime Conference IMCREMEX 2024"
+                    loading="lazy"
+                    className="w-full h-[195px] object-cover object-top"
+                  />
+                  <div className="absolute inset-x-0 bottom-0 h-8 pointer-events-none" style={{ background: "linear-gradient(to bottom, transparent, white)" }} />
+                </div>
+
                 <p className="text-[14px] leading-[1.72] font-light text-muted mb-6">
                   The latest amendments to the Coastal and Inland Shipping Act present both historic opportunity and significant operational risk for Nigerian shipowners. We examine the full regulatory landscape, stakeholder reactions from NIMASA and industry groups, and the strategic implications for indigenous fleet operators now navigating an evolving compliance environment.
                 </p>
@@ -610,7 +624,7 @@ export default function Home() {
                 <div>
                   <div className="font-display text-[16px] font-semibold text-white mb-[2px]">Olawale Adeyemi</div>
                   <div className="text-[12.5px] text-white/40 font-light">
-                    Director General, Nigerian Maritime Administration &amp; Safety Agency · (Placeholder)
+                    Maritime Consultant
                   </div>
                 </div>
               </div>
@@ -638,17 +652,18 @@ export default function Home() {
                 className="relative overflow-hidden"
                 style={{ aspectRatio: "4/5" }}
               >
-                {/* Podcast / panel discussion thumbnail */}
+                {/* TODO: replace src below with the direct lh3.googleusercontent.com URL from share.google/EYyGCRQUOcYtLzLwJ */}
                 <img
-                  src="https://images.unsplash.com/photo-1557804506-669a67965ba0?w=800&q=80&fit=crop&auto=format"
-                  alt="Executive Conversations panel"
+                  src="https://images.unsplash.com/photo-1478737270239-2f02b77fc618?w=800&q=80&fit=crop&auto=format"
+                  alt="Executive Conversations — podcast panel discussion"
                   loading="lazy"
                   className="absolute inset-0 w-full h-full object-cover"
+                  style={{ objectPosition: "center top" }}
                 />
-                {/* Colour-grade overlay keeps brand palette */}
+                {/* Dark gradient overlay — transparent top → brand-dark bottom */}
                 <div
                   className="absolute inset-0"
-                  style={{ background: "linear-gradient(180deg, rgba(21,28,46,.40) 0%, rgba(21,28,46,.82) 100%), radial-gradient(circle at 40% 30%, rgba(191,159,102,.10) 0%, transparent 55%)" }}
+                  style={{ background: "linear-gradient(180deg, transparent 0%, rgba(10,20,35,0.75) 100%)" }}
                 />
                 <div
                   className="absolute top-[22px] left-[22px] px-[13px] py-[7px] border"
@@ -699,8 +714,8 @@ export default function Home() {
           alt=""
           loading="lazy"
           aria-hidden="true"
-          className="absolute inset-0 w-full h-full object-cover pointer-events-none select-none"
-          style={{ opacity: 0.25 }}
+          className="absolute inset-0 w-full h-full object-cover pointer-events-none select-none animate-water-drift"
+          style={{ opacity: 0.25, transformOrigin: "center center" }}
         />
 
         <div className="relative max-w-[1240px] mx-auto px-11 max-sm:px-5">
@@ -757,11 +772,10 @@ export default function Home() {
               { n: "02", icon: <svg viewBox="0 0 24 24" fill="none" strokeWidth="1.5" strokeLinecap="round" className="w-[26px] h-[26px] stroke-teal"><circle cx="12" cy="12" r="10"/><polygon points="10 8 16 12 10 16 10 8"/></svg>, name: "Media Production & Coverage", desc: "Professional production of executive interviews, event coverage, documentary features, and multimedia content for maritime organisations.", delay: "0.08s" },
               { n: "03", icon: <svg viewBox="0 0 24 24" fill="none" strokeWidth="1.5" strokeLinecap="round" className="w-[26px] h-[26px] stroke-teal"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/></svg>, name: "Executive Visibility", desc: "Positioning programmes for maritime executives seeking to build industry authority, expand stakeholder relationships, and elevate their professional profile.", delay: "0.16s" },
               { n: "04", icon: <svg viewBox="0 0 24 24" fill="none" strokeWidth="1.5" strokeLinecap="round" className="w-[26px] h-[26px] stroke-teal"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>, name: "Sponsored Features & Partnerships", desc: "Premium branded content, sponsored editorial series, and strategic partnership programmes for organisations seeking visibility within the African maritime community.", delay: "0.24s" },
-            ].map(({ n, icon, name, desc, delay }) => (
-              <div key={n} className="fade-in group bg-white p-10 px-8 relative overflow-hidden transition-transform duration-[280ms] hover:-translate-y-1 hover:shadow-[0_8px_30px_rgba(0,32,43,.1)] hover:z-[1]" style={{ transitionDelay: delay }}>
+            ].map(({ icon, name, desc, delay }) => (
+              <div key={name} className="fade-in group bg-white p-10 px-8 relative overflow-hidden transition-transform duration-[280ms] hover:-translate-y-1 hover:shadow-[0_8px_30px_rgba(0,32,43,.1)] hover:z-[1]" style={{ transitionDelay: delay }}>
                 <div className="absolute bottom-0 left-0 right-0 h-[2px] bg-cream-d group-hover:bg-gold transition-colors duration-[250ms]" />
-                <div className="font-mono text-[10px] tracking-[.14em] text-gold/50 mb-[22px]">{n}</div>
-                <div className="mb-[18px]">{icon}</div>
+                <div className="mb-[18px] mt-2">{icon}</div>
                 <div className="font-display text-[17.5px] font-semibold text-ink mb-[10px] leading-[1.2]">{name}</div>
                 <p className="text-[13px] leading-[1.7] text-muted font-light">{desc}</p>
               </div>
@@ -852,11 +866,6 @@ export default function Home() {
       <section className="bg-cream py-20 max-sm:py-14 scroll-mt-[100px]" id="newsletter">
         <div className="max-w-[620px] mx-auto px-11 text-center max-sm:px-5">
           <div className="fade-in">
-            <div className="inline-flex items-center gap-2 border px-[14px] py-[6px] mb-6" style={{ borderColor: "rgba(191,159,102,.25)" }}>
-              <span className="w-1.5 h-1.5 rounded-full bg-gold animate-pulse-dot" />
-              <span className="font-mono text-[9.5px] tracking-[.16em] uppercase text-gold">PrimeAxis Intelligence Briefing</span>
-            </div>
-
             <h2 className="font-display text-[clamp(22px,2.5vw,32px)] font-semibold text-deep mb-[14px] leading-[1.2]">
               Stay Ahead of Africa's Maritime Intelligence
             </h2>

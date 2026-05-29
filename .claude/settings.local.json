@@ -4,7 +4,9 @@
       "Bash(sed -n '900,1100p' /mnt/c/Users/DELL/primeaxis-website/primeaxis_homepage.html)",
       "Read(//mnt/c/Users/DELL/primeaxis-website/**)",
       "PowerShell($content = Get-Content \"c:\\\\Users\\\\DELL\\\\primeaxis-website\\\\primeaxis_homepage.html\"; Write-Host \"Total lines: $\\($content.Count\\)\")",
-      "Bash(npm run *)"
+      "Bash(npm run *)",
+      "WebFetch(domain:share.google)",
+      "WebFetch(domain:www.google.com)"
     ]
   }
 }
