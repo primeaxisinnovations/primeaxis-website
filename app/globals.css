@@ -1,0 +1,83 @@
+@import "tailwindcss";
+
+@theme {
+  /* Brand fonts — populated via CSS vars injected by next/font */
+  --font-display: var(--font-playfair), Georgia, serif;
+  --font-body: var(--font-montserrat), system-ui, sans-serif;
+  --font-mono: var(--font-dm-mono), "Courier New", monospace;
+
+  /* Brand colours */
+  --color-deep:    #151C2E;
+  --color-teal:    #263050;
+  --color-mid:     #485778;
+  --color-steel:   #5E719A;
+  --color-gold:    #BF9F66;
+  --color-gold-l:  #D4B880;
+  --color-cream:   #F4F1EB;
+  --color-cream-d: #E5E0D5;
+  --color-ink:     #0D1F28;
+  --color-muted:   #5C7A87;
+  --color-muted-l: #8AAAB6;
+  --color-brd:     #DDD9D0;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: var(--font-body);
+  color: var(--color-ink);
+  background: var(--color-cream);
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+/* ── ANIMATIONS ──────────────────────────────────────────────── */
+@keyframes ticker {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+@keyframes pulse-dot {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50%       { opacity: 0.5; transform: scale(0.8); }
+}
+
+@keyframes scroll-down {
+  0%   { top: -40%; opacity: 0; }
+  30%  { opacity: 1; }
+  100% { top: 100%; opacity: 0; }
+}
+
+@keyframes h-in {
+  to { opacity: 1; transform: none; }
+}
+
+@keyframes h-fade {
+  to { opacity: 1; }
+}
+
+/* ── ANIMATION UTILITY CLASSES ───────────────────────────────── */
+.animate-ticker     { animation: ticker 30s linear infinite; }
+.animate-pulse-dot  { animation: pulse-dot 2s ease-in-out infinite; }
+.animate-scroll-down { animation: scroll-down 2s ease-in-out infinite; }
+
+/* Hero entrance animations */
+.hero-tag-anim        { opacity: 0; transform: translateY(18px); animation: h-in 0.75s cubic-bezier(0.16,1,0.3,1) 0.2s  forwards; }
+.hero-headline-anim   { opacity: 0; transform: translateY(24px); animation: h-in 0.85s cubic-bezier(0.16,1,0.3,1) 0.4s  forwards; }
+.hero-standfirst-anim { opacity: 0; transform: translateY(20px); animation: h-in 0.75s cubic-bezier(0.16,1,0.3,1) 0.6s  forwards; }
+.hero-actions-anim    { opacity: 0; transform: translateY(16px); animation: h-in 0.7s  cubic-bezier(0.16,1,0.3,1) 0.75s forwards; }
+.hero-card-anim       { opacity: 0; transform: translateX(20px); animation: h-in 0.85s cubic-bezier(0.16,1,0.3,1) 0.55s forwards; }
+.hero-stats-anim      { opacity: 0;                              animation: h-fade 0.8s cubic-bezier(0.16,1,0.3,1) 1.1s forwards; }
+
+/* Intersection-observer scroll fade-in */
+.fade-in {
+  opacity: 0;
+  transform: translateY(22px);
+  transition: opacity 0.65s cubic-bezier(0.16,1,0.3,1), transform 0.65s cubic-bezier(0.16,1,0.3,1);
+}
+.fade-in.show { opacity: 1; transform: none; }
+
+/* Misc utilities not in Tailwind core */
+.scrollbar-none                  { scrollbar-width: none; }
+.scrollbar-none::-webkit-scrollbar { display: none; }
+.writing-vertical                { writing-mode: vertical-rl; }
