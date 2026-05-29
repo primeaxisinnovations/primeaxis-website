@@ -6,7 +6,10 @@
       "PowerShell($content = Get-Content \"c:\\\\Users\\\\DELL\\\\primeaxis-website\\\\primeaxis_homepage.html\"; Write-Host \"Total lines: $\\($content.Count\\)\")",
       "Bash(npm run *)",
       "WebFetch(domain:share.google)",
-      "WebFetch(domain:www.google.com)"
+      "WebFetch(domain:www.google.com)",
+      "Bash(git commit -m ' *)",
+      "Bash(git add *)",
+      "Bash(git push *)"
     ]
   }
 }
