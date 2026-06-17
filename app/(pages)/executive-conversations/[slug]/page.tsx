@@ -6,6 +6,7 @@ import { conversations } from '@/lib/placeholder-data'
 import { formatDate } from '@/lib/utils'
 import AnimatedSection from '@/components/ui/AnimatedSection'
 import ConversationCard from '@/components/ui/ConversationCard'
+import DispatchHeader from '@/components/ui/DispatchHeader'
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://primeaxis.africa'
 
@@ -127,6 +128,15 @@ export default async function ConversationPage({ params }: PageProps) {
         {/* Q&A */}
         <AnimatedSection delay={100}>
           <div className="max-w-[720px]">
+
+            <DispatchHeader
+              refCode={conversation.transcriptRef}
+              date={formatDate(conversation.date)}
+              desk="ON RECORD"
+              dateLabel="RECORDED"
+              refLabel="TRANSCRIPT REF"
+              deskLabel="STATUS"
+            />
 
             {conversation.qa.map((pair, i) => (
               <div key={i}>

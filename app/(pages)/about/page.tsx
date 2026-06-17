@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import type { ReactElement } from 'react'
 import Link from 'next/link'
 import AnimatedSection from '@/components/ui/AnimatedSection'
+import StampSeal from '@/components/ui/StampSeal'
 
 export const metadata: Metadata = {
   title: 'About PrimeAxis | Maritime Intelligence & Strategic Communications Platform',
@@ -10,14 +11,12 @@ export const metadata: Metadata = {
 }
 
 const PILLARS: Array<{
-  number: string
   icon: ReactElement
   title: string
   description: string
   items: string[]
 }> = [
   {
-    number: '01',
     icon: (
       <svg
         viewBox="0 0 24 24"
@@ -42,7 +41,6 @@ const PILLARS: Array<{
     ],
   },
   {
-    number: '02',
     icon: (
       <svg
         viewBox="0 0 24 24"
@@ -67,7 +65,6 @@ const PILLARS: Array<{
     ],
   },
   {
-    number: '03',
     icon: (
       <svg
         viewBox="0 0 24 24"
@@ -105,12 +102,40 @@ export default function AboutPage() {
             <span className="block font-mono text-[10.5px] tracking-[0.2em] uppercase text-gold mb-5">
               About PrimeAxis
             </span>
-            <h1 className="font-display text-[clamp(28px,4vw,54px)] font-semibold text-deep leading-[1.1] max-w-[760px] mb-5">
+            <h1 className="font-display text-[clamp(28px,4vw,54px)] font-semibold text-deep leading-[1.1] max-w-[760px]">
               Shaping the Conversations That Define Africa&apos;s Maritime Future
             </h1>
-            <p className="font-sans text-[16px] text-muted leading-relaxed max-w-[520px]">
-              To inform, influence and elevate the conversations shaping Africa&apos;s maritime future.
-            </p>
+          </AnimatedSection>
+        </div>
+      </section>
+
+      {/* ── Vision & Mission ─────────────────────────────────────── */}
+      <section className="bg-white border-b border-border py-[56px] max-sm:py-10">
+        <div className="max-w-[1240px] mx-auto px-11 max-sm:px-5">
+          <AnimatedSection>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-px bg-border">
+
+              <div className="bg-white pr-12 max-sm:pr-0 py-6 max-sm:pb-8">
+                <span className="block font-mono text-[10px] tracking-[0.22em] uppercase text-gold mb-4">
+                  Vision
+                </span>
+                <p className="font-display text-[clamp(17px,1.8vw,22px)] font-semibold text-deep leading-[1.4]">
+                  To become Africa&apos;s leading maritime intelligence and strategic communications
+                  platform.
+                </p>
+              </div>
+
+              <div className="bg-white pl-12 max-sm:pl-0 max-sm:pt-8 py-6">
+                <span className="block font-mono text-[10px] tracking-[0.22em] uppercase text-gold mb-4">
+                  Mission
+                </span>
+                <p className="font-display text-[clamp(17px,1.8vw,22px)] font-semibold text-deep leading-[1.4]">
+                  To inform, influence and elevate the conversations shaping Africa&apos;s maritime
+                  future.
+                </p>
+              </div>
+
+            </div>
           </AnimatedSection>
         </div>
       </section>
@@ -147,10 +172,7 @@ export default function AboutPage() {
             <div className="grid grid-cols-1 md:grid-cols-3 gap-px bg-border">
               {PILLARS.map((pillar) => (
                 <div key={pillar.title} className="bg-cream p-8 max-sm:p-6 flex flex-col">
-                  <span className="font-mono text-[11px] tracking-[0.22em] text-gold/50 mb-6 block">
-                    {pillar.number}
-                  </span>
-                  <div className="mb-5">{pillar.icon}</div>
+                  <StampSeal size={64} className="mb-6">{pillar.icon}</StampSeal>
                   <h3 className="font-display text-[21px] font-semibold text-deep mb-3">
                     {pillar.title}
                   </h3>
@@ -177,63 +199,68 @@ export default function AboutPage() {
       <section className="py-[80px] max-sm:py-14 bg-cream">
         <div className="max-w-[1240px] mx-auto px-11 max-sm:px-5">
           <AnimatedSection>
+            <div className="grid grid-cols-1 md:grid-cols-[2fr_3fr] gap-12 lg:gap-16 items-start">
 
-            <span className="block font-mono text-[10.5px] tracking-[0.2em] uppercase text-gold mb-10">
-              The Founder
-            </span>
-
-            {/* Identity row */}
-            <div className="flex items-start gap-8 max-sm:flex-col max-sm:gap-6 mb-10">
-
+              {/* ── Left column: portrait image ───────────────────── */}
               {/*
-                PLACEHOLDER: Replace this initials avatar with Nneoma's real portrait photograph
-                once received from the "Founder Profile" asset folder referenced in her brief.
-                Dimensions: 160×160px minimum, square crop, professional headshot.
+                PLACEHOLDER: This entire div is the image swap point.
+                Once Nneoma's photograph is available from the "Founder Profile" asset folder,
+                replace this gradient div with:
+                  <div className="relative w-full aspect-[4/5] rounded-sm2 overflow-hidden border border-gold/20">
+                    <Image src="/images/founder/nneoma-obi-asualo.jpg" alt="Nneoma Blessing Obi-Asualo" fill className="object-cover object-top" sizes="(max-width: 768px) 100vw, 40vw" priority />
+                  </div>
+                No other layout changes required.
               */}
-              <div
-                className="w-[160px] h-[160px] flex-shrink-0 flex items-center justify-center bg-gradient-to-br from-teal to-deep border-2 border-gold/30"
-                aria-label="Nneoma Blessing Obi-Asualo"
-              >
-                <span className="font-display text-[40px] font-semibold text-white/85 tracking-wider select-none">
-                  NO
+              <div className="w-full aspect-[4/5] rounded-sm2 overflow-hidden border border-gold/20 bg-gradient-to-br from-teal to-deep flex items-center justify-center">
+                <span
+                  className="font-display font-semibold text-white/80 tracking-widest select-none"
+                  style={{ fontSize: 'clamp(3rem, 8vw, 5.5rem)' }}
+                  aria-label="Nneoma Blessing Obi-Asualo"
+                >
+                  NBO
                 </span>
               </div>
 
-              <div className="pt-2 max-sm:pt-0">
+              {/* ── Right column: identity + bio ──────────────────── */}
+              <div className="flex flex-col justify-center pt-2 max-sm:pt-0">
+                <span className="block font-mono text-[10.5px] tracking-[0.2em] uppercase text-gold mb-6">
+                  The Founder
+                </span>
                 <h2 className="font-display text-[clamp(24px,3vw,42px)] font-semibold text-deep leading-[1.1] mb-3">
                   Nneoma Blessing Obi-Asualo
                 </h2>
-                <p className="font-mono text-[11px] uppercase tracking-[0.18em] text-gold">
+                <p className="font-mono text-[11px] uppercase tracking-[0.18em] text-gold mb-8">
                   Founder &amp; CEO, PrimeAxis
                 </p>
+
+                {/* Bio — verbatim from brief, lightly edited for paragraph flow */}
+                <div className="space-y-5">
+                  <p className="font-sans text-[15.5px] text-ink leading-[1.8]">
+                    Nneoma Blessing Obi-Asualo is a trained broadcast journalist, maritime
+                    communications professional, and Founder &amp; CEO of PrimeAxis — a maritime
+                    intelligence and strategic communications platform dedicated to informing,
+                    influencing and elevating conversations shaping Africa&apos;s maritime future.
+                  </p>
+                  <p className="font-sans text-[15.5px] text-ink leading-[1.8]">
+                    Through years of engagement with policymakers, regulators, industry leaders and
+                    maritime stakeholders, she has developed a deep interest in advancing strategic
+                    dialogue around maritime development, trade and logistics, port and shipping
+                    operations, maritime policy and the blue economy. Her professional experience
+                    spans journalism, stakeholder engagement, strategic communications and
+                    industry-focused content development.
+                  </p>
+                  <p className="font-sans text-[15.5px] text-ink leading-[1.8]">
+                    She is passionate about fostering informed discussions, promoting thought
+                    leadership and contributing to conversations that support sustainable growth and
+                    competitiveness across Africa&apos;s maritime sector. Through PrimeAxis, she
+                    seeks to provide credible insights, executive perspectives and strategic
+                    analysis that help shape the future of Africa&apos;s maritime and blue economy
+                    landscape.
+                  </p>
+                </div>
               </div>
-            </div>
 
-            {/* Bio — verbatim from brief, lightly edited for paragraph flow */}
-            <div className="max-w-[680px] space-y-5">
-              <p className="font-sans text-[16px] text-ink leading-[1.8]">
-                Nneoma Blessing Obi-Asualo is a trained broadcast journalist, maritime
-                communications professional, and Founder &amp; CEO of PrimeAxis — a maritime
-                intelligence and strategic communications platform dedicated to informing,
-                influencing and elevating conversations shaping Africa&apos;s maritime future.
-              </p>
-              <p className="font-sans text-[16px] text-ink leading-[1.8]">
-                Through years of engagement with policymakers, regulators, industry leaders and
-                maritime stakeholders, she has developed a deep interest in advancing strategic
-                dialogue around maritime development, trade and logistics, port and shipping
-                operations, maritime policy and the blue economy. Her professional experience spans
-                journalism, stakeholder engagement, strategic communications and industry-focused
-                content development.
-              </p>
-              <p className="font-sans text-[16px] text-ink leading-[1.8]">
-                She is passionate about fostering informed discussions, promoting thought leadership
-                and contributing to conversations that support sustainable growth and
-                competitiveness across Africa&apos;s maritime sector. Through PrimeAxis, she seeks
-                to provide credible insights, executive perspectives and strategic analysis that
-                help shape the future of Africa&apos;s maritime and blue economy landscape.
-              </p>
             </div>
-
           </AnimatedSection>
         </div>
       </section>

@@ -71,10 +71,15 @@ export default function IntelligenceHubGrid() {
           </div>
         ) : (
           <AnimatedSection delay={100}>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-              {visible.map((article) => (
-                <ArticleCard key={article.slug} article={article} variant="standard" />
-              ))}
+            <div className="flex flex-col gap-10">
+              <ArticleCard article={visible[0]} variant="hero" />
+              {visible.length > 1 && (
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                  {visible.slice(1).map((article) => (
+                    <ArticleCard key={article.slug} article={article} variant="standard" />
+                  ))}
+                </div>
+              )}
             </div>
           </AnimatedSection>
         )}

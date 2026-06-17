@@ -7,6 +7,7 @@ export interface Article {
   date: string
   readingTime: string
   featuredImage: string
+  referenceCode: string
   content?: string
   tags?: string[]
 }
@@ -20,6 +21,7 @@ export interface Conversation {
   photo: string
   initials?: string
   qa: { question: string; answer: string }[]
+  transcriptRef: string
   excerpt: string
   date: string
   content?: string

@@ -13,6 +13,7 @@ export const articles: Article[] = [
     date: '2026-06-10',
     readingTime: '8 min read',
     featuredImage: 'https://images.unsplash.com/photo-1505118380757-91f5f5632de0?w=800&q=80&fit=crop',
+    referenceCode: 'BE-2026-002',
     tags: ['Blue Economy', 'Finance', 'Policy', 'Africa'],
   },
   {
@@ -25,6 +26,7 @@ export const articles: Article[] = [
     date: '2026-05-28',
     readingTime: '10 min read',
     featuredImage: 'https://images.unsplash.com/photo-1605745341112-85968b19335b?w=800&q=80&fit=crop',
+    referenceCode: 'MP-2026-001',
     tags: ['IMO', 'Carbon', 'Regulation', 'Decarbonisation'],
   },
   {
@@ -37,6 +39,7 @@ export const articles: Article[] = [
     date: '2026-05-14',
     readingTime: '12 min read',
     featuredImage: 'https://images.unsplash.com/photo-1678182451047-196f22a4143e?w=800&q=80&fit=crop',
+    referenceCode: 'PI-2026-001',
     tags: ['Ports', 'Nigeria', 'Infrastructure', 'West Africa'],
   },
   {
@@ -49,6 +52,7 @@ export const articles: Article[] = [
     date: '2026-04-22',
     readingTime: '9 min read',
     featuredImage: 'https://images.unsplash.com/photo-1590496793907-4d66e2994b4d?w=800&q=80&fit=crop',
+    referenceCode: 'SL-2026-001',
     tags: ['Cabotage', 'Shipping', 'West Africa', 'Policy'],
   },
   {
@@ -61,6 +65,7 @@ export const articles: Article[] = [
     date: '2026-04-05',
     readingTime: '11 min read',
     featuredImage: 'https://images.unsplash.com/photo-1605745341112-85968b19335b?w=800&q=80&fit=crop',
+    referenceCode: 'RG-2026-001',
     tags: ['Abuja MoU', 'PSC', 'Compliance', 'Governance'],
   },
 ]
@@ -79,6 +84,7 @@ export const allArticles: Article[] = [
     date: '2026-06-03',
     readingTime: '7 min read',
     featuredImage: 'https://images.unsplash.com/photo-1505118380757-91f5f5632de0?w=800&q=80&fit=crop',
+    referenceCode: 'MS-2026-001',
     tags: ['Piracy', 'Gulf of Guinea', 'Maritime Security', 'West Africa'],
   },
   {
@@ -91,6 +97,7 @@ export const allArticles: Article[] = [
     date: '2026-05-20',
     readingTime: '9 min read',
     featuredImage: 'https://images.unsplash.com/photo-1568347877321-f8935c7dc5a3?w=800&q=80&fit=crop',
+    referenceCode: 'EP-2026-001',
     tags: ['Decarbonisation', 'Leadership', 'Green Shipping', 'Africa'],
   },
   {
@@ -103,6 +110,7 @@ export const allArticles: Article[] = [
     date: '2026-05-07',
     readingTime: '8 min read',
     featuredImage: 'https://images.unsplash.com/photo-1568347877321-f8935c7dc5a3?w=800&q=80&fit=crop',
+    referenceCode: 'TF-2026-001',
     tags: ['AfCFTA', 'Trade', 'Facilitation', 'Intra-Africa'],
   },
   {
@@ -115,6 +123,7 @@ export const allArticles: Article[] = [
     date: '2026-04-15',
     readingTime: '6 min read',
     featuredImage: 'https://images.unsplash.com/photo-1568347877321-f8935c7dc5a3?w=800&q=80&fit=crop',
+    referenceCode: 'II-2026-001',
     tags: ['Freight Rates', 'West Africa', 'Market Intelligence', 'Logistics'],
   },
   {
@@ -127,6 +136,7 @@ export const allArticles: Article[] = [
     date: '2026-03-28',
     readingTime: '10 min read',
     featuredImage: 'https://images.unsplash.com/photo-1505118380757-91f5f5632de0?w=800&q=80&fit=crop',
+    referenceCode: 'BE-2026-001',
     tags: ['Aquaculture', 'Blue Economy', 'Nigeria', 'Ghana'],
   },
 ]
@@ -147,6 +157,7 @@ export const conversations: Conversation[] = [
     excerpt:
       'Dr. Pius Akutah on cargo clearance efficiency, cabotage enforcement, freight rate transparency, and why the shipper must occupy a more central position in shaping Nigeria\'s maritime trade policy.',
     date: '2026-06-01',
+    transcriptRef: 'EC-2026-003',
     qa: [
       {
         question: 'Cargo clearance times at Nigerian ports remain a competitive disadvantage for shippers. What concrete progress has the Council made, and where does the work remain unfinished?',
@@ -181,6 +192,7 @@ export const conversations: Conversation[] = [
     excerpt:
       'Captain Umoren on harmonising port state control inspection standards across West and Central Africa, engaging sub-standard flag states, and what genuine regional PSC cooperation must look like in practice.',
     date: '2026-05-15',
+    transcriptRef: 'EC-2026-002',
     qa: [
       {
         question: 'The Abuja MoU covers 22 member states with widely varying maritime administration capacity. How do you maintain consistent inspection standards across that diversity?',
@@ -215,6 +227,7 @@ export const conversations: Conversation[] = [
     excerpt:
       'Dr. Okonna on transforming seafarer training curricula for STCW compliance, closing the gap between academic qualification and operational readiness, and positioning Nigerian seafarers as first-choice crew in global maritime markets.',
     date: '2026-04-28',
+    transcriptRef: 'EC-2026-001',
     qa: [
       {
         question: 'The Maritime Academy of Nigeria has trained thousands of seafarers over its history. What is the most honest assessment of the gap between your graduates\' qualifications and what the global crewing market actually demands?',

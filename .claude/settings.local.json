@@ -9,7 +9,16 @@
       "WebFetch(domain:www.google.com)",
       "Bash(git commit -m ' *)",
       "Bash(git add *)",
-      "Bash(git push *)"
+      "Bash(git push *)",
+      "Bash(git fetch *)",
+      "Bash(npm install *)",
+      "Bash(gh auth *)",
+      "Bash(curl -s -i http://localhost:3000/api/admin/test-github)",
+      "Bash(curl -s -i -b /tmp/cookies.txt http://localhost:3000/api/admin/test-github)",
+      "Bash(node -e ' *)",
+      "Bash(curl -s -i -b /tmp/cookies.txt -X POST http://localhost:3000/api/admin/migrate-articles --max-time 90)",
+      "Bash(curl -s -b /tmp/cookies.txt http://localhost:3000/api/admin/test-github)",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\\\\n\" http://localhost:3000/api/admin/test-github)"
     ]
   }
 }

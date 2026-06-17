@@ -7,6 +7,7 @@ import { formatDate } from '@/lib/utils'
 import AnimatedSection from '@/components/ui/AnimatedSection'
 import Tag from '@/components/ui/Tag'
 import ArticleCard from '@/components/ui/ArticleCard'
+import DispatchHeader from '@/components/ui/DispatchHeader'
 
 // TODO: update with live domain before launch
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://primeaxis.africa'
@@ -152,6 +153,12 @@ export default async function ArticlePage({ params }: PageProps) {
               <span aria-hidden>·</span>
               <span>{article.readingTime}</span>
             </div>
+            <DispatchHeader
+              refCode={article.referenceCode}
+              date={formatDate(article.date)}
+              desk={article.category.toUpperCase()}
+              className="mt-6"
+            />
           </div>
         </AnimatedSection>
 
