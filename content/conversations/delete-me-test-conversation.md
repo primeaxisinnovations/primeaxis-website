@@ -19,6 +19,16 @@ qa:
     answer: >-
       <p>No — it is saved as a draft and should only ever be visible from the
       admin list unless explicitly published during testing.</p>
-status: draft
+status: published
+introduction: >-
+  This conversation today is focused on letting the Test conversation know that
+  we try to make things equally accessible to everyone in this
+  community.&nbsp;<br><br>Nevertheless, we still trust you to be the best in all
+  you do to retain the peace and goodness of God in your life.<br><br>I'm
+  persuaded that you will live well in all you do for the better of Christ's
+  love. Thank you.
+pullQuote: 'Always strive to be the best in all you do, giving it your all'
+closingQuote: Run the race like your life depends on it.
+editorsNote: All notes here has been edited for audience view
 ---
 
