@@ -13,6 +13,6 @@ tags:
   - Test
   - Admin
 referenceCode: BE-2026-003
-status: draft
+status: published
 ---
 <p>This is the body of a test article, now edited through the real admin form to verify <strong>rich text formatting</strong> and a <em>category change</em> round-trip correctly.</p><h2>A test subheading</h2><blockquote>This confirms the edit workflow end to end.</blockquote>
