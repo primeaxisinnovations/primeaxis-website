@@ -8,7 +8,7 @@ excerpt: >-
 category: Blue Economy
 author: PrimeAxis Intelligence Desk
 date: '2026-06-10'
-readingTime: 8 min read
+readingTime: 2 min read
 featuredImage: >-
   https://images.unsplash.com/photo-1505118380757-91f5f5632de0?w=800&q=80&fit=crop
 tags:
@@ -17,6 +17,7 @@ tags:
   - Policy
   - Africa
 referenceCode: BE-2026-002
+status: draft
 ---
 Despite controlling over 38,000 kilometres of coastline and some of the world's most productive exclusive economic zones, African nations capture less than 2% of global maritime trade value. A new financing architecture is urgently needed.
 
@@ -26,4 +27,4 @@ The financing landscape presents the most immediate constraint. Development fina
 
 Regional coordination offers the most promising near-term lever. The AU's 2050 Africa Integrated Maritime Strategy and the more recent Africa Blue Economy Strategy provide normative frameworks, but implementation remains uneven. Countries that have made genuine progress — Seychelles with its debt-for-nature swap, Mauritius with its Ocean Economy Roadmap — have benefited from strong institutional commitment and targeted technical assistance that most continental peers have yet to replicate.
 
-The window for establishing Africa's position in the emerging global blue economy is not indefinite. As decarbonisation reshapes maritime trade routes and offshore energy investment accelerates, early movers will capture disproportionate long-term value. Policymakers, development financiers, and private sector actors all have a role to play — but coordination and urgency are equally essential to seizing this moment.
+The window for establishing Africa's position in the emerging global blue economy is not indefinite. As decarbonisation reshapes maritime trade routes and offshore energy investment accelerates, early movers will capture disproportionate long-term value. Policymakers, development financiers, and private sector actors all have a role to play — but coordination and urgency are equally essential to seizing this moment.<br><br>tvcq;uhnjd;njend;1enudn1/ ej;uqn;eondc;ouneuindune;/d1neundu1nuekd edjno;nejdb;/1jed1 jdn1;oend1n'edn1'i ejd'1nedo1nuend'1ndlj1ne jdn1'end1ejnd uj1bed /2en4djbn1/e db 1ne/jc b1e jdk1njkd/lj4d dn1en ned1enof4n1e&nbsp;
