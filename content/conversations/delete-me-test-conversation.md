@@ -19,12 +19,6 @@ qa:
     answer: >-
       <p>No — it is saved as a draft and should only ever be visible from the
       admin list unless explicitly published during testing.</p>
-status: published
-introduction: >-
-  <p>This is <strong>introduction</strong> test content rendered above the
-  Q&amp;A.</p>
-pullQuote: This is a test pull quote rendered as the Q&A section opens.
-closingQuote: This is a test closing quote rendered near the end of the page.
-editorsNote: <p>This is <em>editor's note</em> test content in the callout box.</p>
+status: draft
 ---
 
