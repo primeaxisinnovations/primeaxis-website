@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import AnimatedSection from '@/components/ui/AnimatedSection'
 import IntelligenceHubGrid from '@/components/sections/IntelligenceHubGrid'
+import { getAllArticles } from '@/lib/content'
 
 export const metadata: Metadata = {
   title: 'Intelligence Hub | PrimeAxis Maritime Intelligence',
@@ -9,6 +10,8 @@ export const metadata: Metadata = {
 }
 
 export default function IntelligenceHubPage() {
+  const articles = getAllArticles()
+
   return (
     <div className="min-h-screen">
 
@@ -31,7 +34,7 @@ export default function IntelligenceHubPage() {
       </section>
 
       {/* Category filter + article grid */}
-      <IntelligenceHubGrid />
+      <IntelligenceHubGrid articles={articles} />
 
     </div>
   )

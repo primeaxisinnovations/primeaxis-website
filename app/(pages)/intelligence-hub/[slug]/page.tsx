@@ -2,7 +2,8 @@ import { notFound } from 'next/navigation'
 import type { Metadata } from 'next'
 import Image from 'next/image'
 import Link from 'next/link'
-import { allArticles } from '@/lib/placeholder-data'
+import ReactMarkdown from 'react-markdown'
+import { getAllArticles, getArticleBySlug } from '@/lib/content'
 import { formatDate } from '@/lib/utils'
 import AnimatedSection from '@/components/ui/AnimatedSection'
 import Tag from '@/components/ui/Tag'
@@ -15,12 +16,12 @@ const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://primeaxis.africa'
 type PageProps = { params: Promise<{ slug: string }> }
 
 export function generateStaticParams() {
-  return allArticles.map((a) => ({ slug: a.slug }))
+  return getAllArticles().map((a) => ({ slug: a.slug }))
 }
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { slug } = await params
-  const article = allArticles.find((a) => a.slug === slug)
+  const article = getArticleBySlug(slug)
   if (!article) return {}
   return {
     title: `${article.title} | PrimeAxis Maritime Intelligence`,
@@ -33,78 +34,12 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   }
 }
 
-// PLACEHOLDER: Category-keyed body paragraphs — replace with full article content from Nneoma.
-// Each array maps to 4 paragraphs rendered below the lead excerpt.
-function getPlaceholderBody(category: string): string[] {
-  const bodies: Record<string, string[]> = {
-    'Blue Economy': [
-      `Africa's blue economy represents one of the continent's most underexploited strategic assets. Spanning fisheries, aquaculture, maritime transport, coastal tourism, and offshore energy, the sector is estimated to contribute over $300 billion annually to global GDP — yet African nations capture a fraction of the value generated from their own exclusive economic zones. The structural barriers are well-documented: fragmented regulatory environments, thin domestic shipping capacity, and chronic underinvestment in port and logistics infrastructure.`,
-      `The financing landscape presents the most immediate constraint. Development finance institutions such as the African Development Bank and the International Finance Corporation have significantly expanded their blue economy portfolios in recent years, but project pipelines remain shallow. Private capital — particularly institutional investors with long-horizon mandates — has yet to engage meaningfully with blue economy assets in Africa. Risk perception, currency exposure, and the absence of bankable project structures are the primary deterrents.`,
-      `Regional coordination offers the most promising near-term lever. The AU's 2050 Africa Integrated Maritime Strategy and the more recent Africa Blue Economy Strategy provide normative frameworks, but implementation remains uneven. Countries that have made genuine progress — Seychelles with its debt-for-nature swap, Mauritius with its Ocean Economy Roadmap — have benefited from strong institutional commitment and targeted technical assistance that most continental peers have yet to replicate.`,
-      `The window for establishing Africa's position in the emerging global blue economy is not indefinite. As decarbonisation reshapes maritime trade routes and offshore energy investment accelerates, early movers will capture disproportionate long-term value. Policymakers, development financiers, and private sector actors all have a role to play — but coordination and urgency are equally essential to seizing this moment.`,
-    ],
-    'Maritime Policy': [
-      `Maritime policy in Africa sits at the intersection of sovereign interest, regional integration imperatives, and international regulatory obligations — a space that requires sustained diplomatic and technical engagement that many African flag states have historically struggled to maintain. The resulting policy gaps have consequences extending well beyond the maritime sector, affecting trade competitiveness, national security, and blue economy ambitions.`,
-      `The International Maritime Organization remains the primary venue for shaping the regulatory framework governing international shipping. African member states collectively account for a significant share of IMO membership, but their influence on key deliberations has historically been limited by capacity constraints and coordination challenges. A more strategic approach to bloc coordination is needed if African interests are to be meaningfully reflected in the global maritime regulatory architecture.`,
-      `At the regional level, instruments such as the Abuja Convention and the Djibouti Code of Conduct reflect genuine political will to address maritime governance collectively. But translating these frameworks into credible enforcement — with adequate resource allocation and genuine inter-agency coordination — remains the central challenge. The most effective national maritime administrations on the continent share common features: consistent political support, dedicated funding, and systematically built technical capacity.`,
-      `The policy environment facing African maritime stakeholders is also increasingly shaped by global decarbonisation mandates. IMO's revised GHG strategy, the Carbon Intensity Indicator regime, and the emerging FuelEU Maritime framework will all have material implications for African shipping operators. Proactive engagement with these regulatory developments — rather than reactive adaptation — is the only path to protecting African interests in a rapidly evolving policy landscape.`,
-    ],
-    'Ports & Infrastructure': [
-      `Sub-Saharan Africa's port infrastructure deficit is both well-documented and chronically underestimated. World Bank Logistics Performance Index data consistently places African ports among the lowest-ranked globally on key metrics — vessel turnaround time, container dwell time, and cargo handling efficiency. The commercial consequences are severe: African shippers pay a significant premium relative to global benchmarks, a structural cost disadvantage that compounds across supply chains and reduces continental export competitiveness.`,
-      `Investment in new port capacity is accelerating, driven by a combination of state-backed financing, sovereign wealth fund interest, and private terminal operators seeking exposure to high-growth markets. Lekki, Tema, Dar es Salaam, and Lamu all represent significant capacity additions. But infrastructure investment alone is insufficient. The operational ecosystem surrounding a port — customs administration, freight forwarding services, inland transport connectivity, and regulatory clarity — determines whether physical capacity translates into commercial throughput.`,
-      `Hinterland connectivity is the most consistent constraint. Road and rail corridors linking port cities to major production and consumption centres remain inadequate in most coastal African countries. Investments in port infrastructure not accompanied by proportionate investment in inland logistics risk generating stranded assets — expensive facilities that cannot operate efficiently because the surrounding network cannot absorb their capacity.`,
-      `The competitive dynamics between major African ports are intensifying. As new capacity comes online, the question of which ports emerge as true regional transhipment hubs — and which remain gateway ports serving their immediate hinterlands — will be determined by a combination of operational performance, regulatory environment, and carrier network decisions. Ports that demonstrate consistent, competitive service delivery will attract liner service upgrades; those that cannot will face a difficult structural position in an increasingly competitive market.`,
-    ],
-    'Shipping & Logistics': [
-      `Africa's position in global shipping is defined by an asymmetry that has persisted for decades: the continent generates a significant and growing share of global maritime trade, yet African-owned and flagged vessels carry a minimal fraction of that cargo. The cabotage regimes that most coastal African states have enacted — intended to reserve coastal trade for domestically registered vessels — have produced mixed results, often hampered by thin domestic shipping capacity and inconsistent enforcement.`,
-      `Freight rate dynamics have added complexity to the operating environment for African shippers. The post-COVID normalisation of global container rates was disrupted by Red Sea security challenges that forced significant rerouting via the Cape of Good Hope, adding transit time and cost to trade lanes serving the Middle East, South Asia, and Southeast Asia. For West African importers the net effect was manageable; for East African trade, the disruption was more pronounced.`,
-      `The logistics sector supporting maritime trade is undergoing structural transformation across the continent. The growth of freight forwarding aggregators, digital customs platforms, and multimodal booking systems is gradually reducing the informational asymmetries that have historically made African trade more costly and opaque than comparable routes elsewhere. But adoption is uneven, and the benefits are accruing disproportionately to larger shippers with the capital to invest in digital logistics infrastructure.`,
-      `Supply chain resilience has emerged as a strategic priority for African importers following the disruptions of recent years. For maritime stakeholders, this translates into renewed interest in regional cargo consolidation, bonded warehouse infrastructure, and alternative port access routes that reduce dependence on single transit points. The longer-term infrastructure investments required to deliver genuine supply chain resilience are substantial, but the business case is increasingly compelling.`,
-    ],
-    'Maritime Security': [
-      `The Gulf of Guinea's piracy threat has evolved significantly over the past five years, defying simple characterisation. The period of peak incidence — between 2019 and 2021, when the region accounted for the majority of global maritime kidnapping events — reflected a particular operational model: armed attack, crew hostage-taking, and ransom payment as the primary revenue mechanism. The subsequent decline in reported incidents was partly attributable to improved naval patrolling and deterrence effects from privately contracted armed security personnel.`,
-      `The threat has not been eliminated; it has shifted. Crew kidnappings from vessels at anchor in Nigerian anchorages, smaller-scale theft operations in the Niger Delta, and the increasing sophistication of armed groups operating in coastal waters all reflect adaptive criminal enterprises rather than a fundamentally weakened threat environment. Intelligence-sharing among regional maritime agencies remains inconsistent, limiting the effectiveness of coordinated response.`,
-      `Naval capacity development is progressing across the region, though at varying speeds and with uneven institutional quality. Nigeria's maritime security architecture has received significant investment through the Deep Blue Project, introducing maritime patrol aircraft and interceptor vessels. Ghana, Côte d'Ivoire, and Cameroon have also increased their maritime security expenditure. But hardware investment without commensurate investment in maintenance, training, and operational doctrine delivers limited security outcomes.`,
-      `The long-term trajectory of Gulf of Guinea maritime security will be determined as much by socio-economic and governance factors ashore as by naval capability developments at sea. Piracy in the region has historically been closely correlated with domestic instability, unemployment, and limited economic opportunity in coastal communities. Security sector investment not accompanied by genuine attention to these underlying drivers will produce temporary displacement rather than durable threat reduction.`,
-    ],
-    'Trade & Facilitation': [
-      `The African Continental Free Trade Area represents the most ambitious integration project in the continent's history, with the potential to reshape intra-African trade flows fundamentally. For the maritime sector, genuine trade facilitation under AfCFTA would require not only tariff reduction and rules-of-origin harmonisation, but a wholesale rationalisation of the documentation, customs, and logistics systems that currently impose friction costs at every point in the supply chain.`,
-      `The current state of intra-African trade facilitation presents a paradox. Africa's major ports are increasingly connected to global liner services, with direct calls from major shipping lines now the norm at hub ports. Yet intra-African maritime trade — particularly short-sea shipping between neighbouring coastal states — remains chronically underdeveloped. The barriers are partly infrastructural, partly regulatory, and partly commercial: small lot sizes, inconsistent demand, and port fees structured around large vessel calls all work against the economics of regional feeder services.`,
-      `Customs harmonisation is the most complex and politically sensitive element of the facilitation agenda. The revenue implications of tariff liberalisation are significant for states that depend heavily on import duties, creating genuine implementation resistance. Single window systems, pre-arrival processing, and risk-based inspection regimes have been adopted with varying commitment across the continent, and the gap between best-practice implementation and laggard states is wide.`,
-      `The digitisation of trade documentation offers the clearest near-term efficiency opportunity. Electronic bills of lading, digital certificates of origin, and interoperable customs data systems would significantly reduce dwell times and administrative costs across African trade corridors. Several regional economic communities are actively pursuing digital trade infrastructure frameworks, and the momentum — while slow relative to the opportunity — is genuine.`,
-    ],
-    'Industry Intelligence': [
-      `The West Africa freight market entered 2026 with a degree of stability that would have seemed improbable eighteen months earlier. The rerouting of significant cargo volumes away from the Red Sea during the security disruptions of 2023–2024 had introduced structural congestion on Cape route services, temporarily inflating freight rates on North-South trade lanes. As security conditions in the Red Sea showed tentative signs of improvement, carriers faced complex network decisions about whether to restore Suez routing — with significant implications for Cape route capacity and West Africa rate trajectories.`,
-      `Container import demand across the Gulf of Guinea remained relatively firm through the first half of 2026, driven by consumer goods, building materials, and automotive sector imports into Nigeria, Ghana, and Côte d'Ivoire. The agricultural export side presents a more mixed picture: cocoa, palm oil, and rubber exports face pricing headwinds from global commodity market dynamics, and currency depreciation across several West African economies has complicated export economics for commodity producers.`,
-      `The structural composition of cargo in and out of the region is shifting in ways that have longer-term implications for port infrastructure and carrier network planning. The growth of LNG export capacity, the increasing volume of project cargo associated with renewable energy investment, and the gradual growth of manufactured goods exports — still a small share of total volume but growing from a low base — are all changing the freight mix that regional terminals and logistics providers need to handle.`,
-      `Market intelligence for the West Africa freight market is improving, though it remains significantly less robust than equivalent data for Northern European or Asia-Pacific trade lanes. The expansion of industry data providers, the growing sophistication of freight index products covering African corridors, and the development of port authority statistical reporting capacity are all positive developments. Better, more timely market data is essential for the well-informed decisions cargo owners, charterers, and financial institutions need to make.`,
-    ],
-    'Executive Perspectives': [
-      `The senior leadership of Africa's maritime sector faces a strategic environment that is more complex and more consequential than at any previous point in the sector's development. Decarbonisation mandates, digital disruption, evolving security threats, and the transformative potential of AfCFTA are all converging simultaneously — and the decisions being made now about investment, regulation, and institutional positioning will shape outcomes for decades.`,
-      `The divergence between publicly stated strategic ambitions and operational realities on the ground remains one of the most persistent features of the African maritime leadership landscape. National maritime policies articulate compelling visions of blue economy development, domestic shipping growth, and world-class port performance. But the institutional systems, funding mechanisms, and sustained political will needed to translate those visions into outcomes are often absent or inconsistent.`,
-      `Talent development is emerging as the most frequently cited medium-term concern among senior maritime executives on the continent. The technical and managerial skills required to operate modern port facilities, comply with increasingly complex regulatory requirements, and manage sophisticated maritime logistics operations are in genuinely short supply. Maritime academies across the continent are producing graduates, but the gap between formal qualification and operational readiness — particularly in specialist areas — is significant.`,
-      `The executives who are most effectively navigating this environment share several characteristics: a clear, evidence-based understanding of their organisation's position within the broader maritime value chain; strong relationships with both domestic political stakeholders and the international maritime community; and a willingness to invest in organisational capacity even when short-term financial pressures argue for deferral. These qualities are not easily replicable through policy intervention, but cultivating them more systematically is essential to the sector's development.`,
-    ],
-    'Regulation & Governance': [
-      `Port State Control remains the most consequential regulatory instrument applied to shipping in African waters, with direct implications for vessel owners, operators, flag administrations, and the commercial parties relying on maritime transport to move cargo. The Abuja MoU on Port State Control for West and Central Africa provides the institutional framework for coordinated inspection and enforcement across the region, but the gap between the framework's design and its operational implementation has historically been wide.`,
-      `Detention rates provide the most direct proxy for fleet safety standards on routes calling at regional ports. The 2025 Abuja MoU annual report reveals persistent concentrations of deficiencies in specific categories: life-saving appliances, fire detection and suppression systems, and navigational equipment account for a disproportionate share of recorded deficiencies. These patterns concentrate in flag administrations with limited oversight capacity and among vessel owners operating older tonnage on cost-constrained schedules.`,
-      `The commercial implications of Port State Control performance extend beyond the operational disruption of detention. P&I clubs and hull underwriters increasingly incorporate PSC records into their risk assessments, with premium implications for vessels and operators with poor compliance histories. Charterers in certain commodity sectors are also beginning to incorporate PSC performance criteria into vessel vetting requirements, creating a commercial incentive for compliance that complements regulatory enforcement.`,
-      `Genuine improvement in Port State Control outcomes requires sustained investment in inspection capacity, training, and information systems — alongside credible political commitment to enforcement at the national level. The Abuja MoU's regional database and harmonised inspection procedures provide a sound technical foundation. What is needed is more consistent institutional follow-through from member state maritime administrations, and greater engagement from the flag states whose vessels account for the majority of serious deficiencies recorded in the region.`,
-    ],
-    'Strategic Commentary': [
-      `Africa's maritime future is not predetermined. The continent sits at a genuine strategic inflection point — one at which the decisions taken by governments, port operators, shipping companies, financiers, and regulators over the next five to ten years will determine whether Africa's maritime sector captures the value embedded in the continent's extraordinary geographical and resource endowments, or continues to play a largely passive role in a global maritime economy shaped elsewhere.`,
-      `The diagnosis is broadly agreed. Africa's maritime infrastructure deficit is real and consequential. Regulatory frameworks are fragmented and inconsistently enforced. Domestic shipping capacity is chronically thin. The talent pipeline for maritime technical and managerial roles is insufficient for the sector's ambitions. And the information architecture — the market data, intelligence products, and analytical capacity — needed to support well-informed decision-making is materially underdeveloped.`,
-      `What is less agreed is the sequencing and prioritisation of interventions. The temptation in development circles and national maritime administrations is to pursue comprehensive reform programmes simultaneously, on the reasoning that the interlocking nature of maritime sector constraints means partial interventions will fail to generate systemic change. This reasoning is not wrong, but it consistently produces implementation paralysis. The most effective maritime development trajectories in comparable emerging markets have been characterised by concentrated effort on a small number of high-leverage interventions.`,
-      `PrimeAxis's analytical perspective on African maritime development begins with this observation: the critical bottleneck is rarely technical. The technical knowledge required to build competitive ports, establish effective maritime administrations, and develop sustainable shipping capacity exists and is increasingly accessible. The binding constraints are political economy and institutional quality — the capacity to make difficult decisions consistently and to sustain implementation against the inevitable pressures for deviation.`,
-    ],
-  }
-  return bodies[category] ?? bodies['Strategic Commentary']
-}
-
 export default async function ArticlePage({ params }: PageProps) {
   const { slug } = await params
-  const article = allArticles.find((a) => a.slug === slug)
+  const article = getArticleBySlug(slug)
   if (!article) notFound()
+
+  const allArticles = getAllArticles()
 
   // Related: same-category articles first, filled with most-recent others to reach 3
   const sameCategory = allArticles.filter(
@@ -118,8 +53,6 @@ export default async function ArticlePage({ params }: PageProps) {
   const pageUrl = `${SITE_URL}/intelligence-hub/${article.slug}`
   const encodedUrl = encodeURIComponent(pageUrl)
   const encodedTitle = encodeURIComponent(article.title)
-
-  const bodyParagraphs = getPlaceholderBody(article.category)
 
   return (
     <div className="min-h-screen bg-cream">
@@ -178,17 +111,10 @@ export default async function ArticlePage({ params }: PageProps) {
         <AnimatedSection delay={100}>
           <div className="max-w-[680px] mx-auto">
 
-            {/* Lead paragraph (excerpt) */}
-            <p className="font-sans text-[18px] font-medium text-ink leading-[1.75] mb-7">
-              {article.excerpt}
-            </p>
-
-            {/* PLACEHOLDER: body paragraphs — replace with full article text from Nneoma */}
-            {bodyParagraphs.map((para, i) => (
-              <p key={i} className="font-sans text-[16px] text-ink leading-[1.75] mb-6">
-                {para}
-              </p>
-            ))}
+            {/* Article body (markdown) — first paragraph carries the lead-paragraph treatment via .article-prose */}
+            <div className="article-prose">
+              <ReactMarkdown>{article.body}</ReactMarkdown>
+            </div>
 
             {/* Tags */}
             {article.tags && article.tags.length > 0 && (

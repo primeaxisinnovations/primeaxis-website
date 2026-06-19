@@ -5,19 +5,23 @@ import AnimatedSection from '@/components/ui/AnimatedSection'
 import ArticleCard from '@/components/ui/ArticleCard'
 import Button from '@/components/ui/Button'
 import { CATEGORIES } from '@/lib/categories'
-import { allArticles } from '@/lib/placeholder-data'
 import { cn } from '@/lib/utils'
+import type { Article } from '@/types'
 
 const PAGE_SIZE = 6
 
-export default function IntelligenceHubGrid() {
+interface IntelligenceHubGridProps {
+  articles: Article[]
+}
+
+export default function IntelligenceHubGrid({ articles }: IntelligenceHubGridProps) {
   const [activeCategory, setActiveCategory] = useState<string | null>(null)
   const [visibleCount, setVisibleCount] = useState(PAGE_SIZE)
 
   const filtered =
     activeCategory === null
-      ? allArticles
-      : allArticles.filter((a) => a.category === activeCategory)
+      ? articles
+      : articles.filter((a) => a.category === activeCategory)
 
   const visible = filtered.slice(0, visibleCount)
   const hasMore = filtered.length > visibleCount

@@ -192,3 +192,47 @@
 .scrollbar-none                     { scrollbar-width: none; }
 .scrollbar-none::-webkit-scrollbar  { display: none; }
 .writing-vertical                   { writing-mode: vertical-rl; }
+
+/* ── ARTICLE BODY (markdown) ───────────────────────────────────
+   Mirrors the typography that previously lived inline on the hardcoded
+   lead-paragraph + body-paragraph <p> tags in the article detail page. */
+.article-prose p {
+  font-family: var(--font-sans);
+  font-size: 16px;
+  color: var(--color-ink);
+  line-height: 1.75;
+  margin-bottom: 1.5rem;
+}
+.article-prose p:first-of-type {
+  font-size: 18px;
+  font-weight: 500;
+  margin-bottom: 1.75rem;
+}
+.article-prose strong { font-weight: 600; color: var(--color-ink); }
+.article-prose em     { font-style: italic; }
+.article-prose a      { color: var(--color-gold); text-decoration: underline; }
+.article-prose a:hover { color: var(--color-gold-light); }
+.article-prose ul, .article-prose ol {
+  margin-bottom: 1.5rem;
+  padding-left: 1.25rem;
+  font-family: var(--font-sans);
+  font-size: 16px;
+  color: var(--color-ink);
+}
+.article-prose ul { list-style-type: disc; }
+.article-prose ol { list-style-type: decimal; }
+.article-prose li { line-height: 1.75; margin-bottom: 0.5rem; }
+.article-prose h2, .article-prose h3 {
+  font-family: var(--font-display);
+  font-weight: 600;
+  color: var(--color-deep);
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+}
+.article-prose blockquote {
+  border-left: 2px solid var(--color-gold);
+  padding-left: 1.25rem;
+  font-style: italic;
+  color: var(--color-muted);
+  margin-bottom: 1.5rem;
+}

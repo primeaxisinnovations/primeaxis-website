@@ -8,6 +8,7 @@ export interface Article {
   readingTime: string
   featuredImage: string
   referenceCode: string
+  body: string
   content?: string
   tags?: string[]
 }

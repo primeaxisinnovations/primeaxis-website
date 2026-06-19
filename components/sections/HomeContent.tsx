@@ -1,0 +1,800 @@
+"use client";
+
+import { useEffect, useRef, useState, ReactElement } from "react";
+import Link from "next/link";
+import { LayoutGrid } from "lucide-react";
+import BreakingBar from "@/components/sections/BreakingBar";
+import { CATEGORIES } from "@/lib/categories";
+import { CATEGORY_ICONS } from "@/lib/category-icons";
+import { services } from "@/lib/placeholder-data";
+import { formatDate } from "@/lib/utils";
+import type { Article } from "@/types";
+
+function ArrowRight({ size = 14, strokeWidth = 2 }: { size?: number; strokeWidth?: number }) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={strokeWidth}>
+      <path d="M5 12h14M12 5l7 7-7 7" />
+    </svg>
+  );
+}
+
+const CAROUSEL_SLIDES = [
+  "https://images.unsplash.com/photo-1605745341112-85968b19335b?w=1920&q=85&fit=crop&auto=format",
+  "https://images.unsplash.com/photo-1678182451047-196f22a4143e?w=1920&q=85&fit=crop&auto=format",
+  "https://images.unsplash.com/photo-1567427017947-545c5f8d16ad?w=1920&q=85&fit=crop&auto=format",
+  "https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=1920&q=85&fit=crop&auto=format",
+];
+
+const FEATURED_BEAT_NAMES = new Set([
+  "Maritime Policy",
+  "Blue Economy",
+  "Ports & Infrastructure",
+  "Shipping & Logistics",
+  "Maritime Security",
+  "Executive Perspectives",
+]);
+const FEATURED_BEATS = CATEGORIES.filter((c) => FEATURED_BEAT_NAMES.has(c));
+
+const SERVICE_ICONS: Record<string, ReactElement> = {
+  megaphone: (
+    <svg viewBox="0 0 24 24" fill="none" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="w-[26px] h-[26px] stroke-teal">
+      <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+    </svg>
+  ),
+  lightbulb: (
+    <svg viewBox="0 0 24 24" fill="none" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="w-[26px] h-[26px] stroke-teal">
+      <path d="M9 18h6M10 22h4M12 2a7 7 0 0 1 7 7c0 2.38-1.19 4.47-3 5.74V17a1 1 0 0 1-1 1H9a1 1 0 0 1-1-1v-2.26A7 7 0 0 1 12 2z"/>
+    </svg>
+  ),
+  chart: (
+    <svg viewBox="0 0 24 24" fill="none" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="w-[26px] h-[26px] stroke-teal">
+      <line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/>
+    </svg>
+  ),
+  handshake: (
+    <svg viewBox="0 0 24 24" fill="none" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="w-[26px] h-[26px] stroke-teal">
+      <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+    </svg>
+  ),
+  calendar: (
+    <svg viewBox="0 0 24 24" fill="none" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="w-[26px] h-[26px] stroke-teal">
+      <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/>
+    </svg>
+  ),
+  pen: (
+    <svg viewBox="0 0 24 24" fill="none" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="w-[26px] h-[26px] stroke-teal">
+      <path d="M12 20h9M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/>
+    </svg>
+  ),
+}
+
+interface HomeContentProps {
+  heroArticle: Article;
+  cardArticles: Article[];
+}
+
+export default function HomeContent({ heroArticle, cardArticles }: HomeContentProps) {
+  const [activeSlide, setActiveSlide] = useState(0);
+  const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
+
+  // Intersection-observer fade-ins
+  useEffect(() => {
+    const io = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((e) => {
+          if (e.isIntersecting) { e.target.classList.add("show"); io.unobserve(e.target); }
+        });
+      },
+      { threshold: 0.1, rootMargin: "0px 0px -30px 0px" }
+    );
+    document.querySelectorAll(".fade-in").forEach((el) => io.observe(el));
+    return () => io.disconnect();
+  }, []);
+
+  // Hero carousel: auto-advance every 5 s
+  useEffect(() => {
+    intervalRef.current = setInterval(() => {
+      setActiveSlide((prev) => (prev + 1) % CAROUSEL_SLIDES.length);
+    }, 5000);
+    return () => { if (intervalRef.current) clearInterval(intervalRef.current); };
+  }, []);
+
+  return (
+    <>
+      <BreakingBar />
+
+      {/* ── HERO — full-screen fade carousel ──────────────────── */}
+      <section
+        className="min-h-screen grid grid-rows-[1fr_auto] bg-deep relative overflow-hidden -mt-[102px]"
+      >
+        {/* Carousel slides */}
+        {CAROUSEL_SLIDES.map((url, i) => (
+          <div
+            key={url}
+            className="absolute inset-0 transition-opacity ease-in-out"
+            style={{ opacity: i === activeSlide ? 1 : 0, transitionDuration: "1500ms" }}
+          >
+            <img
+              src={url}
+              alt=""
+              aria-hidden="true"
+              className="absolute inset-0 w-full h-full object-cover"
+              style={{ objectPosition: "center 40%", opacity: 0.65 }}
+            />
+          </div>
+        ))}
+
+        {/* Directional gradient overlay */}
+        <div
+          className="absolute inset-0"
+          style={{
+            background:
+              "linear-gradient(to right, rgba(21,28,46,.75) 28%, rgba(21,28,46,.18) 100%), linear-gradient(to top, rgba(21,28,46,.68) 0%, transparent 45%)",
+          }}
+        />
+        {/* Atmospheric radial glows */}
+        <div
+          className="absolute inset-0 pointer-events-none"
+          style={{
+            background:
+              "radial-gradient(ellipse 90% 70% at 65% 40%, rgba(0,77,99,.55) 0%, transparent 65%), radial-gradient(ellipse 50% 60% at 5% 90%, rgba(0,40,56,.7) 0%, transparent 55%), radial-gradient(ellipse 40% 40% at 90% 10%, rgba(191,159,102,.04) 0%, transparent 50%)",
+          }}
+        />
+
+        {/* Decorative SVG */}
+        <svg className="absolute inset-0 w-full h-full" viewBox="0 0 1440 900" preserveAspectRatio="xMidYMid slice" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <ellipse cx="1150" cy="450" rx="540" ry="380" stroke="rgba(191,159,102,0.18)" strokeWidth="1" />
+          <ellipse cx="1150" cy="450" rx="380" ry="270" stroke="rgba(191,159,102,0.12)" strokeWidth="1" />
+          <ellipse cx="1150" cy="450" rx="220" ry="155" stroke="rgba(191,159,102,0.08)" strokeWidth="1" />
+          <circle cx="288" cy="225" r="3.5" fill="rgba(191,159,102,0.4)" />
+          <circle cx="576" cy="450" r="2.5" fill="rgba(191,159,102,0.25)" />
+          <circle cx="288" cy="675" r="2" fill="rgba(191,159,102,0.2)" />
+          <g transform="translate(1360,80)" opacity="0.2">
+            <circle cx="0" cy="0" r="22" stroke="rgba(191,159,102,1)" strokeWidth="0.8" fill="none" />
+            <circle cx="0" cy="0" r="8" stroke="rgba(191,159,102,1)" strokeWidth="0.8" fill="none" />
+          </g>
+          <path d="M 0 620 Q 360 480 720 520 T 1440 440" stroke="rgba(191,159,102,0.07)" strokeWidth="1.2" fill="none" strokeDasharray="8 6" />
+          <path d="M 0 680 Q 480 540 960 580 T 1440 500" stroke="rgba(191,159,102,0.05)" strokeWidth="1" fill="none" strokeDasharray="6 8" />
+        </svg>
+
+        {/* Main hero content — pt accounts for breaking bar (38px) + header (64px) */}
+        <div className="relative z-[2] flex items-center pt-[200px] pb-20 max-sm:pt-[150px] max-sm:pb-12">
+          <div className="max-w-[1240px] mx-auto px-11 max-sm:px-5 w-full">
+            <div className="grid grid-cols-1 lg:grid-cols-[1.1fr_1fr] gap-20 items-center">
+
+              {/* Left: editorial statement */}
+              <div>
+                <h1 className="hero-headline-anim font-display text-[clamp(38px,4.8vw,68px)] font-bold leading-[1.06] text-white mb-[22px]">
+                  The Platform That
+                  <br />
+                  Shapes <em className="text-gold italic">Africa&apos;s Maritime</em>
+                  <br />
+                  Industry Narrative
+                </h1>
+
+                <p className="hero-standfirst-anim text-[16.5px] font-light leading-[1.7] text-white/60 max-w-[520px] mb-11">
+                  PrimeAxis is Africa&apos;s maritime intelligence and strategic communications platform — where executives engage, narratives are shaped, and industry authority is built. Insight that informs. Media that matters.
+                </p>
+
+                <div className="hero-actions-anim flex gap-3 flex-wrap">
+                  <a
+                    href="#intelligence"
+                    className="inline-flex items-center gap-2 text-[13px] font-semibold tracking-[.06em] text-deep bg-gold px-7 py-[13px] hover:bg-gold-l hover:-translate-y-[2px] hover:shadow-[0_6px_24px_rgba(191,159,102,.28)] transition-all duration-200"
+                  >
+                    Read the Intelligence
+                    <ArrowRight strokeWidth={2.5} />
+                  </a>
+                  <a
+                    href="#work-with"
+                    className="inline-flex items-center gap-2 text-[13px] font-medium tracking-[.04em] text-white/75 border border-white/20 px-7 py-[13px] hover:border-gold hover:text-gold hover:-translate-y-[2px] transition-all duration-200"
+                  >
+                    Work With Us
+                    <ArrowRight />
+                  </a>
+                </div>
+              </div>
+
+              {/* Right: featured analysis card */}
+              <div
+                className="hero-card-anim hidden lg:block relative p-9"
+                style={{
+                  background: "rgba(10,20,35,0.48)",
+                  backdropFilter: "blur(22px)",
+                  WebkitBackdropFilter: "blur(22px)",
+                  border: "1px solid rgba(255,255,255,0.13)",
+                  boxShadow: "0 8px 40px rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,255,255,0.08)",
+                }}
+              >
+                <div
+                  className="absolute top-0 left-0 right-0 h-[2px]"
+                  style={{ background: "linear-gradient(90deg, #BF9F66, transparent)" }}
+                />
+                <div className="font-mono text-[10px] tracking-[.18em] uppercase text-gold mb-[18px] flex items-center gap-2">
+                  <span className="w-2 h-2 rounded-full bg-gold animate-pulse-dot flex-shrink-0" />
+                  Featured Analysis
+                </div>
+                <h2 className="font-display text-[clamp(18px,1.8vw,24px)] font-semibold text-white leading-[1.3] mb-[14px]">
+                  Nigeria&apos;s Cabotage Regime at a Crossroads: The 2025 Amendment and What It Means for Indigenous Shipping
+                </h2>
+                <p className="text-[13.5px] leading-[1.7] font-light text-white/50 mb-6">
+                  The latest regulatory amendments present both historic opportunity and significant risk for Nigerian shipowners navigating a shifting compliance environment.
+                </p>
+                <div className="flex items-center justify-between pt-5 border-t" style={{ borderColor: "rgba(255,255,255,.07)" }}>
+                  <span className="text-[12px] text-white/35 font-light">
+                    By <strong className="text-white/60 font-medium">PrimeAxis Editorial</strong> · 12 min read
+                  </span>
+                  <a href="#" className="font-mono text-[10.5px] tracking-[.12em] uppercase text-gold flex items-center gap-1.5 hover:gap-2.5 transition-all duration-200">
+                    Read <ArrowRight size={10} strokeWidth={2.5} />
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Carousel navigation dots */}
+        <div className="absolute bottom-24 left-0 right-0 z-[3] flex justify-center items-center gap-2 max-sm:hidden">
+          {CAROUSEL_SLIDES.map((_, i) => (
+            <button
+              key={i}
+              onClick={() => setActiveSlide(i)}
+              aria-label={`Go to slide ${i + 1}`}
+              className={`btn-bare h-[5px] transition-all duration-300 ${
+                i === activeSlide
+                  ? "w-6 bg-gold"
+                  : "w-[5px] rounded-full bg-white/35 hover:bg-white/60"
+              }`}
+            />
+          ))}
+        </div>
+
+        {/* Stats bar */}
+        <div className="hero-stats-anim relative z-[2] border-t py-6" style={{ borderColor: "rgba(191,159,102,.12)" }}>
+          <div className="max-w-[1240px] mx-auto px-11 max-sm:px-5">
+            <div className="flex justify-between items-center max-sm:flex-col max-sm:items-start max-sm:gap-4">
+              <div className="flex max-sm:flex-col max-sm:gap-4">
+                {[
+                  { num: "38",   label: "Coastal African Nations" },
+                  { num: "90%",  label: "Africa's Trade by Sea" },
+                  { num: "$1T+", label: "Blue Economy Potential" },
+                  { num: "2063", label: "African Maritime Vision" },
+                ].map(({ num, label }, i) => (
+                  <div
+                    key={num}
+                    className={`flex flex-col gap-1 px-10 max-sm:px-0 ${i > 0 ? "border-l border-gold/15 max-sm:border-l-0 max-sm:border-b max-sm:border-gold/15 max-sm:pb-4" : ""} ${i === 0 ? "pl-0" : ""}`}
+                  >
+                    <span className="font-display text-[26px] font-bold text-white leading-none">{num}</span>
+                    <span className="font-mono text-[9.5px] tracking-[.14em] uppercase text-gold/60">{label}</span>
+                  </div>
+                ))}
+              </div>
+              <div className="flex items-center gap-[10px] font-mono text-[10px] tracking-[.14em] uppercase text-white/25 max-sm:hidden">
+                <div className="w-[1px] h-10 relative overflow-hidden" style={{ background: "rgba(191,159,102,.25)" }}>
+                  <div className="absolute top-0 left-0 right-0 h-[40%] bg-gold animate-scroll-down" />
+                </div>
+                <span className="writing-vertical text-[9.5px] tracking-[.18em] uppercase">Scroll</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ── LATEST INTELLIGENCE STRIP ─────────────────────────── */}
+      <div className="bg-teal border-t-2 border-gold">
+        <div className="max-w-[1440px] mx-auto">
+          <div className="flex items-stretch min-h-[58px]">
+            <div
+              className="flex-shrink-0 flex items-center gap-2 px-6 font-mono text-[10px] tracking-[.2em] uppercase text-gold border-r"
+              style={{ background: "var(--color-deep)", borderColor: "rgba(191,159,102,.2)" }}
+            >
+              <span className="w-1.5 h-1.5 rounded-full bg-gold animate-pulse-dot" />
+              Live
+            </div>
+            <div className="flex items-center overflow-hidden flex-1 px-7">
+              {[
+                { tag: "Policy",      text: "NIMASA concludes stakeholder review of 2025 Cabotage Enforcement Guidelines" },
+                { tag: "Ports",       text: "Lekki Deep Sea Port targets 2 million TEU capacity by Q4 2026" },
+                { tag: "Blue Economy",text: "AU Commission launches framework for African Ocean Governance Strategy" },
+                { tag: "Shipping",    text: "West African freight rates stabilise following Red Sea rerouting pressure" },
+              ].map(({ tag, text }) => (
+                <span
+                  key={tag + text}
+                  className="text-[13px] font-normal text-white/75 whitespace-nowrap px-7 border-r border-white/10 last:border-r-0 flex-shrink-0 hover:text-gold transition-colors duration-200 cursor-pointer"
+                >
+                  <span className="font-mono text-[9px] tracking-[.12em] uppercase text-gold mr-2">{tag}</span>
+                  {text}
+                </span>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* ── BEATS / TOPIC NAVIGATION ──────────────────────────── */}
+      <div className="bg-white border-t-2 border-brd border-b-2" id="topics">
+
+        {/* Mobile / Tablet — horizontal scroll with right-edge fade + chevron */}
+        <div className="relative lg:hidden">
+          <div className="flex items-stretch overflow-x-auto scrollbar-none">
+            {FEATURED_BEATS.map((category) => (
+              <div
+                key={category}
+                className="group flex flex-col items-center justify-center gap-[7px] py-[22px] px-8 border-r border-brd flex-shrink-0 cursor-pointer hover:bg-cream transition-colors duration-200 relative"
+              >
+                <div className="absolute bottom-0 left-0 right-0 h-[2px] bg-transparent group-hover:bg-gold transition-colors duration-200" />
+                <div className="w-8 h-8 border flex items-center justify-center transition-colors duration-200 group-hover:border-gold text-teal group-hover:text-gold" style={{ borderColor: "rgba(0,56,71,.12)" }}>
+                  {CATEGORY_ICONS[category]}
+                </div>
+                <span className="font-mono text-[9.5px] tracking-[.14em] uppercase text-muted group-hover:text-ink text-center leading-[1.3] transition-colors duration-200">
+                  {category}
+                </span>
+              </div>
+            ))}
+            {/* All Categories — mobile */}
+            <Link
+              href="/intelligence-hub"
+              className="group flex flex-col items-center justify-center gap-[7px] py-[22px] px-8 flex-shrink-0 cursor-pointer bg-gold/10 border-l-2 border-gold/40 hover:bg-gold/20 transition-colors duration-200 relative"
+            >
+              <div className="w-8 h-8 border border-gold/50 flex items-center justify-center text-gold transition-colors duration-200 group-hover:border-gold">
+                <LayoutGrid size={14} />
+              </div>
+              <span className="font-mono text-[9.5px] tracking-[.14em] uppercase text-gold font-medium text-center leading-[1.3] transition-colors duration-200 whitespace-nowrap">
+                All Categories
+              </span>
+            </Link>
+          </div>
+          {/* Scroll indicator — fade + pulsing chevron */}
+          <div className="absolute right-0 top-0 bottom-0 w-[60px] pointer-events-none bg-gradient-to-l from-white to-transparent flex items-center justify-end pr-3">
+            <svg
+              width="14" height="14" viewBox="0 0 24 24"
+              fill="none" stroke="currentColor" strokeWidth="2"
+              strokeLinecap="round" strokeLinejoin="round"
+              className="text-gold animate-pulse"
+            >
+              <path d="M9 18l6-6-6-6" />
+            </svg>
+          </div>
+        </div>
+
+        {/* Desktop — 7 tiles in a single row, no scroll */}
+        <div className="hidden lg:flex items-stretch max-w-[1440px] mx-auto">
+          {FEATURED_BEATS.map((category) => (
+            <div
+              key={category}
+              className="group flex-1 flex flex-col items-center justify-center gap-[7px] py-[22px] px-4 border-r border-brd cursor-pointer hover:bg-cream transition-colors duration-200 relative"
+            >
+              <div className="absolute bottom-0 left-0 right-0 h-[2px] bg-transparent group-hover:bg-gold transition-colors duration-200" />
+              <div className="w-7 h-7 border flex items-center justify-center transition-colors duration-200 group-hover:border-gold text-teal group-hover:text-gold" style={{ borderColor: "rgba(0,56,71,.12)" }}>
+                {CATEGORY_ICONS[category]}
+              </div>
+              <span className="font-mono text-[9px] tracking-[0.08em] uppercase text-muted group-hover:text-ink text-center leading-[1.3] transition-colors duration-200 whitespace-nowrap">
+                {category}
+              </span>
+            </div>
+          ))}
+          {/* All Categories — desktop */}
+          <Link
+            href="/intelligence-hub"
+            className="group flex-1 flex flex-col items-center justify-center gap-[7px] py-[22px] px-4 bg-gold/10 border-l-2 border-gold/40 hover:bg-gold/20 transition-colors duration-200 relative"
+          >
+            <div className="w-7 h-7 border border-gold/50 flex items-center justify-center text-gold transition-colors duration-200 group-hover:border-gold">
+              <LayoutGrid size={13} />
+            </div>
+            <span className="font-mono text-[9px] tracking-[0.08em] uppercase text-gold font-medium text-center leading-[1.3] transition-colors duration-200 whitespace-nowrap">
+              All Categories
+            </span>
+          </Link>
+        </div>
+
+      </div>
+
+      {/* ── INTELLIGENCE GRID ─────────────────────────────────── */}
+      <section className="py-[88px] bg-cream max-sm:py-14 scroll-mt-[100px]" id="intelligence">
+        <div className="max-w-[1240px] mx-auto px-11 max-sm:px-5">
+          <div className="fade-in flex items-end justify-between mb-12 max-sm:flex-col max-sm:items-start max-sm:gap-4">
+            <div>
+              <span className="block w-8 h-0.5 bg-gold mb-[14px]" />
+              <span className="font-mono text-[10.5px] tracking-[.18em] uppercase text-gold">Featured Intelligence</span>
+              <h2 className="font-display text-[clamp(24px,2.6vw,36px)] font-semibold text-deep leading-[1.15] mt-2.5">
+                Analysis & Insight for
+                <br />
+                the Industry That Moves Africa
+              </h2>
+            </div>
+            <Link href="/intelligence-hub" className="font-mono text-[10.5px] tracking-[.14em] uppercase text-teal flex items-center gap-[7px] pb-1 whitespace-nowrap hover:gap-[13px] hover:text-gold transition-all duration-200">
+              All Intelligence <ArrowRight size={14} />
+            </Link>
+          </div>
+
+          <div
+            className="grid gap-[2px] max-sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-[1.65fr_1fr_1fr]"
+            style={{ background: "var(--color-brd)" }}
+          >
+            {/* Hero story */}
+            <Link
+              href={`/intelligence-hub/${heroArticle.slug}`}
+              className="fade-in group bg-white flex flex-col relative overflow-hidden cursor-pointer transition-transform duration-[280ms] hover:-translate-y-[3px] hover:shadow-[0_8px_30px_rgba(0,32,43,.12)] hover:z-[1] lg:row-span-2"
+            >
+              <div className="absolute bottom-0 left-0 right-0 h-[2px] bg-cream-d group-hover:bg-gold transition-colors duration-[250ms] z-[1]" />
+              <div className="relative overflow-hidden h-[240px] flex-shrink-0">
+                <img
+                  src={heroArticle.featuredImage}
+                  alt={heroArticle.title}
+                  loading="lazy"
+                  className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-[1.04]"
+                />
+                <div className="absolute inset-x-0 bottom-0 h-14 pointer-events-none" style={{ background: "linear-gradient(to bottom, transparent, white)" }} />
+              </div>
+              <div className="p-11 flex flex-col flex-1 max-sm:p-6">
+                <span className="font-mono text-[9.5px] tracking-[.16em] uppercase text-gold mb-[14px] flex items-center gap-2">
+                  <span className="w-[5px] h-[5px] rounded-full bg-gold flex-shrink-0" />
+                  {heroArticle.category}
+                </span>
+                <h3 className="font-display text-[clamp(19px,1.9vw,26px)] font-bold text-ink leading-[1.22] mb-5">
+                  {heroArticle.title}
+                </h3>
+                <p className="text-[14px] leading-[1.72] font-light text-muted mb-6">
+                  {heroArticle.excerpt}
+                </p>
+                <div className="flex items-center justify-between pt-4 mt-auto border-t border-cream-d">
+                  <div className="flex items-center gap-[14px]">
+                    <span className="font-mono text-[10px] tracking-[.08em] text-muted-l">{heroArticle.author}</span>
+                    <span className="text-cream-d">·</span>
+                    <span className="font-mono text-[10px] tracking-[.08em] text-muted-l">{heroArticle.readingTime}</span>
+                    <span className="text-cream-d">·</span>
+                    <span className="font-mono text-[10px] tracking-[.08em] text-muted-l">{formatDate(heroArticle.date)}</span>
+                  </div>
+                  <div className="w-[30px] h-[30px] border border-cream-d flex items-center justify-center flex-shrink-0 transition-all duration-200 group-hover:border-gold group-hover:bg-gold">
+                    <svg viewBox="0 0 24 24" fill="none" strokeWidth="2.5" className="w-3 h-3 stroke-muted-l group-hover:stroke-deep transition-colors duration-200">
+                      <path d="M5 12h14M12 5l7 7-7 7" />
+                    </svg>
+                  </div>
+                </div>
+              </div>
+            </Link>
+
+            {/* Regular cards */}
+            {cardArticles.map((article, i) => (
+              <Link
+                key={article.slug}
+                href={`/intelligence-hub/${article.slug}`}
+                className="fade-in group bg-white flex flex-col relative overflow-hidden cursor-pointer transition-transform duration-[280ms] hover:-translate-y-[3px] hover:shadow-[0_8px_30px_rgba(0,32,43,.12)] hover:z-[1]"
+                style={{ transitionDelay: i % 2 === 0 ? "0.08s" : "0.16s" }}
+              >
+                <div className="absolute bottom-0 left-0 right-0 h-[2px] bg-cream-d group-hover:bg-gold transition-colors duration-[250ms] z-[1]" />
+                <div className="relative overflow-hidden h-[180px] flex-shrink-0">
+                  <img
+                    src={article.featuredImage}
+                    alt={article.title}
+                    loading="lazy"
+                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-[1.04]"
+                  />
+                  <div className="absolute inset-x-0 bottom-0 h-10 pointer-events-none" style={{ background: "linear-gradient(to bottom, transparent, white)" }} />
+                </div>
+                <div className="p-9 flex flex-col flex-1 max-sm:p-6">
+                  <span className="font-mono text-[9.5px] tracking-[.16em] uppercase text-gold mb-[14px] flex items-center gap-2">
+                    <span className="w-[5px] h-[5px] rounded-full bg-gold flex-shrink-0" />
+                    {article.category}
+                  </span>
+                  <h3 className="font-display text-[clamp(15px,1.2vw,17.5px)] font-semibold text-ink leading-[1.22] mb-[14px] flex-1">
+                    {article.title}
+                  </h3>
+                  <p className="text-[14px] leading-[1.72] font-light text-muted mb-6">{article.excerpt}</p>
+                  <div className="flex items-center justify-between pt-4 mt-auto border-t border-cream-d">
+                    <div className="flex items-center gap-[14px]">
+                      <span className="font-mono text-[10px] tracking-[.08em] text-muted-l">{article.readingTime}</span>
+                      <span className="text-cream-d">·</span>
+                      <span className="font-mono text-[10px] tracking-[.08em] text-muted-l">{formatDate(article.date)}</span>
+                    </div>
+                    <div className="w-[30px] h-[30px] border border-cream-d flex items-center justify-center flex-shrink-0 transition-all duration-200 group-hover:border-gold group-hover:bg-gold">
+                      <svg viewBox="0 0 24 24" fill="none" strokeWidth="2.5" className="w-3 h-3 stroke-muted-l group-hover:stroke-deep transition-colors duration-200">
+                        <path d="M5 12h14M12 5l7 7-7 7" />
+                      </svg>
+                    </div>
+                  </div>
+                </div>
+              </Link>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ── EXECUTIVE CONVERSATIONS ───────────────────────────── */}
+      <section
+        className="bg-deep py-[88px] relative overflow-hidden max-sm:py-14 scroll-mt-[100px]"
+        id="conversations"
+      >
+        <img
+          src="https://images.unsplash.com/photo-1568347877321-f8935c7dc5a3?w=1920&q=70&fit=crop&auto=format"
+          alt=""
+          loading="lazy"
+          aria-hidden="true"
+          className="absolute inset-0 w-full h-full object-cover pointer-events-none select-none"
+          style={{ opacity: 0.20 }}
+        />
+
+        <div className="relative max-w-[1240px] mx-auto px-11 max-sm:px-5">
+          <div className="grid grid-cols-1 lg:grid-cols-[1fr_1.1fr] gap-[72px] items-center max-sm:gap-12">
+
+            <div className="fade-in">
+              <div className="flex items-center gap-[14px] mb-8">
+                <span className="block w-7 h-[1px] bg-gold" />
+                <span className="font-mono text-[10px] tracking-[.2em] uppercase text-gold">
+                  The PrimeAxis Conversations — Episode 01
+                </span>
+              </div>
+
+              <blockquote className="font-display text-[clamp(21px,2.1vw,29px)] font-normal italic leading-[1.48] text-white mb-8 pl-5 border-l-2 border-gold">
+                &ldquo;Africa cannot continue to be a passive participant in the global maritime economy. We have the coastline, the trade volumes, and the talent. What we need now is the institutional will and the communications infrastructure to lead.&rdquo;
+              </blockquote>
+
+              <div
+                className="flex items-center gap-4 p-[18px_20px] mb-8 border"
+                style={{ borderColor: "rgba(191,159,102,.12)", background: "rgba(255,255,255,.03)" }}
+              >
+                <div
+                  className="w-11 h-11 flex items-center justify-center flex-shrink-0"
+                  style={{ background: "linear-gradient(135deg, #485778, #5E719A)" }}
+                >
+                  <span className="font-display text-[16px] font-bold text-[rgba(191,159,102,.5)]">OA</span>
+                </div>
+                <div>
+                  <div className="font-display text-[16px] font-semibold text-white mb-[2px]">Olawale Adeyemi</div>
+                  <div className="text-[12.5px] text-white/40 font-light">Maritime Consultant</div>
+                </div>
+              </div>
+
+              <p className="text-[14.5px] leading-[1.72] font-light text-white/50 mb-9">
+                In this inaugural conversation, we speak with a senior maritime administrator about Nigeria&apos;s strategic positioning, the challenges of indigenous capacity development, and what Africa&apos;s largest economy must do to claim its rightful place in global shipping over the next decade.
+              </p>
+
+              <div className="flex items-center gap-[14px] flex-wrap">
+                <a
+                  href="#"
+                  className="inline-flex items-center gap-[9px] text-[12.5px] font-semibold tracking-[.06em] text-gold border border-gold px-[26px] py-3 hover:bg-gold hover:text-deep hover:-translate-y-[2px] transition-all duration-200"
+                >
+                  Watch the Conversation <ArrowRight size={13} />
+                </a>
+                <a href="#" className="font-mono text-[10px] tracking-[.15em] uppercase text-white/30 flex items-center gap-1.5 hover:text-white/65 transition-colors duration-200">
+                  All Conversations <ArrowRight size={10} />
+                </a>
+              </div>
+            </div>
+
+            <div className="fade-in" style={{ transitionDelay: "0.2s" }}>
+              <div className="relative overflow-hidden" style={{ aspectRatio: "4/5" }}>
+                <img
+                  src="https://images.unsplash.com/photo-1478737270239-2f02b77fc618?w=800&q=80&fit=crop&auto=format"
+                  alt="Executive Conversations — podcast panel discussion"
+                  loading="lazy"
+                  className="absolute inset-0 w-full h-full object-cover"
+                  style={{ objectPosition: "center top" }}
+                />
+                <div
+                  className="absolute inset-0"
+                  style={{ background: "linear-gradient(180deg, transparent 0%, rgba(10,20,35,0.75) 100%)" }}
+                />
+                <div
+                  className="absolute top-[22px] left-[22px] px-[13px] py-[7px] border"
+                  style={{ background: "rgba(0,32,43,.85)", backdropFilter: "blur(8px)", borderColor: "rgba(191,159,102,.25)" }}
+                >
+                  <span className="font-mono text-[9.5px] tracking-[.16em] uppercase text-gold">Executive Conversations</span>
+                </div>
+                <button
+                  className="absolute bottom-6 left-6 w-[52px] h-[52px] rounded-full bg-gold flex items-center justify-center shadow-[0_4px_20px_rgba(0,0,0,.4)] hover:scale-110 hover:shadow-[0_8px_28px_rgba(191,159,102,.45)] transition-all duration-200"
+                  aria-label="Play episode"
+                >
+                  <svg viewBox="0 0 24 24" className="w-[18px] h-[18px] fill-deep ml-[3px]">
+                    <path d="M5 3l14 9-14 9V3z" />
+                  </svg>
+                </button>
+                <span className="absolute bottom-6 right-6 font-display text-[56px] font-bold text-white/[.06] leading-none pointer-events-none">01</span>
+              </div>
+
+              <div className="mt-[2px] border border-t-0" style={{ background: "rgba(255,255,255,.03)", borderColor: "rgba(191,159,102,.1)" }}>
+                {[
+                  { num: "EP 02", title: "On the Future of West African Regional Maritime Cooperation" },
+                  { num: "EP 03", title: "Port Competition and the Lekki Deep Sea Port Era" },
+                  { num: "EP 04", title: "Decarbonisation and African Shipping's Strategic Choices" },
+                ].map(({ num, title }) => (
+                  <div
+                    key={num}
+                    className="flex items-center gap-[14px] px-5 py-[14px] border-b last:border-b-0 cursor-pointer hover:bg-[rgba(191,159,102,.05)] transition-colors duration-200"
+                    style={{ borderColor: "rgba(255,255,255,.05)" }}
+                  >
+                    <span className="font-mono text-[10px] text-gold tracking-[.1em] w-7 flex-shrink-0">{num}</span>
+                    <span className="text-[12.5px] text-white/55 flex-1 font-light">{title}</span>
+                    <svg viewBox="0 0 24 24" fill="none" strokeWidth="1.5" className="w-[18px] h-[18px] stroke-[rgba(191,159,102,.4)] flex-shrink-0">
+                      <path d="M5 12h14M12 5l7 7-7 7" />
+                    </svg>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ── AFRICA CONTEXT STRIP ──────────────────────────────── */}
+      <div className="bg-teal py-14 relative overflow-hidden scroll-mt-[100px]" id="about">
+        <img
+          src="https://images.unsplash.com/photo-1505118380757-91f5f5632de0?w=1920&q=70&fit=crop&auto=format"
+          alt=""
+          loading="lazy"
+          aria-hidden="true"
+          className="absolute inset-0 w-full h-full object-cover pointer-events-none select-none animate-water-drift"
+          style={{ opacity: 0.25, transformOrigin: "center center" }}
+        />
+
+        <div className="relative max-w-[1240px] mx-auto px-11 max-sm:px-5">
+          <div className="fade-in flex items-center gap-20 max-sm:flex-col max-sm:gap-10">
+            <div className="flex-1">
+              <span className="font-mono text-[10.5px] tracking-[.18em] uppercase text-gold block mb-3">
+                The Opportunity We Cover
+              </span>
+              <h3 className="font-display text-[clamp(20px,2vw,27px)] font-semibold text-white leading-[1.35] mb-3">
+                Africa&apos;s maritime economy is one of the world&apos;s{" "}
+                <em className="italic text-gold">most underreported</em> strategic opportunities
+              </h3>
+              <p className="text-[14px] font-light leading-[1.7] text-white/55 max-w-[480px]">
+                With 38 coastal nations, 90% of its trade moving by sea, and a blue economy valued at over $1 trillion, Africa&apos;s maritime sector demands intelligence, strategic communications, and authoritative media that match its scale. PrimeAxis exists to fill that gap.
+              </p>
+            </div>
+
+            <div className="flex gap-10 flex-shrink-0 max-sm:justify-start">
+              {[
+                { val: "38",   label: "Coastal African\nNations" },
+                { val: "90%",  label: "Trade Volume\nby Sea" },
+                { val: "$1T+", label: "Blue Economy\nPotential" },
+                { val: "54",   label: "African Nations\nin the AU" },
+              ].map(({ val, label }) => (
+                <div key={val} className="flex flex-col gap-[5px] border-l pl-6" style={{ borderColor: "rgba(191,159,102,.25)" }}>
+                  <span className="font-display text-[32px] font-bold text-white leading-none">{val}</span>
+                  <span className="font-mono text-[9px] tracking-[.16em] uppercase text-gold/60 whitespace-pre-line leading-[1.4]">{label}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* ── SERVICES ──────────────────────────────────────────── */}
+      <section className="py-[88px] bg-white max-sm:py-14 scroll-mt-[100px]" id="services">
+        <div className="max-w-[1240px] mx-auto px-11 max-sm:px-5">
+          <div className="fade-in flex items-end justify-between mb-0 max-sm:flex-col max-sm:items-start max-sm:gap-4">
+            <div>
+              <span className="block w-8 h-0.5 bg-gold mb-[14px]" />
+              <span className="font-mono text-[10.5px] tracking-[.18em] uppercase text-gold">What We Offer</span>
+              <h2 className="font-display text-[clamp(24px,2.6vw,36px)] font-semibold text-deep leading-[1.15] mt-2.5">
+                Strategic Services for<br />the Maritime Sector
+              </h2>
+            </div>
+            <a href="#" className="font-mono text-[10.5px] tracking-[.14em] uppercase text-teal flex items-center gap-[7px] pb-1 whitespace-nowrap hover:gap-[13px] hover:text-gold transition-all duration-200">
+              View All Services <ArrowRight size={14} />
+            </a>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-[2px] mt-12" style={{ background: "var(--color-brd)" }}>
+            {services.map(({ icon, title, description }, i) => (
+              <div
+                key={title}
+                className="fade-in group bg-white p-10 px-8 relative overflow-hidden transition-transform duration-[280ms] hover:-translate-y-1 hover:shadow-[0_8px_30px_rgba(0,32,43,.1)] hover:z-[1]"
+                style={{ transitionDelay: `${i * 0.08}s` }}
+              >
+                <div className="absolute bottom-0 left-0 right-0 h-[2px] bg-cream-d group-hover:bg-gold transition-colors duration-[250ms]" />
+                <div className="mb-[18px] mt-2">{SERVICE_ICONS[icon]}</div>
+                <div className="font-display text-[17.5px] font-semibold text-ink mb-[10px] leading-[1.2]">{title}</div>
+                <p className="text-[13px] leading-[1.7] text-muted font-light">{description}</p>
+              </div>
+            ))}
+          </div>
+
+          <div className="mt-11 pt-11 border-t border-brd flex flex-col items-center gap-[14px] text-center">
+            <p className="text-[15px] text-muted font-light">
+              Ready to elevate your position in Africa&apos;s maritime sector?{" "}
+              <strong className="text-ink font-medium">Let&apos;s build something significant together.</strong>
+            </p>
+            <a href="#work-with" className="inline-flex items-center gap-2 text-[13px] font-semibold tracking-[.05em] text-white bg-teal px-7 py-3 hover:bg-deep hover:-translate-y-[2px] transition-all duration-200">
+              Start a Conversation <ArrowRight size={13} />
+            </a>
+          </div>
+        </div>
+      </section>
+
+      {/* ── WORK WITH US ──────────────────────────────────────── */}
+      <section
+        className="bg-deep py-20 relative overflow-hidden max-sm:py-14 scroll-mt-[100px]"
+        id="work-with"
+      >
+        <img
+          src="https://images.unsplash.com/photo-1605745341112-85968b19335b?w=1920&q=70&fit=crop&auto=format"
+          alt=""
+          loading="lazy"
+          aria-hidden="true"
+          className="absolute inset-0 w-full h-full object-cover pointer-events-none select-none"
+          style={{ opacity: 0.20 }}
+        />
+
+        <div className="relative max-w-[1240px] mx-auto px-11 max-sm:px-5">
+          <div className="grid grid-cols-1 lg:grid-cols-[1.3fr_1fr] gap-20 items-center max-sm:gap-12">
+
+            <div className="fade-in">
+              <span className="block w-8 h-0.5 bg-gold mb-[14px]" />
+              <span className="font-mono text-[10.5px] tracking-[.18em] uppercase text-gold">Work With PrimeAxis</span>
+              <h2 className="font-display text-[clamp(24px,2.8vw,38px)] font-semibold leading-[1.3] text-white mt-[14px]">
+                We partner with maritime organisations, executives, and industry stakeholders to{" "}
+                <em className="italic text-gold">build visibility, shape narratives,</em> and drive lasting strategic impact.
+              </h2>
+              <p className="text-[14.5px] leading-[1.72] font-light text-white/50 mt-[18px] mb-8 max-w-[480px]">
+                Whether you are an organisation seeking strategic communications support, an executive building industry authority, or a partner exploring collaboration — PrimeAxis creates the platform for meaningful, long-term engagement across Africa&apos;s maritime ecosystem.
+              </p>
+              <div className="flex items-center gap-3 flex-wrap">
+                <a href="#" className="inline-flex items-center gap-2 text-[13px] font-semibold tracking-[.06em] text-deep bg-gold px-7 py-[13px] hover:bg-gold-l hover:-translate-y-[2px] hover:shadow-[0_6px_24px_rgba(191,159,102,.28)] transition-all duration-200">
+                  Start a Conversation <ArrowRight strokeWidth={2.5} />
+                </a>
+                <a href="#services" className="inline-flex items-center gap-2 text-[13px] font-medium tracking-[.04em] text-white/75 border border-white/20 px-7 py-[13px] hover:border-gold hover:text-gold hover:-translate-y-[2px] transition-all duration-200">
+                  View All Services
+                </a>
+              </div>
+            </div>
+
+            <div className="fade-in flex flex-col gap-[10px]" style={{ transitionDelay: "0.2s" }}>
+              {[
+                { icon: <svg viewBox="0 0 24 24" fill="none" strokeWidth="1.5" strokeLinecap="round" className="w-[15px] h-[15px] stroke-gold"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>, name: "Sponsored Features & Editorial", desc: "Premium branded content produced to full editorial standard" },
+                { icon: <svg viewBox="0 0 24 24" fill="none" strokeWidth="1.5" strokeLinecap="round" className="w-[15px] h-[15px] stroke-gold"><circle cx="12" cy="12" r="10"/><polygon points="10 8 16 12 10 16 10 8"/></svg>, name: "Event & Media Coverage", desc: "Professional coverage packages for maritime events and conferences" },
+                { icon: <svg viewBox="0 0 24 24" fill="none" strokeWidth="1.5" strokeLinecap="round" className="w-[15px] h-[15px] stroke-gold"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/></svg>, name: "Strategic Partnerships", desc: "Co-production, collaboration, and cross-platform opportunities" },
+                { icon: <svg viewBox="0 0 24 24" fill="none" strokeWidth="1.5" strokeLinecap="round" className="w-[15px] h-[15px] stroke-gold"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>, name: "Executive Visibility Programmes", desc: "Structured positioning packages for industry leaders" },
+              ].map(({ icon, name, desc }) => (
+                <div
+                  key={name}
+                  className="group flex items-center gap-4 px-5 py-4 border cursor-default transition-all duration-200 hover:translate-x-[5px]"
+                  style={{ borderColor: "rgba(191,159,102,.18)", background: "rgba(21,28,46,.72)", backdropFilter: "blur(10px)" }}
+                  onMouseEnter={(e) => { e.currentTarget.style.borderColor = "rgba(191,159,102,.45)"; e.currentTarget.style.background = "rgba(21,28,46,.88)"; }}
+                  onMouseLeave={(e) => { e.currentTarget.style.borderColor = "rgba(191,159,102,.18)"; e.currentTarget.style.background = "rgba(21,28,46,.72)"; }}
+                >
+                  <div className="w-[34px] h-[34px] flex-shrink-0 border flex items-center justify-center transition-colors duration-200 group-hover:border-gold/60" style={{ borderColor: "rgba(191,159,102,.25)" }}>
+                    {icon}
+                  </div>
+                  <div>
+                    <div className="text-[13px] font-medium text-white/75 mb-[2px]">{name}</div>
+                    <div className="text-[11.5px] text-white/35 font-light">{desc}</div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ── NEWSLETTER ────────────────────────────────────────── */}
+      <section className="bg-cream py-20 max-sm:py-14 scroll-mt-[100px]" id="newsletter">
+        <div className="max-w-[620px] mx-auto px-11 text-center max-sm:px-5">
+          <div className="fade-in">
+            <h2 className="font-display text-[clamp(22px,2.5vw,32px)] font-semibold text-deep mb-[14px] leading-[1.2]">
+              Stay Ahead of Africa&apos;s Maritime Intelligence
+            </h2>
+
+            <p className="text-[14.5px] leading-[1.7] text-muted font-light mb-9">
+              Join maritime executives, policy professionals, and industry decision-makers who receive curated intelligence, executive insights, and strategic perspectives on Africa&apos;s maritime and blue economy sector — direct to their inbox.
+            </p>
+
+            <form className="flex max-w-[460px] mx-auto mb-[14px]" onSubmit={(e) => e.preventDefault()}>
+              <input
+                type="email"
+                placeholder="Your professional email address"
+                className="flex-1 font-sans text-[13.5px] px-[18px] py-[13px] border border-cream-dark border-r-0 bg-white text-ink outline-none focus:border-gold placeholder:text-muted transition-colors duration-200"
+              />
+              <button type="submit" className="font-sans text-[13px] font-semibold tracking-[.04em] bg-deep text-white px-6 py-[13px] whitespace-nowrap hover:bg-teal transition-colors duration-200">
+                Subscribe Free
+              </button>
+            </form>
+
+            <p className="font-mono text-[9.5px] tracking-[.1em] text-muted">
+              No noise. Only intelligence. Unsubscribe anytime.
+            </p>
+          </div>
+        </div>
+      </section>
+    </>
+  );
+}

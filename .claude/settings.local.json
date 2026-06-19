@@ -18,7 +18,40 @@
       "Bash(node -e ' *)",
       "Bash(curl -s -i -b /tmp/cookies.txt -X POST http://localhost:3000/api/admin/migrate-articles --max-time 90)",
       "Bash(curl -s -b /tmp/cookies.txt http://localhost:3000/api/admin/test-github)",
-      "Bash(curl -s -o /dev/null -w \"%{http_code}\\\\n\" http://localhost:3000/api/admin/test-github)"
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\\\\n\" http://localhost:3000/api/admin/test-github)",
+      "Bash(cd \"c:/Users/DELL/primeaxis-website\" && sed -i '37,102d' \"app/\\(pages\\)/intelligence-hub/[slug]/page.tsx\" && sed -n '30,45p' \"app/\\(pages\\)/intelligence-hub/[slug]/page.tsx\")",
+      "Bash(curl -s -o /tmp/home.html -w \"%{http_code}\\\\n\" http://localhost:3001/)",
+      "Bash(curl -s -o /tmp/home2.html -w \"%{http_code}\\\\n\" http://localhost:3001/)",
+      "Bash(find app/admin -type f)",
+      "Bash(find app/api/admin -type f)",
+      "Bash(find app/api -type f)",
+      "Bash(cat \"app/api/admin-login/route.ts\")",
+      "Bash(find . -maxdepth 1 -iname \"proxy.ts\" -o -iname \"middleware.ts\")",
+      "Bash(xargs head -20)",
+      "Bash(xargs cat)",
+      "Bash(curl -s -i -c /tmp/cookies.txt -X POST http://localhost:3002/api/admin-login -H \"Content-Type: application/json\" -d '{\"password\":\"123Abc456def\"}')",
+      "Bash(curl -s -b /tmp/cookies.txt -o /tmp/admin_articles.html -w \"%{http_code}\\\\n\" http://localhost:3002/admin/articles)",
+      "Bash(curl -s -b /tmp/cookies.txt -X POST http://localhost:3002/api/admin/articles -H 'Content-Type: application/json' -d '{ *)",
+      "Bash(curl -s -b /tmp/cookies.txt \"http://localhost:3002/admin/articles?saved=delete-me-test-article\" -o /tmp/admin_after.html)",
+      "Bash(git ls-remote *)",
+      "Bash(curl -s -w '\\\\nHTTP %{http_code}\\\\n' -b /tmp/cookies.txt -X POST http://localhost:3002/api/admin/articles -H 'Content-Type: application/json' -d '{ *)",
+      "Bash(curl -s -w '\\\\nHTTP %{http_code}\\\\n' -X POST http://localhost:3002/api/admin/articles -H 'Content-Type: application/json' -d '{\"title\":\"x\",\"slug\":\"x\",\"category\":\"Blue Economy\",\"author\":\"x\",\"date\":\"2026-06-17\",\"excerpt\":\"x\",\"featuredImage\":\"https://x.com/x.jpg\",\"tags\":[],\"body\":\"x\"}')",
+      "Bash(curl -s -b /tmp/cookies.txt -o /tmp/admin_dash.html -w \"%{http_code}\\\\n\" http://localhost:3002/admin)",
+      "Bash(curl -s -b /tmp/cookies.txt -o /tmp/admin_dash.html -w \"%{http_code}\\\\n\" http://localhost:3000/admin)",
+      "Bash(node -e \"const icons = require\\('lucide-react'\\); ['Bold','Italic','Underline','Strikethrough','Heading1','Heading2','Heading3','Pilcrow','List','ListOrdered','Quote','AlignLeft','AlignCenter','AlignRight','IndentIncrease','IndentDecrease','Link2','ImagePlus','Minus','Undo2','Redo2'].forEach\\(n => console.log\\(n, typeof icons[n]\\)\\)\")",
+      "Bash(npx tsc *)",
+      "Bash(echo \"EXIT_CODE:$?\")",
+      "Bash(npm run dev > /tmp/nextdev.log 2>&1 & *)",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\\\\n\" http://localhost:3000)",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\\\\n\" http://localhost:3001)",
+      "Bash(cat \"c:\\\\Users\\\\DELL\\\\.claude\\\\projects\\\\c--Users-DELL-primeaxis-website\\\\memory\\\\MEMORY.md\" 2>/dev/null)",
+      "Read(//c/Users/DELL/.claude/projects/c--Users-DELL-primeaxis-website/memory/**)",
+      "Bash(ls -la \"c:\\\\Users\\\\DELL\\\\.claude\\\\projects\\\\c--Users-DELL-primeaxis-website\\\\memory\\\\\" 2>&1)",
+      "Read(//c/Users/DELL/.claude/projects/c--Users-DELL-primeaxis-website/**)"
+    ],
+    "additionalDirectories": [
+      "c:\\Users\\DELL\\primeaxis-website\\app\\(pages)\\intelligence-hub\\[slug]",
+      "\\tmp"
     ]
   }
 }
