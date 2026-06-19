@@ -17,7 +17,7 @@ tags:
   - Policy
   - Africa
 referenceCode: BE-2026-002
-status: draft
+status: published
 ---
 Despite controlling over 38,000 kilometres of coastline and some of the world's most productive exclusive economic zones, African nations capture less than 2% of global maritime trade value. A new financing architecture is urgently needed.
 
