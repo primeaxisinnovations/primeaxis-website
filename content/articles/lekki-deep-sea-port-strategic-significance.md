@@ -1,4 +1,5 @@
 ---
+status: published
 title: 'Lekki Deep Sea Port: Redefining Nigeria''s Position in West African Trade Flows'
 excerpt: >-
   With its first vessel calls now complete and container throughput climbing
