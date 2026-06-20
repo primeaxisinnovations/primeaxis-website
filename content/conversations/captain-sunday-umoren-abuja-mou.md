@@ -91,6 +91,6 @@ qa:
       states, the international community, and the IMO's technical cooperation
       programmes is straightforward — safer shipping in African waters is not a
       regional interest, it is a global one.</p>
-status: draft
+status: published
 ---
 
