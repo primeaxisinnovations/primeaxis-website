@@ -1,4 +1,5 @@
 ---
+status: published
 title: 'West Africa Freight Market: Q2 2026 Intelligence Brief'
 excerpt: >-
   Freight rates on key West Africa trade lanes stabilised in Q2 2026 following
