@@ -19,7 +19,7 @@ qa:
     answer: >-
       <p>No — it is saved as a draft and should only ever be visible from the
       admin list unless explicitly published during testing.</p>
-status: published
+status: draft
 introduction: >-
   This conversation today is focused on letting the Test conversation know that
   we try to make things equally accessible to everyone in this
