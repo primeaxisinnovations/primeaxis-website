@@ -94,6 +94,6 @@ qa:
       capacity, better data systems, and — frankly — a willingness to take
       positions that challenge well-resourced commercial interests when the
       evidence demands it.</p>
-status: draft
+status: published
 ---
 
