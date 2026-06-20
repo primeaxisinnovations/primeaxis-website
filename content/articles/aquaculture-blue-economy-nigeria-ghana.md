@@ -1,4 +1,5 @@
 ---
+status: published
 title: 'Aquaculture as a Blue Economy Anchor: Nigeria and Ghana Chart Different Paths'
 excerpt: >-
   Nigeria and Ghana have both placed aquaculture at the centre of their
