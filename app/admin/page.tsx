@@ -17,6 +17,11 @@ const ADMIN_SECTIONS: AdminSection[] = [
     description: 'Create, edit, and review maritime intelligence articles.',
     href: '/admin/articles',
   },
+  {
+    label: 'Manage Conversations',
+    description: 'Create, edit, and review executive conversations.',
+    href: '/admin/conversations',
+  },
 ]
 
 export default async function AdminDashboardPage() {

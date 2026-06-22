@@ -2,7 +2,6 @@ import { notFound } from 'next/navigation'
 import type { Metadata } from 'next'
 import Image from 'next/image'
 import Link from 'next/link'
-import ReactMarkdown from 'react-markdown'
 import { getAllArticles, getArticleBySlug } from '@/lib/content'
 import { formatDate } from '@/lib/utils'
 import AnimatedSection from '@/components/ui/AnimatedSection'
@@ -10,18 +9,20 @@ import Tag from '@/components/ui/Tag'
 import ArticleCard from '@/components/ui/ArticleCard'
 import DispatchHeader from '@/components/ui/DispatchHeader'
 
-// TODO: update with live domain before launch
-const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://primeaxis.africa'
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://primeaxisinnovations.com.ng'
 
 type PageProps = { params: Promise<{ slug: string }> }
 
-export function generateStaticParams() {
-  return getAllArticles().map((a) => ({ slug: a.slug }))
-}
+// Reads live from GitHub on every request (see lib/content.ts), so this
+// page can no longer be statically generated at build time — a published
+// article would otherwise be frozen at whatever state existed at the last
+// deploy. generateStaticParams is removed for the same reason: pre-building
+// a slug list is pointless once every request re-fetches anyway.
+export const dynamic = 'force-dynamic'
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { slug } = await params
-  const article = getArticleBySlug(slug)
+  const article = await getArticleBySlug(slug)
   if (!article) return {}
   return {
     title: `${article.title} | PrimeAxis Maritime Intelligence`,
@@ -36,10 +37,10 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 
 export default async function ArticlePage({ params }: PageProps) {
   const { slug } = await params
-  const article = getArticleBySlug(slug)
+  const article = await getArticleBySlug(slug)
   if (!article) notFound()
 
-  const allArticles = getAllArticles()
+  const allArticles = await getAllArticles()
 
   // Related: same-category articles first, filled with most-recent others to reach 3
   const sameCategory = allArticles.filter(
@@ -111,10 +112,16 @@ export default async function ArticlePage({ params }: PageProps) {
         <AnimatedSection delay={100}>
           <div className="max-w-[680px] mx-auto">
 
-            {/* Article body (markdown) — first paragraph carries the lead-paragraph treatment via .article-prose */}
-            <div className="article-prose">
-              <ReactMarkdown>{article.body}</ReactMarkdown>
-            </div>
+            {/* Article body (HTML) — first paragraph carries the lead-paragraph
+                treatment via .article-prose. dangerouslySetInnerHTML is safe here
+                specifically because article.body originates only from RichTextEditor
+                inside the authenticated admin's own article editor — it is never
+                derived from public user input. Do not copy this pattern for any
+                content that originates outside the admin CMS. */}
+            <div
+              className="article-prose bg-white/85 backdrop-blur-sm rounded-sm2 border border-white/20 p-10 max-sm:p-6"
+              dangerouslySetInnerHTML={{ __html: article.body }}
+            />
 
             {/* Tags */}
             {article.tags && article.tags.length > 0 && (

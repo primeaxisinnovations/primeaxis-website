@@ -2,13 +2,19 @@
 
 import { useEffect, useRef, useState, ReactElement } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { LayoutGrid } from "lucide-react";
 import BreakingBar from "@/components/sections/BreakingBar";
 import { CATEGORIES } from "@/lib/categories";
 import { CATEGORY_ICONS } from "@/lib/category-icons";
 import { services } from "@/lib/placeholder-data";
 import { formatDate } from "@/lib/utils";
-import type { Article } from "@/types";
+import type { Article, Conversation } from "@/types";
+
+function truncateText(text: string, maxLength: number): string {
+  if (text.length <= maxLength) return text;
+  return `${text.slice(0, maxLength).trimEnd()}…`;
+}
 
 function ArrowRight({ size = 14, strokeWidth = 2 }: { size?: number; strokeWidth?: number }) {
   return (
@@ -71,9 +77,18 @@ const SERVICE_ICONS: Record<string, ReactElement> = {
 interface HomeContentProps {
   heroArticle: Article;
   cardArticles: Article[];
+  latestArticles: Article[];
+  featuredConversation: Conversation | undefined;
+  otherConversations: Conversation[];
 }
 
-export default function HomeContent({ heroArticle, cardArticles }: HomeContentProps) {
+export default function HomeContent({
+  heroArticle,
+  cardArticles,
+  latestArticles,
+  featuredConversation,
+  otherConversations,
+}: HomeContentProps) {
   const [activeSlide, setActiveSlide] = useState(0);
   const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
 
@@ -101,7 +116,7 @@ export default function HomeContent({ heroArticle, cardArticles }: HomeContentPr
 
   return (
     <>
-      <BreakingBar />
+      <BreakingBar articles={latestArticles} />
 
       {/* ── HERO — full-screen fade carousel ──────────────────── */}
       <section
@@ -194,15 +209,19 @@ export default function HomeContent({ heroArticle, cardArticles }: HomeContentPr
                 </div>
               </div>
 
-              {/* Right: featured analysis card */}
+              {/* Right: featured analysis card — frosted glass over a dark
+                  scrim. The scrim isn't decorative: the hero's ambient
+                  gradient fades out toward the right (strongest at 28% from
+                  the left, down to 18% here), so this corner is the
+                  brightest part of the carousel image. A glass tint alone
+                  would wash out the white text; the gradient layer beneath
+                  it restores contrast without losing the frosted look. */}
               <div
-                className="hero-card-anim hidden lg:block relative p-9"
+                className="hero-card-anim hidden lg:block relative p-9 border border-white/20 backdrop-blur-lg"
                 style={{
-                  background: "rgba(10,20,35,0.48)",
-                  backdropFilter: "blur(22px)",
-                  WebkitBackdropFilter: "blur(22px)",
-                  border: "1px solid rgba(255,255,255,0.13)",
-                  boxShadow: "0 8px 40px rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,255,255,0.08)",
+                  background:
+                    "linear-gradient(rgba(255,255,255,0.10), rgba(255,255,255,0.10)), linear-gradient(135deg, rgba(10,20,35,0.58) 0%, rgba(10,20,35,0.34) 100%)",
+                  boxShadow: "0 8px 40px rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,255,255,0.16)",
                 }}
               >
                 <div
@@ -279,38 +298,16 @@ export default function HomeContent({ heroArticle, cardArticles }: HomeContentPr
         </div>
       </section>
 
-      {/* ── LATEST INTELLIGENCE STRIP ─────────────────────────── */}
-      <div className="bg-teal border-t-2 border-gold">
-        <div className="max-w-[1440px] mx-auto">
-          <div className="flex items-stretch min-h-[58px]">
-            <div
-              className="flex-shrink-0 flex items-center gap-2 px-6 font-mono text-[10px] tracking-[.2em] uppercase text-gold border-r"
-              style={{ background: "var(--color-deep)", borderColor: "rgba(191,159,102,.2)" }}
-            >
-              <span className="w-1.5 h-1.5 rounded-full bg-gold animate-pulse-dot" />
-              Live
-            </div>
-            <div className="flex items-center overflow-hidden flex-1 px-7">
-              {[
-                { tag: "Policy",      text: "NIMASA concludes stakeholder review of 2025 Cabotage Enforcement Guidelines" },
-                { tag: "Ports",       text: "Lekki Deep Sea Port targets 2 million TEU capacity by Q4 2026" },
-                { tag: "Blue Economy",text: "AU Commission launches framework for African Ocean Governance Strategy" },
-                { tag: "Shipping",    text: "West African freight rates stabilise following Red Sea rerouting pressure" },
-              ].map(({ tag, text }) => (
-                <span
-                  key={tag + text}
-                  className="text-[13px] font-normal text-white/75 whitespace-nowrap px-7 border-r border-white/10 last:border-r-0 flex-shrink-0 hover:text-gold transition-colors duration-200 cursor-pointer"
-                >
-                  <span className="font-mono text-[9px] tracking-[.12em] uppercase text-gold mr-2">{tag}</span>
-                  {text}
-                </span>
-              ))}
-            </div>
-          </div>
-        </div>
-      </div>
-
       {/* ── BEATS / TOPIC NAVIGATION ──────────────────────────── */}
+      {/* Solid dark-card treatment on the 6 regular tiles — no real
+          photography here, so the earlier glass-effect test never had
+          anything genuine to blur. Flat bg-teal (not a teal→deep diagonal
+          gradient) on purpose: 6 small adjacent tiles each running their
+          own diagonal gradient created a busy repeating-sawtooth look at
+          this scale — the gradient reads better on the larger Vision &
+          Mission / Services cards. "All Categories" 7th tile keeps its
+          existing gold treatment, completely untouched. No blur, no
+          transparency, no texture. */}
       <div className="bg-white border-t-2 border-brd border-b-2" id="topics">
 
         {/* Mobile / Tablet — horizontal scroll with right-edge fade + chevron */}
@@ -319,13 +316,13 @@ export default function HomeContent({ heroArticle, cardArticles }: HomeContentPr
             {FEATURED_BEATS.map((category) => (
               <div
                 key={category}
-                className="group flex flex-col items-center justify-center gap-[7px] py-[22px] px-8 border-r border-brd flex-shrink-0 cursor-pointer hover:bg-cream transition-colors duration-200 relative"
+                className="group flex flex-col items-center justify-center gap-[7px] py-[22px] px-8 border-r border-white/10 bg-teal hover:border-gold/40 flex-shrink-0 cursor-pointer transition-colors duration-200 relative"
               >
                 <div className="absolute bottom-0 left-0 right-0 h-[2px] bg-transparent group-hover:bg-gold transition-colors duration-200" />
-                <div className="w-8 h-8 border flex items-center justify-center transition-colors duration-200 group-hover:border-gold text-teal group-hover:text-gold" style={{ borderColor: "rgba(0,56,71,.12)" }}>
+                <div className="w-8 h-8 border border-white/15 flex items-center justify-center transition-colors duration-200 group-hover:border-gold text-gold">
                   {CATEGORY_ICONS[category]}
                 </div>
-                <span className="font-mono text-[9.5px] tracking-[.14em] uppercase text-muted group-hover:text-ink text-center leading-[1.3] transition-colors duration-200">
+                <span className="font-mono text-[9.5px] tracking-[.14em] uppercase text-white/70 group-hover:text-white text-center leading-[1.3] transition-colors duration-200">
                   {category}
                 </span>
               </div>
@@ -361,13 +358,13 @@ export default function HomeContent({ heroArticle, cardArticles }: HomeContentPr
           {FEATURED_BEATS.map((category) => (
             <div
               key={category}
-              className="group flex-1 flex flex-col items-center justify-center gap-[7px] py-[22px] px-4 border-r border-brd cursor-pointer hover:bg-cream transition-colors duration-200 relative"
+              className="group flex-1 flex flex-col items-center justify-center gap-[7px] py-[22px] px-4 border-r border-white/10 bg-teal hover:border-gold/40 cursor-pointer transition-colors duration-200 relative"
             >
               <div className="absolute bottom-0 left-0 right-0 h-[2px] bg-transparent group-hover:bg-gold transition-colors duration-200" />
-              <div className="w-7 h-7 border flex items-center justify-center transition-colors duration-200 group-hover:border-gold text-teal group-hover:text-gold" style={{ borderColor: "rgba(0,56,71,.12)" }}>
+              <div className="w-7 h-7 border border-white/15 flex items-center justify-center transition-colors duration-200 group-hover:border-gold text-gold">
                 {CATEGORY_ICONS[category]}
               </div>
-              <span className="font-mono text-[9px] tracking-[0.08em] uppercase text-muted group-hover:text-ink text-center leading-[1.3] transition-colors duration-200 whitespace-nowrap">
+              <span className="font-mono text-[9px] tracking-[0.08em] uppercase text-white/70 group-hover:text-white text-center leading-[1.3] transition-colors duration-200 whitespace-nowrap">
                 {category}
               </span>
             </div>
@@ -500,120 +497,165 @@ export default function HomeContent({ heroArticle, cardArticles }: HomeContentPr
       </section>
 
       {/* ── EXECUTIVE CONVERSATIONS ───────────────────────────── */}
-      <section
-        className="bg-deep py-[88px] relative overflow-hidden max-sm:py-14 scroll-mt-[100px]"
-        id="conversations"
-      >
-        <img
-          src="https://images.unsplash.com/photo-1568347877321-f8935c7dc5a3?w=1920&q=70&fit=crop&auto=format"
-          alt=""
-          loading="lazy"
-          aria-hidden="true"
-          className="absolute inset-0 w-full h-full object-cover pointer-events-none select-none"
-          style={{ opacity: 0.20 }}
-        />
+      {/* Never pads with fake content — if there's no real published
+          conversation at all, the section doesn't render. */}
+      {featuredConversation && (
+        <section
+          className="bg-deep py-[88px] relative overflow-hidden max-sm:py-14 scroll-mt-[100px]"
+          id="conversations"
+        >
+          <img
+            src="https://images.unsplash.com/photo-1568347877321-f8935c7dc5a3?w=1920&q=70&fit=crop&auto=format"
+            alt=""
+            loading="lazy"
+            aria-hidden="true"
+            className="absolute inset-0 w-full h-full object-cover pointer-events-none select-none"
+            style={{ opacity: 0.20 }}
+          />
 
-        <div className="relative max-w-[1240px] mx-auto px-11 max-sm:px-5">
-          <div className="grid grid-cols-1 lg:grid-cols-[1fr_1.1fr] gap-[72px] items-center max-sm:gap-12">
+          <div className="relative max-w-[1240px] mx-auto px-11 max-sm:px-5">
+            <div className="grid grid-cols-1 lg:grid-cols-[1fr_1.1fr] gap-[72px] items-center max-sm:gap-12">
 
-            <div className="fade-in">
-              <div className="flex items-center gap-[14px] mb-8">
-                <span className="block w-7 h-[1px] bg-gold" />
-                <span className="font-mono text-[10px] tracking-[.2em] uppercase text-gold">
-                  The PrimeAxis Conversations — Episode 01
-                </span>
-              </div>
-
-              <blockquote className="font-display text-[clamp(21px,2.1vw,29px)] font-normal italic leading-[1.48] text-white mb-8 pl-5 border-l-2 border-gold">
-                &ldquo;Africa cannot continue to be a passive participant in the global maritime economy. We have the coastline, the trade volumes, and the talent. What we need now is the institutional will and the communications infrastructure to lead.&rdquo;
-              </blockquote>
-
-              <div
-                className="flex items-center gap-4 p-[18px_20px] mb-8 border"
-                style={{ borderColor: "rgba(191,159,102,.12)", background: "rgba(255,255,255,.03)" }}
-              >
-                <div
-                  className="w-11 h-11 flex items-center justify-center flex-shrink-0"
-                  style={{ background: "linear-gradient(135deg, #485778, #5E719A)" }}
-                >
-                  <span className="font-display text-[16px] font-bold text-[rgba(191,159,102,.5)]">OA</span>
+              <div className="fade-in">
+                <div className="flex items-center gap-[14px] mb-8">
+                  <span className="block w-7 h-[1px] bg-gold" />
+                  <span className="font-mono text-[10px] tracking-[.2em] uppercase text-gold">
+                    Featured Conversation
+                  </span>
                 </div>
-                <div>
-                  <div className="font-display text-[16px] font-semibold text-white mb-[2px]">Olawale Adeyemi</div>
-                  <div className="text-[12.5px] text-white/40 font-light">Maritime Consultant</div>
-                </div>
-              </div>
 
-              <p className="text-[14.5px] leading-[1.72] font-light text-white/50 mb-9">
-                In this inaugural conversation, we speak with a senior maritime administrator about Nigeria&apos;s strategic positioning, the challenges of indigenous capacity development, and what Africa&apos;s largest economy must do to claim its rightful place in global shipping over the next decade.
-              </p>
+                <blockquote className="font-display text-[clamp(21px,2.1vw,29px)] font-normal italic leading-[1.48] text-white mb-8 pl-5 border-l-2 border-gold">
+                  &ldquo;{featuredConversation.pullQuote?.trim() || truncateText(featuredConversation.excerpt, 220)}&rdquo;
+                </blockquote>
 
-              <div className="flex items-center gap-[14px] flex-wrap">
-                <a
-                  href="#"
-                  className="inline-flex items-center gap-[9px] text-[12.5px] font-semibold tracking-[.06em] text-gold border border-gold px-[26px] py-3 hover:bg-gold hover:text-deep hover:-translate-y-[2px] transition-all duration-200"
-                >
-                  Watch the Conversation <ArrowRight size={13} />
-                </a>
-                <a href="#" className="font-mono text-[10px] tracking-[.15em] uppercase text-white/30 flex items-center gap-1.5 hover:text-white/65 transition-colors duration-200">
-                  All Conversations <ArrowRight size={10} />
-                </a>
-              </div>
-            </div>
-
-            <div className="fade-in" style={{ transitionDelay: "0.2s" }}>
-              <div className="relative overflow-hidden" style={{ aspectRatio: "4/5" }}>
-                <img
-                  src="https://images.unsplash.com/photo-1478737270239-2f02b77fc618?w=800&q=80&fit=crop&auto=format"
-                  alt="Executive Conversations — podcast panel discussion"
-                  loading="lazy"
-                  className="absolute inset-0 w-full h-full object-cover"
-                  style={{ objectPosition: "center top" }}
-                />
+                {/* Same frosted-glass-over-dark-scrim recipe as the hero
+                    card and the corner badge — one consistent device
+                    across all three photo-backed surfaces. */}
                 <div
-                  className="absolute inset-0"
-                  style={{ background: "linear-gradient(180deg, transparent 0%, rgba(10,20,35,0.75) 100%)" }}
-                />
-                <div
-                  className="absolute top-[22px] left-[22px] px-[13px] py-[7px] border"
-                  style={{ background: "rgba(0,32,43,.85)", backdropFilter: "blur(8px)", borderColor: "rgba(191,159,102,.25)" }}
+                  className="flex items-center gap-4 p-[18px_20px] mb-8 border border-white/20 backdrop-blur-md"
+                  style={{
+                    background:
+                      "linear-gradient(rgba(255,255,255,0.10), rgba(255,255,255,0.10)), linear-gradient(135deg, rgba(10,20,35,0.58) 0%, rgba(10,20,35,0.34) 100%)",
+                    boxShadow: "inset 0 1px 0 rgba(255,255,255,0.16)",
+                  }}
                 >
-                  <span className="font-mono text-[9.5px] tracking-[.16em] uppercase text-gold">Executive Conversations</span>
-                </div>
-                <button
-                  className="absolute bottom-6 left-6 w-[52px] h-[52px] rounded-full bg-gold flex items-center justify-center shadow-[0_4px_20px_rgba(0,0,0,.4)] hover:scale-110 hover:shadow-[0_8px_28px_rgba(191,159,102,.45)] transition-all duration-200"
-                  aria-label="Play episode"
-                >
-                  <svg viewBox="0 0 24 24" className="w-[18px] h-[18px] fill-deep ml-[3px]">
-                    <path d="M5 3l14 9-14 9V3z" />
-                  </svg>
-                </button>
-                <span className="absolute bottom-6 right-6 font-display text-[56px] font-bold text-white/[.06] leading-none pointer-events-none">01</span>
-              </div>
-
-              <div className="mt-[2px] border border-t-0" style={{ background: "rgba(255,255,255,.03)", borderColor: "rgba(191,159,102,.1)" }}>
-                {[
-                  { num: "EP 02", title: "On the Future of West African Regional Maritime Cooperation" },
-                  { num: "EP 03", title: "Port Competition and the Lekki Deep Sea Port Era" },
-                  { num: "EP 04", title: "Decarbonisation and African Shipping's Strategic Choices" },
-                ].map(({ num, title }) => (
                   <div
-                    key={num}
-                    className="flex items-center gap-[14px] px-5 py-[14px] border-b last:border-b-0 cursor-pointer hover:bg-[rgba(191,159,102,.05)] transition-colors duration-200"
-                    style={{ borderColor: "rgba(255,255,255,.05)" }}
+                    className="w-11 h-11 flex items-center justify-center flex-shrink-0"
+                    style={{ background: "linear-gradient(135deg, #485778, #5E719A)" }}
                   >
-                    <span className="font-mono text-[10px] text-gold tracking-[.1em] w-7 flex-shrink-0">{num}</span>
-                    <span className="text-[12.5px] text-white/55 flex-1 font-light">{title}</span>
-                    <svg viewBox="0 0 24 24" fill="none" strokeWidth="1.5" className="w-[18px] h-[18px] stroke-[rgba(191,159,102,.4)] flex-shrink-0">
-                      <path d="M5 12h14M12 5l7 7-7 7" />
-                    </svg>
+                    <span className="font-display text-[16px] font-bold text-[rgba(191,159,102,.5)]">
+                      {featuredConversation.initials}
+                    </span>
                   </div>
-                ))}
+                  <div>
+                    <div className="font-display text-[16px] font-semibold text-white mb-[2px]">
+                      {featuredConversation.executiveName}
+                    </div>
+                    <div className="text-[12.5px] text-white/40 font-light">
+                      {featuredConversation.position}, {featuredConversation.organisation}
+                    </div>
+                  </div>
+                </div>
+
+                <p className="text-[14.5px] leading-[1.72] font-light text-white/50 mb-9">
+                  {featuredConversation.excerpt}
+                </p>
+
+                <div className="flex items-center gap-[14px] flex-wrap">
+                  <Link
+                    href={`/executive-conversations/${featuredConversation.slug}`}
+                    className="inline-flex items-center gap-[9px] text-[12.5px] font-semibold tracking-[.06em] text-gold border border-gold px-[26px] py-3 hover:bg-gold hover:text-deep hover:-translate-y-[2px] transition-all duration-200"
+                  >
+                    Read the Conversation <ArrowRight size={13} />
+                  </Link>
+                  <Link
+                    href="/executive-conversations"
+                    className="font-mono text-[10px] tracking-[.15em] uppercase text-white/30 flex items-center gap-1.5 hover:text-white/65 transition-colors duration-200"
+                  >
+                    All Conversations <ArrowRight size={10} />
+                  </Link>
+                </div>
+              </div>
+
+              <div className="fade-in" style={{ transitionDelay: "0.2s" }}>
+                <div className="relative overflow-hidden" style={{ aspectRatio: "4/5" }}>
+                  {/* Real photo takes priority, falling back to the
+                      initials gradient only when no photo is set — same
+                      conditional pattern as ConversationCard and the
+                      conversation detail page. */}
+                  {featuredConversation.photo ? (
+                    <Image
+                      src={featuredConversation.photo}
+                      alt={featuredConversation.executiveName}
+                      fill
+                      className="object-cover"
+                      style={{ objectPosition: "center top" }}
+                      sizes="(max-width: 1024px) 100vw, 50vw"
+                    />
+                  ) : (
+                    <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-teal to-deep">
+                      <span className="font-display text-[72px] font-semibold text-white/85 tracking-wider">
+                        {featuredConversation.initials}
+                      </span>
+                    </div>
+                  )}
+                  <div
+                    className="absolute inset-0"
+                    style={{ background: "linear-gradient(180deg, transparent 0%, rgba(10,20,35,0.75) 100%)" }}
+                  />
+                  {/* Typography matches DispatchHeader (font-mono,
+                      tracking-[0.22em], text-stamp) — the same treatment
+                      used on every article/conversation detail page.
+                      Same frosted-glass-over-dark-scrim recipe as the hero
+                      card (smaller blur radius since this is a much
+                      smaller surface) — same device, not a separate
+                      experiment. */}
+                  <div
+                    className="absolute top-[22px] left-[22px] px-[13px] py-[7px] border border-white/20 backdrop-blur-md"
+                    style={{
+                      background:
+                        "linear-gradient(rgba(255,255,255,0.10), rgba(255,255,255,0.10)), linear-gradient(135deg, rgba(10,20,35,0.58) 0%, rgba(10,20,35,0.34) 100%)",
+                      boxShadow: "inset 0 1px 0 rgba(255,255,255,0.16)",
+                    }}
+                  >
+                    <span className="font-mono text-[10px] tracking-[0.22em] uppercase text-stamp">
+                      Executive Conversations
+                    </span>
+                  </div>
+                </div>
+
+                {otherConversations.length > 0 && (
+                  <div className="mt-[2px] border border-t-0" style={{ background: "rgba(255,255,255,.03)", borderColor: "rgba(191,159,102,.1)" }}>
+                    {otherConversations.map((conversation) => (
+                      <Link
+                        key={conversation.slug}
+                        href={`/executive-conversations/${conversation.slug}`}
+                        className="flex items-center gap-[14px] px-5 py-[12px] border-b last:border-b-0 transition-colors duration-200 hover:bg-[rgba(191,159,102,.05)]"
+                        style={{ borderColor: "rgba(255,255,255,.05)" }}
+                      >
+                        <span className="font-mono text-[10px] text-stamp tracking-[.05em] flex-shrink-0 whitespace-nowrap">
+                          {conversation.transcriptRef}
+                        </span>
+                        <span className="flex-1 min-w-0">
+                          <span className="block text-[12.5px] text-white/70 font-medium truncate">
+                            {conversation.executiveName}
+                          </span>
+                          <span className="block text-[11px] text-white/40 font-light truncate">
+                            {conversation.title}
+                          </span>
+                        </span>
+                        <svg viewBox="0 0 24 24" fill="none" strokeWidth="1.5" className="w-[18px] h-[18px] stroke-[rgba(191,159,102,.4)] flex-shrink-0">
+                          <path d="M5 12h14M12 5l7 7-7 7" />
+                        </svg>
+                      </Link>
+                    ))}
+                  </div>
+                )}
               </div>
             </div>
           </div>
-        </div>
-      </section>
+        </section>
+      )}
 
       {/* ── AFRICA CONTEXT STRIP ──────────────────────────────── */}
       <div className="bg-teal py-14 relative overflow-hidden scroll-mt-[100px]" id="about">
@@ -740,10 +782,10 @@ export default function HomeContent({ heroArticle, cardArticles }: HomeContentPr
 
             <div className="fade-in flex flex-col gap-[10px]" style={{ transitionDelay: "0.2s" }}>
               {[
-                { icon: <svg viewBox="0 0 24 24" fill="none" strokeWidth="1.5" strokeLinecap="round" className="w-[15px] h-[15px] stroke-gold"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>, name: "Sponsored Features & Editorial", desc: "Premium branded content produced to full editorial standard" },
-                { icon: <svg viewBox="0 0 24 24" fill="none" strokeWidth="1.5" strokeLinecap="round" className="w-[15px] h-[15px] stroke-gold"><circle cx="12" cy="12" r="10"/><polygon points="10 8 16 12 10 16 10 8"/></svg>, name: "Event & Media Coverage", desc: "Professional coverage packages for maritime events and conferences" },
-                { icon: <svg viewBox="0 0 24 24" fill="none" strokeWidth="1.5" strokeLinecap="round" className="w-[15px] h-[15px] stroke-gold"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/></svg>, name: "Strategic Partnerships", desc: "Co-production, collaboration, and cross-platform opportunities" },
-                { icon: <svg viewBox="0 0 24 24" fill="none" strokeWidth="1.5" strokeLinecap="round" className="w-[15px] h-[15px] stroke-gold"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>, name: "Executive Visibility Programmes", desc: "Structured positioning packages for industry leaders" },
+                { icon: <svg viewBox="0 0 24 24" fill="none" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="w-[15px] h-[15px] stroke-gold"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>, name: "Explore Collaboration Opportunities", desc: "Joint initiatives and content partnerships across the maritime ecosystem" },
+                { icon: <svg viewBox="0 0 24 24" fill="none" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="w-[15px] h-[15px] stroke-gold"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>, name: "Submit a Partnership Enquiry", desc: "Sponsorship, branded content, and event partnerships with PrimeAxis" },
+                { icon: <svg viewBox="0 0 24 24" fill="none" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="w-[15px] h-[15px] stroke-gold"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>, name: "Contribute an Article", desc: "Guest perspectives from credible voices across the maritime sector" },
+                { icon: <svg viewBox="0 0 24 24" fill="none" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="w-[15px] h-[15px] stroke-gold"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>, name: "Request Strategic Communication Support", desc: "Advisory and thought-leadership support for executives and institutions" },
               ].map(({ icon, name, desc }) => (
                 <div
                   key={name}
@@ -761,6 +803,12 @@ export default function HomeContent({ heroArticle, cardArticles }: HomeContentPr
                   </div>
                 </div>
               ))}
+              <Link
+                href="/work-with-us"
+                className="mt-1 font-mono text-[10px] tracking-[.15em] uppercase text-white/30 flex items-center gap-1.5 hover:text-white/65 transition-colors duration-200"
+              >
+                View All Ways to Work With Us <ArrowRight size={10} />
+              </Link>
             </div>
           </div>
         </div>

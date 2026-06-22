@@ -1,8 +1,19 @@
 import type { Metadata } from 'next'
 import type { ReactElement } from 'react'
+import Image from 'next/image'
 import Link from 'next/link'
 import AnimatedSection from '@/components/ui/AnimatedSection'
 import StampSeal from '@/components/ui/StampSeal'
+
+// PLACEHOLDER: set this to the real path (e.g.
+// "/images/founder/nneoma-obi-asualo.jpg") once Nneoma's photograph is
+// available. The Founder Profile section below switches automatically:
+// the gradient/initials placeholder becomes a real <Image>, and the
+// corner label switches from a simple solid tag to the same frosted-
+// glass-over-dark-scrim treatment already proven on the homepage's hero
+// and Executive Conversations cards. Glass only makes sense once there's
+// a real photo behind it to blur — hence the conditional, not a flat swap.
+const FOUNDER_PHOTO_URL: string | null = null
 
 export const metadata: Metadata = {
   title: 'About PrimeAxis | Maritime Intelligence & Strategic Communications Platform',
@@ -110,12 +121,15 @@ export default function AboutPage() {
       </section>
 
       {/* ── Vision & Mission ─────────────────────────────────────── */}
+      {/* Silky reading container — bg-white/85 + backdrop-blur-sm, the
+          translucent light-card treatment used for every text-heavy
+          section across the interior pages. */}
       <section className="bg-white border-b border-border py-[56px] max-sm:py-10">
         <div className="max-w-[1240px] mx-auto px-11 max-sm:px-5">
           <AnimatedSection>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-px bg-border">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
 
-              <div className="bg-white pr-12 max-sm:pr-0 py-6 max-sm:pb-8">
+              <div className="p-8 max-sm:p-6 bg-white/85 backdrop-blur-sm rounded-sm2 border border-white/20">
                 <span className="block font-mono text-[10px] tracking-[0.22em] uppercase text-gold mb-4">
                   Vision
                 </span>
@@ -125,7 +139,7 @@ export default function AboutPage() {
                 </p>
               </div>
 
-              <div className="bg-white pl-12 max-sm:pl-0 max-sm:pt-8 py-6">
+              <div className="p-8 max-sm:p-6 bg-white/85 backdrop-blur-sm rounded-sm2 border border-white/20">
                 <span className="block font-mono text-[10px] tracking-[0.22em] uppercase text-gold mb-4">
                   Mission
                 </span>
@@ -171,7 +185,7 @@ export default function AboutPage() {
           <AnimatedSection delay={100}>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-px bg-border">
               {PILLARS.map((pillar) => (
-                <div key={pillar.title} className="bg-cream p-8 max-sm:p-6 flex flex-col">
+                <div key={pillar.title} className="bg-white/85 backdrop-blur-sm rounded-sm2 border border-white/20 p-8 max-sm:p-6 flex flex-col">
                   <StampSeal size={64} className="mb-6">{pillar.icon}</StampSeal>
                   <h3 className="font-display text-[21px] font-semibold text-deep mb-3">
                     {pillar.title}
@@ -195,38 +209,85 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* ── Founder Profile ──────────────────────────────────────── */}
-      <section className="py-[80px] max-sm:py-14 bg-cream">
-        <div className="max-w-[1240px] mx-auto px-11 max-sm:px-5">
+      {/* ── Founder Profile — full-bleed maritime photography behind a
+          frosted-glass identity/bio card (same recipe as the Services and
+          Executive Conversations photo headers) ───────────────────────── */}
+      <section className="relative py-[80px] max-sm:py-14 overflow-hidden">
+        <Image
+          src="https://images.unsplash.com/photo-1724862574576-55c24a3d44bd?w=1600&q=80&fit=crop"
+          alt=""
+          fill
+          className="object-cover"
+          sizes="100vw"
+        />
+        <div className="absolute inset-0 bg-gradient-to-b from-[#0D1824]/90 via-[#0D1824]/60 to-transparent" />
+        <div className="relative max-w-[1240px] mx-auto px-11 max-sm:px-5">
           <AnimatedSection>
             <div className="grid grid-cols-1 md:grid-cols-[2fr_3fr] gap-12 lg:gap-16 items-start">
 
               {/* ── Left column: portrait image ───────────────────── */}
-              {/*
-                PLACEHOLDER: This entire div is the image swap point.
-                Once Nneoma's photograph is available from the "Founder Profile" asset folder,
-                replace this gradient div with:
-                  <div className="relative w-full aspect-[4/5] rounded-sm2 overflow-hidden border border-gold/20">
-                    <Image src="/images/founder/nneoma-obi-asualo.jpg" alt="Nneoma Blessing Obi-Asualo" fill className="object-cover object-top" sizes="(max-width: 768px) 100vw, 40vw" priority />
+              <div className="relative w-full aspect-[4/5] rounded-sm2 overflow-hidden border border-gold/20">
+                {FOUNDER_PHOTO_URL ? (
+                  <Image
+                    src={FOUNDER_PHOTO_URL}
+                    alt="Nneoma Blessing Obi-Asualo"
+                    fill
+                    className="object-cover object-top"
+                    sizes="(max-width: 768px) 100vw, 40vw"
+                    priority
+                  />
+                ) : (
+                  <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-teal to-deep">
+                    <span
+                      className="font-display font-semibold text-white/80 tracking-widest select-none"
+                      style={{ fontSize: 'clamp(3rem, 8vw, 5.5rem)' }}
+                      aria-label="Nneoma Blessing Obi-Asualo"
+                    >
+                      NBO
+                    </span>
                   </div>
-                No other layout changes required.
-              */}
-              <div className="w-full aspect-[4/5] rounded-sm2 overflow-hidden border border-gold/20 bg-gradient-to-br from-teal to-deep flex items-center justify-center">
-                <span
-                  className="font-display font-semibold text-white/80 tracking-widest select-none"
-                  style={{ fontSize: 'clamp(3rem, 8vw, 5.5rem)' }}
-                  aria-label="Nneoma Blessing Obi-Asualo"
-                >
-                  NBO
-                </span>
+                )}
+
+                {/* Corner label — solid against the placeholder gradient
+                    (nothing real to blur yet). Once FOUNDER_PHOTO_URL above
+                    is set to a real photo, this switches to the same
+                    frosted-glass-over-dark-scrim recipe as the homepage's
+                    hero card and Executive Conversations corner badge. */}
+                {FOUNDER_PHOTO_URL ? (
+                  <div
+                    className="absolute top-[18px] left-[18px] px-[13px] py-[7px] border border-white/20 backdrop-blur-md"
+                    style={{
+                      background:
+                        "linear-gradient(rgba(255,255,255,0.10), rgba(255,255,255,0.10)), linear-gradient(135deg, rgba(10,20,35,0.58) 0%, rgba(10,20,35,0.34) 100%)",
+                      boxShadow: "inset 0 1px 0 rgba(255,255,255,0.16)",
+                    }}
+                  >
+                    <span className="font-mono text-[10px] tracking-[0.22em] uppercase text-white">
+                      The Founder
+                    </span>
+                  </div>
+                ) : (
+                  <div className="absolute top-[18px] left-[18px] px-[13px] py-[7px] bg-deep/85">
+                    <span className="font-mono text-[10px] tracking-[0.22em] uppercase text-gold">
+                      The Founder
+                    </span>
+                  </div>
+                )}
               </div>
 
-              {/* ── Right column: identity + bio ──────────────────── */}
-              <div className="flex flex-col justify-center pt-2 max-sm:pt-0">
+              {/* ── Right column: identity + bio — frosted-glass card
+                  sitting directly on the section's photography ────────── */}
+              <div
+                className="flex flex-col justify-center p-8 max-sm:p-6 border border-white/20 backdrop-blur-md"
+                style={{
+                  background: 'rgba(255,255,255,0.08)',
+                  boxShadow: 'inset 0 1px 0 rgba(255,255,255,0.16)',
+                }}
+              >
                 <span className="block font-mono text-[10.5px] tracking-[0.2em] uppercase text-gold mb-6">
                   The Founder
                 </span>
-                <h2 className="font-display text-[clamp(24px,3vw,42px)] font-semibold text-deep leading-[1.1] mb-3">
+                <h2 className="font-display text-[clamp(24px,3vw,42px)] font-semibold text-white leading-[1.1] mb-3">
                   Nneoma Blessing Obi-Asualo
                 </h2>
                 <p className="font-mono text-[11px] uppercase tracking-[0.18em] text-gold mb-8">
@@ -235,13 +296,13 @@ export default function AboutPage() {
 
                 {/* Bio — verbatim from brief, lightly edited for paragraph flow */}
                 <div className="space-y-5">
-                  <p className="font-sans text-[15.5px] text-ink leading-[1.8]">
+                  <p className="font-sans text-[15.5px] text-white/80 leading-[1.8]">
                     Nneoma Blessing Obi-Asualo is a trained broadcast journalist, maritime
                     communications professional, and Founder &amp; CEO of PrimeAxis — a maritime
                     intelligence and strategic communications platform dedicated to informing,
                     influencing and elevating conversations shaping Africa&apos;s maritime future.
                   </p>
-                  <p className="font-sans text-[15.5px] text-ink leading-[1.8]">
+                  <p className="font-sans text-[15.5px] text-white/80 leading-[1.8]">
                     Through years of engagement with policymakers, regulators, industry leaders and
                     maritime stakeholders, she has developed a deep interest in advancing strategic
                     dialogue around maritime development, trade and logistics, port and shipping
@@ -249,7 +310,7 @@ export default function AboutPage() {
                     spans journalism, stakeholder engagement, strategic communications and
                     industry-focused content development.
                   </p>
-                  <p className="font-sans text-[15.5px] text-ink leading-[1.8]">
+                  <p className="font-sans text-[15.5px] text-white/80 leading-[1.8]">
                     She is passionate about fostering informed discussions, promoting thought
                     leadership and contributing to conversations that support sustainable growth and
                     competitiveness across Africa&apos;s maritime sector. Through PrimeAxis, she

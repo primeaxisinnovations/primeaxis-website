@@ -19,6 +19,7 @@ tags:
   - Infrastructure
   - West Africa
 referenceCode: PI-2026-001
+status: published
 ---
 With its first vessel calls now complete and container throughput climbing ahead of projections, the Lekki Deep Sea Port is emerging as a genuine regional hub. But infrastructure alone does not make a port competitive. We assess the operational, regulatory, and logistics ecosystem challenges that will determine whether Lekki fulfils its promise.
 

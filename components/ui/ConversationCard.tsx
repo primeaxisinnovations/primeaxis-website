@@ -20,14 +20,9 @@ export default function ConversationCard({ conversation, className }: Conversati
         className
       )}
     >
-      {/* Square portrait or initials avatar */}
-      {conversation.initials ? (
-        <div className="w-[120px] h-[120px] flex-shrink-0 flex items-center justify-center border-2 border-transparent group-hover:border-gold transition-colors duration-200 bg-gradient-to-br from-teal to-deep">
-          <span className="font-display text-[26px] font-semibold text-white/85 tracking-wider">
-            {conversation.initials}
-          </span>
-        </div>
-      ) : (
+      {/* Square portrait or initials avatar — real photo takes priority,
+          falling back to the initials gradient only when no photo is set. */}
+      {conversation.photo ? (
         <div className="relative w-[120px] h-[120px] flex-shrink-0 overflow-hidden border-2 border-transparent group-hover:border-gold transition-colors duration-200">
           <Image
             src={conversation.photo}
@@ -36,6 +31,12 @@ export default function ConversationCard({ conversation, className }: Conversati
             className="object-cover"
             sizes="120px"
           />
+        </div>
+      ) : (
+        <div className="w-[120px] h-[120px] flex-shrink-0 flex items-center justify-center border-2 border-transparent group-hover:border-gold transition-colors duration-200 bg-gradient-to-br from-teal to-deep">
+          <span className="font-display text-[26px] font-semibold text-white/85 tracking-wider">
+            {conversation.initials}
+          </span>
         </div>
       )}
 

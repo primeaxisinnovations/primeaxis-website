@@ -2,23 +2,27 @@ import { notFound } from 'next/navigation'
 import type { Metadata } from 'next'
 import Image from 'next/image'
 import Link from 'next/link'
-import { conversations } from '@/lib/placeholder-data'
+import { getAllConversations, getConversationBySlug } from '@/lib/conversation-content'
 import { formatDate } from '@/lib/utils'
 import AnimatedSection from '@/components/ui/AnimatedSection'
 import ConversationCard from '@/components/ui/ConversationCard'
 import DispatchHeader from '@/components/ui/DispatchHeader'
 
-const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://primeaxis.africa'
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://primeaxisinnovations.com.ng'
 
 type PageProps = { params: Promise<{ slug: string }> }
 
-export function generateStaticParams() {
-  return conversations.map((c) => ({ slug: c.slug }))
-}
+// Reads live from GitHub on every request (see lib/conversation-content.ts),
+// so this page can no longer be statically generated at build time — a
+// published conversation would otherwise be frozen at whatever state
+// existed at the last deploy. generateStaticParams is removed for the same
+// reason: pre-building a slug list is pointless once every request
+// re-fetches anyway.
+export const dynamic = 'force-dynamic'
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { slug } = await params
-  const conversation = conversations.find((c) => c.slug === slug)
+  const conversation = await getConversationBySlug(slug)
   if (!conversation) return {}
   return {
     title: `${conversation.executiveName} | Executive Conversations | PrimeAxis`,
@@ -30,12 +34,29 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   }
 }
 
+// Large italic Playfair Display pull-quote on a dark full-bleed band — same
+// gold-accent pattern as the About page's positioning statement, reused here
+// for both the Pull Quote and Closing Quote fields.
+function PullQuoteSection({ text }: { text: string }) {
+  return (
+    <section className="bg-deep py-[80px] max-sm:py-14">
+      <div className="max-w-[900px] mx-auto px-11 max-sm:px-5 text-center">
+        <span className="block w-8 h-0.5 bg-gold mx-auto mb-10" />
+        <p className="font-display italic text-[clamp(17px,2vw,26px)] text-white leading-[1.65]">
+          {text}
+        </p>
+        <span className="block w-8 h-0.5 bg-gold mx-auto mt-10" />
+      </div>
+    </section>
+  )
+}
+
 export default async function ConversationPage({ params }: PageProps) {
   const { slug } = await params
-  const conversation = conversations.find((c) => c.slug === slug)
+  const conversation = await getConversationBySlug(slug)
   if (!conversation) notFound()
 
-  const others = conversations.filter((c) => c.slug !== conversation.slug)
+  const others = (await getAllConversations()).filter((c) => c.slug !== conversation.slug)
 
   const pageUrl = `${SITE_URL}/executive-conversations/${conversation.slug}`
   const encodedUrl = encodeURIComponent(pageUrl)
@@ -71,14 +92,10 @@ export default async function ConversationPage({ params }: PageProps) {
             {/* Avatar + name + position row */}
             <div className="flex items-start gap-8 max-sm:flex-col max-sm:gap-6 mb-8">
 
-              {/* Avatar */}
-              {conversation.initials ? (
-                <div className="w-[140px] h-[140px] flex-shrink-0 flex items-center justify-center bg-gradient-to-br from-teal to-deep border border-gold/25">
-                  <span className="font-display text-[36px] font-semibold text-white/85 tracking-wider">
-                    {conversation.initials}
-                  </span>
-                </div>
-              ) : (
+              {/* Avatar — real photo takes priority, falling back to the
+                  initials gradient only when no photo is set (same
+                  conditional pattern as ConversationCard). */}
+              {conversation.photo ? (
                 <div className="relative w-[140px] h-[140px] flex-shrink-0 overflow-hidden border border-gold/25">
                   <Image
                     src={conversation.photo}
@@ -88,6 +105,12 @@ export default async function ConversationPage({ params }: PageProps) {
                     className="object-cover"
                     sizes="140px"
                   />
+                </div>
+              ) : (
+                <div className="w-[140px] h-[140px] flex-shrink-0 flex items-center justify-center bg-gradient-to-br from-teal to-deep border border-gold/25">
+                  <span className="font-display text-[36px] font-semibold text-white/85 tracking-wider">
+                    {conversation.initials}
+                  </span>
                 </div>
               )}
 
@@ -122,12 +145,32 @@ export default async function ConversationPage({ params }: PageProps) {
         </div>
       </section>
 
-      {/* ── Q&A body + share + more conversations ───────────────────── */}
-      <div className="max-w-[1240px] mx-auto px-11 max-sm:px-5 py-[72px] max-sm:py-14">
+      {/* ── Introduction (HTML, optional) — renders nothing at all when
+          unset, not even an empty container. dangerouslySetInnerHTML is
+          safe here for the same reason as the Q&A answers below: this HTML
+          originates only from the authenticated admin's RichTextEditor. */}
+      {conversation.introduction && (
+        <section className="bg-cream py-[56px] max-sm:py-10 border-b border-border">
+          <div className="max-w-[1240px] mx-auto px-11 max-sm:px-5">
+            <AnimatedSection>
+              <div
+                className="article-prose max-w-[720px] mx-auto"
+                dangerouslySetInnerHTML={{ __html: conversation.introduction }}
+              />
+            </AnimatedSection>
+          </div>
+        </section>
+      )}
 
-        {/* Q&A */}
+      {/* ── Pull Quote (optional) — placed as the Q&A section opens */}
+      {conversation.pullQuote && <PullQuoteSection text={conversation.pullQuote} />}
+
+      {/* ── Q&A body + share ──────────────────────────────────────────── */}
+      <div className="max-w-[1240px] mx-auto px-11 max-sm:px-5 pt-[72px] pb-[56px] max-sm:pt-14 max-sm:pb-10">
+
+        {/* Q&A — silky reading container */}
         <AnimatedSection delay={100}>
-          <div className="max-w-[720px]">
+          <div className="max-w-[720px] bg-white/85 backdrop-blur-sm rounded-sm2 border border-white/20 p-10 max-sm:p-6">
 
             <DispatchHeader
               refCode={conversation.transcriptRef}
@@ -156,10 +199,16 @@ export default async function ConversationPage({ params }: PageProps) {
                   </p>
                 </div>
 
-                {/* Answer */}
-                <p className="font-sans text-[16px] text-ink leading-[1.8]">
-                  {pair.answer}
-                </p>
+                {/* Answer (HTML) — dangerouslySetInnerHTML is safe here
+                    specifically because pair.answer originates only from
+                    RichTextEditor inside the authenticated admin's own
+                    conversation editor — it is never derived from public
+                    user input. Do not copy this pattern for any content
+                    that originates outside the admin CMS. */}
+                <div
+                  className="qa-answer font-sans text-[16px] text-ink leading-[1.8]"
+                  dangerouslySetInnerHTML={{ __html: pair.answer }}
+                />
               </div>
             ))}
 
@@ -219,6 +268,59 @@ export default async function ConversationPage({ params }: PageProps) {
                 </svg>
               </a>
             </div>
+
+          </div>
+        </AnimatedSection>
+
+      </div>
+
+      {/* ── Closing Quote (optional) — the dramatic last word before the
+          editorial wrap-up content */}
+      {conversation.closingQuote && <PullQuoteSection text={conversation.closingQuote} />}
+
+      <div className="max-w-[1240px] mx-auto px-11 max-sm:px-5 pt-[56px] pb-[72px] max-sm:pt-10 max-sm:pb-14">
+
+        <AnimatedSection>
+          <div className="max-w-[720px]">
+
+            {/* ── Editor's Note (HTML, optional) — distinct callout box,
+                not to be confused with the fixed "Editorial Note" disclaimer
+                below. dangerouslySetInnerHTML is safe here for the same
+                reason as the Q&A answers above. */}
+            {conversation.editorsNote && (
+              <div className="border border-gold/30 bg-white p-6 mb-10">
+                <span className="block font-mono text-[10px] tracking-[0.18em] uppercase text-gold mb-3">
+                  Editor&apos;s Note
+                </span>
+                <div
+                  className="qa-answer font-sans text-[14.5px] text-ink leading-[1.75]"
+                  dangerouslySetInnerHTML={{ __html: conversation.editorsNote }}
+                />
+              </div>
+            )}
+
+            {/* ── About Executive Conversations — fixed section, identical
+                on every conversation page, not tied to any data field. */}
+            <div className="mb-10">
+              <span className="block w-6 h-0.5 bg-gold mb-3" />
+              <h2 className="font-display text-[19px] font-semibold text-deep mb-2.5">
+                About Executive Conversations
+              </h2>
+              {/* PLACEHOLDER COPY — pending Nneoma's final wording. */}
+              <p className="font-sans text-[14px] text-muted leading-relaxed max-w-[640px]">
+                Executive Conversations is PrimeAxis&apos;s flagship interview series, engaging the
+                leaders, regulators, and institution builders shaping Africa&apos;s maritime and
+                blue economy future.
+              </p>
+            </div>
+
+            {/* ── Editorial Note — fixed disclaimer, identical on every
+                conversation page. Understated by design: this is a standard
+                editorial footnote, not a featured section. */}
+            <p className="font-mono text-[10.5px] tracking-[0.08em] text-muted/70 leading-relaxed">
+              Editorial Note: This interview has been edited for clarity, length, and flow while
+              preserving the substance of the conversation.
+            </p>
 
           </div>
         </AnimatedSection>

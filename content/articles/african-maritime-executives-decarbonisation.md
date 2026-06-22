@@ -19,6 +19,7 @@ tags:
   - Green Shipping
   - Africa
 referenceCode: EP-2026-001
+status: published
 ---
 We surveyed 30 senior maritime executives across 12 African countries. The consensus: decarbonisation targets set in Geneva or Brussels do not map cleanly onto the infrastructure realities of Lomé, Lagos, or Luanda.
 

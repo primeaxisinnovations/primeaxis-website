@@ -17,6 +17,7 @@ tags:
   - Nigeria
   - Ghana
 referenceCode: BE-2026-001
+status: published
 ---
 Nigeria and Ghana have both placed aquaculture at the centre of their respective blue economy strategies. A comparative analysis reveals divergent trajectories — and lessons each country can learn from the other.
 

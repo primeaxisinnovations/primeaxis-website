@@ -20,6 +20,12 @@ export function calculateReadingTime(wordCount: number): string {
   return `${minutes} min read`
 }
 
+// Strips tags so HTML article bodies get an accurate word count for
+// calculateReadingTime instead of counting markup as words.
+export function stripHtml(html: string): string {
+  return html.replace(/<[^>]*>/g, ' ')
+}
+
 export function slugify(title: string): string {
   return title
     .toLowerCase()

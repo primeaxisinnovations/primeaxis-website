@@ -21,6 +21,7 @@ tags:
   - Compliance
   - Governance
 referenceCode: RG-2026-001
+status: published
 ---
 The Abuja Memorandum of Understanding on Port State Control for West and Central Africa released its 2025 annual report this month, revealing persistent compliance gaps among vessels calling at regional ports. We break down the data, identify the highest-risk flag states, and assess what the trends mean for charterers and P&I clubs operating in the region.
 

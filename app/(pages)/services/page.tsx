@@ -1,8 +1,10 @@
 import type { Metadata } from 'next'
 import type { ReactElement } from 'react'
+import Image from 'next/image'
 import Link from 'next/link'
 import AnimatedSection from '@/components/ui/AnimatedSection'
 import StampSeal from '@/components/ui/StampSeal'
+import { cn } from '@/lib/utils'
 
 export const metadata: Metadata = {
   title: 'Services | PrimeAxis Maritime Intelligence',
@@ -148,34 +150,65 @@ export default function ServicesPage() {
   return (
     <div className="min-h-screen bg-cream">
 
-      {/* ── Page Header ──────────────────────────────────────────── */}
-      <section className="bg-cream pt-[60px] pb-[72px] border-b border-border">
-        <div className="max-w-[1240px] mx-auto px-11 max-sm:px-5">
+      {/* ── Page Header — full-bleed maritime photography behind a
+          frosted-glass content card (same recipe as the homepage's
+          photo-backed surfaces) ───────────────────────────────────── */}
+      <section className="relative pt-[60px] pb-[72px] overflow-hidden">
+        <Image
+          src="https://images.unsplash.com/photo-1735774551547-0e6c38870714?w=1600&q=80&fit=crop"
+          alt=""
+          fill
+          priority
+          className="object-cover"
+          sizes="100vw"
+        />
+        <div className="absolute inset-0 bg-gradient-to-b from-[#0D1824]/90 via-[#0D1824]/60 to-transparent" />
+        <div className="relative max-w-[1240px] mx-auto px-11 max-sm:px-5">
           <AnimatedSection>
-            <span className="block font-mono text-[10.5px] tracking-[0.2em] uppercase text-gold mb-5">
-              Our Services
-            </span>
-            <h1 className="font-display text-[clamp(28px,4vw,54px)] font-semibold text-deep leading-[1.1] max-w-[720px] mb-5">
-              Strategic Services for Africa&apos;s Maritime Leaders
-            </h1>
-            <p className="font-sans text-[16px] text-muted leading-relaxed max-w-[540px]">
-              We translate intelligence, access, and strategic communications expertise into
-              measurable outcomes for the institutions and executives shaping Africa&apos;s
-              maritime future.
-            </p>
+            <div
+              className="max-w-[680px] p-8 max-sm:p-6 border border-white/20 backdrop-blur-md"
+              style={{
+                background: 'rgba(255,255,255,0.08)',
+                boxShadow: 'inset 0 1px 0 rgba(255,255,255,0.16)',
+              }}
+            >
+              <span className="block font-mono text-[10.5px] tracking-[0.2em] uppercase text-gold mb-5">
+                Our Services
+              </span>
+              <h1 className="font-display text-[clamp(28px,4vw,54px)] font-semibold text-white leading-[1.1] max-w-[720px] mb-5">
+                Strategic Services for Africa&apos;s Maritime Leaders
+              </h1>
+              <p className="font-sans text-[16px] text-white/70 leading-relaxed max-w-[540px]">
+                We translate intelligence, access, and strategic communications expertise into
+                measurable outcomes for the institutions and executives shaping Africa&apos;s
+                maritime future.
+              </p>
+            </div>
           </AnimatedSection>
         </div>
       </section>
 
       {/* ── Services list ────────────────────────────────────────── */}
+      {/* Silky reading container — bg-white/85 + backdrop-blur-sm, the
+          translucent light-card treatment used for every text-heavy
+          section across the interior pages. The first row ("Strategic
+          Communications," the platform's lead/flagship service) keeps the
+          optional gold-top-border highlight variant. */}
       <section className="bg-cream">
         <div className="max-w-[1240px] mx-auto px-11 max-sm:px-5">
           <AnimatedSection>
-            {SERVICES.map((service, i) => (
-              <div key={service.title} className={`py-[56px] max-sm:py-10 ${i < SERVICES.length - 1 ? 'border-b border-border' : ''}`}>
+            <div className="flex flex-col gap-6 py-[56px] max-sm:py-10">
+              {SERVICES.map((service, i) => (
+                <div
+                  key={service.title}
+                  className={cn(
+                    'p-8 max-sm:p-6 bg-white/85 backdrop-blur-sm rounded-sm2 border border-white/20',
+                    i === 0 && 'border-t-2 border-t-gold'
+                  )}
+                >
                 <div className="grid grid-cols-[72px_1fr] gap-x-10 gap-y-6 max-sm:grid-cols-1 max-sm:gap-x-0">
 
-                  {/* Left: seal */}
+                  {/* Left: seal — unmodified StampSeal */}
                   <div className="pt-1 flex flex-col gap-5 max-sm:flex-row max-sm:items-center max-sm:gap-4">
                     <StampSeal size={64}>{service.icon}</StampSeal>
                   </div>
@@ -205,7 +238,8 @@ export default function ServicesPage() {
 
                 </div>
               </div>
-            ))}
+              ))}
+            </div>
           </AnimatedSection>
         </div>
       </section>

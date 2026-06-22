@@ -4,7 +4,7 @@ import matter from 'gray-matter'
 import { ADMIN_SESSION_COOKIE, verifySessionToken } from '@/lib/admin-session'
 import { listFiles, getFile, createOrUpdateFile } from '@/lib/github'
 import { CATEGORIES, CATEGORY_CODES, type Category } from '@/lib/categories'
-import { calculateReadingTime } from '@/lib/utils'
+import { calculateReadingTime, stripHtml } from '@/lib/utils'
 
 // Always hits GitHub live — never cached.
 export const dynamic = 'force-dynamic'
@@ -21,6 +21,7 @@ interface CreateArticleBody {
   featuredImage: string
   tags: string[]
   body: string
+  status: 'draft' | 'published'
 }
 
 function validateBody(input: unknown): { value: CreateArticleBody } | { error: string } {
@@ -53,6 +54,10 @@ function validateBody(input: unknown): { value: CreateArticleBody } | { error: s
     return { error: 'Tags must be an array of strings.' }
   }
 
+  if (b.status !== 'draft' && b.status !== 'published') {
+    return { error: '"status" must be either "draft" or "published".' }
+  }
+
   return {
     value: {
       title: (b.title as string).trim(),
@@ -64,6 +69,7 @@ function validateBody(input: unknown): { value: CreateArticleBody } | { error: s
       featuredImage: (b.featuredImage as string).trim(),
       tags: (tags as string[] | undefined) ?? [],
       body: (b.body as string).trim(),
+      status: b.status,
     },
   }
 }
@@ -81,7 +87,7 @@ export async function POST(request: NextRequest) {
   if ('error' in validated) {
     return NextResponse.json({ error: validated.error }, { status: 400 })
   }
-  const { title, slug, category, author, date, excerpt, featuredImage, tags, body } = validated.value
+  const { title, slug, category, author, date, excerpt, featuredImage, tags, body, status } = validated.value
 
   let filenames: string[]
   try {
@@ -124,7 +130,7 @@ export async function POST(request: NextRequest) {
 
   const year = new Date(date).getFullYear()
   const referenceCode = `${code}-${year}-${String(maxNumber + 1).padStart(3, '0')}`
-  const readingTime = calculateReadingTime(body.split(/\s+/).filter(Boolean).length)
+  const readingTime = calculateReadingTime(stripHtml(body).split(/\s+/).filter(Boolean).length)
 
   const frontmatter = {
     title,
@@ -136,6 +142,7 @@ export async function POST(request: NextRequest) {
     featuredImage,
     tags,
     referenceCode,
+    status,
   }
   const fileContent = matter.stringify(`${body}\n`, frontmatter)
 

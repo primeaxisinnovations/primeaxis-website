@@ -6,7 +6,6 @@ import {
   Italic,
   Underline,
   Strikethrough,
-  Heading1,
   Heading2,
   Heading3,
   Pilcrow,
@@ -40,7 +39,6 @@ interface ActiveFormats {
   justifyLeft: boolean
   justifyCenter: boolean
   justifyRight: boolean
-  h1: boolean
   h2: boolean
   h3: boolean
   paragraph: boolean
@@ -57,7 +55,6 @@ const EMPTY_FORMATS: ActiveFormats = {
   justifyLeft: false,
   justifyCenter: false,
   justifyRight: false,
-  h1: false,
   h2: false,
   h3: false,
   paragraph: false,
@@ -151,7 +148,6 @@ export default function RichTextEditor({ value, onChange }: RichTextEditorProps)
       justifyLeft: queryState('justifyLeft'),
       justifyCenter: queryState('justifyCenter'),
       justifyRight: queryState('justifyRight'),
-      h1: blockTagActive('H1'),
       h2: blockTagActive('H2'),
       h3: blockTagActive('H3'),
       paragraph: blockTagActive('P') || blockTagActive('DIV'),
@@ -202,7 +198,7 @@ export default function RichTextEditor({ value, onChange }: RichTextEditorProps)
   // Renames every top-level block in the current selection to `tag`,
   // preserving inline content. execCommand('formatBlock', ...) is
   // unreliable across browsers for this, so it's done by hand.
-  function applyBlockTag(tag: 'H1' | 'H2' | 'H3' | 'P') {
+  function applyBlockTag(tag: 'H2' | 'H3' | 'P') {
     const root = editorRef.current
     if (!root) return
     root.focus()
@@ -392,9 +388,6 @@ export default function RichTextEditor({ value, onChange }: RichTextEditorProps)
 
         <span className={TOOLBAR_DIVIDER} />
 
-        <button type="button" title="Heading 1" onMouseDown={preserveSelection} onClick={() => applyBlockTag('H1')} className={buttonClass(formats.h1)}>
-          <Heading1 size={16} />
-        </button>
         <button type="button" title="Heading 2" onMouseDown={preserveSelection} onClick={() => applyBlockTag('H2')} className={buttonClass(formats.h2)}>
           <Heading2 size={16} />
         </button>

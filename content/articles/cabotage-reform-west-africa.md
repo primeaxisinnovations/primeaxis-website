@@ -19,6 +19,7 @@ tags:
   - West Africa
   - Policy
 referenceCode: SL-2026-001
+status: published
 ---
 Cabotage legislation — designed to reserve coastal trade for nationally flagged vessels — has long been a cornerstone of maritime development policy across West and Central Africa. Yet enforcement remains inconsistent, vessel ownership thin, and foreign operators adept at circumventing the rules. We examine what genuine reform would require.
 

@@ -1,7 +1,7 @@
 import { cookies } from 'next/headers'
 import { redirect } from 'next/navigation'
 import { ADMIN_SESSION_COOKIE, verifySessionToken } from '@/lib/admin-session'
-import NewArticleForm from '@/components/admin/NewArticleForm'
+import ArticleForm from '@/components/admin/ArticleForm'
 
 // No caching — this page only renders a form, but every admin route stays
 // dynamic on principle so nothing under /admin is ever served stale.
@@ -15,5 +15,5 @@ export default async function NewArticlePage() {
     redirect('/admin/login')
   }
 
-  return <NewArticleForm />
+  return <ArticleForm mode="create" />
 }

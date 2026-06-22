@@ -19,6 +19,7 @@ tags:
   - Facilitation
   - Intra-Africa
 referenceCode: TF-2026-001
+status: published
 ---
 The African Continental Free Trade Area holds transformational promise for intra-African maritime trade. But customs harmonisation, port documentation standards, and intermodal connectivity remain unresolved friction points.
 

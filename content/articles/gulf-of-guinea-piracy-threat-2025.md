@@ -18,6 +18,7 @@ tags:
   - Maritime Security
   - West Africa
 referenceCode: MS-2026-001
+status: published
 ---
 Reported piracy incidents in the Gulf of Guinea declined markedly in 2025, but security analysts caution against premature confidence. The threat has shifted geographically and operationally — and regional navies are still playing catch-up.
 

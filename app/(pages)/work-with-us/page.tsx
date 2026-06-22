@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import type { ReactElement } from 'react'
 import Link from 'next/link'
 import AnimatedSection from '@/components/ui/AnimatedSection'
+import { cn } from '@/lib/utils'
 
 export const metadata: Metadata = {
   title: 'Work With Us | PrimeAxis',
@@ -121,7 +122,10 @@ export default function WorkWithUsPage() {
               {PATHWAYS.map((pathway) => (
                 <div
                   key={pathway.title}
-                  className="bg-white p-8 max-sm:p-6 flex flex-col border-t-2 border-transparent hover:border-gold transition-colors duration-200 group"
+                  className={cn(
+                    'bg-white/85 backdrop-blur-sm rounded-sm2 border border-white/20 p-8 max-sm:p-6 flex flex-col transition-colors duration-200 group',
+                    'border-t-2 border-t-transparent hover:border-t-gold'
+                  )}
                 >
                   <div className="mb-5">{pathway.icon}</div>
                   <h2 className="font-display text-[20px] font-semibold text-deep leading-[1.2] mb-4">

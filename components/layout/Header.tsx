@@ -1,9 +1,9 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, type FormEvent } from 'react'
 import Link from 'next/link'
-import { usePathname } from 'next/navigation'
-import { Menu, X } from 'lucide-react'
+import { usePathname, useRouter } from 'next/navigation'
+import { Menu, X, Search } from 'lucide-react'
 import { cn } from '@/lib/utils'
 
 const navLinks = [
@@ -18,7 +18,31 @@ const navLinks = [
 export default function Header() {
   const [scrolled, setScrolled] = useState(false)
   const [isOpen, setIsOpen] = useState(false)
+  const [searchOpen, setSearchOpen] = useState(false)
+  const [searchQuery, setSearchQuery] = useState('')
+  const [mobileSearchQuery, setMobileSearchQuery] = useState('')
   const pathname = usePathname()
+  const router = useRouter()
+
+  function submitSearch(query: string) {
+    const trimmed = query.trim()
+    if (!trimmed) return
+    router.push(`/search?q=${encodeURIComponent(trimmed)}`)
+    setSearchOpen(false)
+    setSearchQuery('')
+    setMobileSearchQuery('')
+    setIsOpen(false)
+  }
+
+  function handleSearchSubmit(e: FormEvent) {
+    e.preventDefault()
+    submitSearch(searchQuery)
+  }
+
+  function handleMobileSearchSubmit(e: FormEvent) {
+    e.preventDefault()
+    submitSearch(mobileSearchQuery)
+  }
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 60)
@@ -79,8 +103,35 @@ export default function Header() {
             ))}
           </nav>
 
-          {/* Right — desktop contact + mobile hamburger */}
+          {/* Right — desktop search + contact, mobile hamburger */}
           <div className="flex items-center gap-4">
+            <form
+              onSubmit={handleSearchSubmit}
+              className="hidden lg:flex items-center"
+            >
+              <input
+                type="text"
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                placeholder="Search…"
+                aria-label="Search articles and conversations"
+                className={cn(
+                  'font-sans text-[13px] text-white placeholder:text-white/40 bg-white/10 border border-white/15 outline-none focus:border-gold transition-all duration-200 overflow-hidden',
+                  searchOpen ? 'w-[180px] px-3 py-[7px] opacity-100 mr-1' : 'w-0 px-0 py-[7px] opacity-0 border-transparent'
+                )}
+              />
+              <button
+                type={searchOpen ? 'submit' : 'button'}
+                onClick={() => {
+                  if (!searchOpen) setSearchOpen(true)
+                }}
+                aria-label={searchOpen ? 'Submit search' : 'Open search'}
+                className="btn-bare text-white/75 hover:text-gold transition-colors duration-200 p-1"
+              >
+                <Search size={19} />
+              </button>
+            </form>
+
             <Link
               href="/contact"
               className="hidden lg:inline-flex items-center font-sans font-semibold text-sm tracking-wide text-gold border border-gold px-5 py-2 transition-all duration-200 hover:bg-gold hover:text-deep"
@@ -124,6 +175,27 @@ export default function Header() {
             <X size={24} />
           </button>
         </div>
+
+        {/* Overlay search */}
+        <form onSubmit={handleMobileSearchSubmit} className="px-6 flex-shrink-0">
+          <div className="flex items-center border border-white/15 bg-white/5">
+            <input
+              type="text"
+              value={mobileSearchQuery}
+              onChange={(e) => setMobileSearchQuery(e.target.value)}
+              placeholder="Search articles and conversations…"
+              aria-label="Search articles and conversations"
+              className="flex-1 font-sans text-[14px] text-white placeholder:text-white/40 bg-transparent outline-none px-4 py-3"
+            />
+            <button
+              type="submit"
+              aria-label="Submit search"
+              className="btn-bare text-white/75 hover:text-gold transition-colors duration-200 px-4"
+            >
+              <Search size={18} />
+            </button>
+          </div>
+        </form>
 
         {/* Overlay nav links */}
         <nav className="flex-1 flex flex-col items-center justify-center gap-2">

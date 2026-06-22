@@ -9,8 +9,12 @@ export const metadata: Metadata = {
     "Strategic maritime analysis, industry intelligence, and policy perspectives shaping Africa's maritime future.",
 }
 
-export default function IntelligenceHubPage() {
-  const articles = getAllArticles()
+// Reads live from GitHub on every request (see lib/content.ts) — must stay
+// dynamic so a Publish/Unpublish/Save never waits on a rebuild.
+export const dynamic = 'force-dynamic'
+
+export default async function IntelligenceHubPage() {
+  const articles = await getAllArticles()
 
   return (
     <div className="min-h-screen">

@@ -19,6 +19,7 @@ tags:
   - Regulation
   - Decarbonisation
 referenceCode: MP-2026-001
+status: published
 ---
 The International Maritime Organization's landmark decision to impose a carbon pricing mechanism on international shipping will have asymmetric consequences across the global fleet. African operators, often running older tonnage, face disproportionate compliance costs — and the policy window to address this disparity is closing.
 

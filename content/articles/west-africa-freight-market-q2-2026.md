@@ -17,6 +17,7 @@ tags:
   - Market Intelligence
   - Logistics
 referenceCode: II-2026-001
+status: published
 ---
 Freight rates on key West Africa trade lanes stabilised in Q2 2026 following Red Sea-driven volatility, but underlying demand patterns reveal structural shifts in cargo composition that operators ignore at their peril.
 

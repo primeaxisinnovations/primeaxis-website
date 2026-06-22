@@ -33,7 +33,7 @@ export default function IntelligenceHubGrid({ articles }: IntelligenceHubGridPro
 
   return (
     <section className="py-[72px] bg-cream max-sm:py-12">
-      <div className="max-w-[1240px] mx-auto px-11 max-sm:px-5">
+      <div className="max-w-[1240px] mx-auto px-11 max-sm:px-5 bg-white/85 backdrop-blur-sm rounded-sm2 border border-white/20 pt-10 pb-12 max-sm:pt-8 max-sm:pb-8">
 
         {/* Category filter pills */}
         <AnimatedSection className="mb-10">

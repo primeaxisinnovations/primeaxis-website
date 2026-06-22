@@ -11,6 +11,7 @@ export interface Article {
   body: string
   content?: string
   tags?: string[]
+  status: 'draft' | 'published'
 }
 
 export interface Conversation {
@@ -26,6 +27,11 @@ export interface Conversation {
   excerpt: string
   date: string
   content?: string
+  status: 'draft' | 'published'
+  introduction?: string
+  pullQuote?: string
+  closingQuote?: string
+  editorsNote?: string
 }
 
 export interface Service {
