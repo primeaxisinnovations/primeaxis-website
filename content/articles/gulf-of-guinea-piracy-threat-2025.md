@@ -1,5 +1,4 @@
 ---
-status: published
 title: 'Gulf of Guinea Piracy in 2025: A Shifted Threat Landscape'
 excerpt: >-
   Reported piracy incidents in the Gulf of Guinea declined markedly in 2025, but

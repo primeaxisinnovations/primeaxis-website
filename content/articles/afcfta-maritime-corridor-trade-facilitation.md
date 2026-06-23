@@ -1,5 +1,4 @@
 ---
-status: published
 title: >-
   The AfCFTA Maritime Corridor: Trade Facilitation Gaps That Could Stall the
   Dividend

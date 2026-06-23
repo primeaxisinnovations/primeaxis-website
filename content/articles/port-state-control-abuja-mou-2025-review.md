@@ -1,5 +1,4 @@
 ---
-status: published
 title: >-
   Abuja MoU 2025 Annual Review: Detention Rates, Deficiency Trends, and the Road
   to Compliance

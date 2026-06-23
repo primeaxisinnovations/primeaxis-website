@@ -1,5 +1,4 @@
 ---
-status: published
 title: 'Cabotage Reform Across West Africa: Progress, Pitfalls, and the Path Forward'
 excerpt: >-
   Cabotage legislation — designed to reserve coastal trade for nationally

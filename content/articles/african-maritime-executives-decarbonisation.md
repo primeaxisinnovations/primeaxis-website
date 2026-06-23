@@ -1,5 +1,4 @@
 ---
-status: published
 title: >-
   Decarbonisation or Development? How Africa's Maritime Leaders Are Navigating
   the Green Transition
