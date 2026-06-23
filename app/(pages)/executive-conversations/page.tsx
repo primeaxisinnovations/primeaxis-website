@@ -3,7 +3,6 @@ import Image from 'next/image'
 import { getAllConversations } from '@/lib/conversation-content'
 import AnimatedSection from '@/components/ui/AnimatedSection'
 import ConversationCard from '@/components/ui/ConversationCard'
-import GlassOrbs from '@/components/ui/GlassOrbs'
 
 export const metadata: Metadata = {
   title: 'Executive Conversations | PrimeAxis',
@@ -21,47 +20,45 @@ export default async function ExecutiveConversationsPage() {
   return (
     <div className="min-h-screen bg-cream">
 
-      {/* Page Header — full-bleed maritime photography behind a
-          frosted-glass content card ─────────────────────────────────── */}
-      <section className="relative pt-[60px] pb-[72px] overflow-hidden">
+      {/* Page Header — full-viewport hero photograph, bleeding behind the
+          transparent fixed header (-mt cancels the global main pt-[102px]) ── */}
+      <section className="relative min-h-screen overflow-hidden -mt-[102px]">
         <Image
-          src="https://images.unsplash.com/photo-1704655395967-c4b2c617a028?w=1600&q=80&fit=crop"
-          alt=""
+          src="https://n0jyvquhgs2welj7.public.blob.vercel-storage.com/uploads/1782232147724-f6f6d6d4-whatsapp-image-2026-06-15-at-18-56-21.jpg"
+          alt="Executive conversation interview"
           fill
           priority
-          className="object-cover"
           sizes="100vw"
+          className="object-cover object-[center_8%] max-sm:object-[center_15%]"
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-[#0D1824]/90 via-[#0D1824]/60 to-transparent" />
-        <GlassOrbs
-          orbs={[
-            { color: 'rgba(30,80,160,0.25)', size: 380, top: '-100px', left: '-80px' },
-            { color: 'rgba(100,40,160,0.18)', size: 300, bottom: '-80px', right: '0px' },
-          ]}
+        <div
+          className="absolute inset-x-0 top-0 h-[80px]"
+          style={{ background: 'linear-gradient(to bottom, rgba(13,27,42,0.65), transparent)' }}
         />
-        <div className="relative max-w-[1240px] mx-auto px-11 max-sm:px-5">
-          <AnimatedSection>
-            <div className="glass-card max-w-[680px] p-8 max-sm:p-6">
-              <span
-                className="block font-mono text-[10.5px] tracking-[0.2em] uppercase mb-5"
-                style={{ color: 'var(--color-gold-bright)' }}
-              >
-                Executive Conversations
-              </span>
-              <h1 className="font-display text-[clamp(28px,3.5vw,52px)] font-semibold text-white leading-[1.1] max-w-[680px] mb-5">
-                Conversations Shaping Africa&apos;s Maritime Future
-              </h1>
-              <p className="font-sans text-[15px] text-white/70 leading-relaxed max-w-[520px]">
-                Engaging the executives, regulators, and institution builders whose decisions are
-                defining the direction of Africa&apos;s maritime and blue economy sectors.
-              </p>
-            </div>
-          </AnimatedSection>
+        <div className="absolute z-10 bottom-[52px] left-[64px] max-sm:bottom-9 max-sm:left-6">
+          <span
+            className="block font-mono text-[10px] tracking-[0.24em] uppercase mb-3"
+            style={{ color: 'var(--color-gold-bright)', textShadow: '0 1px 12px rgba(0,0,0,0.8)' }}
+          >
+            Executive Conversations
+          </span>
+          <h1
+            className="font-display text-[46px] max-sm:text-[32px] font-bold text-white leading-[1.12] max-w-[620px] mb-4"
+            style={{ textShadow: '0 2px 24px rgba(0,0,0,0.75), 0 1px 6px rgba(0,0,0,0.60)' }}
+          >
+            Conversations Shaping Africa&apos;s Maritime Future
+          </h1>
+          <p
+            className="font-sans text-[15px] font-light text-white/80 max-w-[480px]"
+            style={{ textShadow: '0 1px 12px rgba(0,0,0,0.85), 0 2px 20px rgba(0,0,0,0.60)' }}
+          >
+            Unfiltered dialogue with the leaders defining Africa&apos;s blue economy.
+          </p>
         </div>
       </section>
 
       {/* Conversation List */}
-      <section className="py-[72px] max-sm:py-12">
+      <section className="pt-[102px] pb-[72px] max-sm:pb-12">
         <div className="max-w-[1240px] mx-auto px-11 max-sm:px-5">
           <AnimatedSection delay={100}>
             <div className="flex flex-col gap-4">

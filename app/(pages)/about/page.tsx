@@ -167,17 +167,25 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* ── Three Pillars — glassmorphism orb-backed dark environment ── */}
+      {/* ── Three Pillars — full-bleed maritime photography behind
+          frosted glass cards (image dimmed + edge-faded into the page) ── */}
       <section className="relative overflow-hidden py-[72px] max-sm:py-14" style={{ background: '#0a1628' }}>
-        <GlassOrbs
-          orbs={[
-            { color: 'rgba(30,80,160,0.45)', size: 500, top: '-120px', left: '-120px' },
-            { color: 'rgba(100,40,160,0.35)', size: 400, bottom: '-100px', right: '-100px' },
-            { color: 'rgba(20,120,160,0.30)', size: 300, top: '30%', left: '40%' },
-            { color: 'rgba(180,130,30,0.20)', size: 250, bottom: '5%', left: '0px' },
-          ]}
+        <img
+          className="pillars-bg"
+          src="https://n0jyvquhgs2welj7.public.blob.vercel-storage.com/uploads/1782238764166-6b82e17d-luk.png"
+          alt=""
+          aria-hidden="true"
         />
-        <div className="relative max-w-[1240px] mx-auto px-11 max-sm:px-5">
+        <div className="absolute inset-0 z-[1] pointer-events-none" style={{ background: 'rgba(7, 16, 28, 0.58)' }} />
+        <div
+          className="absolute top-0 left-0 right-0 h-[120px] z-[2] pointer-events-none"
+          style={{ background: 'linear-gradient(to bottom, #0d1b2a, transparent)' }}
+        />
+        <div
+          className="absolute bottom-0 left-0 right-0 h-[120px] z-[2] pointer-events-none"
+          style={{ background: 'linear-gradient(to top, #0d1b2a, transparent)' }}
+        />
+        <div className="relative z-[3] max-w-[1240px] mx-auto px-11 max-sm:px-5">
 
           <AnimatedSection className="mb-12">
             <span
@@ -195,7 +203,7 @@ export default function AboutPage() {
           <AnimatedSection delay={100}>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               {PILLARS.map((pillar) => (
-                <div key={pillar.title} className="glass-card p-8 max-sm:p-6 flex flex-col">
+                <div key={pillar.title} className="pillar-card p-8 max-sm:p-6 flex flex-col">
                   <div className="glass-icon-box mb-6">{pillar.icon}</div>
                   <h3 className="font-display text-[22px] font-semibold text-white mb-3">
                     {pillar.title}
@@ -371,35 +379,6 @@ export default function AboutPage() {
               </Link>
             </div>
           </AnimatedSection>
-        </div>
-      </section>
-
-      {/* ── Newsletter CTA ───────────────────────────────────────── */}
-      <section className="bg-deep py-[72px] max-sm:py-14">
-        <div className="max-w-[600px] mx-auto px-11 max-sm:px-5 text-center">
-          <span className="block font-mono text-[10.5px] tracking-[0.2em] uppercase text-gold mb-4">
-            Intelligence Briefings
-          </span>
-          <h2 className="font-display text-[clamp(22px,2.5vw,34px)] font-semibold text-white leading-[1.15] mb-4">
-            Stay Ahead of Africa&apos;s Maritime Story
-          </h2>
-          <p className="font-sans text-[14px] text-white/50 leading-relaxed mb-8">
-            Strategic intelligence, policy analysis, and industry perspectives — direct to your
-            inbox, free.
-          </p>
-          <div className="flex max-sm:flex-col">
-            <input
-              type="email"
-              placeholder="Your professional email address"
-              className="flex-1 font-sans text-[13.5px] px-[18px] py-[13px] border border-white/10 bg-white/5 text-white placeholder:text-white/30 outline-none focus:border-gold transition-colors duration-200"
-            />
-            <button
-              type="submit"
-              className="font-sans text-[13px] font-semibold tracking-[.04em] bg-gold text-deep px-6 py-[13px] whitespace-nowrap hover:bg-gold-light transition-colors duration-200"
-            >
-              Subscribe Free
-            </button>
-          </div>
         </div>
       </section>
 
