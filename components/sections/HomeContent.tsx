@@ -539,10 +539,7 @@ export default function HomeContent({
                     boxShadow: "inset 0 1px 0 rgba(255,255,255,0.16)",
                   }}
                 >
-                  <div
-                    className="w-11 h-11 flex items-center justify-center flex-shrink-0"
-                    style={{ background: "linear-gradient(135deg, #485778, #5E719A)" }}
-                  >
+                  <div className="w-11 h-11 flex items-center justify-center flex-shrink-0 bg-teal">
                     <span className="font-display text-[16px] font-bold text-[rgba(191,159,102,.5)]">
                       {featuredConversation.initials}
                     </span>
@@ -593,7 +590,7 @@ export default function HomeContent({
                       sizes="(max-width: 1024px) 100vw, 50vw"
                     />
                   ) : (
-                    <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-teal to-deep">
+                    <div className="absolute inset-0 flex items-center justify-center bg-teal">
                       <span className="font-display text-[72px] font-semibold text-white/85 tracking-wider">
                         {featuredConversation.initials}
                       </span>

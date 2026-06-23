@@ -2,7 +2,7 @@ import type { Metadata } from 'next'
 import type { ReactElement } from 'react'
 import Link from 'next/link'
 import AnimatedSection from '@/components/ui/AnimatedSection'
-import { cn } from '@/lib/utils'
+import GlassOrbs from '@/components/ui/GlassOrbs'
 
 export const metadata: Metadata = {
   title: 'Work With Us | PrimeAxis',
@@ -21,7 +21,7 @@ const PATHWAYS: Array<{
 }> = [
   {
     icon: (
-      <svg viewBox="0 0 24 24" fill="none" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="w-7 h-7 stroke-teal" aria-hidden="true">
+      <svg viewBox="0 0 24 24" fill="none" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="w-6 h-6" aria-hidden="true">
         <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
         <circle cx="9" cy="7" r="4" />
         <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
@@ -36,7 +36,7 @@ const PATHWAYS: Array<{
   },
   {
     icon: (
-      <svg viewBox="0 0 24 24" fill="none" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="w-7 h-7 stroke-teal" aria-hidden="true">
+      <svg viewBox="0 0 24 24" fill="none" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="w-6 h-6" aria-hidden="true">
         <rect x="2" y="7" width="20" height="14" rx="2" ry="2" />
         <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16" />
       </svg>
@@ -49,7 +49,7 @@ const PATHWAYS: Array<{
   },
   {
     icon: (
-      <svg viewBox="0 0 24 24" fill="none" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="w-7 h-7 stroke-teal" aria-hidden="true">
+      <svg viewBox="0 0 24 24" fill="none" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="w-6 h-6" aria-hidden="true">
         <path d="M12 20h9" />
         <path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z" />
       </svg>
@@ -62,7 +62,7 @@ const PATHWAYS: Array<{
   },
   {
     icon: (
-      <svg viewBox="0 0 24 24" fill="none" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="w-7 h-7 stroke-teal" aria-hidden="true">
+      <svg viewBox="0 0 24 24" fill="none" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="w-6 h-6" aria-hidden="true">
         <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
       </svg>
     ),
@@ -99,39 +99,46 @@ export default function WorkWithUsPage() {
       <section className="bg-cream pt-[60px] pb-[72px] border-b border-border">
         <div className="max-w-[1240px] mx-auto px-11 max-sm:px-5">
           <AnimatedSection>
-            <span className="block font-mono text-[10.5px] tracking-[0.2em] uppercase text-gold mb-5">
-              Work With Us
-            </span>
-            <h1 className="font-display text-[clamp(28px,4vw,54px)] font-semibold text-deep leading-[1.1] max-w-[720px] mb-5">
-              Let&apos;s Build Africa&apos;s Maritime Future Together
-            </h1>
-            <p className="font-sans text-[16px] text-muted leading-relaxed max-w-[540px]">
-              PrimeAxis welcomes collaboration, partnership, and contribution from across the
-              maritime ecosystem — organisations, executives, researchers, and practitioners who
-              share our commitment to advancing Africa&apos;s maritime future.
-            </p>
+            <div className="max-w-[760px] bg-white/82 backdrop-blur-sm rounded-sm2 border border-white/25 p-8 max-sm:p-6">
+              <span className="block font-mono text-[10.5px] tracking-[0.2em] uppercase text-gold mb-5">
+                Work With Us
+              </span>
+              <h1 className="font-display text-[clamp(28px,4vw,54px)] font-semibold text-deep leading-[1.1] max-w-[720px] mb-5">
+                Let&apos;s Build Africa&apos;s Maritime Future Together
+              </h1>
+              <p className="font-sans text-[16px] text-muted leading-relaxed max-w-[540px]">
+                PrimeAxis welcomes collaboration, partnership, and contribution from across the
+                maritime ecosystem — organisations, executives, researchers, and practitioners who
+                share our commitment to advancing Africa&apos;s maritime future.
+              </p>
+            </div>
           </AnimatedSection>
         </div>
       </section>
 
-      {/* ── Four pathway cards ───────────────────────────────────── */}
-      <section className="py-[72px] max-sm:py-14 bg-cream">
-        <div className="max-w-[1240px] mx-auto px-11 max-sm:px-5">
+      {/* ── Four pathway cards — glassmorphism orb-backed dark environment ── */}
+      <section className="relative overflow-hidden py-[72px] max-sm:py-14" style={{ background: '#0a1628' }}>
+        <GlassOrbs
+          orbs={[
+            { color: 'rgba(30,80,160,0.40)', size: 480, top: '-110px', left: '-100px' },
+            { color: 'rgba(100,40,160,0.32)', size: 380, bottom: '-90px', right: '-80px' },
+            { color: 'rgba(20,120,160,0.26)', size: 280, top: '35%', left: '48%' },
+            { color: 'rgba(180,130,30,0.18)', size: 220, bottom: '8%', left: '5%' },
+          ]}
+        />
+        <div className="relative max-w-[1240px] mx-auto px-11 max-sm:px-5">
           <AnimatedSection delay={100}>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-px bg-border">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               {PATHWAYS.map((pathway) => (
-                <div
-                  key={pathway.title}
-                  className={cn(
-                    'bg-white/85 backdrop-blur-sm rounded-sm2 border border-white/20 p-8 max-sm:p-6 flex flex-col transition-colors duration-200 group',
-                    'border-t-2 border-t-transparent hover:border-t-gold'
-                  )}
-                >
-                  <div className="mb-5">{pathway.icon}</div>
-                  <h2 className="font-display text-[20px] font-semibold text-deep leading-[1.2] mb-4">
+                <div key={pathway.title} className="glass-card p-8 max-sm:p-6 flex flex-col">
+                  <div className="glass-icon-box mb-5">{pathway.icon}</div>
+                  <h2 className="font-display text-[20px] font-semibold text-white leading-[1.2] mb-4">
                     {pathway.title}
                   </h2>
-                  <p className="font-sans text-[14px] text-muted leading-[1.78] mb-7 flex-1">
+                  <p
+                    className="font-sans text-[14px] font-light leading-[1.78] mb-7 flex-1"
+                    style={{ color: 'rgba(180,200,240,0.65)' }}
+                  >
                     {pathway.description}
                   </p>
                   <div className="flex flex-wrap items-center gap-4">
@@ -147,7 +154,7 @@ export default function WorkWithUsPage() {
                     {pathway.secondary && (
                       <Link
                         href={pathway.secondary.href}
-                        className="font-mono text-[10px] tracking-[0.14em] uppercase text-teal hover:text-gold transition-colors duration-200"
+                        className="font-mono text-[10px] tracking-[0.14em] uppercase text-white/60 hover:text-[var(--color-gold-bright)] transition-colors duration-200"
                       >
                         {pathway.secondary.label} →
                       </Link>

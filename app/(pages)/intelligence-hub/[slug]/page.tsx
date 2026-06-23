@@ -119,7 +119,7 @@ export default async function ArticlePage({ params }: PageProps) {
                 derived from public user input. Do not copy this pattern for any
                 content that originates outside the admin CMS. */}
             <div
-              className="article-prose bg-white/85 backdrop-blur-sm rounded-sm2 border border-white/20 p-10 max-sm:p-6"
+              className="article-prose bg-white/82 backdrop-blur-sm rounded-sm2 border border-white/25 p-10 max-sm:p-6"
               dangerouslySetInnerHTML={{ __html: article.body }}
             />
 

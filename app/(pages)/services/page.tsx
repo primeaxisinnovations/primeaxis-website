@@ -3,8 +3,7 @@ import type { ReactElement } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 import AnimatedSection from '@/components/ui/AnimatedSection'
-import StampSeal from '@/components/ui/StampSeal'
-import { cn } from '@/lib/utils'
+import GlassOrbs from '@/components/ui/GlassOrbs'
 
 export const metadata: Metadata = {
   title: 'Services | PrimeAxis Maritime Intelligence',
@@ -15,32 +14,32 @@ export const metadata: Metadata = {
 // ── Service icons — matching the homepage icon set ──────────────────────────
 const ICONS: Record<string, ReactElement> = {
   megaphone: (
-    <svg viewBox="0 0 24 24" fill="none" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="w-8 h-8 stroke-teal" aria-hidden="true">
+    <svg viewBox="0 0 24 24" fill="none" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="w-6 h-6" aria-hidden="true">
       <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
     </svg>
   ),
   lightbulb: (
-    <svg viewBox="0 0 24 24" fill="none" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="w-8 h-8 stroke-teal" aria-hidden="true">
+    <svg viewBox="0 0 24 24" fill="none" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="w-6 h-6" aria-hidden="true">
       <path d="M9 18h6M10 22h4M12 2a7 7 0 0 1 7 7c0 2.38-1.19 4.47-3 5.74V17a1 1 0 0 1-1 1H9a1 1 0 0 1-1-1v-2.26A7 7 0 0 1 12 2z" />
     </svg>
   ),
   chart: (
-    <svg viewBox="0 0 24 24" fill="none" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="w-8 h-8 stroke-teal" aria-hidden="true">
+    <svg viewBox="0 0 24 24" fill="none" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="w-6 h-6" aria-hidden="true">
       <line x1="18" y1="20" x2="18" y2="10" /><line x1="12" y1="20" x2="12" y2="4" /><line x1="6" y1="20" x2="6" y2="14" />
     </svg>
   ),
   handshake: (
-    <svg viewBox="0 0 24 24" fill="none" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="w-8 h-8 stroke-teal" aria-hidden="true">
+    <svg viewBox="0 0 24 24" fill="none" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="w-6 h-6" aria-hidden="true">
       <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" /><circle cx="9" cy="7" r="4" /><path d="M23 21v-2a4 4 0 0 0-3-3.87" /><path d="M16 3.13a4 4 0 0 1 0 7.75" />
     </svg>
   ),
   calendar: (
-    <svg viewBox="0 0 24 24" fill="none" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="w-8 h-8 stroke-teal" aria-hidden="true">
+    <svg viewBox="0 0 24 24" fill="none" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="w-6 h-6" aria-hidden="true">
       <rect x="3" y="4" width="18" height="18" rx="2" ry="2" /><line x1="16" y1="2" x2="16" y2="6" /><line x1="8" y1="2" x2="8" y2="6" /><line x1="3" y1="10" x2="21" y2="10" />
     </svg>
   ),
   pen: (
-    <svg viewBox="0 0 24 24" fill="none" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="w-8 h-8 stroke-teal" aria-hidden="true">
+    <svg viewBox="0 0 24 24" fill="none" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="w-6 h-6" aria-hidden="true">
       <path d="M12 20h9M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z" />
     </svg>
   ),
@@ -188,56 +187,63 @@ export default function ServicesPage() {
         </div>
       </section>
 
-      {/* ── Services list ────────────────────────────────────────── */}
-      {/* Silky reading container — bg-white/85 + backdrop-blur-sm, the
-          translucent light-card treatment used for every text-heavy
-          section across the interior pages. The first row ("Strategic
-          Communications," the platform's lead/flagship service) keeps the
-          optional gold-top-border highlight variant. */}
-      <section className="bg-cream">
-        <div className="max-w-[1240px] mx-auto px-11 max-sm:px-5">
+      {/* ── Services list — glassmorphism orb-backed dark environment ── */}
+      <section className="relative overflow-hidden" style={{ background: '#0a1628' }}>
+        <GlassOrbs
+          orbs={[
+            { color: 'rgba(30,90,180,0.45)', size: 550, top: '-150px', left: '-150px' },
+            { color: 'rgba(40,100,180,0.30)', size: 450, bottom: '10%', right: '-120px' },
+            { color: 'rgba(20,130,170,0.25)', size: 320, top: '50%', left: '45%' },
+            { color: 'rgba(100,60,160,0.18)', size: 260, bottom: '-100px', left: '10%' },
+          ]}
+        />
+        <div className="relative max-w-[1240px] mx-auto px-11 max-sm:px-5">
           <AnimatedSection>
             <div className="flex flex-col gap-6 py-[56px] max-sm:py-10">
-              {SERVICES.map((service, i) => (
-                <div
-                  key={service.title}
-                  className={cn(
-                    'p-8 max-sm:p-6 bg-white/85 backdrop-blur-sm rounded-sm2 border border-white/20',
-                    i === 0 && 'border-t-2 border-t-gold'
-                  )}
-                >
-                <div className="grid grid-cols-[72px_1fr] gap-x-10 gap-y-6 max-sm:grid-cols-1 max-sm:gap-x-0">
+              {SERVICES.map((service) => (
+                <div key={service.title} className="glass-card p-8 max-sm:p-6">
+                  <div className="grid grid-cols-[52px_1fr] gap-x-10 gap-y-6 max-sm:grid-cols-1 max-sm:gap-x-0">
 
-                  {/* Left: seal — unmodified StampSeal */}
-                  <div className="pt-1 flex flex-col gap-5 max-sm:flex-row max-sm:items-center max-sm:gap-4">
-                    <StampSeal size={64}>{service.icon}</StampSeal>
-                  </div>
-
-                  {/* Right: name, description, outcomes */}
-                  <div>
-                    <h2 className="font-display text-[clamp(21px,2.4vw,30px)] font-semibold text-deep leading-[1.15] mb-5">
-                      {service.title}
-                    </h2>
-                    <p className="font-sans text-[15.5px] text-muted leading-[1.8] max-w-[640px] mb-7">
-                      {service.description}
-                    </p>
-                    <div>
-                      <span className="block font-mono text-[10px] tracking-[0.18em] uppercase text-gold mb-3">
-                        What This Includes
-                      </span>
-                      <ul className="space-y-2.5">
-                        {service.outcomes.map((item) => (
-                          <li key={item} className="flex items-start gap-3 font-sans text-[13.5px] text-muted">
-                            <span className="w-[5px] h-[5px] rounded-full bg-gold mt-[7px] flex-shrink-0" />
-                            {item}
-                          </li>
-                        ))}
-                      </ul>
+                    {/* Left: icon box */}
+                    <div className="pt-1 flex flex-col gap-5 max-sm:flex-row max-sm:items-center max-sm:gap-4">
+                      <div className="glass-icon-box">{service.icon}</div>
                     </div>
-                  </div>
 
+                    {/* Right: name, description, outcomes */}
+                    <div>
+                      <h2 className="font-display text-[clamp(21px,2.4vw,30px)] font-semibold text-white leading-[1.15] mb-5">
+                        {service.title}
+                      </h2>
+                      <p
+                        className="font-sans text-[14px] font-light leading-[1.8] max-w-[640px] mb-5"
+                        style={{ color: 'rgba(180,200,240,0.65)' }}
+                      >
+                        {service.description}
+                      </p>
+                      <span className="glass-divider mb-5" />
+                      <div>
+                        <span
+                          className="block font-mono text-[10px] tracking-[0.18em] uppercase mb-3"
+                          style={{ color: 'var(--color-gold-bright)' }}
+                        >
+                          What This Includes
+                        </span>
+                        <ul className="glass-bullet space-y-2.5">
+                          {service.outcomes.map((item) => (
+                            <li
+                              key={item}
+                              className="font-sans text-[13px]"
+                              style={{ color: 'rgba(200,220,255,0.60)' }}
+                            >
+                              {item}
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    </div>
+
+                  </div>
                 </div>
-              </div>
               ))}
             </div>
           </AnimatedSection>

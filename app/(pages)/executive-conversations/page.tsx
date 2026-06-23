@@ -3,6 +3,7 @@ import Image from 'next/image'
 import { getAllConversations } from '@/lib/conversation-content'
 import AnimatedSection from '@/components/ui/AnimatedSection'
 import ConversationCard from '@/components/ui/ConversationCard'
+import GlassOrbs from '@/components/ui/GlassOrbs'
 
 export const metadata: Metadata = {
   title: 'Executive Conversations | PrimeAxis',
@@ -32,16 +33,19 @@ export default async function ExecutiveConversationsPage() {
           sizes="100vw"
         />
         <div className="absolute inset-0 bg-gradient-to-b from-[#0D1824]/90 via-[#0D1824]/60 to-transparent" />
+        <GlassOrbs
+          orbs={[
+            { color: 'rgba(30,80,160,0.25)', size: 380, top: '-100px', left: '-80px' },
+            { color: 'rgba(100,40,160,0.18)', size: 300, bottom: '-80px', right: '0px' },
+          ]}
+        />
         <div className="relative max-w-[1240px] mx-auto px-11 max-sm:px-5">
           <AnimatedSection>
-            <div
-              className="max-w-[680px] p-8 max-sm:p-6 border border-white/20 backdrop-blur-md"
-              style={{
-                background: 'rgba(255,255,255,0.08)',
-                boxShadow: 'inset 0 1px 0 rgba(255,255,255,0.16)',
-              }}
-            >
-              <span className="block font-mono text-[10.5px] tracking-[0.2em] uppercase text-gold mb-5">
+            <div className="glass-card max-w-[680px] p-8 max-sm:p-6">
+              <span
+                className="block font-mono text-[10.5px] tracking-[0.2em] uppercase mb-5"
+                style={{ color: 'var(--color-gold-bright)' }}
+              >
                 Executive Conversations
               </span>
               <h1 className="font-display text-[clamp(28px,3.5vw,52px)] font-semibold text-white leading-[1.1] max-w-[680px] mb-5">

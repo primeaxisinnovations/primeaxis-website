@@ -13,6 +13,11 @@
   --color-teal-mid:   #5E719A;
   --color-gold:       #BF9F66;
   --color-gold-light: #D4B880;
+  /* Brighter gold used only within the glassmorphism orb/glass-card
+     system — reads crisper than --color-gold against #0a1628 + heavy
+     blur at the low opacities that system relies on (dividers, dots,
+     small accent text). Existing UI keeps --color-gold untouched. */
+  --color-gold-bright: #c8a96e;
   --color-cream:      #F4F1EB;
   --color-cream-dark: #E5E0D5;
   --color-ink:        #0D1F28;
@@ -60,6 +65,7 @@
   --color-teal-mid:   #5E719A;
   --color-gold:       #BF9F66;
   --color-gold-light: #D4B880;
+  --color-gold-bright: #c8a96e;
   --color-cream:      #F4F1EB;
   --color-cream-dark: #E5E0D5;
   --color-ink:        #0D1F28;
@@ -109,6 +115,83 @@
 ::selection {
   background: #BF9F66;
   color: #0D1F28;
+}
+
+/* ── GLASSMORPHISM CARD SYSTEM ─────────────────────────────────
+   One shared recipe for every dark glass card sitewide (Three
+   Pillars, Services, Work With Us, Vision/Mission, Executive
+   Conversations header, Contact panel). box-shadow can't render a
+   gradient, so the top highlight line is a ::before strip instead. */
+@layer components {
+  .glass-card {
+    position: relative;
+    background: rgba(255, 255, 255, 0.07);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 20px;
+    transition: all 0.3s ease;
+  }
+  .glass-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    border-radius: 20px 20px 0 0;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.25), transparent);
+    pointer-events: none;
+  }
+  .glass-card:hover {
+    transform: translateY(-6px);
+    background: rgba(255, 255, 255, 0.11);
+  }
+
+  .glass-icon-box {
+    width: 52px;
+    height: 52px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    border-radius: 14px;
+    background: rgba(255, 255, 255, 0.07);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    transition: border-color 0.3s ease;
+  }
+  .glass-icon-box svg {
+    stroke: rgba(180, 210, 255, 0.80);
+    transition: stroke 0.3s ease;
+  }
+  .glass-card:hover .glass-icon-box {
+    border-color: var(--color-gold-bright);
+  }
+  .glass-card:hover .glass-icon-box svg {
+    stroke: var(--color-gold-bright);
+  }
+
+  .glass-divider {
+    display: block;
+    width: 40px;
+    height: 1px;
+    background: linear-gradient(90deg, var(--color-gold-bright), transparent);
+  }
+
+  .glass-bullet li {
+    position: relative;
+    padding-left: 18px;
+  }
+  .glass-bullet li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0.55em;
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: var(--color-gold-bright);
+  }
 }
 
 /* ── CUSTOM SCROLLBAR (WebKit) ───────────────────────────────── */

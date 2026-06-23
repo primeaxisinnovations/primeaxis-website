@@ -3,17 +3,10 @@ import type { ReactElement } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 import AnimatedSection from '@/components/ui/AnimatedSection'
-import StampSeal from '@/components/ui/StampSeal'
+import GlassOrbs from '@/components/ui/GlassOrbs'
 
-// PLACEHOLDER: set this to the real path (e.g.
-// "/images/founder/nneoma-obi-asualo.jpg") once Nneoma's photograph is
-// available. The Founder Profile section below switches automatically:
-// the gradient/initials placeholder becomes a real <Image>, and the
-// corner label switches from a simple solid tag to the same frosted-
-// glass-over-dark-scrim treatment already proven on the homepage's hero
-// and Executive Conversations cards. Glass only makes sense once there's
-// a real photo behind it to blur — hence the conditional, not a flat swap.
-const FOUNDER_PHOTO_URL: string | null = null
+const FOUNDER_PHOTO_URL =
+  'https://n0jyvquhgs2welj7.public.blob.vercel-storage.com/founder/nneoma-obi-asualo.jpg'
 
 export const metadata: Metadata = {
   title: 'About PrimeAxis | Maritime Intelligence & Strategic Communications Platform',
@@ -35,7 +28,7 @@ const PILLARS: Array<{
         strokeWidth="1.5"
         strokeLinecap="round"
         strokeLinejoin="round"
-        className="w-7 h-7 stroke-teal"
+        className="w-6 h-6"
         aria-hidden="true"
       >
         <path d="M9 19v-6a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h2a2 2 0 0 0 2-2zm0 0V9a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v10m-6 0a2 2 0 0 0 2 2h2a2 2 0 0 0 2-2m0 0V5a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-2a2 2 0 0 1-2-2z" />
@@ -59,7 +52,7 @@ const PILLARS: Array<{
         strokeWidth="1.5"
         strokeLinecap="round"
         strokeLinejoin="round"
-        className="w-7 h-7 stroke-teal"
+        className="w-6 h-6"
         aria-hidden="true"
       >
         <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
@@ -83,7 +76,7 @@ const PILLARS: Array<{
         strokeWidth="1.5"
         strokeLinecap="round"
         strokeLinejoin="round"
-        className="w-7 h-7 stroke-teal"
+        className="w-6 h-6"
         aria-hidden="true"
       >
         <path d="M3 3l7.07 16.97 2.51-7.39 7.39-2.51L3 3z" />
@@ -107,43 +100,48 @@ export default function AboutPage() {
     <div className="min-h-screen bg-cream">
 
       {/* ── Page Header ──────────────────────────────────────────── */}
-      <section className="bg-cream pt-[60px] pb-[72px] border-b border-border">
+      <section className="bg-deep pt-[60px] pb-[72px]">
         <div className="max-w-[1240px] mx-auto px-11 max-sm:px-5">
           <AnimatedSection>
             <span className="block font-mono text-[10.5px] tracking-[0.2em] uppercase text-gold mb-5">
               About PrimeAxis
             </span>
-            <h1 className="font-display text-[clamp(28px,4vw,54px)] font-semibold text-deep leading-[1.1] max-w-[760px]">
+            <h1 className="font-display text-[clamp(28px,4vw,54px)] font-semibold text-white leading-[1.1] max-w-[760px]">
               Shaping the Conversations That Define Africa&apos;s Maritime Future
             </h1>
           </AnimatedSection>
         </div>
       </section>
 
-      {/* ── Vision & Mission ─────────────────────────────────────── */}
-      {/* Silky reading container — bg-white/85 + backdrop-blur-sm, the
-          translucent light-card treatment used for every text-heavy
-          section across the interior pages. */}
-      <section className="bg-white border-b border-border py-[56px] max-sm:py-10">
-        <div className="max-w-[1240px] mx-auto px-11 max-sm:px-5">
+      {/* ── Vision & Mission — glassmorphism orb-backed dark environment ── */}
+      <section className="relative overflow-hidden py-[56px] max-sm:py-10" style={{ background: '#0a1628' }}>
+        <GlassOrbs
+          orbs={[
+            { color: 'rgba(30,80,160,0.35)', size: 420, top: '-100px', left: '-80px' },
+            { color: 'rgba(100,40,160,0.28)', size: 340, bottom: '-90px', right: '-60px' },
+            { color: 'rgba(20,120,160,0.22)', size: 240, top: '20%', left: '50%' },
+            { color: 'rgba(180,130,30,0.16)', size: 200, bottom: '0px', left: '10%' },
+          ]}
+        />
+        <div className="relative max-w-[1240px] mx-auto px-11 max-sm:px-5">
           <AnimatedSection>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
 
-              <div className="p-8 max-sm:p-6 bg-white/85 backdrop-blur-sm rounded-sm2 border border-white/20">
-                <span className="block font-mono text-[10px] tracking-[0.22em] uppercase text-gold mb-4">
+              <div className="glass-card p-8 max-sm:p-6">
+                <span className="block font-mono text-[10px] tracking-[0.22em] uppercase mb-4" style={{ color: 'var(--color-gold-bright)' }}>
                   Vision
                 </span>
-                <p className="font-display text-[clamp(17px,1.8vw,22px)] font-semibold text-deep leading-[1.4]">
+                <p className="font-display text-[clamp(17px,1.8vw,22px)] font-semibold text-white leading-[1.4]">
                   To become Africa&apos;s leading maritime intelligence and strategic communications
                   platform.
                 </p>
               </div>
 
-              <div className="p-8 max-sm:p-6 bg-white/85 backdrop-blur-sm rounded-sm2 border border-white/20">
-                <span className="block font-mono text-[10px] tracking-[0.22em] uppercase text-gold mb-4">
+              <div className="glass-card p-8 max-sm:p-6">
+                <span className="block font-mono text-[10px] tracking-[0.22em] uppercase mb-4" style={{ color: 'var(--color-gold-bright)' }}>
                   Mission
                 </span>
-                <p className="font-display text-[clamp(17px,1.8vw,22px)] font-semibold text-deep leading-[1.4]">
+                <p className="font-display text-[clamp(17px,1.8vw,22px)] font-semibold text-white leading-[1.4]">
                   To inform, influence and elevate the conversations shaping Africa&apos;s maritime
                   future.
                 </p>
@@ -169,34 +167,53 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* ── Three Pillars ────────────────────────────────────────── */}
-      <section className="py-[72px] max-sm:py-14 bg-white border-y border-border">
-        <div className="max-w-[1240px] mx-auto px-11 max-sm:px-5">
+      {/* ── Three Pillars — glassmorphism orb-backed dark environment ── */}
+      <section className="relative overflow-hidden py-[72px] max-sm:py-14" style={{ background: '#0a1628' }}>
+        <GlassOrbs
+          orbs={[
+            { color: 'rgba(30,80,160,0.45)', size: 500, top: '-120px', left: '-120px' },
+            { color: 'rgba(100,40,160,0.35)', size: 400, bottom: '-100px', right: '-100px' },
+            { color: 'rgba(20,120,160,0.30)', size: 300, top: '30%', left: '40%' },
+            { color: 'rgba(180,130,30,0.20)', size: 250, bottom: '5%', left: '0px' },
+          ]}
+        />
+        <div className="relative max-w-[1240px] mx-auto px-11 max-sm:px-5">
 
           <AnimatedSection className="mb-12">
-            <span className="block font-mono text-[10.5px] tracking-[0.2em] uppercase text-gold mb-4">
+            <span
+              className="block font-mono text-[10.5px] tracking-[0.2em] uppercase mb-4"
+              style={{ color: 'var(--color-gold-bright)' }}
+            >
               What We Do
             </span>
-            <h2 className="font-display text-[clamp(22px,2.6vw,34px)] font-semibold text-deep leading-[1.15] max-w-[480px]">
-              Three Pillars of Africa&apos;s Maritime Intelligence Platform
+            <h2 className="font-display text-[52px] max-sm:text-[32px] font-bold text-white leading-[1.15] max-w-[700px]">
+              Three Pillars of Africa&apos;s{' '}
+              <span style={{ color: 'var(--color-gold-bright)' }}>Maritime Intelligence</span> Platform
             </h2>
           </AnimatedSection>
 
           <AnimatedSection delay={100}>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-px bg-border">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               {PILLARS.map((pillar) => (
-                <div key={pillar.title} className="bg-white/85 backdrop-blur-sm rounded-sm2 border border-white/20 p-8 max-sm:p-6 flex flex-col">
-                  <StampSeal size={64} className="mb-6">{pillar.icon}</StampSeal>
-                  <h3 className="font-display text-[21px] font-semibold text-deep mb-3">
+                <div key={pillar.title} className="glass-card p-8 max-sm:p-6 flex flex-col">
+                  <div className="glass-icon-box mb-6">{pillar.icon}</div>
+                  <h3 className="font-display text-[22px] font-semibold text-white mb-3">
                     {pillar.title}
                   </h3>
-                  <p className="font-sans text-[13.5px] text-muted leading-[1.75] mb-6">
+                  <p
+                    className="font-sans text-[14px] font-light leading-[1.75] mb-5"
+                    style={{ color: 'rgba(180,200,240,0.65)' }}
+                  >
                     {pillar.description}
                   </p>
-                  <ul className="space-y-2.5 mt-auto">
+                  <span className="glass-divider mb-5" />
+                  <ul className="glass-bullet space-y-2.5 mt-auto">
                     {pillar.items.map((item) => (
-                      <li key={item} className="flex items-start gap-3 font-sans text-[13px] text-muted">
-                        <span className="w-[5px] h-[5px] rounded-full bg-gold mt-[6px] flex-shrink-0" />
+                      <li
+                        key={item}
+                        className="font-sans text-[13px]"
+                        style={{ color: 'rgba(200,220,255,0.60)' }}
+                      >
                         {item}
                       </li>
                     ))}
@@ -227,67 +244,40 @@ export default function AboutPage() {
 
               {/* ── Left column: portrait image ───────────────────── */}
               <div className="relative w-full aspect-[4/5] rounded-sm2 overflow-hidden border border-gold/20">
-                {FOUNDER_PHOTO_URL ? (
-                  <Image
-                    src={FOUNDER_PHOTO_URL}
-                    alt="Nneoma Blessing Obi-Asualo"
-                    fill
-                    className="object-cover object-top"
-                    sizes="(max-width: 768px) 100vw, 40vw"
-                    priority
-                  />
-                ) : (
-                  <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-teal to-deep">
-                    <span
-                      className="font-display font-semibold text-white/80 tracking-widest select-none"
-                      style={{ fontSize: 'clamp(3rem, 8vw, 5.5rem)' }}
-                      aria-label="Nneoma Blessing Obi-Asualo"
-                    >
-                      NBO
-                    </span>
-                  </div>
-                )}
+                <Image
+                  src={FOUNDER_PHOTO_URL}
+                  alt="Nneoma Blessing Obi-Asualo"
+                  fill
+                  className="object-cover"
+                  style={{ objectPosition: 'center top' }}
+                  sizes="(max-width: 768px) 100vw, 40vw"
+                  priority
+                />
 
-                {/* Corner label — solid against the placeholder gradient
-                    (nothing real to blur yet). Once FOUNDER_PHOTO_URL above
-                    is set to a real photo, this switches to the same
-                    frosted-glass-over-dark-scrim recipe as the homepage's
-                    hero card and Executive Conversations corner badge. */}
-                {FOUNDER_PHOTO_URL ? (
-                  <div
-                    className="absolute top-[18px] left-[18px] px-[13px] py-[7px] border border-white/20 backdrop-blur-md"
-                    style={{
-                      background:
-                        "linear-gradient(rgba(255,255,255,0.10), rgba(255,255,255,0.10)), linear-gradient(135deg, rgba(10,20,35,0.58) 0%, rgba(10,20,35,0.34) 100%)",
-                      boxShadow: "inset 0 1px 0 rgba(255,255,255,0.16)",
-                    }}
-                  >
-                    <span className="font-mono text-[10px] tracking-[0.22em] uppercase text-white">
-                      The Founder
-                    </span>
-                  </div>
-                ) : (
-                  <div className="absolute top-[18px] left-[18px] px-[13px] py-[7px] bg-deep/85">
-                    <span className="font-mono text-[10px] tracking-[0.22em] uppercase text-gold">
-                      The Founder
-                    </span>
-                  </div>
-                )}
+                {/* Corner label — frosted-glass-over-dark-scrim recipe,
+                    same as the homepage's hero card and Executive
+                    Conversations corner badge. */}
+                <div
+                  className="absolute top-[18px] left-[18px] px-[13px] py-[7px] border border-white/20 backdrop-blur-md"
+                  style={{
+                    background:
+                      "linear-gradient(rgba(255,255,255,0.10), rgba(255,255,255,0.10)), linear-gradient(135deg, rgba(10,20,35,0.58) 0%, rgba(10,20,35,0.34) 100%)",
+                    boxShadow: "inset 0 1px 0 rgba(255,255,255,0.16)",
+                  }}
+                >
+                  <span className="font-mono text-[10px] tracking-[0.22em] uppercase text-white">
+                    The Founder
+                  </span>
+                </div>
               </div>
 
-              {/* ── Right column: identity + bio — frosted-glass card
+              {/* ── Right column: identity + bio — silky reading card
                   sitting directly on the section's photography ────────── */}
-              <div
-                className="flex flex-col justify-center p-8 max-sm:p-6 border border-white/20 backdrop-blur-md"
-                style={{
-                  background: 'rgba(255,255,255,0.08)',
-                  boxShadow: 'inset 0 1px 0 rgba(255,255,255,0.16)',
-                }}
-              >
+              <div className="flex flex-col justify-center bg-white/82 backdrop-blur-sm rounded-sm2 border border-white/25 p-8 max-sm:p-6">
                 <span className="block font-mono text-[10.5px] tracking-[0.2em] uppercase text-gold mb-6">
                   The Founder
                 </span>
-                <h2 className="font-display text-[clamp(24px,3vw,42px)] font-semibold text-white leading-[1.1] mb-3">
+                <h2 className="font-display text-[clamp(24px,3vw,42px)] font-semibold text-deep leading-[1.1] mb-3">
                   Nneoma Blessing Obi-Asualo
                 </h2>
                 <p className="font-mono text-[11px] uppercase tracking-[0.18em] text-gold mb-8">
@@ -296,13 +286,13 @@ export default function AboutPage() {
 
                 {/* Bio — verbatim from brief, lightly edited for paragraph flow */}
                 <div className="space-y-5">
-                  <p className="font-sans text-[15.5px] text-white/80 leading-[1.8]">
+                  <p className="font-sans text-[15.5px] text-ink leading-[1.8]">
                     Nneoma Blessing Obi-Asualo is a trained broadcast journalist, maritime
                     communications professional, and Founder &amp; CEO of PrimeAxis — a maritime
                     intelligence and strategic communications platform dedicated to informing,
                     influencing and elevating conversations shaping Africa&apos;s maritime future.
                   </p>
-                  <p className="font-sans text-[15.5px] text-white/80 leading-[1.8]">
+                  <p className="font-sans text-[15.5px] text-ink leading-[1.8]">
                     Through years of engagement with policymakers, regulators, industry leaders and
                     maritime stakeholders, she has developed a deep interest in advancing strategic
                     dialogue around maritime development, trade and logistics, port and shipping
@@ -310,7 +300,7 @@ export default function AboutPage() {
                     spans journalism, stakeholder engagement, strategic communications and
                     industry-focused content development.
                   </p>
-                  <p className="font-sans text-[15.5px] text-white/80 leading-[1.8]">
+                  <p className="font-sans text-[15.5px] text-ink leading-[1.8]">
                     She is passionate about fostering informed discussions, promoting thought
                     leadership and contributing to conversations that support sustainable growth and
                     competitiveness across Africa&apos;s maritime sector. Through PrimeAxis, she

@@ -33,7 +33,7 @@ export default function ConversationCard({ conversation, className }: Conversati
           />
         </div>
       ) : (
-        <div className="w-[120px] h-[120px] flex-shrink-0 flex items-center justify-center border-2 border-transparent group-hover:border-gold transition-colors duration-200 bg-gradient-to-br from-teal to-deep">
+        <div className="w-[120px] h-[120px] flex-shrink-0 flex items-center justify-center border-2 border-transparent group-hover:border-gold transition-colors duration-200 bg-teal">
           <span className="font-display text-[26px] font-semibold text-white/85 tracking-wider">
             {conversation.initials}
           </span>

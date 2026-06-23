@@ -107,7 +107,7 @@ export default async function ConversationPage({ params }: PageProps) {
                   />
                 </div>
               ) : (
-                <div className="w-[140px] h-[140px] flex-shrink-0 flex items-center justify-center bg-gradient-to-br from-teal to-deep border border-gold/25">
+                <div className="w-[140px] h-[140px] flex-shrink-0 flex items-center justify-center bg-teal border border-gold/25">
                   <span className="font-display text-[36px] font-semibold text-white/85 tracking-wider">
                     {conversation.initials}
                   </span>
@@ -168,10 +168,10 @@ export default async function ConversationPage({ params }: PageProps) {
       {/* ── Q&A body + share ──────────────────────────────────────────── */}
       <div className="max-w-[1240px] mx-auto px-11 max-sm:px-5 pt-[72px] pb-[56px] max-sm:pt-14 max-sm:pb-10">
 
-        {/* Q&A — silky reading container */}
+        {/* DispatchHeader belongs to the dark header world, not the
+            reading world — stays outside the silky container. */}
         <AnimatedSection delay={100}>
-          <div className="max-w-[720px] bg-white/85 backdrop-blur-sm rounded-sm2 border border-white/20 p-10 max-sm:p-6">
-
+          <div className="max-w-[720px] mb-8">
             <DispatchHeader
               refCode={conversation.transcriptRef}
               date={formatDate(conversation.date)}
@@ -180,6 +180,10 @@ export default async function ConversationPage({ params }: PageProps) {
               refLabel="TRANSCRIPT REF"
               deskLabel="STATUS"
             />
+          </div>
+
+          {/* Q&A — silky reading container */}
+          <div className="max-w-[720px] bg-white/82 backdrop-blur-sm rounded-sm2 border border-white/25 p-10 max-sm:p-6">
 
             {conversation.qa.map((pair, i) => (
               <div key={i}>
