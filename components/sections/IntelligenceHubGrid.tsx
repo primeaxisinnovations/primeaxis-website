@@ -32,44 +32,45 @@ export default function IntelligenceHubGrid({ articles }: IntelligenceHubGridPro
   }
 
   return (
-    <section className="py-[72px] bg-cream max-sm:py-12">
+    <section className="mt-0 pt-0 pb-[72px] bg-cream max-sm:pb-12">
       <div className="max-w-[1240px] mx-auto px-11 max-sm:px-5">
 
-        {/* Category filter pills — dark glass island floating on the
-            otherwise light/cream page */}
-        <AnimatedSection className="mb-10">
-          <div className="relative bg-deep rounded-sm2 overflow-hidden">
-            <div
-              className="absolute inset-0 border border-white/15 backdrop-blur-md"
-              style={{ background: 'rgba(255,255,255,0.08)', boxShadow: 'inset 0 1px 0 rgba(255,255,255,0.12)' }}
-            />
-            <div className="relative flex flex-wrap gap-2 p-5">
+        {/* Category filter pills — dark navy container */}
+        <AnimatedSection>
+          <div
+            className="flex flex-wrap gap-2 mt-[32px] mb-10"
+            style={{
+              background: '#1a2535',
+              border: '1px solid rgba(255,255,255,0.08)',
+              borderRadius: '4px',
+              padding: '16px',
+            }}
+          >
+            <button
+              onClick={() => handleCategoryChange(null)}
+              className={cn(
+                'font-mono text-[10px] tracking-[0.15em] uppercase px-4 py-2 rounded-sm2 border transition-colors duration-200 cursor-pointer',
+                activeCategory === null
+                  ? 'bg-gold text-deep border-gold'
+                  : 'bg-white text-teal border-border hover:border-gold hover:text-deep'
+              )}
+            >
+              All
+            </button>
+            {CATEGORIES.map((cat) => (
               <button
-                onClick={() => handleCategoryChange(null)}
+                key={cat}
+                onClick={() => handleCategoryChange(cat)}
                 className={cn(
                   'font-mono text-[10px] tracking-[0.15em] uppercase px-4 py-2 rounded-sm2 border transition-colors duration-200 cursor-pointer',
-                  activeCategory === null
+                  activeCategory === cat
                     ? 'bg-gold text-deep border-gold'
                     : 'bg-white text-teal border-border hover:border-gold hover:text-deep'
                 )}
               >
-                All
+                {cat}
               </button>
-              {CATEGORIES.map((cat) => (
-                <button
-                  key={cat}
-                  onClick={() => handleCategoryChange(cat)}
-                  className={cn(
-                    'font-mono text-[10px] tracking-[0.15em] uppercase px-4 py-2 rounded-sm2 border transition-colors duration-200 cursor-pointer',
-                    activeCategory === cat
-                      ? 'bg-gold text-deep border-gold'
-                      : 'bg-white text-teal border-border hover:border-gold hover:text-deep'
-                  )}
-                >
-                  {cat}
-                </button>
-              ))}
-            </div>
+            ))}
           </div>
         </AnimatedSection>
 

@@ -199,7 +199,12 @@
       "Bash(curl -s \"http://localhost:3000/intelligence-hub\" -o /tmp/ih_full.html)",
       "Bash(taskkill //PID 11832 //F)",
       "Bash(curl -s \"http://localhost:3000/work-with-us\" -o /tmp/wwu.html)",
-      "Bash(taskkill //PID 21744 //F)"
+      "Bash(taskkill //PID 21744 //F)",
+      "Bash(npx eslint *)",
+      "Bash(curl -s -o \"C:\\\\Users\\\\DELL\\\\AppData\\\\Local\\\\Temp\\\\claude\\\\c--Users-DELL-primeaxis-website\\\\f2fd810b-5d4d-4223-b547-7aeea40f62b3\\\\scratchpad\\\\about.html\" -w \"%{http_code}\\\\n\" http://localhost:3000/about)",
+      "Bash(curl -s http://localhost:3000/about)",
+      "Bash(curl -s \"http://localhost:3000/_next/static/chunks/%5Broot-of-the-server%5D__04k7jbp._.css\")",
+      "Bash(curl -s \"http://localhost:3000/_next/static/chunks/%5Broot-of-the-server%5D__04k7jbp._.css\" -o \"C:\\\\Users\\\\DELL\\\\AppData\\\\Local\\\\Temp\\\\claude\\\\c--Users-DELL-primeaxis-website\\\\f2fd810b-5d4d-4223-b547-7aeea40f62b3\\\\scratchpad\\\\bundle.css\")"
     ],
     "additionalDirectories": [
       "c:\\Users\\DELL\\primeaxis-website\\app\\(pages)\\intelligence-hub\\[slug]",

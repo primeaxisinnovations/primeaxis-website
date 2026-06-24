@@ -3,7 +3,6 @@ import type { ReactElement } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 import AnimatedSection from '@/components/ui/AnimatedSection'
-import GlassOrbs from '@/components/ui/GlassOrbs'
 
 const FOUNDER_PHOTO_URL =
   'https://n0jyvquhgs2welj7.public.blob.vercel-storage.com/founder/nneoma-obi-asualo.jpg'
@@ -99,35 +98,53 @@ export default function AboutPage() {
   return (
     <div className="min-h-screen bg-cream">
 
-      {/* ── Page Header ──────────────────────────────────────────── */}
-      <section className="bg-deep pt-[60px] pb-[72px]">
-        <div className="max-w-[1240px] mx-auto px-11 max-sm:px-5">
+      {/* ── About Hero + Mission/Vision — combined full-bleed section.
+          Hero text sits in the top portion; Mission/Vision glass cards
+          overlap the lower portion of the same background photograph. ── */}
+      <section className="relative overflow-hidden min-h-screen flex flex-col justify-between -mt-[102px]">
+        <img
+          className="about-hero-bg"
+          src="https://n0jyvquhgs2welj7.public.blob.vercel-storage.com/uploads/1782263444566-666207da-chatgpt-image-jun-24-2026-02-05-51-am.png"
+          alt=""
+          aria-hidden="true"
+        />
+        <div
+          className="absolute top-0 left-0 right-0 h-[160px] z-[1] pointer-events-none"
+          style={{ background: 'linear-gradient(to bottom, rgba(13,27,42,0.85), transparent)' }}
+        />
+        <div
+          className="absolute inset-0 z-[1] pointer-events-none"
+          style={{
+            background:
+              'linear-gradient(to right, rgba(13,27,42,0.82) 0%, rgba(13,27,42,0.55) 32%, rgba(13,27,42,0.18) 55%, transparent 72%)',
+          }}
+        />
+        <div
+          className="absolute bottom-0 left-0 right-0 h-[220px] z-[1] pointer-events-none"
+          style={{ background: 'linear-gradient(to top, rgba(13,27,42,0.95), transparent)' }}
+        />
+
+        {/* Hero text — hugs the left edge of the section */}
+        <div className="relative z-[3] max-w-[580px] self-start mt-[80px] pl-[56px] pr-0 text-left">
           <AnimatedSection>
-            <span className="block font-mono text-[10.5px] tracking-[0.2em] uppercase text-gold mb-5">
-              About PrimeAxis
-            </span>
-            <h1 className="font-display text-[clamp(28px,4vw,54px)] font-semibold text-white leading-[1.1] max-w-[760px]">
-              Shaping the Conversations That Define Africa&apos;s Maritime Future
+            <h1 className="font-display text-[clamp(28px,4vw,54px)] font-bold text-white leading-[1.1] max-w-[760px] mb-4">
+              Shaping Africa&apos;s Maritime Conversations
             </h1>
+            <p
+              className="font-sans text-[15px] font-light leading-[1.6] max-w-[520px]"
+              style={{ color: 'rgba(210,228,248,0.72)' }}
+            >
+              Intelligence and strategy for the leaders defining Africa&apos;s blue economy.
+            </p>
           </AnimatedSection>
         </div>
-      </section>
 
-      {/* ── Vision & Mission — glassmorphism orb-backed dark environment ── */}
-      <section className="relative overflow-hidden py-[56px] max-sm:py-10" style={{ background: '#0a1628' }}>
-        <GlassOrbs
-          orbs={[
-            { color: 'rgba(30,80,160,0.35)', size: 420, top: '-100px', left: '-80px' },
-            { color: 'rgba(100,40,160,0.28)', size: 340, bottom: '-90px', right: '-60px' },
-            { color: 'rgba(20,120,160,0.22)', size: 240, top: '20%', left: '50%' },
-            { color: 'rgba(180,130,30,0.16)', size: 200, bottom: '0px', left: '10%' },
-          ]}
-        />
-        <div className="relative max-w-[1240px] mx-auto px-11 max-sm:px-5">
+        {/* Mission & Vision cards — anchored to the bottom of the section */}
+        <div className="relative z-[3] w-full px-[56px] pb-[80px] mt-auto">
           <AnimatedSection>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
 
-              <div className="glass-card p-8 max-sm:p-6">
+              <div className="about-hero-card p-8 max-sm:p-6">
                 <span className="block font-mono text-[10px] tracking-[0.22em] uppercase mb-4" style={{ color: 'var(--color-gold-bright)' }}>
                   Vision
                 </span>
@@ -137,7 +154,7 @@ export default function AboutPage() {
                 </p>
               </div>
 
-              <div className="glass-card p-8 max-sm:p-6">
+              <div className="about-hero-card p-8 max-sm:p-6">
                 <span className="block font-mono text-[10px] tracking-[0.22em] uppercase mb-4" style={{ color: 'var(--color-gold-bright)' }}>
                   Mission
                 </span>

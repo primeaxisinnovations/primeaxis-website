@@ -9,9 +9,9 @@ export const metadata: Metadata = {
     "Strategic maritime analysis, industry intelligence, and policy perspectives shaping Africa's maritime future.",
 }
 
-// Reads live from GitHub on every request (see lib/content.ts) — must stay
-// dynamic so a Publish/Unpublish/Save never waits on a rebuild.
-export const dynamic = 'force-dynamic'
+// ISR: served from the CDN cache, regenerated in the background at most
+// once every 60s — a Publish/Unpublish/Save shows up within ~a minute.
+export const revalidate = 60
 
 export default async function IntelligenceHubPage() {
   const articles = await getAllArticles()
@@ -20,8 +20,29 @@ export default async function IntelligenceHubPage() {
     <div className="min-h-screen">
 
       {/* Page Header */}
-      <section className="bg-deep pt-[60px] pb-[72px]">
-        <div className="max-w-[1240px] mx-auto px-11 max-sm:px-5">
+      <section className="relative overflow-hidden bg-deep mb-0 pt-[60px] pb-[70px] min-h-[420px] h-[46vh] max-h-[520px]">
+        <img
+          className="hub-hero-bg"
+          src="https://n0jyvquhgs2welj7.public.blob.vercel-storage.com/uploads/1782268821745-595c0378-chatgpt-image-jun-24-2026-03-31-35-am.png"
+          alt=""
+          aria-hidden="true"
+        />
+        <div
+          className="absolute top-0 left-0 right-0 h-[100px] z-[1] pointer-events-none"
+          style={{ background: 'linear-gradient(to bottom, rgba(13,27,42,0.90), transparent)' }}
+        />
+        <div
+          className="absolute inset-0 z-[1] pointer-events-none"
+          style={{
+            background:
+              'linear-gradient(to right, rgba(13,27,42,0.92) 0%, rgba(13,27,42,0.75) 30%, rgba(13,27,42,0.35) 55%, rgba(13,27,42,0.08) 75%, transparent 88%)',
+          }}
+        />
+        <div
+          className="absolute bottom-0 left-0 right-0 h-[140px] z-[1] pointer-events-none"
+          style={{ background: 'linear-gradient(to top, #111f2e, transparent)' }}
+        />
+        <div className="relative z-[3] max-w-[1240px] mx-auto px-11 max-sm:px-5">
           <AnimatedSection>
             <span className="block font-mono text-[10.5px] tracking-[0.2em] uppercase text-gold mb-5">
               Intelligence Hub

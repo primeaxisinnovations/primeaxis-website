@@ -2,10 +2,9 @@ import { getAllArticles } from "@/lib/content";
 import { getAllConversations } from "@/lib/conversation-content";
 import HomeContent from "@/components/sections/HomeContent";
 
-// Reads live from GitHub on every request (see lib/content.ts /
-// lib/conversation-content.ts) — must stay dynamic so a Publish/Unpublish/
-// Save never waits on a rebuild.
-export const dynamic = "force-dynamic";
+// ISR: served from the CDN cache, regenerated in the background at most
+// once every 60s — a Publish/Unpublish/Save shows up within ~a minute.
+export const revalidate = 60;
 
 export default async function Home() {
   // Single getAllArticles() call, reused for the hero/card grid and the

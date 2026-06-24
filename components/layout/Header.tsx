@@ -81,24 +81,31 @@ export default function Header() {
             </span>
           </Link>
 
-          {/* Desktop nav */}
-          <nav className="hidden lg:flex items-center gap-7">
+          {/* Desktop nav — pill switcher container */}
+          <nav
+            className="hidden lg:flex items-center"
+            style={{
+              background: 'rgba(255,255,255,0.06)',
+              border: '1px solid rgba(255,255,255,0.10)',
+              borderRadius: '100px',
+              padding: '4px',
+              gap: '2px',
+            }}
+          >
             {navLinks.map((link) => (
               <Link
                 key={link.href}
                 href={link.href}
-                className={cn(
-                  'relative group text-[13px] font-medium pb-0.5 transition-colors duration-200',
-                  isActive(link.href) ? 'text-gold' : 'text-white/75 hover:text-white'
-                )}
+                className={cn('nav-pill-link', isActive(link.href) && 'active')}
               >
-                {link.label}
-                <span
-                  className={cn(
-                    'absolute bottom-0 left-0 h-px w-full bg-gold origin-left transition-transform duration-200',
-                    isActive(link.href) ? 'scale-x-100' : 'scale-x-0 group-hover:scale-x-100'
-                  )}
-                />
+                {link.label === 'Executive Conversations' ? (
+                  <>
+                    <span className="hidden xl:inline">Executive Conversations</span>
+                    <span className="xl:hidden">Exec Conversations</span>
+                  </>
+                ) : (
+                  link.label
+                )}
               </Link>
             ))}
           </nav>

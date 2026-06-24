@@ -13,12 +13,15 @@ const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://primeaxisinnovatio
 
 type PageProps = { params: Promise<{ slug: string }> }
 
-// Reads live from GitHub on every request (see lib/content.ts), so this
-// page can no longer be statically generated at build time — a published
-// article would otherwise be frozen at whatever state existed at the last
-// deploy. generateStaticParams is removed for the same reason: pre-building
-// a slug list is pointless once every request re-fetches anyway.
-export const dynamic = 'force-dynamic'
+// ISR: pre-built for every known slug at deploy time, then served from the
+// CDN cache and regenerated in the background at most once every 60s — a
+// Publish/Unpublish/Save shows up within ~a minute.
+export const revalidate = 60
+
+export async function generateStaticParams() {
+  const articles = await getAllArticles()
+  return articles.map((article) => ({ slug: article.slug }))
+}
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { slug } = await params

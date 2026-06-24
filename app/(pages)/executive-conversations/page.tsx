@@ -10,9 +10,9 @@ export const metadata: Metadata = {
     "In-depth dialogue with the executives, regulators, and institution builders defining Africa's maritime future — in their own words.",
 }
 
-// Reads live from GitHub on every request (see lib/conversation-content.ts)
-// — must stay dynamic so a Publish/Unpublish/Save never waits on a rebuild.
-export const dynamic = 'force-dynamic'
+// ISR: served from the CDN cache, regenerated in the background at most
+// once every 60s — a Publish/Unpublish/Save shows up within ~a minute.
+export const revalidate = 60
 
 export default async function ExecutiveConversationsPage() {
   const conversations = await getAllConversations()
@@ -24,12 +24,12 @@ export default async function ExecutiveConversationsPage() {
           transparent fixed header (-mt cancels the global main pt-[102px]) ── */}
       <section className="relative min-h-screen overflow-hidden -mt-[102px]">
         <Image
-          src="https://n0jyvquhgs2welj7.public.blob.vercel-storage.com/uploads/1782232147724-f6f6d6d4-whatsapp-image-2026-06-15-at-18-56-21.jpg"
+          src="https://n0jyvquhgs2welj7.public.blob.vercel-storage.com/uploads/1782264691397-a9a17b5b-nym.png"
           alt="Executive conversation interview"
           fill
           priority
           sizes="100vw"
-          className="object-cover object-[center_8%] max-sm:object-[center_15%]"
+          className="object-cover object-center"
         />
         <div
           className="absolute inset-x-0 top-0 h-[80px]"

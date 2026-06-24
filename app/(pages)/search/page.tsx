@@ -9,9 +9,9 @@ export const metadata: Metadata = {
   description: 'Search PrimeAxis maritime intelligence articles and executive conversations.',
 }
 
-// Reads live from GitHub on every request (see lib/search.ts) — must stay
-// dynamic, same as every other content-backed page in this app.
-export const dynamic = 'force-dynamic'
+// ISR: served from the CDN cache, regenerated in the background at most
+// once every 60s — a Publish/Unpublish/Save shows up within ~a minute.
+export const revalidate = 60
 
 type PageProps = { searchParams: Promise<{ q?: string }> }
 

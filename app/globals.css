@@ -241,6 +241,77 @@
   }
 }
 
+/* ── ABOUT HERO + MISSION/VISION (About page) ──────────────────
+   Scoped to the combined hero section — the card glass is a darker,
+   flatter recipe than the shared .glass-card so it reads against the
+   full-bleed photo rather than the deep navy backgrounds elsewhere. */
+@layer components {
+  .about-hero-bg {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: 60% center;
+    z-index: 0;
+    filter: brightness(0.88) contrast(1.06) saturate(0.92);
+  }
+
+  .about-hero-card {
+    background: rgba(13, 27, 42, 0.60);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 14px;
+  }
+}
+
+/* ── INTELLIGENCE HUB HERO (Intelligence Hub page) ─────────────── */
+@layer components {
+  .hub-hero-bg {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center center;
+    z-index: 0;
+    filter: brightness(0.55) saturate(0.85) contrast(1.08);
+  }
+}
+
+/* ── NAV PILL SWITCHER (Header desktop nav) ────────────────────
+   Lives in CSS (not inline styles) so :hover and .active can
+   actually override the default state — inline styles would beat
+   any CSS rule regardless of pseudo-class. .active is declared
+   after :hover so it wins on equal specificity when a link is both
+   active and hovered. */
+@layer components {
+  .nav-pill-link {
+    padding: 8px 16px;
+    border-radius: 100px;
+    border: none;
+    background: transparent;
+    color: rgba(255, 255, 255, 0.55);
+    font-size: 12.5px;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    transition: all 0.2s;
+    white-space: nowrap;
+    text-decoration: none;
+  }
+  .nav-pill-link:hover {
+    color: rgba(255, 255, 255, 0.85);
+    background: rgba(255, 255, 255, 0.06);
+  }
+  .nav-pill-link.active {
+    background: rgba(200, 169, 110, 0.15);
+    color: #c8a96e;
+    border: 1px solid rgba(200, 169, 110, 0.40);
+    border-radius: 100px;
+  }
+}
+
 /* ── CUSTOM SCROLLBAR (WebKit) ───────────────────────────────── */
 ::-webkit-scrollbar        { width: 6px; }
 ::-webkit-scrollbar-track  { background: #485778; }
