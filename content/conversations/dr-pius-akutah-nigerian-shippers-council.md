@@ -3,7 +3,8 @@ executiveName: 'Dr. Pius Akutah, MON'
 title: Building the Shipper's Voice in a Fragmented Market
 position: Executive Secretary/CEO
 organisation: Nigerian Shippers' Council
-photo: 'https://images.unsplash.com/photo-1560250097-0b93528c311a?w=600&q=80&fit=crop'
+photo: >-
+  https://n0jyvquhgs2welj7.public.blob.vercel-storage.com/uploads/1782373259440-5d96f7fd-pius-2.png
 initials: PA
 excerpt: >-
   Dr. Pius Akutah on cargo clearance efficiency, cabotage enforcement, freight
