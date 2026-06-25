@@ -7,12 +7,11 @@ import HomeContent from "@/components/sections/HomeContent";
 export const revalidate = 60;
 
 export default async function Home() {
-  // Single getAllArticles() call, reused for the hero/card grid and the
+  // Single getAllArticles() call, reused for the featured grid and the
   // breaking-bar ticker — both just need the same already-sorted-by-date
   // list, so there's no reason to hit GitHub for it twice.
   const articles = await getAllArticles();
-  const [heroArticle, ...rest] = articles;
-  const cardArticles = rest.slice(0, 4);
+  const featuredArticles = articles.slice(0, 6);
   const latestArticles = articles.slice(0, 5);
 
   // Most recently published conversation is the featured one; the next
@@ -22,8 +21,7 @@ export default async function Home() {
 
   return (
     <HomeContent
-      heroArticle={heroArticle}
-      cardArticles={cardArticles}
+      featuredArticles={featuredArticles}
       latestArticles={latestArticles}
       featuredConversation={featuredConversation}
       otherConversations={otherConversations.slice(0, 3)}

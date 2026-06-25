@@ -5,10 +5,10 @@ import Link from "next/link";
 import Image from "next/image";
 import { LayoutGrid } from "lucide-react";
 import BreakingBar from "@/components/sections/BreakingBar";
+import ArticleCard from "@/components/ui/ArticleCard";
 import { CATEGORIES } from "@/lib/categories";
 import { CATEGORY_ICONS } from "@/lib/category-icons";
 import { services } from "@/lib/placeholder-data";
-import { formatDate } from "@/lib/utils";
 import type { Article, Conversation } from "@/types";
 
 function truncateText(text: string, maxLength: number): string {
@@ -75,16 +75,14 @@ const SERVICE_ICONS: Record<string, ReactElement> = {
 }
 
 interface HomeContentProps {
-  heroArticle: Article;
-  cardArticles: Article[];
+  featuredArticles: Article[];
   latestArticles: Article[];
   featuredConversation: Conversation | undefined;
   otherConversations: Conversation[];
 }
 
 export default function HomeContent({
-  heroArticle,
-  cardArticles,
+  featuredArticles,
   latestArticles,
   featuredConversation,
   otherConversations,
@@ -403,94 +401,9 @@ export default function HomeContent({
             </Link>
           </div>
 
-          <div
-            className="grid gap-[2px] max-sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-[1.65fr_1fr_1fr]"
-            style={{ background: "var(--color-brd)" }}
-          >
-            {/* Hero story */}
-            <Link
-              href={`/intelligence-hub/${heroArticle.slug}`}
-              className="fade-in group bg-white flex flex-col relative overflow-hidden cursor-pointer transition-transform duration-[280ms] hover:-translate-y-[3px] hover:shadow-[0_8px_30px_rgba(0,32,43,.12)] hover:z-[1] lg:row-span-2"
-            >
-              <div className="absolute bottom-0 left-0 right-0 h-[2px] bg-cream-d group-hover:bg-gold transition-colors duration-[250ms] z-[1]" />
-              <div className="relative overflow-hidden h-[240px] flex-shrink-0">
-                <img
-                  src={heroArticle.featuredImage}
-                  alt={heroArticle.title}
-                  loading="lazy"
-                  className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-[1.04]"
-                />
-                <div className="absolute inset-x-0 bottom-0 h-14 pointer-events-none" style={{ background: "linear-gradient(to bottom, transparent, white)" }} />
-              </div>
-              <div className="p-11 flex flex-col flex-1 max-sm:p-6">
-                <span className="font-mono text-[9.5px] tracking-[.16em] uppercase text-gold mb-[14px] flex items-center gap-2">
-                  <span className="w-[5px] h-[5px] rounded-full bg-gold flex-shrink-0" />
-                  {heroArticle.category}
-                </span>
-                <h3 className="font-display text-[clamp(19px,1.9vw,26px)] font-bold text-ink leading-[1.22] mb-5">
-                  {heroArticle.title}
-                </h3>
-                <p className="text-[14px] leading-[1.72] font-light text-muted mb-6">
-                  {heroArticle.excerpt}
-                </p>
-                <div className="flex items-center justify-between pt-4 mt-auto border-t border-cream-d">
-                  <div className="flex items-center gap-[14px]">
-                    <span className="font-mono text-[10px] tracking-[.08em] text-muted-l">{heroArticle.author}</span>
-                    <span className="text-cream-d">·</span>
-                    <span className="font-mono text-[10px] tracking-[.08em] text-muted-l">{heroArticle.readingTime}</span>
-                    <span className="text-cream-d">·</span>
-                    <span className="font-mono text-[10px] tracking-[.08em] text-muted-l">{formatDate(heroArticle.date)}</span>
-                  </div>
-                  <div className="w-[30px] h-[30px] border border-cream-d flex items-center justify-center flex-shrink-0 transition-all duration-200 group-hover:border-gold group-hover:bg-gold">
-                    <svg viewBox="0 0 24 24" fill="none" strokeWidth="2.5" className="w-3 h-3 stroke-muted-l group-hover:stroke-deep transition-colors duration-200">
-                      <path d="M5 12h14M12 5l7 7-7 7" />
-                    </svg>
-                  </div>
-                </div>
-              </div>
-            </Link>
-
-            {/* Regular cards */}
-            {cardArticles.map((article, i) => (
-              <Link
-                key={article.slug}
-                href={`/intelligence-hub/${article.slug}`}
-                className="fade-in group bg-white flex flex-col relative overflow-hidden cursor-pointer transition-transform duration-[280ms] hover:-translate-y-[3px] hover:shadow-[0_8px_30px_rgba(0,32,43,.12)] hover:z-[1]"
-                style={{ transitionDelay: i % 2 === 0 ? "0.08s" : "0.16s" }}
-              >
-                <div className="absolute bottom-0 left-0 right-0 h-[2px] bg-cream-d group-hover:bg-gold transition-colors duration-[250ms] z-[1]" />
-                <div className="relative overflow-hidden h-[180px] flex-shrink-0">
-                  <img
-                    src={article.featuredImage}
-                    alt={article.title}
-                    loading="lazy"
-                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-[1.04]"
-                  />
-                  <div className="absolute inset-x-0 bottom-0 h-10 pointer-events-none" style={{ background: "linear-gradient(to bottom, transparent, white)" }} />
-                </div>
-                <div className="p-9 flex flex-col flex-1 max-sm:p-6">
-                  <span className="font-mono text-[9.5px] tracking-[.16em] uppercase text-gold mb-[14px] flex items-center gap-2">
-                    <span className="w-[5px] h-[5px] rounded-full bg-gold flex-shrink-0" />
-                    {article.category}
-                  </span>
-                  <h3 className="font-display text-[clamp(15px,1.2vw,17.5px)] font-semibold text-ink leading-[1.22] mb-[14px] flex-1">
-                    {article.title}
-                  </h3>
-                  <p className="text-[14px] leading-[1.72] font-light text-muted mb-6">{article.excerpt}</p>
-                  <div className="flex items-center justify-between pt-4 mt-auto border-t border-cream-d">
-                    <div className="flex items-center gap-[14px]">
-                      <span className="font-mono text-[10px] tracking-[.08em] text-muted-l">{article.readingTime}</span>
-                      <span className="text-cream-d">·</span>
-                      <span className="font-mono text-[10px] tracking-[.08em] text-muted-l">{formatDate(article.date)}</span>
-                    </div>
-                    <div className="w-[30px] h-[30px] border border-cream-d flex items-center justify-center flex-shrink-0 transition-all duration-200 group-hover:border-gold group-hover:bg-gold">
-                      <svg viewBox="0 0 24 24" fill="none" strokeWidth="2.5" className="w-3 h-3 stroke-muted-l group-hover:stroke-deep transition-colors duration-200">
-                        <path d="M5 12h14M12 5l7 7-7 7" />
-                      </svg>
-                    </div>
-                  </div>
-                </div>
-              </Link>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {featuredArticles.map((article) => (
+              <ArticleCard key={article.slug} article={article} variant="standard" className="fade-in" />
             ))}
           </div>
         </div>

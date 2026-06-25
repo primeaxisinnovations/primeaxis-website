@@ -312,6 +312,172 @@
   }
 }
 
+/* ── SERVICES SIX-CARD SECTION (Services page) ─────────────────
+   Distinct recipe from the shared .glass-card (also used on
+   Contact/Work With Us) — different opacity, blur, radius, hover,
+   and a teal bottom glow — so it's scoped to its own class instead
+   of touching that shared one. */
+@layer components {
+  .services-section-bg {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center center;
+    z-index: 0;
+    filter: brightness(0.45) saturate(0.85) contrast(1.05);
+  }
+
+  .svc-card {
+    position: relative;
+    overflow: hidden;
+    background: rgba(255, 255, 255, 0.06);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    border-radius: 16px;
+    padding: 36px 30px 40px;
+    transition: background 0.35s ease, border-color 0.35s ease, transform 0.3s ease;
+  }
+  .svc-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.22), transparent);
+  }
+  .svc-card::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 60px;
+    background: linear-gradient(to top, rgba(20, 120, 110, 0.10), transparent);
+    pointer-events: none;
+  }
+  .svc-card:hover {
+    background: rgba(255, 255, 255, 0.11);
+    border-color: rgba(200, 169, 110, 0.32);
+    transform: translateY(-4px);
+  }
+
+  .card-num {
+    position: absolute;
+    top: 22px;
+    right: 24px;
+    font-family: 'Playfair Display', serif;
+    font-size: 11px;
+    color: rgba(200, 169, 110, 0.35);
+    font-weight: 400;
+    letter-spacing: 0.12em;
+  }
+
+  .card-icon {
+    position: relative;
+    width: 42px;
+    height: 42px;
+    border-radius: 10px;
+    background: rgba(200, 169, 110, 0.10);
+    border: 1px solid rgba(200, 169, 110, 0.25);
+    margin-bottom: 22px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.3s ease, border-color 0.3s ease;
+  }
+  .card-icon svg {
+    /* !important: Tailwind's w-6/h-6 utility on these shared icon SVGs
+       lives in the utilities layer, which always wins over @layer
+       components regardless of selector specificity. */
+    width: 19px !important;
+    height: 19px !important;
+    stroke: #c8a96e;
+    fill: none;
+    stroke-width: 1.5;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+  .svc-card:hover .card-icon {
+    background: rgba(200, 169, 110, 0.20);
+    border-color: rgba(200, 169, 110, 0.50);
+  }
+
+  .card-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 17px;
+    font-weight: 600;
+    color: #fff;
+    margin-bottom: 11px;
+    line-height: 1.25;
+    letter-spacing: -0.01em;
+  }
+
+  .card-body {
+    font-size: 12.5px;
+    font-weight: 300;
+    line-height: 1.75;
+    color: rgba(215, 235, 248, 0.60);
+    margin-bottom: 20px;
+  }
+
+  .card-label {
+    font-size: 9px;
+    font-weight: 600;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: #c8a96e;
+    margin-bottom: 10px;
+    display: block;
+  }
+
+  .card-list {
+    list-style: none;
+  }
+  .card-list li {
+    font-size: 11.5px;
+    font-weight: 300;
+    color: rgba(200, 220, 240, 0.48);
+    padding-left: 13px;
+    position: relative;
+    line-height: 1.5;
+  }
+  .card-list li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 6px;
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    background: #c8a96e;
+    opacity: 0.50;
+  }
+
+  .services-eyebrow {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.26em;
+    text-transform: uppercase;
+    color: #c8a96e;
+    margin-bottom: 16px;
+  }
+  .services-eyebrow::before {
+    content: '';
+    display: block;
+    width: 28px;
+    height: 1px;
+    background: #c8a96e;
+    flex-shrink: 0;
+  }
+}
+
 /* ── CUSTOM SCROLLBAR (WebKit) ───────────────────────────────── */
 ::-webkit-scrollbar        { width: 6px; }
 ::-webkit-scrollbar-track  { background: #485778; }

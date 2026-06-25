@@ -3,7 +3,6 @@ import type { ReactElement } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 import AnimatedSection from '@/components/ui/AnimatedSection'
-import GlassOrbs from '@/components/ui/GlassOrbs'
 
 export const metadata: Metadata = {
   title: 'Services | PrimeAxis Maritime Intelligence',
@@ -59,66 +58,66 @@ const SERVICES: Array<{
     icon: ICONS.megaphone,
     title: 'Strategic Communications',
     description:
-      "We develop and execute integrated communications strategies that position maritime organisations, port authorities, and blue economy institutions as authoritative voices in their sectors. Our approach builds the messaging architecture, stakeholder mapping, and channel strategy your institution needs to shape how decision-makers, investors, and regulators perceive and engage with you — moving well beyond reactive press releases. Whether you are navigating a policy shift, managing institutional transition, or establishing presence in a new market segment, we ensure your communications are strategically aligned with your objectives and credible to an expert maritime audience.",
+      'Integrated communications strategies that position maritime organisations as authoritative voices shaping how stakeholders and policymakers engage with them.',
     outcomes: [
-      'Institutional positioning strategy and messaging framework',
-      'Multi-stakeholder communications programme design',
-      'Crisis communications protocol and rapid response planning',
+      'Institutional messaging and brand narrative',
+      'Multi-stakeholder programme design',
+      'Crisis communications planning',
     ],
   },
   {
     icon: ICONS.lightbulb,
     title: 'Thought Leadership Development',
     description:
-      "In a sector where credibility is built through sustained intellectual presence, we help maritime executives and institutions build the authority their roles demand. We develop the research-backed publications, executive commentary, and speaking programmes that establish your voice as essential reading for policymakers, investors, and industry peers across Africa's maritime landscape. The result is not simply visibility — it is the kind of earned authority that shapes policy conversations, attracts strategic partnerships, and distinguishes your institution in a competitive environment where reputation is a strategic asset.",
+      'Helping executives build sustained intellectual authority through publications, commentary, and speaking — moving organisations from reactive to proactive shapers.',
     outcomes: [
-      'Executive positioning strategy and editorial voice development',
-      'Long-form intelligence reports, white papers, and op-ed placement',
-      'Speaking programme design and conference brief preparation',
+      'Executive positioning and editorial development',
+      'Long-form intelligence reports and op-ed placement',
+      'Speaking programme and conference positioning',
     ],
   },
   {
     icon: ICONS.chart,
     title: 'Maritime Research & Intelligence',
     description:
-      "Decisions made without sound market intelligence carry disproportionate risk in Africa's evolving maritime landscape. We produce original, rigorously researched analysis on African maritime markets, trade flows, regulatory environments, and blue economy opportunities — providing the evidence base that supports strategic investment, policy design, and commercial planning. Our work is calibrated for executive audiences: concise, actionable, and grounded in the institutional and political realities that determine what is achievable within the African maritime operating environment.",
+      'Original research on African maritime markets, trade flows, and regulatory environments — providing the evidence base for strategic decisions at the institutional level.',
     outcomes: [
-      'Custom market intelligence reports and sector analysis',
-      'Regulatory landscape mapping across African jurisdictions',
-      'Policy impact assessments and trade route analysis',
+      'Custom market intelligence and sector analysis',
+      'Regulatory landscape mapping and policy tracking',
+      'Impact assessments and trade route analysis',
     ],
   },
   {
     icon: ICONS.handshake,
     title: 'Stakeholder Engagement',
     description:
-      "The outcomes that matter most in the maritime sector — policy change, market access, regulatory reform, strategic partnership — are achieved through structured relationships and deliberate dialogue, not documentation alone. We design and manage engagement programmes that identify the stakeholders your organisation needs to reach, develop the formats through which to engage them, and sustain the relationships that convert initial contact into durable influence. Our approach ensures your engagement is well-sequenced, strategically positioned, and oriented toward the specific policy or commercial outcomes you are pursuing.",
+      'Structured engagement programmes that build the multi-sector relationships maritime organisations need to advance policy, secure partnerships, and achieve objectives.',
     outcomes: [
       'Stakeholder mapping and influence network analysis',
-      'Structured dialogue design, facilitation, and follow-through',
-      'Government, regulatory body, and industry coalition engagement',
+      'Structured dialogue design and facilitation',
+      'Government and industry coalition engagement',
     ],
   },
   {
     icon: ICONS.calendar,
     title: 'Event Communications',
     description:
-      "Maritime conferences and industry summits are among the most concentrated opportunities for institutional positioning in the sector — but only when the communications surrounding them are as carefully planned as the event itself. We provide end-to-end support: pre-event narrative development and media coordination, in-event content delivery and speaker briefing, and post-event knowledge dissemination that extends impact beyond the room. Every engagement your institution participates in becomes a communications asset, not just a calendar obligation.",
+      'End-to-end communications support for maritime conferences — from pre-event content strategy and media coordination to post-event knowledge capture and dissemination.',
     outcomes: [
-      'Pre-event narrative development and media accreditation management',
-      'Speaker briefing, panel facilitation support, and in-event content',
-      'Post-event reporting, media coverage, and follow-up communications',
+      'Pre-event content and media management',
+      'Speaker briefing and panel facilitation',
+      'Post-event reporting and follow-up communications',
     ],
   },
   {
     icon: ICONS.pen,
     title: 'Content & Media Advisory',
     description:
-      "Sustained communications impact in the maritime sector requires institutional capability — the editorial systems, media relationships, and in-house capacity to produce authoritative content consistently without dependence on external agencies for every output. We advise maritime organisations on building these foundations: defining editorial strategy aligned with institutional priorities, developing content architecture across channels, and equipping in-house teams to execute independently. The outcome is a communications function that compounds in value over time rather than resetting with each new engagement.",
+      'Advising maritime institutions on building editorial capabilities, content systems, and media relationships to sustain long-term communications impact independently.',
     outcomes: [
       'Editorial strategy and content calendar development',
-      'Maritime media relationship building and placement strategy',
-      'In-house communications team capacity development and coaching',
+      'Media relationship and placement strategy',
+      'In-house communications capacity coaching',
     ],
   },
 ]
@@ -187,61 +186,56 @@ export default function ServicesPage() {
         </div>
       </section>
 
-      {/* ── Services list — glassmorphism orb-backed dark environment ── */}
-      <section className="relative overflow-hidden" style={{ background: '#0a1628' }}>
-        <GlassOrbs
-          orbs={[
-            { color: 'rgba(30,90,180,0.45)', size: 550, top: '-150px', left: '-150px' },
-            { color: 'rgba(40,100,180,0.30)', size: 450, bottom: '10%', right: '-120px' },
-            { color: 'rgba(20,130,170,0.25)', size: 320, top: '50%', left: '45%' },
-            { color: 'rgba(100,60,160,0.18)', size: 260, bottom: '-100px', left: '10%' },
-          ]}
+      {/* ── Services list — full-bleed photo background behind the
+          six service cards ─────────────────────────────────────── */}
+      <section
+        className="relative overflow-hidden"
+        style={{ background: 'transparent', padding: '80px 48px 100px' }}
+      >
+        <img
+          className="services-section-bg"
+          src="https://n0jyvquhgs2welj7.public.blob.vercel-storage.com/uploads/1782354512654-3483a9f6-nv.png"
+          alt=""
+          aria-hidden="true"
         />
-        <div className="relative max-w-[1240px] mx-auto px-11 max-sm:px-5">
+        <div
+          className="absolute inset-0 z-[1] pointer-events-none"
+          style={{ background: 'rgba(5,12,24,0.72)' }}
+        />
+        <div
+          className="absolute top-0 left-0 right-0 h-[160px] z-[2] pointer-events-none"
+          style={{ background: 'linear-gradient(to bottom, #0d1b2a, transparent)' }}
+        />
+        <div
+          className="absolute bottom-0 left-0 right-0 h-[160px] z-[2] pointer-events-none"
+          style={{ background: 'linear-gradient(to top, #0d1b2a, transparent)' }}
+        />
+        <div className="relative z-[3]" style={{ maxWidth: '1200px', margin: '0 auto' }}>
           <AnimatedSection>
-            <div className="flex flex-col gap-6 py-[56px] max-sm:py-10">
-              {SERVICES.map((service) => (
-                <div key={service.title} className="glass-card p-8 max-sm:p-6">
-                  <div className="grid grid-cols-[52px_1fr] gap-x-10 gap-y-6 max-sm:grid-cols-1 max-sm:gap-x-0">
-
-                    {/* Left: icon box */}
-                    <div className="pt-1 flex flex-col gap-5 max-sm:flex-row max-sm:items-center max-sm:gap-4">
-                      <div className="glass-icon-box">{service.icon}</div>
-                    </div>
-
-                    {/* Right: name, description, outcomes */}
-                    <div>
-                      <h2 className="font-display text-[clamp(21px,2.4vw,30px)] font-semibold text-white leading-[1.15] mb-5">
-                        {service.title}
-                      </h2>
-                      <p
-                        className="font-sans text-[14px] font-light leading-[1.8] max-w-[640px] mb-5"
-                        style={{ color: 'rgba(180,200,240,0.65)' }}
-                      >
-                        {service.description}
-                      </p>
-                      <span className="glass-divider mb-5" />
-                      <div>
-                        <span
-                          className="block font-mono text-[10px] tracking-[0.18em] uppercase mb-3"
-                          style={{ color: 'var(--color-gold-bright)' }}
-                        >
-                          What This Includes
-                        </span>
-                        <ul className="glass-bullet space-y-2.5">
-                          {service.outcomes.map((item) => (
-                            <li
-                              key={item}
-                              className="font-sans text-[13px]"
-                              style={{ color: 'rgba(200,220,255,0.60)' }}
-                            >
-                              {item}
-                            </li>
-                          ))}
-                        </ul>
-                      </div>
-                    </div>
-
+            <span className="services-eyebrow">What We Offer</span>
+            <h2
+              className="font-display font-bold text-white"
+              style={{ fontSize: 'clamp(32px, 3.8vw, 52px)', lineHeight: 1.10, marginBottom: '56px' }}
+            >
+              Strategic Services for{' '}
+              <em className="italic" style={{ color: '#c8a96e' }}>Maritime Leaders</em>
+            </h2>
+          </AnimatedSection>
+          <AnimatedSection delay={100}>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+              {SERVICES.map((service, i) => (
+                <div key={service.title} className="svc-card">
+                  <span className="card-num">{String(i + 1).padStart(2, '0')}</span>
+                  <div className="card-icon">{service.icon}</div>
+                  <h3 className="card-title">{service.title}</h3>
+                  <p className="card-body">{service.description}</p>
+                  <div>
+                    <span className="card-label">What This Includes</span>
+                    <ul className="card-list">
+                      {service.outcomes.map((item) => (
+                        <li key={item}>{item}</li>
+                      ))}
+                    </ul>
                   </div>
                 </div>
               ))}
