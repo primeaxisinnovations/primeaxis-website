@@ -4,7 +4,7 @@ title: Building the Shipper's Voice in a Fragmented Market
 position: Executive Secretary/CEO
 organisation: Nigerian Shippers' Council
 photo: >-
-  https://n0jyvquhgs2welj7.public.blob.vercel-storage.com/uploads/1782373259440-5d96f7fd-pius-2.png
+  https://n0jyvquhgs2welj7.public.blob.vercel-storage.com/uploads/1782373794044-532fadfb-tyu.png
 initials: PA
 excerpt: >-
   Dr. Pius Akutah on cargo clearance efficiency, cabotage enforcement, freight
