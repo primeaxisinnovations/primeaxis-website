@@ -42,7 +42,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 function PullQuoteSection({ text }: { text: string }) {
   return (
     <section className="bg-deep py-[80px] max-sm:py-14">
-      <div className="max-w-[900px] mx-auto px-11 max-sm:px-5 text-center">
+      <div className="max-w-[900px] mx-auto px-11 max-md:px-5 text-center">
         <span className="block w-8 h-0.5 bg-gold mx-auto mb-10" />
         <p className="font-display italic text-[clamp(17px,2vw,26px)] text-white leading-[1.65]">
           {text}
@@ -71,7 +71,7 @@ export default async function ConversationPage({ params }: PageProps) {
 
       {/* ── Breadcrumb ──────────────────────────────────────────────── */}
       <div className="bg-white border-b border-border">
-        <div className="max-w-[1240px] mx-auto px-11 max-sm:px-5 py-3">
+        <div className="max-w-[1240px] mx-auto px-11 max-md:px-5 py-3">
           <nav className="flex items-center gap-2 font-mono text-[10px] tracking-[0.12em] uppercase text-muted flex-wrap">
             <Link href="/" className="hover:text-gold transition-colors duration-150">Home</Link>
             <span>/</span>
@@ -84,7 +84,7 @@ export default async function ConversationPage({ params }: PageProps) {
 
       {/* ── Header — dark ───────────────────────────────────────────── */}
       <section className="bg-deep pt-[60px] pb-[72px]">
-        <div className="max-w-[1240px] mx-auto px-11 max-sm:px-5">
+        <div className="max-w-[1240px] mx-auto px-11 max-md:px-5">
           <AnimatedSection>
 
             <span className="block font-mono text-[10.5px] tracking-[0.2em] uppercase text-gold mb-10">
@@ -153,7 +153,7 @@ export default async function ConversationPage({ params }: PageProps) {
           originates only from the authenticated admin's RichTextEditor. */}
       {conversation.introduction && (
         <section className="bg-cream py-[56px] max-sm:py-10 border-b border-border">
-          <div className="max-w-[1240px] mx-auto px-11 max-sm:px-5">
+          <div className="max-w-[1240px] mx-auto px-11 max-md:px-5">
             <AnimatedSection>
               <div
                 className="article-prose max-w-[720px] mx-auto"
@@ -168,7 +168,7 @@ export default async function ConversationPage({ params }: PageProps) {
       {conversation.pullQuote && <PullQuoteSection text={conversation.pullQuote} />}
 
       {/* ── Q&A body + share ──────────────────────────────────────────── */}
-      <div className="max-w-[1240px] mx-auto px-11 max-sm:px-5 pt-[72px] pb-[56px] max-sm:pt-14 max-sm:pb-10">
+      <div className="max-w-[1240px] mx-auto px-11 max-md:px-5 pt-[72px] pb-[56px] max-sm:pt-14 max-sm:pb-10">
 
         {/* DispatchHeader belongs to the dark header world, not the
             reading world — stays outside the silky container. */}
@@ -284,7 +284,7 @@ export default async function ConversationPage({ params }: PageProps) {
           editorial wrap-up content */}
       {conversation.closingQuote && <PullQuoteSection text={conversation.closingQuote} />}
 
-      <div className="max-w-[1240px] mx-auto px-11 max-sm:px-5 pt-[56px] pb-[72px] max-sm:pt-10 max-sm:pb-14">
+      <div className="max-w-[1240px] mx-auto px-11 max-md:px-5 pt-[56px] pb-[72px] max-sm:pt-10 max-sm:pb-14">
 
         <AnimatedSection>
           <div className="max-w-[720px]">
@@ -360,7 +360,7 @@ export default async function ConversationPage({ params }: PageProps) {
 
       {/* ── Newsletter CTA ──────────────────────────────────────────── */}
       <section className="bg-deep py-[72px] max-sm:py-14">
-        <div className="max-w-[600px] mx-auto px-11 max-sm:px-5 text-center">
+        <div className="max-w-[600px] mx-auto px-11 max-md:px-5 text-center">
           <span className="block font-mono text-[10.5px] tracking-[0.2em] uppercase text-gold mb-4">
             Intelligence Briefings
           </span>
@@ -379,7 +379,7 @@ export default async function ConversationPage({ params }: PageProps) {
             />
             <button
               type="submit"
-              className="font-sans text-[13px] font-semibold tracking-[.04em] bg-gold text-deep px-6 py-[13px] whitespace-nowrap hover:bg-gold-light transition-colors duration-200"
+              className="font-sans text-[13px] font-semibold tracking-[.04em] bg-gold text-deep px-6 py-[13px] whitespace-nowrap hover:bg-gold-light transition-colors duration-200 max-sm:w-full"
             >
               Subscribe Free
             </button>

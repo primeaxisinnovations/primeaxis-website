@@ -125,7 +125,7 @@ export default function AboutPage() {
         />
 
         {/* Hero text — hugs the left edge of the section */}
-        <div className="relative z-[3] max-w-[580px] self-start mt-[80px] pl-[56px] pr-0 text-left">
+        <div className="relative z-[3] max-w-[580px] self-start mt-[80px] pl-[56px] max-md:pl-5 pr-0 text-left">
           <AnimatedSection>
             <h1 className="font-display text-[clamp(28px,4vw,54px)] font-bold text-white leading-[1.1] max-w-[760px] mb-4">
               Shaping Africa&apos;s Maritime Conversations
@@ -140,7 +140,7 @@ export default function AboutPage() {
         </div>
 
         {/* Mission & Vision cards — anchored to the bottom of the section */}
-        <div className="relative z-[3] w-full px-[56px] pb-[80px] mt-auto">
+        <div className="relative z-[3] w-full px-[56px] max-md:px-5 pb-[80px] mt-auto">
           <AnimatedSection>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
 
@@ -170,16 +170,144 @@ export default function AboutPage() {
       </section>
 
       {/* ── About PrimeAxis lead ─────────────────────────────────── */}
-      <section className="py-[72px] max-sm:py-14 bg-cream">
-        <div className="max-w-[1240px] mx-auto px-11 max-sm:px-5">
+      <section
+        className="relative overflow-hidden text-center py-[80px] px-14 max-sm:px-6"
+        style={{ background: '#F5F0E8' }}
+      >
+        <div
+          className="absolute rounded-full pointer-events-none"
+          style={{
+            width: 300,
+            height: 300,
+            top: -100,
+            right: -100,
+            border: '1px solid rgba(200,169,110,0.08)',
+          }}
+          aria-hidden="true"
+        />
+        <div
+          className="absolute rounded-full pointer-events-none"
+          style={{
+            width: 300,
+            height: 300,
+            bottom: -100,
+            left: -100,
+            border: '1px solid rgba(200,169,110,0.08)',
+          }}
+          aria-hidden="true"
+        />
+
+        <div className="relative max-w-[1240px] mx-auto">
           <AnimatedSection>
-            <p className="font-sans text-[18px] font-medium text-ink leading-[1.8] max-w-[680px]">
+            <span
+              className="block text-center font-sans text-[10px] font-medium uppercase mb-8"
+              style={{ letterSpacing: '0.26em', color: '#c8a96e' }}
+            >
+              About PrimeAxis
+            </span>
+
+            <div className="flex items-center justify-center gap-12 mb-10">
+              {[
+                {
+                  label: 'Intelligence',
+                  svg: (
+                    <svg width="72" height="72" viewBox="0 0 72 72" fill="none" aria-hidden="true">
+                      <circle cx="36" cy="36" r="34" fill="#1C2B4A" stroke="#c8a96e" strokeWidth="1.5" />
+                      <circle cx="36" cy="36" r="22" fill="none" stroke="rgba(200,169,110,0.25)" strokeWidth="0.8" />
+                      <circle cx="36" cy="36" r="3" fill="#c8a96e" />
+                      <polygon points="36,14 39,34 36,30 33,34" fill="#c8a96e" />
+                      <polygon points="36,58 39,38 36,42 33,38" fill="rgba(255,255,255,0.35)" />
+                      <text x="36" y="11" textAnchor="middle" fill="#c8a96e" fontSize="7" fontFamily="Georgia" fontWeight="600">N</text>
+                      <text x="36" y="66" textAnchor="middle" fill="rgba(255,255,255,0.45)" fontSize="7" fontFamily="Georgia">S</text>
+                      <text x="62" y="38" textAnchor="middle" fill="rgba(255,255,255,0.45)" fontSize="7" fontFamily="Georgia">E</text>
+                      <text x="10" y="38" textAnchor="middle" fill="rgba(255,255,255,0.45)" fontSize="7" fontFamily="Georgia">W</text>
+                    </svg>
+                  ),
+                },
+                {
+                  label: 'Maritime',
+                  svg: (
+                    <svg width="72" height="72" viewBox="0 0 72 72" fill="none" aria-hidden="true">
+                      <circle cx="36" cy="36" r="34" fill="#F0E8D8" stroke="#c8a96e" strokeWidth="1.5" />
+                      <circle cx="36" cy="20" r="5" fill="none" stroke="#1C2B4A" strokeWidth="2" />
+                      <line x1="36" y1="25" x2="36" y2="54" stroke="#1C2B4A" strokeWidth="2.5" strokeLinecap="round" />
+                      <line x1="22" y1="30" x2="50" y2="30" stroke="#1C2B4A" strokeWidth="2" strokeLinecap="round" />
+                      <path d="M36 54 Q24 52 20 46" stroke="#1C2B4A" strokeWidth="2" fill="none" strokeLinecap="round" />
+                      <path d="M36 54 Q48 52 52 46" stroke="#1C2B4A" strokeWidth="2" fill="none" strokeLinecap="round" />
+                      <circle cx="20" cy="46" r="2.5" fill="#c8a96e" />
+                      <circle cx="52" cy="46" r="2.5" fill="#c8a96e" />
+                      <path d="M22 30 Q18 36 20 46" stroke="#c8a96e" strokeWidth="1" fill="none" strokeDasharray="2,2" opacity="0.7" />
+                    </svg>
+                  ),
+                },
+                {
+                  label: 'Conversations',
+                  svg: (
+                    <svg width="72" height="72" viewBox="0 0 72 72" fill="none" aria-hidden="true">
+                      <circle cx="36" cy="36" r="34" fill="#1C2B4A" stroke="#c8a96e" strokeWidth="1.5" />
+                      <rect x="29" y="18" width="14" height="22" rx="7" fill="#c8a96e" />
+                      <path d="M22 37 Q22 50 36 50 Q50 50 50 37" stroke="rgba(200,169,110,0.8)" strokeWidth="2" fill="none" strokeLinecap="round" />
+                      <line x1="36" y1="50" x2="36" y2="57" stroke="rgba(200,169,110,0.8)" strokeWidth="2" strokeLinecap="round" />
+                      <line x1="28" y1="57" x2="44" y2="57" stroke="rgba(200,169,110,0.8)" strokeWidth="2" strokeLinecap="round" />
+                      <path d="M16 28 Q14 33 16 38" stroke="rgba(255,255,255,0.30)" strokeWidth="1.5" fill="none" strokeLinecap="round" />
+                      <path d="M12 24 Q9 33 12 42" stroke="rgba(255,255,255,0.18)" strokeWidth="1.5" fill="none" strokeLinecap="round" />
+                      <path d="M56 28 Q58 33 56 38" stroke="rgba(255,255,255,0.30)" strokeWidth="1.5" fill="none" strokeLinecap="round" />
+                      <path d="M60 24 Q63 33 60 42" stroke="rgba(255,255,255,0.18)" strokeWidth="1.5" fill="none" strokeLinecap="round" />
+                    </svg>
+                  ),
+                },
+                {
+                  label: 'Blue Economy',
+                  svg: (
+                    <svg width="72" height="72" viewBox="0 0 72 72" fill="none" aria-hidden="true">
+                      <circle cx="36" cy="36" r="34" fill="#F0E8D8" stroke="#c8a96e" strokeWidth="1.5" />
+                      <circle cx="36" cy="36" r="20" fill="#1C2B4A" />
+                      <ellipse cx="36" cy="36" rx="20" ry="7" fill="none" stroke="rgba(200,169,110,0.35)" strokeWidth="0.8" />
+                      <line x1="16" y1="36" x2="56" y2="36" stroke="rgba(200,169,110,0.35)" strokeWidth="0.8" />
+                      <path d="M33 22 L38 22 L41 26 L42 30 L40 34 L42 38 L40 44 L37 48 L34 46 L31 42 L30 37 L32 33 L30 28 Z" fill="#c8a96e" opacity="0.9" />
+                      <path d="M40 34 L44 36 L41 38 L40 34Z" fill="#c8a96e" opacity="0.9" />
+                    </svg>
+                  ),
+                },
+              ].map(({ label, svg }) => (
+                <div key={label} className="flex flex-col items-center">
+                  {svg}
+                  <span
+                    className="mt-3 font-sans uppercase"
+                    style={{
+                      fontSize: 10,
+                      letterSpacing: '0.18em',
+                      color: '#1C2B4A',
+                      fontFamily: 'Inter, sans-serif',
+                      fontWeight: 500,
+                    }}
+                  >
+                    {label}
+                  </span>
+                </div>
+              ))}
+            </div>
+
+            <p
+              className="font-display font-normal mx-auto"
+              style={{
+                fontSize: 'clamp(17px, 2vw, 22px)',
+                lineHeight: 1.82,
+                color: '#1C2B4A',
+                maxWidth: 780,
+              }}
+            >
               PrimeAxis is a maritime intelligence and strategic communications platform dedicated
               to informing, influencing and elevating conversations shaping Africa&apos;s maritime
               future. Through insights, analysis, executive conversations and industry intelligence,
               PrimeAxis provides a credible platform for decision-makers, regulators, industry
               leaders and stakeholders across the maritime ecosystem.
             </p>
+
+            <div
+              className="mx-auto"
+              style={{ width: 40, height: 2, background: '#c8a96e', marginTop: 40 }}
+            />
           </AnimatedSection>
         </div>
       </section>
@@ -202,7 +330,7 @@ export default function AboutPage() {
           className="absolute bottom-0 left-0 right-0 h-[120px] z-[2] pointer-events-none"
           style={{ background: 'linear-gradient(to top, #0d1b2a, transparent)' }}
         />
-        <div className="relative z-[3] max-w-[1240px] mx-auto px-11 max-sm:px-5">
+        <div className="relative z-[3] max-w-[1240px] mx-auto px-11 max-md:px-5">
 
           <AnimatedSection className="mb-12">
             <span
@@ -263,7 +391,7 @@ export default function AboutPage() {
           sizes="100vw"
         />
         <div className="absolute inset-0 bg-gradient-to-b from-[#0D1824]/90 via-[#0D1824]/60 to-transparent" />
-        <div className="relative max-w-[1240px] mx-auto px-11 max-sm:px-5">
+        <div className="relative max-w-[1240px] mx-auto px-11 max-md:px-5">
           <AnimatedSection>
             <div className="grid grid-cols-1 md:grid-cols-[2fr_3fr] gap-12 lg:gap-16 items-start">
 
@@ -341,27 +469,9 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* ── Platform Positioning pull-quote ──────────────────────── */}
-      <section className="bg-deep py-[80px] max-sm:py-14">
-        <div className="max-w-[900px] mx-auto px-11 max-sm:px-5 text-center">
-          <AnimatedSection>
-            <span className="block w-8 h-0.5 bg-gold mx-auto mb-10" />
-            <p className="font-display text-[clamp(17px,2vw,26px)] text-white leading-[1.65]">
-              PrimeAxis serves{' '}
-              <span className="text-gold font-semibold">
-                decision-makers, policymakers, industry leaders, investors and professionals
-              </span>{' '}
-              who shape the future of Africa&apos;s maritime and blue economy sectors — through
-              intelligence, analysis, strategic communication and thought leadership.
-            </p>
-            <span className="block w-8 h-0.5 bg-gold mx-auto mt-10" />
-          </AnimatedSection>
-        </div>
-      </section>
-
       {/* ── CTA ──────────────────────────────────────────────────── */}
       <section className="py-[72px] max-sm:py-14 bg-cream">
-        <div className="max-w-[1240px] mx-auto px-11 max-sm:px-5 text-center">
+        <div className="max-w-[1240px] mx-auto px-11 max-md:px-5 text-center">
           <AnimatedSection>
             <span className="block font-mono text-[10.5px] tracking-[0.2em] uppercase text-gold mb-4">
               Start Exploring

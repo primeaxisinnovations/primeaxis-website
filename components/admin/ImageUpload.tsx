@@ -80,7 +80,7 @@ export default function ImageUpload({ label, value, onUploadComplete, required }
       <input
         ref={fileInputRef}
         type="file"
-        accept="image/jpeg,image/png,image/webp"
+        accept="image/jpeg,image/png,image/webp,video/mp4,video/webm,video/ogg"
         onChange={handleFileChange}
         className="hidden"
       />
@@ -123,7 +123,7 @@ export default function ImageUpload({ label, value, onUploadComplete, required }
             ? 'Uploading image…'
             : preview
               ? 'Click to choose a different image'
-              : 'Click to choose an image — JPEG, PNG, or WebP, up to 5MB'}
+              : 'Click to choose an image or video — JPEG, PNG, WebP, MP4, up to 50MB'}
         </p>
       </div>
 

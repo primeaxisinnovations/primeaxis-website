@@ -172,7 +172,7 @@ export default function HomeContent({
 
         {/* Main hero content — pt accounts for breaking bar (38px) + header (64px) */}
         <div className="relative z-[2] flex items-center pt-[200px] pb-20 max-sm:pt-[150px] max-sm:pb-12">
-          <div className="max-w-[1240px] mx-auto px-11 max-sm:px-5 w-full">
+          <div className="max-w-[1240px] mx-auto px-11 max-md:px-5 w-full">
             <div className="grid grid-cols-1 lg:grid-cols-[1.1fr_1fr] gap-20 items-center">
 
               {/* Left: editorial statement */}
@@ -267,7 +267,7 @@ export default function HomeContent({
 
         {/* Stats bar */}
         <div className="hero-stats-anim relative z-[2] border-t py-6" style={{ borderColor: "rgba(191,159,102,.12)" }}>
-          <div className="max-w-[1240px] mx-auto px-11 max-sm:px-5">
+          <div className="max-w-[1240px] mx-auto px-11 max-md:px-5">
             <div className="flex justify-between items-center max-sm:flex-col max-sm:items-start max-sm:gap-4">
               <div className="flex max-sm:flex-col max-sm:gap-4">
                 {[
@@ -385,7 +385,7 @@ export default function HomeContent({
 
       {/* ── INTELLIGENCE GRID ─────────────────────────────────── */}
       <section className="py-[88px] bg-cream max-sm:py-14 scroll-mt-[100px]" id="intelligence">
-        <div className="max-w-[1240px] mx-auto px-11 max-sm:px-5">
+        <div className="max-w-[1240px] mx-auto px-11 max-md:px-5">
           <div className="fade-in flex items-end justify-between mb-12 max-sm:flex-col max-sm:items-start max-sm:gap-4">
             <div>
               <span className="block w-8 h-0.5 bg-gold mb-[14px]" />
@@ -426,7 +426,7 @@ export default function HomeContent({
             style={{ opacity: 0.20 }}
           />
 
-          <div className="relative max-w-[1240px] mx-auto px-11 max-sm:px-5">
+          <div className="relative max-w-[1240px] mx-auto px-11 max-md:px-5">
             <div className="grid grid-cols-1 lg:grid-cols-[1fr_1.1fr] gap-[72px] items-center max-sm:gap-12">
 
               <div className="fade-in">
@@ -578,7 +578,7 @@ export default function HomeContent({
           style={{ opacity: 0.25, transformOrigin: "center center" }}
         />
 
-        <div className="relative max-w-[1240px] mx-auto px-11 max-sm:px-5">
+        <div className="relative max-w-[1240px] mx-auto px-11 max-md:px-5">
           <div className="fade-in flex items-center gap-20 max-sm:flex-col max-sm:gap-10">
             <div className="flex-1">
               <span className="font-mono text-[10.5px] tracking-[.18em] uppercase text-gold block mb-3">
@@ -612,7 +612,7 @@ export default function HomeContent({
 
       {/* ── SERVICES ──────────────────────────────────────────── */}
       <section className="py-[88px] bg-white max-sm:py-14 scroll-mt-[100px]" id="services">
-        <div className="max-w-[1240px] mx-auto px-11 max-sm:px-5">
+        <div className="max-w-[1240px] mx-auto px-11 max-md:px-5">
           <div className="fade-in flex items-end justify-between mb-0 max-sm:flex-col max-sm:items-start max-sm:gap-4">
             <div>
               <span className="block w-8 h-0.5 bg-gold mb-[14px]" />
@@ -667,7 +667,7 @@ export default function HomeContent({
           style={{ opacity: 0.20 }}
         />
 
-        <div className="relative max-w-[1240px] mx-auto px-11 max-sm:px-5">
+        <div className="relative max-w-[1240px] mx-auto px-11 max-md:px-5">
           <div className="grid grid-cols-1 lg:grid-cols-[1.3fr_1fr] gap-20 items-center max-sm:gap-12">
 
             <div className="fade-in">
@@ -736,13 +736,13 @@ export default function HomeContent({
               Join maritime executives, policy professionals, and industry decision-makers who receive curated intelligence, executive insights, and strategic perspectives on Africa&apos;s maritime and blue economy sector — direct to their inbox.
             </p>
 
-            <form className="flex max-w-[460px] mx-auto mb-[14px]" onSubmit={(e) => e.preventDefault()}>
+            <form className="flex max-sm:flex-col max-w-[460px] mx-auto mb-[14px]" onSubmit={(e) => e.preventDefault()}>
               <input
                 type="email"
                 placeholder="Your professional email address"
-                className="flex-1 font-sans text-[13.5px] px-[18px] py-[13px] border border-cream-dark border-r-0 bg-white text-ink outline-none focus:border-gold placeholder:text-muted transition-colors duration-200"
+                className="flex-1 font-sans text-[13.5px] px-[18px] py-[13px] border border-cream-dark max-sm:border-r border-r-0 bg-white text-ink outline-none focus:border-gold placeholder:text-muted transition-colors duration-200"
               />
-              <button type="submit" className="font-sans text-[13px] font-semibold tracking-[.04em] bg-deep text-white px-6 py-[13px] whitespace-nowrap hover:bg-teal transition-colors duration-200">
+              <button type="submit" className="font-sans text-[13px] font-semibold tracking-[.04em] bg-deep text-white px-6 py-[13px] whitespace-nowrap hover:bg-teal transition-colors duration-200 max-sm:w-full">
                 Subscribe Free
               </button>
             </form>

@@ -25,7 +25,7 @@ export default async function SearchPage({ searchParams }: PageProps) {
 
       {/* Page Header */}
       <section className="bg-cream pt-[60px] pb-[72px] border-b border-border">
-        <div className="max-w-[1240px] mx-auto px-11 max-sm:px-5">
+        <div className="max-w-[1240px] mx-auto px-11 max-md:px-5">
           <AnimatedSection>
             <span className="block font-mono text-[10.5px] tracking-[0.2em] uppercase text-gold mb-5">
               Search
@@ -44,7 +44,7 @@ export default async function SearchPage({ searchParams }: PageProps) {
 
       {/* Results */}
       <section className="py-[72px] max-sm:py-12">
-        <div className="max-w-[800px] mx-auto px-11 max-sm:px-5">
+        <div className="max-w-[800px] mx-auto px-11 max-md:px-5">
           {!query ? (
             <div className="py-24 text-center">
               <p className="font-sans text-[15px] text-muted">

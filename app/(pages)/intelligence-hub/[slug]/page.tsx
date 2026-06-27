@@ -63,7 +63,7 @@ export default async function ArticlePage({ params }: PageProps) {
 
       {/* ── Breadcrumb ─────────────────────────────────────────── */}
       <div className="bg-white border-b border-border">
-        <div className="max-w-[1240px] mx-auto px-11 max-sm:px-5 py-3">
+        <div className="max-w-[1240px] mx-auto px-11 max-md:px-5 py-3">
           <nav className="flex items-center gap-2 font-mono text-[10px] tracking-[0.12em] uppercase text-muted flex-wrap">
             <Link href="/" className="hover:text-gold transition-colors duration-150">Home</Link>
             <span>/</span>
@@ -74,7 +74,7 @@ export default async function ArticlePage({ params }: PageProps) {
         </div>
       </div>
 
-      <div className="max-w-[1240px] mx-auto px-11 max-sm:px-5 py-[60px] max-sm:py-10">
+      <div className="max-w-[1240px] mx-auto px-11 max-md:px-5 py-[60px] max-sm:py-10">
 
         {/* ── Article Header ─────────────────────────────────── */}
         <AnimatedSection>
@@ -251,7 +251,7 @@ export default async function ArticlePage({ params }: PageProps) {
 
       {/* ── Newsletter CTA ─────────────────────────────────────── */}
       <section className="bg-deep py-[72px] max-sm:py-14">
-        <div className="max-w-[600px] mx-auto px-11 max-sm:px-5 text-center">
+        <div className="max-w-[600px] mx-auto px-11 max-md:px-5 text-center">
           <span className="block font-mono text-[10.5px] tracking-[0.2em] uppercase text-gold mb-4">
             Intelligence Briefings
           </span>
@@ -270,7 +270,7 @@ export default async function ArticlePage({ params }: PageProps) {
             />
             <button
               type="submit"
-              className="font-sans text-[13px] font-semibold tracking-[.04em] bg-gold text-deep px-6 py-[13px] whitespace-nowrap hover:bg-gold-light transition-colors duration-200"
+              className="font-sans text-[13px] font-semibold tracking-[.04em] bg-gold text-deep px-6 py-[13px] whitespace-nowrap hover:bg-gold-light transition-colors duration-200 max-sm:w-full"
             >
               Subscribe Free
             </button>

@@ -7,12 +7,15 @@ import { ADMIN_SESSION_COOKIE, verifySessionToken } from '@/lib/admin-session'
 // Always hits Vercel Blob live — never cached.
 export const dynamic = 'force-dynamic'
 
-const MAX_FILE_SIZE_BYTES = 5 * 1024 * 1024 // 5MB
+const MAX_FILE_SIZE_BYTES = 50 * 1024 * 1024 // 50MB
 
 const ALLOWED_TYPES: Record<string, string> = {
   'image/jpeg': 'jpg',
   'image/png': 'png',
   'image/webp': 'webp',
+  'video/mp4': 'mp4',
+  'video/webm': 'webm',
+  'video/ogg': 'ogv',
 }
 
 // Strips the extension, lowercases, replaces anything that isn't
@@ -40,20 +43,20 @@ export async function POST(request: NextRequest) {
   const file = formData?.get('file')
 
   if (!file || !(file instanceof File)) {
-    return NextResponse.json({ error: 'No image file was provided.' }, { status: 400 })
+    return NextResponse.json({ error: 'No file was provided.' }, { status: 400 })
   }
 
   const extension = ALLOWED_TYPES[file.type]
   if (!extension) {
     return NextResponse.json(
-      { error: 'Unsupported file type. Only JPEG, PNG, and WebP images are allowed.' },
+      { error: 'Unsupported file type. Only JPEG, PNG, WebP images and MP4, WebM, OGG videos are allowed.' },
       { status: 400 }
     )
   }
 
   if (file.size > MAX_FILE_SIZE_BYTES) {
     return NextResponse.json(
-      { error: 'Image is too large. The maximum file size is 5MB.' },
+      { error: 'File is too large. The maximum file size is 50MB.' },
       { status: 400 }
     )
   }

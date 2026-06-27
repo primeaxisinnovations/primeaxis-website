@@ -69,7 +69,7 @@ export default function ContactPage() {
           sizes="100vw"
         />
         <div className="absolute inset-0 bg-gradient-to-b from-[#0D1824]/90 via-[#0D1824]/60 to-transparent" />
-        <div className="relative max-w-[1240px] mx-auto px-11 max-sm:px-5">
+        <div className="relative max-w-[1240px] mx-auto px-11 max-md:px-5">
           <AnimatedSection>
             <div
               className="max-w-[600px] p-8 max-sm:p-6 border border-white/20 backdrop-blur-md"
@@ -96,7 +96,7 @@ export default function ContactPage() {
 
       {/* ── Two-column: form + contact details ───────────────────── */}
       <section className="py-[72px] max-sm:py-14 bg-cream">
-        <div className="max-w-[1240px] mx-auto px-11 max-sm:px-5">
+        <div className="max-w-[1240px] mx-auto px-11 max-md:px-5">
           <AnimatedSection delay={100}>
             <div className="grid grid-cols-1 lg:grid-cols-[3fr_2fr] gap-16 max-sm:gap-12">
 
@@ -204,7 +204,7 @@ export default function ContactPage() {
 
       {/* ── Newsletter CTA ───────────────────────────────────────── */}
       <section className="bg-deep py-[72px] max-sm:py-14">
-        <div className="max-w-[600px] mx-auto px-11 max-sm:px-5 text-center">
+        <div className="max-w-[600px] mx-auto px-11 max-md:px-5 text-center">
           <span className="block font-mono text-[10.5px] tracking-[0.2em] uppercase text-gold mb-4">
             Intelligence Briefings
           </span>
@@ -223,7 +223,7 @@ export default function ContactPage() {
             />
             <button
               type="submit"
-              className="font-sans text-[13px] font-semibold tracking-[.04em] bg-gold text-deep px-6 py-[13px] whitespace-nowrap hover:bg-gold-light transition-colors duration-200"
+              className="font-sans text-[13px] font-semibold tracking-[.04em] bg-gold text-deep px-6 py-[13px] whitespace-nowrap hover:bg-gold-light transition-colors duration-200 max-sm:w-full"
             >
               Subscribe Free
             </button>

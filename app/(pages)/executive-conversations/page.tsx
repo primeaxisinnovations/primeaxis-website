@@ -59,7 +59,7 @@ export default async function ExecutiveConversationsPage() {
 
       {/* Conversation List */}
       <section className="pt-[102px] pb-[72px] max-sm:pb-12">
-        <div className="max-w-[1240px] mx-auto px-11 max-sm:px-5">
+        <div className="max-w-[1240px] mx-auto px-11 max-md:px-5">
           <AnimatedSection delay={100}>
             <div className="flex flex-col gap-4">
               {conversations.map((conversation) => (

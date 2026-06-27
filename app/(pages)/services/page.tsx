@@ -1,8 +1,8 @@
 import type { Metadata } from 'next'
 import type { ReactElement } from 'react'
-import Image from 'next/image'
 import Link from 'next/link'
 import AnimatedSection from '@/components/ui/AnimatedSection'
+import HowWeWorkSection from '@/components/services/HowWeWorkSection'
 
 export const metadata: Metadata = {
   title: 'Services | PrimeAxis Maritime Intelligence',
@@ -123,24 +123,71 @@ const SERVICES: Array<{
 ]
 
 // ── How We Work ─────────────────────────────────────────────────────────────
-const PROCESS_STEPS = [
+const PROCESS_STEPS: Array<{ title: string; description: string; icon: ReactElement }> = [
   {
-    number: '01',
     title: 'Discovery',
     description:
       'We begin by understanding your objectives, stakeholders, and operating context — taking time to define the problem clearly before proposing any approach.',
+    icon: (
+      <svg viewBox="0 0 24 24" fill="none" stroke="#c8a96e" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+        <circle cx="12" cy="12" r="10" />
+        <polygon points="16.24,7.76 14.12,14.12 7.76,16.24 9.88,9.88" />
+      </svg>
+    ),
   },
   {
-    number: '02',
     title: 'Strategy & Execution',
     description:
       'We design a programme built specifically around your goals and execute it with rigour, adapting as your environment and priorities evolve.',
+    icon: (
+      <svg viewBox="0 0 24 24" fill="none" stroke="#c8a96e" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+        <circle cx="12" cy="12" r="3" />
+        <circle cx="12" cy="12" r="9" />
+        <line x1="12" y1="3" x2="12" y2="6" />
+        <line x1="12" y1="18" x2="12" y2="21" />
+        <line x1="3" y1="12" x2="6" y2="12" />
+        <line x1="18" y1="12" x2="21" y2="12" />
+        <line x1="5.64" y1="5.64" x2="7.76" y2="7.76" />
+        <line x1="16.24" y1="16.24" x2="18.36" y2="18.36" />
+        <line x1="18.36" y1="5.64" x2="16.24" y2="7.76" />
+        <line x1="7.76" y1="16.24" x2="5.64" y2="18.36" />
+      </svg>
+    ),
   },
   {
-    number: '03',
     title: 'Delivery & Impact',
     description:
       'We deliver clear, measurable outputs and track outcomes against agreed objectives, ensuring every engagement produces demonstrable value.',
+    icon: (
+      <svg viewBox="0 0 24 24" fill="none" stroke="#c8a96e" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+        <circle cx="12" cy="5" r="3" />
+        <line x1="12" y1="8" x2="12" y2="20" />
+        <path d="M5 12 Q5 19 12 19 Q19 19 19 12" />
+        <line x1="8" y1="10" x2="16" y2="10" />
+      </svg>
+    ),
+  },
+]
+
+// ── Who We Serve ────────────────────────────────────────────────────────────
+const WHO_WE_SERVE_CARDS = [
+  {
+    badge: 'GOVERNMENT',
+    image: 'https://images.unsplash.com/photo-1464938050520-ef2270bb8ce8?w=800&q=80',
+    title: 'Government & Regulators',
+    body: "Port authorities, maritime ministries, and regulatory bodies shaping Africa's blue economy policy and governance.",
+  },
+  {
+    badge: 'INDUSTRY',
+    image: 'https://images.unsplash.com/photo-1578575437130-527eed3abbec?w=800&q=80',
+    title: 'Shipping & Port Executives',
+    body: 'CEOs, directors, and operators driving commercial maritime activity across African trade corridors and port systems.',
+  },
+  {
+    badge: 'FINANCE',
+    image: 'https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=800&q=80',
+    title: 'Investors & Finance',
+    body: 'Private equity, development finance, and institutional investors navigating blue economy opportunities across African markets.',
   },
 ]
 
@@ -148,49 +195,86 @@ export default function ServicesPage() {
   return (
     <div className="min-h-screen bg-cream">
 
-      {/* ── Page Header — full-bleed maritime photography behind a
-          frosted-glass content card (same recipe as the homepage's
-          photo-backed surfaces) ───────────────────────────────────── */}
-      <section className="relative pt-[60px] pb-[72px] overflow-hidden">
-        <Image
-          src="https://images.unsplash.com/photo-1735774551547-0e6c38870714?w=1600&q=80&fit=crop"
-          alt=""
-          fill
-          priority
-          className="object-cover"
-          sizes="100vw"
-        />
-        <div className="absolute inset-0 bg-gradient-to-b from-[#0D1824]/90 via-[#0D1824]/60 to-transparent" />
-        <div className="relative max-w-[1240px] mx-auto px-11 max-sm:px-5">
+      {/* ── Who We Serve — header row + three image cards ──────── */}
+      <section
+        className="relative overflow-hidden px-14 max-md:px-5"
+        style={{ background: '#F5F0E8', paddingTop: '72px', paddingBottom: '72px' }}
+      >
+        <div className="services-who-circle-1" aria-hidden="true" />
+        <div className="services-who-circle-2" aria-hidden="true" />
+
+        <div className="relative max-w-[1240px] mx-auto">
           <AnimatedSection>
-            <div
-              className="max-w-[680px] p-8 max-sm:p-6 border border-white/20 backdrop-blur-md"
-              style={{
-                background: 'rgba(255,255,255,0.08)',
-                boxShadow: 'inset 0 1px 0 rgba(255,255,255,0.16)',
-              }}
-            >
-              <span className="block font-mono text-[10.5px] tracking-[0.2em] uppercase text-gold mb-5">
-                Our Services
+            <div style={{ textAlign: 'center', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+              <span
+                className="services-who-eyebrow"
+                style={{ textAlign: 'center', justifyContent: 'center' }}
+              >
+                Who We Serve
               </span>
-              <h1 className="font-display text-[clamp(28px,4vw,54px)] font-semibold text-white leading-[1.1] max-w-[720px] mb-5">
-                Strategic Services for Africa&apos;s Maritime Leaders
-              </h1>
-              <p className="font-sans text-[16px] text-white/70 leading-relaxed max-w-[540px]">
-                We translate intelligence, access, and strategic communications expertise into
-                measurable outcomes for the institutions and executives shaping Africa&apos;s
-                maritime future.
+              <h2
+                className="font-display"
+                style={{
+                  fontSize: 'clamp(28px, 3vw, 36px)',
+                  fontWeight: 700,
+                  lineHeight: 1.12,
+                  color: '#1C2B4A',
+                  letterSpacing: '-0.02em',
+                  textAlign: 'center',
+                  maxWidth: '600px',
+                  marginLeft: 'auto',
+                  marginRight: 'auto',
+                }}
+              >
+                Built for the leaders shaping{' '}
+                <em style={{ color: '#c8a96e', fontStyle: 'italic' }}>Africa&apos;s seas</em>
+              </h2>
+              <p
+                className="font-sans"
+                style={{
+                  fontSize: '15px',
+                  fontWeight: 300,
+                  lineHeight: 1.80,
+                  color: 'rgba(28,43,74,0.68)',
+                  textAlign: 'center',
+                  maxWidth: '520px',
+                  marginLeft: 'auto',
+                  marginRight: 'auto',
+                  marginBottom: '52px',
+                }}
+              >
+                PrimeAxis serves the decision-makers, policymakers, and executives who drive
+                Africa&apos;s maritime and blue economy sectors forward.
               </p>
+            </div>
+          </AnimatedSection>
+
+          <AnimatedSection delay={100}>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
+              {WHO_WE_SERVE_CARDS.map((card) => (
+                <div key={card.title} className="services-who-card">
+                  <div className="services-who-card-image">
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img src={card.image} alt={card.title} />
+                    <div className="services-who-card-overlay" />
+                    <span className="services-who-badge">{card.badge}</span>
+                  </div>
+                  <div className="services-who-card-body">
+                    <h3 className="services-who-card-title">{card.title}</h3>
+                    <p className="services-who-card-text">{card.body}</p>
+                  </div>
+                </div>
+              ))}
             </div>
           </AnimatedSection>
         </div>
       </section>
 
-      {/* ── Services list — full-bleed photo background behind the
-          six service cards ─────────────────────────────────────── */}
+      {/* ── Services heading + six service cards — single shared
+          full-bleed photo background, no seam between heading and cards ── */}
       <section
-        className="relative overflow-hidden"
-        style={{ background: 'transparent', padding: '80px 48px 100px' }}
+        className="relative overflow-hidden px-12 max-md:px-5"
+        style={{ background: 'transparent', paddingTop: '120px', paddingBottom: '100px' }}
       >
         <img
           className="services-section-bg"
@@ -212,15 +296,40 @@ export default function ServicesPage() {
         />
         <div className="relative z-[3]" style={{ maxWidth: '1200px', margin: '0 auto' }}>
           <AnimatedSection>
-            <span className="services-eyebrow">What We Offer</span>
-            <h2
-              className="font-display font-bold text-white"
-              style={{ fontSize: 'clamp(32px, 3.8vw, 52px)', lineHeight: 1.10, marginBottom: '56px' }}
-            >
-              Strategic Services for{' '}
-              <em className="italic" style={{ color: '#c8a96e' }}>Maritime Leaders</em>
-            </h2>
+            <div style={{ marginBottom: '56px', textAlign: 'left', display: 'flex', flexDirection: 'column', alignItems: 'flex-start' }}>
+              <span className="services-eyebrow" style={{ textAlign: 'left', justifyContent: 'flex-start' }}>What We Offer</span>
+              <h2
+                className="font-display font-bold text-white"
+                style={{
+                  fontSize: 'clamp(32px, 3.8vw, 52px)',
+                  lineHeight: 1.10,
+                  marginBottom: '20px',
+                  textAlign: 'left',
+                  maxWidth: '620px',
+                  marginLeft: 0,
+                  marginRight: 0,
+                }}
+              >
+                Strategic Services for{' '}
+                <em className="italic" style={{ color: '#c8a96e' }}>Maritime Leaders</em>
+              </h2>
+              <p
+                className="font-sans text-[16px] text-white/70 leading-relaxed"
+                style={{ textAlign: 'left', maxWidth: '540px', marginLeft: 0, marginRight: 0 }}
+              >
+                We translate{' '}
+                <span style={{ color: '#c8a96e', fontWeight: 400 }}>
+                  intelligence, access, and strategic communications expertise
+                </span>{' '}
+                into measurable outcomes for the{' '}
+                <span style={{ color: '#c8a96e', fontWeight: 400 }}>
+                  institutions and executives
+                </span>{' '}
+                shaping Africa&apos;s maritime future.
+              </p>
+            </div>
           </AnimatedSection>
+
           <AnimatedSection delay={100}>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
               {SERVICES.map((service, i) => (
@@ -245,54 +354,23 @@ export default function ServicesPage() {
       </section>
 
       {/* ── How We Work ──────────────────────────────────────────── */}
-      <section className="py-[72px] max-sm:py-14 bg-white border-y border-border">
-        <div className="max-w-[1240px] mx-auto px-11 max-sm:px-5">
-
-          <AnimatedSection className="mb-12">
-            <span className="block font-mono text-[10.5px] tracking-[0.2em] uppercase text-gold mb-4">
-              How We Work
-            </span>
-            <h2 className="font-display text-[clamp(22px,2.6vw,34px)] font-semibold text-deep leading-[1.15] max-w-[480px]">
-              A Structured Approach to Every Engagement
-            </h2>
-          </AnimatedSection>
-
-          <AnimatedSection delay={100}>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-px bg-border">
-              {PROCESS_STEPS.map((step) => (
-                <div key={step.title} className="bg-cream p-8 max-sm:p-6">
-                  <span className="font-display text-[3.5rem] font-bold leading-none text-gold/15 block mb-6 select-none">
-                    {step.number}
-                  </span>
-                  <h3 className="font-display text-[20px] font-semibold text-deep mb-3">
-                    {step.title}
-                  </h3>
-                  <p className="font-sans text-[13.5px] text-muted leading-[1.75]">
-                    {step.description}
-                  </p>
-                </div>
-              ))}
-            </div>
-          </AnimatedSection>
-
-        </div>
-      </section>
+      <HowWeWorkSection steps={PROCESS_STEPS} />
 
       {/* ── Closing CTA ──────────────────────────────────────────── */}
       <section className="py-[80px] max-sm:py-14 bg-cream">
-        <div className="max-w-[1240px] mx-auto px-11 max-sm:px-5">
+        <div className="max-w-[1240px] mx-auto px-11 max-md:px-5">
           <AnimatedSection>
-            <div className="max-w-[640px]">
+            <div className="max-w-[640px] mx-auto flex flex-col items-center text-center">
               <span className="block w-6 h-0.5 bg-gold mb-7" />
-              <h2 className="font-display text-[clamp(24px,2.8vw,38px)] font-semibold text-deep leading-[1.15] mb-5">
+              <h2 className="font-display text-[clamp(24px,2.8vw,38px)] font-semibold text-deep leading-[1.15] mb-5 text-center">
                 Not sure which service fits your objective?
               </h2>
-              <p className="font-sans text-[15.5px] text-muted leading-[1.75] mb-8">
+              <p className="font-sans text-[15.5px] text-muted leading-[1.75] mb-8 text-center max-w-[580px] mx-auto">
                 Many of our clients come to us with a clear outcome in mind but an open question
                 about the most effective path to it. Start a conversation — we will help you
                 identify the right approach for where your organisation is and where it needs to go.
               </p>
-              <div className="flex flex-wrap gap-4">
+              <div className="flex flex-wrap justify-center gap-4">
                 <Link
                   href="/contact"
                   className="inline-flex items-center gap-2.5 font-sans font-semibold text-[13px] tracking-[.04em] bg-gold text-deep px-8 py-[14px] hover:bg-gold-light transition-colors duration-200"
@@ -311,35 +389,6 @@ export default function ServicesPage() {
               </div>
             </div>
           </AnimatedSection>
-        </div>
-      </section>
-
-      {/* ── Newsletter CTA ───────────────────────────────────────── */}
-      <section className="bg-deep py-[72px] max-sm:py-14">
-        <div className="max-w-[600px] mx-auto px-11 max-sm:px-5 text-center">
-          <span className="block font-mono text-[10.5px] tracking-[0.2em] uppercase text-gold mb-4">
-            Intelligence Briefings
-          </span>
-          <h2 className="font-display text-[clamp(22px,2.5vw,34px)] font-semibold text-white leading-[1.15] mb-4">
-            Stay Ahead of Africa&apos;s Maritime Story
-          </h2>
-          <p className="font-sans text-[14px] text-white/50 leading-relaxed mb-8">
-            Strategic intelligence, policy analysis, and industry perspectives — direct to your
-            inbox, free.
-          </p>
-          <div className="flex max-sm:flex-col">
-            <input
-              type="email"
-              placeholder="Your professional email address"
-              className="flex-1 font-sans text-[13.5px] px-[18px] py-[13px] border border-white/10 bg-white/5 text-white placeholder:text-white/30 outline-none focus:border-gold transition-colors duration-200"
-            />
-            <button
-              type="submit"
-              className="font-sans text-[13px] font-semibold tracking-[.04em] bg-gold text-deep px-6 py-[13px] whitespace-nowrap hover:bg-gold-light transition-colors duration-200"
-            >
-              Subscribe Free
-            </button>
-          </div>
         </div>
       </section>
 

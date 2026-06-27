@@ -20,42 +20,29 @@ export default async function IntelligenceHubPage() {
     <div className="min-h-screen">
 
       {/* Page Header */}
-      <section className="relative overflow-hidden bg-deep mb-0 pt-[60px] pb-[70px] min-h-[420px] h-[46vh] max-h-[520px]">
+      <section className="relative overflow-hidden bg-deep mb-0 pt-[60px] pb-[70px] min-h-screen h-screen max-h-none flex items-end justify-start">
         <img
           className="hub-hero-bg"
-          src="https://n0jyvquhgs2welj7.public.blob.vercel-storage.com/uploads/1782268821745-595c0378-chatgpt-image-jun-24-2026-03-31-35-am.png"
+          src="https://n0jyvquhgs2welj7.public.blob.vercel-storage.com/uploads/1782434695415-622356c7-frxth.png"
           alt=""
           aria-hidden="true"
         />
         <div
-          className="absolute top-0 left-0 right-0 h-[100px] z-[1] pointer-events-none"
-          style={{ background: 'linear-gradient(to bottom, rgba(13,27,42,0.90), transparent)' }}
+          className="absolute top-0 left-0 right-0 h-[110px] z-[1] pointer-events-none"
+          style={{ background: 'linear-gradient(to bottom, rgba(13,27,42,0.88), transparent)' }}
         />
         <div
-          className="absolute inset-0 z-[1] pointer-events-none"
-          style={{
-            background:
-              'linear-gradient(to right, rgba(13,27,42,0.92) 0%, rgba(13,27,42,0.75) 30%, rgba(13,27,42,0.35) 55%, rgba(13,27,42,0.08) 75%, transparent 88%)',
-          }}
+          className="absolute bottom-0 left-0 right-0 h-[130px] z-[1] pointer-events-none"
+          style={{ background: 'linear-gradient(to top, rgba(13,27,42,0.96), transparent)' }}
         />
-        <div
-          className="absolute bottom-0 left-0 right-0 h-[140px] z-[1] pointer-events-none"
-          style={{ background: 'linear-gradient(to top, #111f2e, transparent)' }}
-        />
-        <div className="relative z-[3] max-w-[1240px] mx-auto px-11 max-sm:px-5">
-          <AnimatedSection>
-            <span className="block font-mono text-[10.5px] tracking-[0.2em] uppercase text-gold mb-5">
-              Intelligence Hub
-            </span>
-            <h1 className="font-display text-[clamp(28px,3.5vw,52px)] font-semibold text-white leading-[1.1] max-w-[720px] mb-5">
-              Maritime Intelligence for Africa&apos;s Decision-Makers
-            </h1>
-            <p className="font-sans text-[15px] text-white/70 leading-relaxed max-w-[560px]">
-              Strategic analysis, policy intelligence, and industry perspectives — curated for
-              Africa&apos;s maritime executives, regulators, and operators.
-            </p>
-          </AnimatedSection>
-        </div>
+        <AnimatedSection className="hub-hero-card">
+          <h1 className="font-display text-[clamp(28px,3.5vw,52px)] font-semibold text-white leading-[1.1] max-w-[720px] mb-5">
+            Maritime intelligence for Africa&apos;s leaders.
+          </h1>
+          <p className="font-sans text-[15px] text-white/70 leading-relaxed max-w-[560px]">
+            Clear insight for policy and industry action.
+          </p>
+        </AnimatedSection>
       </section>
 
       {/* Category filter + article grid */}

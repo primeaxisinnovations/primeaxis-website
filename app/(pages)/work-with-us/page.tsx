@@ -2,7 +2,7 @@ import type { Metadata } from 'next'
 import type { ReactElement } from 'react'
 import Link from 'next/link'
 import AnimatedSection from '@/components/ui/AnimatedSection'
-import GlassOrbs from '@/components/ui/GlassOrbs'
+import WhyPartnerSection from '@/components/work-with-us/WhyPartnerSection'
 
 export const metadata: Metadata = {
   title: 'Work With Us | PrimeAxis',
@@ -76,18 +76,39 @@ const PATHWAYS: Array<{
 ]
 
 // ── Why partner with PrimeAxis ──────────────────────────────────────────────
-const REASONS = [
+const REASONS: Array<{ title: string; body: string; icon: ReactElement }> = [
   {
     title: 'An Informed, Senior Audience',
     body: "PrimeAxis is built for executives, regulators, and decision-makers — not general readers. Partners and contributors reach an audience that is already engaged with Africa's maritime agenda at a serious level.",
+    icon: (
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#c8a96e" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+        <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+        <circle cx="9" cy="7" r="4" />
+        <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
+        <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+      </svg>
+    ),
   },
   {
     title: 'Editorial Credibility',
     body: 'Everything published under the PrimeAxis brand is held to a consistent standard of rigour and relevance. Associating with that standard carries weight in a sector where credibility is a competitive advantage.',
+    icon: (
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#c8a96e" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+        <polyline points="9 12 11 14 15 10" />
+      </svg>
+    ),
   },
   {
     title: 'Africa-First by Design',
     body: "PrimeAxis was built specifically for the African maritime context — not adapted from a Western template. Partners and contributors are part of a platform that speaks to the continent's maritime leaders in a language that reflects their actual operating reality.",
+    icon: (
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#c8a96e" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+        <circle cx="12" cy="12" r="10" />
+        <line x1="2" y1="12" x2="22" y2="12" />
+        <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" />
+      </svg>
+    ),
   },
 ]
 
@@ -95,42 +116,72 @@ export default function WorkWithUsPage() {
   return (
     <div className="min-h-screen bg-cream">
 
-      {/* ── Page Header ──────────────────────────────────────────── */}
-      <section className="bg-cream pt-[60px] pb-[72px] border-b border-border">
-        <div className="max-w-[1240px] mx-auto px-11 max-sm:px-5">
+      {/* ── Page Header / Hero ───────────────────────────────────── */}
+      <section
+        className="relative w-full overflow-hidden flex items-end"
+        style={{ height: 'calc(100vh - 70px)', minHeight: '620px' }}
+      >
+        <img
+          className="wwu-hero-bg"
+          src="https://n0jyvquhgs2welj7.public.blob.vercel-storage.com/uploads/1782497081687-925edf91-byyy.png"
+          alt="PrimeAxis at Africa Maritime Summit"
+        />
+        <div
+          className="absolute top-0 left-0 right-0 h-[140px] z-[1] pointer-events-none"
+          style={{ background: 'linear-gradient(to bottom, rgba(13,27,42,0.80), transparent)' }}
+        />
+        <div
+          className="relative z-[3] flex flex-col items-center text-center px-14 max-md:px-5"
+          style={{ width: '100%', paddingBottom: '60px', marginLeft: 0 }}
+        >
           <AnimatedSection>
-            <div className="max-w-[760px] bg-white/82 backdrop-blur-sm rounded-sm2 border border-white/25 p-8 max-sm:p-6">
-              <span className="block font-mono text-[10.5px] tracking-[0.2em] uppercase text-gold mb-5">
-                Work With Us
-              </span>
-              <h1 className="font-display text-[clamp(28px,4vw,54px)] font-semibold text-deep leading-[1.1] max-w-[720px] mb-5">
-                Let&apos;s Build Africa&apos;s Maritime Future Together
-              </h1>
-              <p className="font-sans text-[16px] text-muted leading-relaxed max-w-[540px]">
-                PrimeAxis welcomes collaboration, partnership, and contribution from across the
-                maritime ecosystem — organisations, executives, researchers, and practitioners who
-                share our commitment to advancing Africa&apos;s maritime future.
-              </p>
-            </div>
+            <span className="block font-mono text-[10.5px] tracking-[0.2em] uppercase text-gold mb-5 text-center justify-center">
+              Work With Us
+            </span>
+            <h1
+              className="font-display text-[clamp(28px,4vw,54px)] font-semibold text-white leading-[1.1] mb-5 text-center mx-auto"
+              style={{ maxWidth: '680px' }}
+            >
+              Let&apos;s Build Africa&apos;s Maritime Future Together
+            </h1>
+            <p
+              className="font-sans text-[16px] leading-relaxed text-center mx-auto"
+              style={{ color: 'rgba(255,255,255,0.72)', maxWidth: '560px' }}
+            >
+              Collaboration, partnership, and contribution from across Africa&apos;s maritime
+              ecosystem — advancing the conversations that matter.
+            </p>
           </AnimatedSection>
+        </div>
+
+        <div className="wwu-scroll-cue absolute z-[3]" style={{ bottom: '36px', right: '56px' }}>
+          <span className="wwu-scroll-line" />
+          Scroll
         </div>
       </section>
 
-      {/* ── Four pathway cards — glassmorphism orb-backed dark environment ── */}
+      {/* ── Four pathway cards — glassmorphism cards over a full-bleed photo ── */}
       <section className="relative overflow-hidden py-[72px] max-sm:py-14" style={{ background: '#0a1628' }}>
-        <GlassOrbs
-          orbs={[
-            { color: 'rgba(30,80,160,0.40)', size: 480, top: '-110px', left: '-100px' },
-            { color: 'rgba(100,40,160,0.32)', size: 380, bottom: '-90px', right: '-80px' },
-            { color: 'rgba(20,120,160,0.26)', size: 280, top: '35%', left: '48%' },
-            { color: 'rgba(180,130,30,0.18)', size: 220, bottom: '8%', left: '5%' },
-          ]}
+        <img
+          className="wwu-cards-bg"
+          src="https://n0jyvquhgs2welj7.public.blob.vercel-storage.com/uploads/1782530981515-c6fa9ebf-ghjjj.png"
+          alt=""
+          aria-hidden="true"
         />
-        <div className="relative max-w-[1240px] mx-auto px-11 max-sm:px-5">
+        <div className="absolute inset-0 z-[1] pointer-events-none" style={{ background: 'rgba(7, 14, 28, 0.60)' }} />
+        <div
+          className="absolute top-0 left-0 right-0 h-[130px] z-[2] pointer-events-none"
+          style={{ background: 'linear-gradient(to bottom, #0d1b2a, transparent)' }}
+        />
+        <div
+          className="absolute bottom-0 left-0 right-0 h-[130px] z-[2] pointer-events-none"
+          style={{ background: 'linear-gradient(to top, #0d1b2a, transparent)' }}
+        />
+        <div className="relative z-[3] max-w-[1240px] mx-auto px-11 max-md:px-5">
           <AnimatedSection delay={100}>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               {PATHWAYS.map((pathway) => (
-                <div key={pathway.title} className="glass-card p-8 max-sm:p-6 flex flex-col">
+                <div key={pathway.title} className="wwu-card p-8 max-sm:p-6 flex flex-col">
                   <div className="glass-icon-box mb-5">{pathway.icon}</div>
                   <h2 className="font-display text-[20px] font-semibold text-white leading-[1.2] mb-4">
                     {pathway.title}
@@ -168,40 +219,11 @@ export default function WorkWithUsPage() {
       </section>
 
       {/* ── Why Partner With PrimeAxis ───────────────────────────── */}
-      <section className="py-[72px] max-sm:py-14 bg-white border-y border-border">
-        <div className="max-w-[1240px] mx-auto px-11 max-sm:px-5">
-
-          <AnimatedSection className="mb-12">
-            <span className="block font-mono text-[10.5px] tracking-[0.2em] uppercase text-gold mb-4">
-              Why Partner With PrimeAxis
-            </span>
-            <h2 className="font-display text-[clamp(22px,2.6vw,34px)] font-semibold text-deep leading-[1.15] max-w-[520px]">
-              What Working With PrimeAxis Means for Your Organisation
-            </h2>
-          </AnimatedSection>
-
-          <AnimatedSection delay={100}>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-px bg-border">
-              {REASONS.map((reason) => (
-                <div key={reason.title} className="bg-cream p-8 max-sm:p-6">
-                  <span className="block w-5 h-0.5 bg-gold mb-5" />
-                  <h3 className="font-display text-[18px] font-semibold text-deep mb-3 leading-snug">
-                    {reason.title}
-                  </h3>
-                  <p className="font-sans text-[13.5px] text-muted leading-[1.75]">
-                    {reason.body}
-                  </p>
-                </div>
-              ))}
-            </div>
-          </AnimatedSection>
-
-        </div>
-      </section>
+      <WhyPartnerSection reasons={REASONS} />
 
       {/* ── Newsletter CTA ───────────────────────────────────────── */}
       <section className="bg-deep py-[72px] max-sm:py-14">
-        <div className="max-w-[600px] mx-auto px-11 max-sm:px-5 text-center">
+        <div className="max-w-[600px] mx-auto px-11 max-md:px-5 text-center">
           <span className="block font-mono text-[10.5px] tracking-[0.2em] uppercase text-gold mb-4">
             Intelligence Briefings
           </span>
@@ -220,7 +242,7 @@ export default function WorkWithUsPage() {
             />
             <button
               type="submit"
-              className="font-sans text-[13px] font-semibold tracking-[.04em] bg-gold text-deep px-6 py-[13px] whitespace-nowrap hover:bg-gold-light transition-colors duration-200"
+              className="font-sans text-[13px] font-semibold tracking-[.04em] bg-gold text-deep px-6 py-[13px] whitespace-nowrap hover:bg-gold-light transition-colors duration-200 max-sm:w-full"
             >
               Subscribe Free
             </button>
