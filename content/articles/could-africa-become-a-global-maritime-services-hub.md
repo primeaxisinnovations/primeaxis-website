@@ -12,7 +12,7 @@ author: By Nneoma Blessing Obi-Asualo
 date: '2026-06-21'
 readingTime: 3 min read
 featuredImage: >-
-  https://n0jyvquhgs2welj7.public.blob.vercel-storage.com/uploads/1782056923503-a6dde7fe-n.jpg
+  https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?w=1600&q=80
 tags: []
 referenceCode: MP-2026-002
 status: published

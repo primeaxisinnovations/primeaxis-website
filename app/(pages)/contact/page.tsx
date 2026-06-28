@@ -1,6 +1,5 @@
 import { Suspense } from 'react'
 import type { Metadata } from 'next'
-import Image from 'next/image'
 import AnimatedSection from '@/components/ui/AnimatedSection'
 import ContactForm from '@/components/ui/ContactForm'
 import GlassOrbs from '@/components/ui/GlassOrbs'
@@ -59,37 +58,47 @@ export default function ContactPage() {
 
       {/* ── Page Header — full-bleed maritime photography behind a
           frosted-glass content card ─────────────────────────────────── */}
-      <section className="relative pt-[60px] pb-[72px] overflow-hidden">
-        <Image
-          src="https://images.unsplash.com/photo-1710067029849-ca4cf07cbce0?w=1600&q=80&fit=crop"
-          alt=""
-          fill
-          priority
-          className="object-cover"
-          sizes="100vw"
+      <section className="relative pt-[60px] pb-[72px] overflow-hidden flex justify-center">
+        <img
+          className="contact-hero-bg"
+          src="https://n0jyvquhgs2welj7.public.blob.vercel-storage.com/uploads/1782612987909-6eddf98d-bu.png"
+          alt="Maritime compass and vessel"
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-[#0D1824]/90 via-[#0D1824]/60 to-transparent" />
-        <div className="relative max-w-[1240px] mx-auto px-11 max-md:px-5">
+        <div
+          className="absolute top-0 left-0 right-0 h-[140px] z-[1] pointer-events-none"
+          style={{ background: 'linear-gradient(to bottom, rgba(13,27,42,0.85), transparent)' }}
+        />
+        <div
+          className="absolute inset-0 z-[1] pointer-events-none"
+          style={{
+            background:
+              'linear-gradient(to right, rgba(13,27,42,0.90) 0%, rgba(13,27,42,0.65) 35%, rgba(13,27,42,0.22) 58%, transparent 76%)',
+          }}
+        />
+        <div
+          className="absolute bottom-0 left-0 right-0 h-[180px] z-[1] pointer-events-none"
+          style={{ background: 'linear-gradient(to top, rgba(13,27,42,0.88), transparent)' }}
+        />
+        <div className="relative z-[3] flex flex-col items-center text-center max-w-[680px] mx-auto px-11 max-md:px-5">
           <AnimatedSection>
-            <div
-              className="max-w-[600px] p-8 max-sm:p-6 border border-white/20 backdrop-blur-md"
-              style={{
-                background: 'rgba(255,255,255,0.08)',
-                boxShadow: 'inset 0 1px 0 rgba(255,255,255,0.16)',
-              }}
+            <span className="block font-mono text-[10.5px] tracking-[0.2em] uppercase text-gold mb-5">
+              Contact
+            </span>
+            <h1
+              className="font-display text-[clamp(28px,3.8vw,48px)] font-semibold text-white leading-[1.1] mb-5"
+              style={{ whiteSpace: 'nowrap', maxWidth: 'none', textShadow: '0 2px 24px rgba(0,0,0,0.55)' }}
             >
-              <span className="block font-mono text-[10.5px] tracking-[0.2em] uppercase text-gold mb-5">
-                Contact
-              </span>
-              <h1 className="font-display text-[clamp(28px,4vw,54px)] font-semibold text-white leading-[1.1] max-w-[640px] mb-5">
-                Let&apos;s Start the Conversation
-              </h1>
-              <p className="font-sans text-[16px] text-white/70 leading-relaxed max-w-[520px]">
-                Whether you are exploring collaboration, requesting our services, or have a
-                perspective you want to share with Africa&apos;s maritime community — we want to
-                hear from you.
-              </p>
-            </div>
+              Let&apos;s Start the{' '}
+              <span style={{ color: '#c8a96e', fontStyle: 'italic' }}>Conversation</span>
+            </h1>
+            <p
+              className="font-sans text-[16px] text-white/70 leading-relaxed max-w-[520px]"
+              style={{ textShadow: '0 1px 14px rgba(0,0,0,0.50)' }}
+            >
+              Whether you are exploring collaboration, requesting our services, or have a
+              perspective you want to share with Africa&apos;s maritime community — we want to
+              hear from you.
+            </p>
           </AnimatedSection>
         </div>
       </section>
@@ -203,7 +212,7 @@ export default function ContactPage() {
       </section>
 
       {/* ── Newsletter CTA ───────────────────────────────────────── */}
-      <section className="bg-deep py-[72px] max-sm:py-14">
+      <section className="bg-deep py-[56px] max-sm:py-14">
         <div className="max-w-[600px] mx-auto px-11 max-md:px-5 text-center">
           <span className="block font-mono text-[10.5px] tracking-[0.2em] uppercase text-gold mb-4">
             Intelligence Briefings

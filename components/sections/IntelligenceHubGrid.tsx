@@ -1,10 +1,11 @@
 'use client'
 
 import { useState } from 'react'
+import { useSearchParams } from 'next/navigation'
 import AnimatedSection from '@/components/ui/AnimatedSection'
 import ArticleCard from '@/components/ui/ArticleCard'
 import Button from '@/components/ui/Button'
-import { CATEGORIES } from '@/lib/categories'
+import { CATEGORIES, categoryToSlug } from '@/lib/categories'
 import { cn } from '@/lib/utils'
 import type { Article } from '@/types'
 
@@ -15,7 +16,11 @@ interface IntelligenceHubGridProps {
 }
 
 export default function IntelligenceHubGrid({ articles }: IntelligenceHubGridProps) {
-  const [activeCategory, setActiveCategory] = useState<string | null>(null)
+  const searchParams = useSearchParams()
+  const categoryParam = searchParams.get('category')
+  const matchedCategory = CATEGORIES.find((cat) => categoryToSlug(cat) === categoryParam) ?? null
+
+  const [activeCategory, setActiveCategory] = useState<string | null>(matchedCategory)
   const [visibleCount, setVisibleCount] = useState(PAGE_SIZE)
 
   const filtered =

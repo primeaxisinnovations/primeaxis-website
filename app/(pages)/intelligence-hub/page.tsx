@@ -1,3 +1,4 @@
+import { Suspense } from 'react'
 import type { Metadata } from 'next'
 import AnimatedSection from '@/components/ui/AnimatedSection'
 import IntelligenceHubGrid from '@/components/sections/IntelligenceHubGrid'
@@ -46,7 +47,9 @@ export default async function IntelligenceHubPage() {
       </section>
 
       {/* Category filter + article grid */}
-      <IntelligenceHubGrid articles={articles} />
+      <Suspense>
+        <IntelligenceHubGrid articles={articles} />
+      </Suspense>
 
     </div>
   )

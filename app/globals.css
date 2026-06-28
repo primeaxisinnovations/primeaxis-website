@@ -795,6 +795,21 @@
   margin-bottom: 1.5rem;
 }
 
+/* ── CONTACT — HERO PHOTO BACKGROUND ─────────────────────────────
+   Scoped to the page-header/hero section only. */
+@layer components {
+  .contact-hero-bg {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center 30%;
+    z-index: 0;
+    filter: brightness(0.50) saturate(0.85) contrast(1.06);
+  }
+}
+
 /* ── WORK WITH US — HERO PHOTO BACKGROUND ───────────────────────
    Scoped to the page-header/hero section only. */
 @layer components {

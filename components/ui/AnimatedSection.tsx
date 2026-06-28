@@ -1,60 +1,76 @@
 'use client'
 
 import { useEffect, useRef, useState } from 'react'
-import { cn } from '@/lib/utils'
-
-type Delay = 0 | 100 | 200 | 300
 
 interface AnimatedSectionProps {
   children: React.ReactNode
   className?: string
-  delay?: Delay
-  threshold?: number
-}
-
-const delayClass: Record<Delay, string> = {
-  0: 'delay-0',
-  100: 'delay-100',
-  200: 'delay-200',
-  300: 'delay-300',
+  delay?: number
 }
 
 export default function AnimatedSection({
   children,
-  className,
+  className = '',
   delay = 0,
-  threshold = 0.1,
 }: AnimatedSectionProps) {
   const ref = useRef<HTMLDivElement>(null)
-  const [visible, setVisible] = useState(false)
+  const [isVisible, setIsVisible] = useState(false)
 
   useEffect(() => {
-    const el = ref.current
-    if (!el) return
+    const element = ref.current
+    if (!element) return
+
+    // Safety timeout — forces reveal after 1.2s regardless of the observer,
+    // so content is NEVER left permanently hidden.
+    const safetyTimer = setTimeout(() => {
+      setIsVisible(true)
+    }, 1200)
 
     const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setVisible(true)
-          observer.unobserve(el)
-        }
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            setIsVisible(true)
+            observer.unobserve(entry.target)
+            clearTimeout(safetyTimer)
+          }
+        })
       },
-      { threshold }
+      {
+        threshold: 0.05,
+        rootMargin: '0px 0px -20px 0px',
+      }
     )
 
-    observer.observe(el)
-    return () => observer.disconnect()
-  }, [threshold])
+    observer.observe(element)
+
+    // Reveal immediately if the element is already in the viewport on mount.
+    const rect = element.getBoundingClientRect()
+    const alreadyVisible = rect.top < window.innerHeight && rect.bottom > 0
+
+    if (alreadyVisible) {
+      setTimeout(() => {
+        setIsVisible(true)
+        observer.unobserve(element)
+        clearTimeout(safetyTimer)
+      }, delay || 100)
+    }
+
+    return () => {
+      observer.disconnect()
+      clearTimeout(safetyTimer)
+    }
+  }, [delay])
 
   return (
     <div
       ref={ref}
-      className={cn(
-        'transition-all duration-700',
-        delayClass[delay],
-        visible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6',
-        className
-      )}
+      className={className}
+      style={{
+        opacity: isVisible ? 1 : 0,
+        transform: isVisible ? 'translateY(0)' : 'translateY(24px)',
+        transition: `opacity 0.65s ease-out ${delay}ms, transform 0.65s ease-out ${delay}ms`,
+      }}
     >
       {children}
     </div>

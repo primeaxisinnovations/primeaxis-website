@@ -6,7 +6,7 @@ import Image from "next/image";
 import { LayoutGrid } from "lucide-react";
 import BreakingBar from "@/components/sections/BreakingBar";
 import ArticleCard from "@/components/ui/ArticleCard";
-import { CATEGORIES } from "@/lib/categories";
+import { CATEGORIES, categoryToSlug } from "@/lib/categories";
 import { CATEGORY_ICONS } from "@/lib/category-icons";
 import { services } from "@/lib/placeholder-data";
 import type { Article, Conversation } from "@/types";
@@ -265,35 +265,6 @@ export default function HomeContent({
           ))}
         </div>
 
-        {/* Stats bar */}
-        <div className="hero-stats-anim relative z-[2] border-t py-6" style={{ borderColor: "rgba(191,159,102,.12)" }}>
-          <div className="max-w-[1240px] mx-auto px-11 max-md:px-5">
-            <div className="flex justify-between items-center max-sm:flex-col max-sm:items-start max-sm:gap-4">
-              <div className="flex max-sm:flex-col max-sm:gap-4">
-                {[
-                  { num: "38",   label: "Coastal African Nations" },
-                  { num: "90%",  label: "Africa's Trade by Sea" },
-                  { num: "$1T+", label: "Blue Economy Potential" },
-                  { num: "2063", label: "African Maritime Vision" },
-                ].map(({ num, label }, i) => (
-                  <div
-                    key={num}
-                    className={`flex flex-col gap-1 px-10 max-sm:px-0 ${i > 0 ? "border-l border-gold/15 max-sm:border-l-0 max-sm:border-b max-sm:border-gold/15 max-sm:pb-4" : ""} ${i === 0 ? "pl-0" : ""}`}
-                  >
-                    <span className="font-display text-[26px] font-bold text-white leading-none">{num}</span>
-                    <span className="font-mono text-[9.5px] tracking-[.14em] uppercase text-gold/60">{label}</span>
-                  </div>
-                ))}
-              </div>
-              <div className="flex items-center gap-[10px] font-mono text-[10px] tracking-[.14em] uppercase text-white/25 max-sm:hidden">
-                <div className="w-[1px] h-10 relative overflow-hidden" style={{ background: "rgba(191,159,102,.25)" }}>
-                  <div className="absolute top-0 left-0 right-0 h-[40%] bg-gold animate-scroll-down" />
-                </div>
-                <span className="writing-vertical text-[9.5px] tracking-[.18em] uppercase">Scroll</span>
-              </div>
-            </div>
-          </div>
-        </div>
       </section>
 
       {/* ── BEATS / TOPIC NAVIGATION ──────────────────────────── */}
@@ -312,8 +283,9 @@ export default function HomeContent({
         <div className="relative lg:hidden">
           <div className="flex items-stretch overflow-x-auto scrollbar-none">
             {FEATURED_BEATS.map((category) => (
-              <div
+              <Link
                 key={category}
+                href={`/intelligence-hub?category=${categoryToSlug(category)}`}
                 className="group flex flex-col items-center justify-center gap-[7px] py-[22px] px-8 border-r border-white/10 bg-teal hover:border-gold/40 flex-shrink-0 cursor-pointer transition-colors duration-200 relative"
               >
                 <div className="absolute bottom-0 left-0 right-0 h-[2px] bg-transparent group-hover:bg-gold transition-colors duration-200" />
@@ -323,7 +295,7 @@ export default function HomeContent({
                 <span className="font-mono text-[9.5px] tracking-[.14em] uppercase text-white/70 group-hover:text-white text-center leading-[1.3] transition-colors duration-200">
                   {category}
                 </span>
-              </div>
+              </Link>
             ))}
             {/* All Categories — mobile */}
             <Link
@@ -354,8 +326,9 @@ export default function HomeContent({
         {/* Desktop — 7 tiles in a single row, no scroll */}
         <div className="hidden lg:flex items-stretch max-w-[1440px] mx-auto">
           {FEATURED_BEATS.map((category) => (
-            <div
+            <Link
               key={category}
+              href={`/intelligence-hub?category=${categoryToSlug(category)}`}
               className="group flex-1 flex flex-col items-center justify-center gap-[7px] py-[22px] px-4 border-r border-white/10 bg-teal hover:border-gold/40 cursor-pointer transition-colors duration-200 relative"
             >
               <div className="absolute bottom-0 left-0 right-0 h-[2px] bg-transparent group-hover:bg-gold transition-colors duration-200" />
@@ -365,7 +338,7 @@ export default function HomeContent({
               <span className="font-mono text-[9px] tracking-[0.08em] uppercase text-white/70 group-hover:text-white text-center leading-[1.3] transition-colors duration-200 whitespace-nowrap">
                 {category}
               </span>
-            </div>
+            </Link>
           ))}
           {/* All Categories — desktop */}
           <Link
@@ -725,7 +698,7 @@ export default function HomeContent({
       </section>
 
       {/* ── NEWSLETTER ────────────────────────────────────────── */}
-      <section className="bg-cream py-20 max-sm:py-14 scroll-mt-[100px]" id="newsletter">
+      <section className="bg-cream py-[56px] max-sm:py-14 scroll-mt-[100px]" id="newsletter">
         <div className="max-w-[620px] mx-auto px-11 text-center max-sm:px-5">
           <div className="fade-in">
             <h2 className="font-display text-[clamp(22px,2.5vw,32px)] font-semibold text-deep mb-[14px] leading-[1.2]">

@@ -134,7 +134,7 @@ export default function Footer() {
           {/* Column 4 — Connect */}
           <div>
             <h4 className={columnHeading}>Connect</h4>
-            <div className="space-y-3 mb-7">
+            <div className="space-y-3">
               <a
                 href="mailto:hello@primeaxisinnovations.com.ng"
                 className="flex items-start gap-2.5 text-white/40 hover:text-white/80 transition-colors duration-200"
@@ -151,24 +151,6 @@ export default function Footer() {
                 <Phone size={13} className="text-gold/60 flex-shrink-0" />
                 <span className="font-sans text-[13px]">+234 802 949 0471</span>
               </a>
-            </div>
-
-            {/* Newsletter */}
-            <div>
-              <p className={cn(columnHeading, 'mb-3')}>Newsletter</p>
-              <div className="flex gap-2">
-                <input
-                  type="email"
-                  placeholder="Your email address"
-                  className="flex-1 min-w-0 bg-white/5 border border-white/10 text-white text-[12px] placeholder:text-white/30 px-3 py-2.5 focus:outline-none focus:border-gold transition-colors duration-200 font-sans"
-                />
-                <button
-                  type="button"
-                  className="flex-shrink-0 bg-gold text-deep font-sans font-semibold text-[11px] tracking-wide px-3 py-2.5 hover:bg-gold-light transition-colors duration-200 whitespace-nowrap"
-                >
-                  Subscribe
-                </button>
-              </div>
             </div>
           </div>
 

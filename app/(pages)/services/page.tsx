@@ -357,7 +357,7 @@ export default function ServicesPage() {
       <HowWeWorkSection steps={PROCESS_STEPS} />
 
       {/* ── Closing CTA ──────────────────────────────────────────── */}
-      <section className="py-[80px] max-sm:py-14 bg-cream">
+      <section className="py-[56px] max-sm:py-14 bg-cream">
         <div className="max-w-[1240px] mx-auto px-11 max-md:px-5">
           <AnimatedSection>
             <div className="max-w-[640px] mx-auto flex flex-col items-center text-center">

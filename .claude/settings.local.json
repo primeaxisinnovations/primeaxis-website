@@ -204,7 +204,19 @@
       "Bash(curl -s -o \"C:\\\\Users\\\\DELL\\\\AppData\\\\Local\\\\Temp\\\\claude\\\\c--Users-DELL-primeaxis-website\\\\f2fd810b-5d4d-4223-b547-7aeea40f62b3\\\\scratchpad\\\\about.html\" -w \"%{http_code}\\\\n\" http://localhost:3000/about)",
       "Bash(curl -s http://localhost:3000/about)",
       "Bash(curl -s \"http://localhost:3000/_next/static/chunks/%5Broot-of-the-server%5D__04k7jbp._.css\")",
-      "Bash(curl -s \"http://localhost:3000/_next/static/chunks/%5Broot-of-the-server%5D__04k7jbp._.css\" -o \"C:\\\\Users\\\\DELL\\\\AppData\\\\Local\\\\Temp\\\\claude\\\\c--Users-DELL-primeaxis-website\\\\f2fd810b-5d4d-4223-b547-7aeea40f62b3\\\\scratchpad\\\\bundle.css\")"
+      "Bash(curl -s \"http://localhost:3000/_next/static/chunks/%5Broot-of-the-server%5D__04k7jbp._.css\" -o \"C:\\\\Users\\\\DELL\\\\AppData\\\\Local\\\\Temp\\\\claude\\\\c--Users-DELL-primeaxis-website\\\\f2fd810b-5d4d-4223-b547-7aeea40f62b3\\\\scratchpad\\\\bundle.css\")",
+      "Bash(git commit *)",
+      "Bash(tasklist)",
+      "Bash(wmic process *)",
+      "PowerShell(taskkill /PID 32624 /T /F)",
+      "PowerShell(Remove-Item -Recurse -Force .next -Confirm:$false)",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\\\\n\" http://localhost:3000/contact --max-time 3)",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\\\\n\" http://localhost:3000/contact --max-time 5)",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\\\\n\" http://localhost:3000/ --max-time 5)",
+      "Bash(curl -s http://localhost:3000/services --max-time 10)",
+      "Bash(curl -s -o /dev/null http://localhost:3000/ --max-time 2)",
+      "Bash(curl -s -o /dev/null -w \"homepage: %{http_code}\\\\n\" http://localhost:3000/ --max-time 15)",
+      "Bash(curl -s -o /dev/null -w \"services: %{http_code}\\\\n\" http://localhost:3000/services --max-time 15)"
     ],
     "additionalDirectories": [
       "c:\\Users\\DELL\\primeaxis-website\\app\\(pages)\\intelligence-hub\\[slug]",

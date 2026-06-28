@@ -108,6 +108,12 @@ export default function Header() {
                 )}
               </Link>
             ))}
+            <Link
+              href="/contact"
+              className={cn('nav-pill-link', isActive('/contact') && 'active')}
+            >
+              Contact
+            </Link>
           </nav>
 
           {/* Right — desktop search + contact, mobile hamburger */}
@@ -139,12 +145,6 @@ export default function Header() {
               </button>
             </form>
 
-            <Link
-              href="/contact"
-              className="hidden lg:inline-flex items-center font-sans font-semibold text-sm tracking-wide text-gold border border-gold px-5 py-2 transition-all duration-200 hover:bg-gold hover:text-deep"
-            >
-              Contact
-            </Link>
             <button
               onClick={() => setIsOpen(true)}
               className="btn-bare lg:hidden text-white p-1"

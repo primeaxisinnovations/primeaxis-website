@@ -384,8 +384,8 @@ export default function AboutPage() {
           Executive Conversations photo headers) ───────────────────────── */}
       <section className="relative py-[80px] max-sm:py-14 overflow-hidden">
         <Image
-          src="https://images.unsplash.com/photo-1724862574576-55c24a3d44bd?w=1600&q=80&fit=crop"
-          alt=""
+          src="https://images.unsplash.com/photo-1578575437130-527eed3abbec?w=1600&q=80"
+          alt="Aerial view of cargo vessel on open ocean"
           fill
           className="object-cover"
           sizes="100vw"
@@ -399,7 +399,7 @@ export default function AboutPage() {
               <div className="relative w-full aspect-[4/5] rounded-sm2 overflow-hidden border border-gold/20">
                 <Image
                   src={FOUNDER_PHOTO_URL}
-                  alt="Nneoma Blessing Obi-Asualo"
+                  alt="Nneoma Blessing Obi-Asualo, Founder and CEO of PrimeAxis"
                   fill
                   className="object-cover"
                   style={{ objectPosition: 'center top' }}
@@ -470,7 +470,7 @@ export default function AboutPage() {
       </section>
 
       {/* ── CTA ──────────────────────────────────────────────────── */}
-      <section className="py-[72px] max-sm:py-14 bg-cream">
+      <section className="py-[56px] max-sm:py-14 bg-cream">
         <div className="max-w-[1240px] mx-auto px-11 max-md:px-5 text-center">
           <AnimatedSection>
             <span className="block font-mono text-[10.5px] tracking-[0.2em] uppercase text-gold mb-4">

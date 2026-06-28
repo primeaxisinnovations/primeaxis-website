@@ -250,7 +250,7 @@ export default async function ArticlePage({ params }: PageProps) {
       </div>
 
       {/* ── Newsletter CTA ─────────────────────────────────────── */}
-      <section className="bg-deep py-[72px] max-sm:py-14">
+      <section className="bg-deep py-[56px] max-sm:py-14">
         <div className="max-w-[600px] mx-auto px-11 max-md:px-5 text-center">
           <span className="block font-mono text-[10.5px] tracking-[0.2em] uppercase text-gold mb-4">
             Intelligence Briefings
