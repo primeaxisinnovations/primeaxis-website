@@ -385,13 +385,26 @@
   .svc-card {
     position: relative;
     overflow: hidden;
-    background: rgba(255, 255, 255, 0.06);
-    backdrop-filter: blur(18px);
-    -webkit-backdrop-filter: blur(18px);
-    border: 1px solid rgba(255, 255, 255, 0.14);
+    background: linear-gradient(
+      to bottom,
+      rgba(255, 255, 255, 0.13) 0%,
+      rgba(255, 255, 255, 0.07) 50%,
+      rgba(8, 16, 30, 0.30) 100%
+    );
+    backdrop-filter: blur(30px);
+    -webkit-backdrop-filter: blur(30px);
+    border: 1px solid rgba(255, 255, 255, 0.16);
     border-radius: 16px;
-    padding: 36px 30px 40px;
-    transition: background 0.35s ease, border-color 0.35s ease, transform 0.3s ease;
+    box-shadow:
+      0 8px 32px rgba(0, 0, 0, 0.40),
+      0 2px 8px rgba(0, 0, 0, 0.25),
+      inset 0 1px 0 rgba(255, 255, 255, 0.22),
+      inset 0 -1px 0 rgba(0, 0, 0, 0.15);
+    padding: 40px 36px 44px;
+    transition: background 0.35s ease,
+                border-color 0.35s ease,
+                box-shadow 0.35s ease,
+                transform 0.3s ease;
   }
   .svc-card::before {
     content: '';
@@ -400,7 +413,7 @@
     left: 0;
     right: 0;
     height: 1px;
-    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.22), transparent);
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.35), transparent);
   }
   .svc-card::after {
     content: '';
@@ -408,14 +421,25 @@
     bottom: 0;
     left: 0;
     right: 0;
-    height: 60px;
-    background: linear-gradient(to top, rgba(20, 120, 110, 0.10), transparent);
+    height: 40%;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.18), transparent);
     pointer-events: none;
+    border-radius: 0 0 16px 16px;
   }
   .svc-card:hover {
-    background: rgba(255, 255, 255, 0.11);
-    border-color: rgba(200, 169, 110, 0.32);
-    transform: translateY(-4px);
+    background: linear-gradient(
+      to bottom,
+      rgba(255, 255, 255, 0.20) 0%,
+      rgba(255, 255, 255, 0.12) 50%,
+      rgba(8, 16, 30, 0.22) 100%
+    );
+    border-color: rgba(200, 169, 110, 0.50);
+    box-shadow:
+      0 16px 52px rgba(0, 0, 0, 0.45),
+      0 4px 12px rgba(0, 0, 0, 0.28),
+      inset 0 1px 0 rgba(255, 255, 255, 0.32),
+      inset 0 -1px 0 rgba(0, 0, 0, 0.12);
+    transform: translateY(-5px);
   }
 
   .card-num {
@@ -431,11 +455,12 @@
 
   .card-icon {
     position: relative;
-    width: 42px;
-    height: 42px;
-    border-radius: 10px;
-    background: rgba(200, 169, 110, 0.10);
-    border: 1px solid rgba(200, 169, 110, 0.25);
+    width: 48px;
+    height: 48px;
+    border-radius: 12px;
+    background: rgba(200, 169, 110, 0.12);
+    border: 1px solid rgba(200, 169, 110, 0.28);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.15);
     margin-bottom: 22px;
     display: flex;
     align-items: center;
@@ -1102,5 +1127,113 @@
     transform: translateY(-6px);
     box-shadow: 0 12px 40px rgba(0, 0, 0, 0.10);
     border-color: rgba(200, 169, 110, 0.45);
+  }
+}
+
+/* ── Mobile hero fix (≤768px) ──────────────────────────────────────────────
+   On small screens the hero sections could collapse, hiding their full-bleed
+   background photos. We guarantee a non-zero height and force the background
+   <img>/next/image element to cover the section.
+
+   Scoped to the explicit .hero-section / .hero-carousel classes added to each
+   hero <section> rather than a [class*="hero"] wildcard: the homepage hero's
+   text uses hero-headline-anim / hero-standfirst-anim / hero-actions-anim
+   utility classes, and a wildcard would force a 480px min-height onto the
+   headline, standfirst, and button row — breaking the mobile hero layout. */
+@media (max-width: 768px) {
+  /* Homepage carousel: keep it full-viewport using the small-viewport unit. */
+  .hero-carousel {
+    min-height: 100svh !important;
+  }
+
+  /* All hero sections: positioning context + a safety floor so the section
+     can never collapse to zero height (larger explicit heights still win). */
+  .hero-section {
+    position: relative !important;
+    min-height: 480px;
+  }
+
+  /* Force the hero background image to cover the section on mobile. */
+  .hero-section img {
+    position: absolute !important;
+    inset: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+    object-position: center !important;
+  }
+}
+
+/* ── Editor's Note — slate-blue glass pill on the conversation detail page.
+   Kept in CSS (not inline) because of the ::before top shimmer line. */
+.editors-note-pill {
+  position: relative;
+  overflow: hidden;
+  background: rgba(74, 90, 120, 0.18);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(74, 90, 120, 0.30);
+  border-radius: 16px;
+  padding: 28px 32px;
+  margin-bottom: 40px;
+  width: 100%;
+  max-width: 680px;
+  text-align: left;
+}
+.editors-note-pill::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(74, 90, 120, 0.50), transparent);
+}
+
+/* ── Article detail body on cream ──────────────────────────────────────────
+   Scoped to .article-content (added alongside .article-prose on the article
+   detail page only) so the shared .article-prose styles — and the executive
+   conversation pages that also use them — are left untouched. Declared after
+   the .article-prose rules so equal-specificity selectors win here. */
+.article-content {
+  background: #F5F0E8;
+  max-width: 780px;
+  margin: 0 auto;
+  padding: 64px 48px;
+  color: #1C2B4A;
+}
+.article-content p,
+.article-content li {
+  font-size: 16px;
+  font-weight: 300;
+  line-height: 1.85;
+  color: #1C2B4A;
+}
+.article-content p:first-of-type {
+  font-size: 16px;
+  font-weight: 300;
+}
+/* CHANGE 2 — keep inline article images inside their container */
+.article-content img {
+  max-width: 100%;
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 12px;
+  margin: 32px auto;
+  object-fit: cover;
+}
+/* CHANGE 3 — headings tuned for the cream background */
+.article-content h1,
+.article-content h2,
+.article-content h3 {
+  font-family: var(--font-display);
+  color: #1C2B4A;
+  margin-top: 40px;
+  margin-bottom: 16px;
+}
+@media (max-width: 640px) {
+  .article-content {
+    padding: 40px 20px;
   }
 }

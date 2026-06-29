@@ -124,14 +124,14 @@ export default function AboutPage() {
           style={{ background: 'linear-gradient(to top, rgba(13,27,42,0.95), transparent)' }}
         />
 
-        {/* Hero text — hugs the left edge of the section */}
-        <div className="relative z-[3] max-w-[580px] self-start mt-[80px] pl-[56px] max-md:pl-5 pr-0 text-left">
+        {/* Hero text — centred, floating in the middle of the section */}
+        <div className="relative z-[3] w-full flex flex-col items-center justify-center text-center pt-[100px] pb-[60px] px-[56px] max-md:px-5">
           <AnimatedSection>
-            <h1 className="font-display text-[clamp(28px,4vw,54px)] font-bold text-white leading-[1.1] max-w-[760px] mb-4">
+            <h1 className="font-display text-[clamp(28px,4vw,54px)] font-bold text-white leading-[1.1] max-w-[700px] mx-auto text-center mb-4">
               Shaping Africa&apos;s Maritime Conversations
             </h1>
             <p
-              className="font-sans text-[15px] font-light leading-[1.6] max-w-[520px]"
+              className="font-sans text-[15px] font-light leading-[1.6] max-w-[520px] mx-auto text-center"
               style={{ color: 'rgba(210,228,248,0.72)' }}
             >
               Intelligence and strategy for the leaders defining Africa&apos;s blue economy.

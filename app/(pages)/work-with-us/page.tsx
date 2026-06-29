@@ -118,7 +118,7 @@ export default function WorkWithUsPage() {
 
       {/* ── Page Header / Hero ───────────────────────────────────── */}
       <section
-        className="relative w-full overflow-hidden flex items-end"
+        className="hero-section relative w-full overflow-hidden flex items-end"
         style={{ height: 'calc(100vh - 70px)', minHeight: '620px' }}
       >
         <img

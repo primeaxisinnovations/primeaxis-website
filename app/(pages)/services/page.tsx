@@ -274,7 +274,7 @@ export default function ServicesPage() {
           full-bleed photo background, no seam between heading and cards ── */}
       <section
         className="relative overflow-hidden px-12 max-md:px-5"
-        style={{ background: 'transparent', paddingTop: '120px', paddingBottom: '100px' }}
+        style={{ background: 'transparent', paddingTop: '64px', paddingBottom: '72px' }}
       >
         <img
           className="services-section-bg"
@@ -284,7 +284,7 @@ export default function ServicesPage() {
         />
         <div
           className="absolute inset-0 z-[1] pointer-events-none"
-          style={{ background: 'rgba(5,12,24,0.72)' }}
+          style={{ background: 'rgba(5,12,26,0.42)' }}
         />
         <div
           className="absolute top-0 left-0 right-0 h-[160px] z-[2] pointer-events-none"
@@ -296,18 +296,17 @@ export default function ServicesPage() {
         />
         <div className="relative z-[3]" style={{ maxWidth: '1200px', margin: '0 auto' }}>
           <AnimatedSection>
-            <div style={{ marginBottom: '56px', textAlign: 'left', display: 'flex', flexDirection: 'column', alignItems: 'flex-start' }}>
-              <span className="services-eyebrow" style={{ textAlign: 'left', justifyContent: 'flex-start' }}>What We Offer</span>
+            <div style={{ textAlign: 'center', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
               <h2
                 className="font-display font-bold text-white"
                 style={{
                   fontSize: 'clamp(32px, 3.8vw, 52px)',
                   lineHeight: 1.10,
                   marginBottom: '20px',
-                  textAlign: 'left',
-                  maxWidth: '620px',
-                  marginLeft: 0,
-                  marginRight: 0,
+                  textAlign: 'center',
+                  maxWidth: '680px',
+                  marginLeft: 'auto',
+                  marginRight: 'auto',
                 }}
               >
                 Strategic Services for{' '}
@@ -315,7 +314,7 @@ export default function ServicesPage() {
               </h2>
               <p
                 className="font-sans text-[16px] text-white/70 leading-relaxed"
-                style={{ textAlign: 'left', maxWidth: '540px', marginLeft: 0, marginRight: 0 }}
+                style={{ textAlign: 'center', maxWidth: '560px', marginLeft: 'auto', marginRight: 'auto', marginBottom: '56px' }}
               >
                 We translate{' '}
                 <span style={{ color: '#c8a96e', fontWeight: 400 }}>

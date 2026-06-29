@@ -22,7 +22,7 @@ export default async function ExecutiveConversationsPage() {
 
       {/* Page Header — full-viewport hero photograph, bleeding behind the
           transparent fixed header (-mt cancels the global main pt-[102px]) ── */}
-      <section className="relative min-h-screen overflow-hidden -mt-[102px]">
+      <section className="hero-section relative min-h-screen overflow-hidden -mt-[102px]">
         <Image
           src="https://n0jyvquhgs2welj7.public.blob.vercel-storage.com/uploads/1782264691397-a9a17b5b-nym.png"
           alt="Executive conversation interview"

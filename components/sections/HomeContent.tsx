@@ -27,8 +27,9 @@ function ArrowRight({ size = 14, strokeWidth = 2 }: { size?: number; strokeWidth
 const CAROUSEL_SLIDES = [
   "https://images.unsplash.com/photo-1605745341112-85968b19335b?w=1920&q=85&fit=crop&auto=format",
   "https://images.unsplash.com/photo-1678182451047-196f22a4143e?w=1920&q=85&fit=crop&auto=format",
-  "https://images.unsplash.com/photo-1567427017947-545c5f8d16ad?w=1920&q=85&fit=crop&auto=format",
-  "https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=1920&q=85&fit=crop&auto=format",
+  "https://n0jyvquhgs2welj7.public.blob.vercel-storage.com/uploads/1782718239222-cfa6b73f-landscape.png",
+  "https://n0jyvquhgs2welj7.public.blob.vercel-storage.com/uploads/1782719629319-95f5d22f-thuy.png",
+  "https://n0jyvquhgs2welj7.public.blob.vercel-storage.com/uploads/1782718362858-5197695e-n.png",
 ];
 
 const FEATURED_BEAT_NAMES = new Set([
@@ -118,7 +119,7 @@ export default function HomeContent({
 
       {/* ── HERO — full-screen fade carousel ──────────────────── */}
       <section
-        className="min-h-screen grid grid-rows-[1fr_auto] bg-deep relative overflow-hidden -mt-[102px]"
+        className="hero-section hero-carousel min-h-screen grid grid-rows-[1fr_auto] bg-deep relative overflow-hidden -mt-[102px]"
       >
         {/* Carousel slides */}
         {CAROUSEL_SLIDES.map((url, i) => (
@@ -127,13 +128,29 @@ export default function HomeContent({
             className="absolute inset-0 transition-opacity ease-in-out"
             style={{ opacity: i === activeSlide ? 1 : 0, transitionDuration: "1500ms" }}
           >
-            <img
-              src={url}
-              alt=""
-              aria-hidden="true"
-              className="absolute inset-0 w-full h-full object-cover"
-              style={{ objectPosition: "center 40%", opacity: 0.65 }}
-            />
+            {i < 2 ? (
+              <img
+                src={url}
+                alt=""
+                aria-hidden="true"
+                className="absolute inset-0 w-full h-full object-cover"
+                style={{ objectPosition: "center 40%", opacity: 0.65 }}
+              />
+            ) : (
+              <img
+                src={url}
+                alt=""
+                aria-hidden="true"
+                style={{
+                  position: "absolute",
+                  inset: 0,
+                  width: "100%",
+                  height: "100%",
+                  objectFit: "cover",
+                  objectPosition: "center",
+                }}
+              />
+            )}
           </div>
         ))}
 
@@ -215,11 +232,17 @@ export default function HomeContent({
                   would wash out the white text; the gradient layer beneath
                   it restores contrast without losing the frosted look. */}
               <div
-                className="hero-card-anim hidden lg:block relative p-9 border border-white/20 backdrop-blur-lg"
+                className="hero-card-anim hidden lg:block relative border border-white/20 backdrop-blur-lg"
                 style={{
                   background:
                     "linear-gradient(rgba(255,255,255,0.10), rgba(255,255,255,0.10)), linear-gradient(135deg, rgba(10,20,35,0.58) 0%, rgba(10,20,35,0.34) 100%)",
                   boxShadow: "0 8px 40px rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,255,255,0.16)",
+                  maxWidth: "480px",
+                  padding: "28px 32px 32px",
+                  alignSelf: "flex-end",
+                  marginTop: "auto",
+                  marginBottom: "32px",
+                  marginLeft: "32px",
                 }}
               >
                 <div
@@ -230,10 +253,18 @@ export default function HomeContent({
                   <span className="w-2 h-2 rounded-full bg-gold animate-pulse-dot flex-shrink-0" />
                   Featured Analysis
                 </div>
-                <h2 className="font-display text-[clamp(18px,1.8vw,24px)] font-semibold text-white leading-[1.3] mb-[14px]">
+                <h2 className="font-display font-semibold text-white mb-[14px]" style={{ fontSize: "clamp(18px, 2vw, 24px)", lineHeight: 1.25 }}>
                   Nigeria&apos;s Cabotage Regime at a Crossroads: The 2025 Amendment and What It Means for Indigenous Shipping
                 </h2>
-                <p className="text-[13.5px] leading-[1.7] font-light text-white/50 mb-6">
+                <p
+                  className="text-[13.5px] leading-[1.7] font-light text-white/50 mb-6"
+                  style={{
+                    display: "-webkit-box",
+                    WebkitLineClamp: 2,
+                    WebkitBoxOrient: "vertical",
+                    overflow: "hidden",
+                  }}
+                >
                   The latest regulatory amendments present both historic opportunity and significant risk for Nigerian shipowners navigating a shifting compliance environment.
                 </p>
                 <div className="flex items-center justify-between pt-5 border-t" style={{ borderColor: "rgba(255,255,255,.07)" }}>
@@ -552,28 +583,28 @@ export default function HomeContent({
         />
 
         <div className="relative max-w-[1240px] mx-auto px-11 max-md:px-5">
-          <div className="fade-in flex items-center gap-20 max-sm:flex-col max-sm:gap-10">
-            <div className="flex-1">
-              <span className="font-mono text-[10.5px] tracking-[.18em] uppercase text-gold block mb-3">
+          <div className="fade-in flex flex-col items-center text-center">
+            <div className="w-full flex flex-col items-center">
+              <span className="font-mono text-[10.5px] tracking-[.18em] uppercase text-gold block mb-3 text-center">
                 The Opportunity We Cover
               </span>
-              <h3 className="font-display text-[clamp(20px,2vw,27px)] font-semibold text-white leading-[1.35] mb-3">
+              <h3 className="font-display text-[clamp(20px,2vw,27px)] font-semibold text-white leading-[1.35] mb-3 text-center max-w-3xl mx-auto">
                 Africa&apos;s maritime economy is one of the world&apos;s{" "}
                 <em className="italic text-gold">most underreported</em> strategic opportunities
               </h3>
-              <p className="text-[14px] font-light leading-[1.7] text-white/55 max-w-[480px]">
+              <p className="text-[14px] font-light leading-[1.7] text-white/55 max-w-3xl mx-auto text-center">
                 With 38 coastal nations, 90% of its trade moving by sea, and a blue economy valued at over $1 trillion, Africa&apos;s maritime sector demands intelligence, strategic communications, and authoritative media that match its scale. PrimeAxis exists to fill that gap.
               </p>
             </div>
 
-            <div className="flex gap-10 flex-shrink-0 max-sm:justify-start">
+            <div className="flex flex-wrap justify-center gap-12 mt-12 w-full">
               {[
                 { val: "38",   label: "Coastal African\nNations" },
                 { val: "90%",  label: "Trade Volume\nby Sea" },
                 { val: "$1T+", label: "Blue Economy\nPotential" },
                 { val: "54",   label: "African Nations\nin the AU" },
               ].map(({ val, label }) => (
-                <div key={val} className="flex flex-col gap-[5px] border-l pl-6" style={{ borderColor: "rgba(191,159,102,.25)" }}>
+                <div key={val} className="flex flex-col items-center gap-[5px] border-l pl-6 text-center" style={{ borderColor: "rgba(191,159,102,.25)" }}>
                   <span className="font-display text-[32px] font-bold text-white leading-none">{val}</span>
                   <span className="font-mono text-[9px] tracking-[.16em] uppercase text-gold/60 whitespace-pre-line leading-[1.4]">{label}</span>
                 </div>

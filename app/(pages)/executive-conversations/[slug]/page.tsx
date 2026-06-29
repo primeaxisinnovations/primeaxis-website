@@ -152,11 +152,12 @@ export default async function ConversationPage({ params }: PageProps) {
           safe here for the same reason as the Q&A answers below: this HTML
           originates only from the authenticated admin's RichTextEditor. */}
       {conversation.introduction && (
-        <section className="bg-cream py-[56px] max-sm:py-10 border-b border-border">
-          <div className="max-w-[1240px] mx-auto px-11 max-md:px-5">
+        <section style={{ background: '#F5F0E8' }}>
+          <div className="max-w-[780px] mx-auto pt-16 pb-0 px-12 max-sm:px-5">
             <AnimatedSection>
               <div
-                className="article-prose max-w-[720px] mx-auto"
+                className="article-prose"
+                style={{ fontSize: '16px', lineHeight: 1.85, color: '#1C2B4A', fontWeight: 300 }}
                 dangerouslySetInnerHTML={{ __html: conversation.introduction }}
               />
             </AnimatedSection>
@@ -168,12 +169,11 @@ export default async function ConversationPage({ params }: PageProps) {
       {conversation.pullQuote && <PullQuoteSection text={conversation.pullQuote} />}
 
       {/* ── Q&A body + share ──────────────────────────────────────────── */}
-      <div className="max-w-[1240px] mx-auto px-11 max-md:px-5 pt-[72px] pb-[56px] max-sm:pt-14 max-sm:pb-10">
+      <section style={{ background: '#F5F0E8' }}>
+      <div className="max-w-[780px] mx-auto py-16 px-12 max-sm:px-5 text-left">
 
-        {/* DispatchHeader belongs to the dark header world, not the
-            reading world — stays outside the silky container. */}
         <AnimatedSection delay={100}>
-          <div className="max-w-[720px] mb-8">
+          <div className="mb-8">
             <DispatchHeader
               refCode={conversation.transcriptRef}
               date={formatDate(conversation.date)}
@@ -184,35 +184,74 @@ export default async function ConversationPage({ params }: PageProps) {
             />
           </div>
 
-          {/* Q&A — silky reading container */}
-          <div className="max-w-[720px] bg-white/82 backdrop-blur-sm rounded-sm2 border border-white/25 p-10 max-sm:p-6">
+          <div>
 
             {conversation.qa.map((pair, i) => (
               <div key={i}>
-                {i > 0 && <div className="border-t border-border my-[56px]" />}
+                {/* Thin gold separator between the previous answer and this question */}
+                {i > 0 && (
+                  <div style={{ width: '40px', height: '1px', background: '#c8a96e', margin: '40px 0' }} />
+                )}
 
-                {/* Question */}
-                <div className="flex items-start gap-4 mb-6">
+                {/* Question — glass pill */}
+                <div
+                  style={{
+                    background: 'rgba(28, 43, 74, 0.08)',
+                    backdropFilter: 'blur(16px)',
+                    WebkitBackdropFilter: 'blur(16px)',
+                    border: '1px solid rgba(200, 169, 110, 0.25)',
+                    borderRadius: '16px',
+                    padding: '28px 32px',
+                    marginBottom: '24px',
+                  }}
+                >
                   <span
-                    className="font-display font-bold leading-none text-gold flex-shrink-0 select-none"
-                    style={{ fontSize: '2.75rem', marginTop: '-5px' }}
+                    style={{
+                      fontFamily: '"Playfair Display", serif',
+                      fontSize: '32px',
+                      fontWeight: 700,
+                      color: '#c8a96e',
+                      lineHeight: 1,
+                      marginRight: '16px',
+                      float: 'left',
+                    }}
                     aria-hidden="true"
                   >
                     Q
                   </span>
-                  <p className="font-display italic text-[1.1rem] text-deep leading-[1.55] pt-2">
+                  <p
+                    style={{
+                      fontFamily: '"Playfair Display", serif',
+                      fontSize: '17px',
+                      fontStyle: 'italic',
+                      fontWeight: 400,
+                      color: '#1C2B4A',
+                      lineHeight: 1.65,
+                    }}
+                  >
                     {pair.question}
                   </p>
                 </div>
 
-                {/* Answer (HTML) — dangerouslySetInnerHTML is safe here
-                    specifically because pair.answer originates only from
-                    RichTextEditor inside the authenticated admin's own
-                    conversation editor — it is never derived from public
-                    user input. Do not copy this pattern for any content
-                    that originates outside the admin CMS. */}
+                {/* Answer (HTML) — plain on cream, no card. dangerouslySetInnerHTML
+                    is safe here specifically because pair.answer originates only
+                    from RichTextEditor inside the authenticated admin's own
+                    conversation editor — it is never derived from public user
+                    input. Do not copy this pattern for any content that
+                    originates outside the admin CMS. */}
                 <div
-                  className="qa-answer font-sans text-[16px] text-ink leading-[1.8]"
+                  className="qa-answer"
+                  style={{
+                    background: 'transparent',
+                    border: 'none',
+                    padding: '0 0 48px 0',
+                    marginBottom: 0,
+                    fontFamily: 'Inter, sans-serif',
+                    fontSize: '16px',
+                    fontWeight: 300,
+                    lineHeight: 1.85,
+                    color: '#1C2B4A',
+                  }}
                   dangerouslySetInnerHTML={{ __html: pair.answer }}
                 />
               </div>
@@ -279,6 +318,7 @@ export default async function ConversationPage({ params }: PageProps) {
         </AnimatedSection>
 
       </div>
+      </section>
 
       {/* ── Closing Quote (optional) — the dramatic last word before the
           editorial wrap-up content */}
@@ -287,19 +327,40 @@ export default async function ConversationPage({ params }: PageProps) {
       <div className="max-w-[1240px] mx-auto px-11 max-md:px-5 pt-[56px] pb-[72px] max-sm:pt-10 max-sm:pb-14">
 
         <AnimatedSection>
-          <div className="max-w-[720px]">
+          <div
+            style={{
+              maxWidth: '780px',
+              margin: '0 auto',
+              padding: '48px 48px 64px',
+              textAlign: 'center',
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'center',
+            }}
+          >
 
             {/* ── Editor's Note (HTML, optional) — distinct callout box,
                 not to be confused with the fixed "Editorial Note" disclaimer
                 below. dangerouslySetInnerHTML is safe here for the same
                 reason as the Q&A answers above. */}
             {conversation.editorsNote && (
-              <div className="border border-gold/30 bg-white p-6 mb-10">
-                <span className="block font-mono text-[10px] tracking-[0.18em] uppercase text-gold mb-3">
+              <div className="editors-note-pill">
+                <span
+                  style={{
+                    fontSize: '10px',
+                    fontWeight: 600,
+                    letterSpacing: '0.26em',
+                    textTransform: 'uppercase',
+                    color: '#c8a96e',
+                    marginBottom: '12px',
+                    display: 'block',
+                  }}
+                >
                   Editor&apos;s Note
                 </span>
                 <div
-                  className="qa-answer font-sans text-[14.5px] text-ink leading-[1.75]"
+                  className="qa-answer"
+                  style={{ fontSize: '14px', fontWeight: 300, lineHeight: 1.78, color: '#1C2B4A' }}
                   dangerouslySetInnerHTML={{ __html: conversation.editorsNote }}
                 />
               </div>
@@ -308,12 +369,12 @@ export default async function ConversationPage({ params }: PageProps) {
             {/* ── About Executive Conversations — fixed section, identical
                 on every conversation page, not tied to any data field. */}
             <div className="mb-10">
-              <span className="block w-6 h-0.5 bg-gold mb-3" />
-              <h2 className="font-display text-[19px] font-semibold text-deep mb-2.5">
+              <span className="block w-6 h-0.5 bg-gold mb-3 mx-auto" />
+              <h2 className="font-display text-[19px] font-semibold text-deep mb-2.5 text-center">
                 About Executive Conversations
               </h2>
               {/* PLACEHOLDER COPY — pending Nneoma's final wording. */}
-              <p className="font-sans text-[14px] text-muted leading-relaxed max-w-[640px]">
+              <p className="font-sans text-[14px] text-muted leading-relaxed max-w-[580px] mx-auto text-center">
                 Executive Conversations is PrimeAxis&apos;s flagship interview series, engaging the
                 leaders, regulators, and institution builders shaping Africa&apos;s maritime and
                 blue economy future.
@@ -323,7 +384,7 @@ export default async function ConversationPage({ params }: PageProps) {
             {/* ── Editorial Note — fixed disclaimer, identical on every
                 conversation page. Understated by design: this is a standard
                 editorial footnote, not a featured section. */}
-            <p className="font-mono text-[10.5px] tracking-[0.08em] text-muted/70 leading-relaxed">
+            <p className="font-mono text-[10.5px] tracking-[0.08em] text-muted/70 leading-relaxed max-w-[620px] mx-auto text-center">
               Editorial Note: This interview has been edited for clarity, length, and flow while
               preserving the substance of the conversation.
             </p>
