@@ -1,5 +1,6 @@
 import { Suspense } from 'react'
 import type { Metadata } from 'next'
+import Image from 'next/image'
 import AnimatedSection from '@/components/ui/AnimatedSection'
 import ContactForm from '@/components/ui/ContactForm'
 import GlassOrbs from '@/components/ui/GlassOrbs'
@@ -59,10 +60,16 @@ export default function ContactPage() {
       {/* ── Page Header — full-bleed maritime photography behind a
           frosted-glass content card ─────────────────────────────────── */}
       <section className="relative pt-[60px] pb-[72px] overflow-hidden flex justify-center">
-        <img
+        {/* Full-bleed CSS-cover hero (.contact-hero-bg) → next/image `fill`
+            with priority (LCP) and sizes=100vw (spans the viewport). */}
+        <Image
           className="contact-hero-bg"
           src="https://n0jyvquhgs2welj7.public.blob.vercel-storage.com/uploads/1782612987909-6eddf98d-bu.png"
           alt="Maritime compass and vessel"
+          fill
+          quality={80}
+          sizes="100vw"
+          priority
         />
         <div
           className="absolute top-0 left-0 right-0 h-[140px] z-[1] pointer-events-none"

@@ -217,7 +217,11 @@
       "Bash(curl -s -o /dev/null http://localhost:3000/ --max-time 2)",
       "Bash(curl -s -o /dev/null -w \"homepage: %{http_code}\\\\n\" http://localhost:3000/ --max-time 15)",
       "Bash(curl -s -o /dev/null -w \"services: %{http_code}\\\\n\" http://localhost:3000/services --max-time 15)",
-      "Bash(curl -s -o /dev/null -w \"%{http_code}\\\\n\" http://localhost:3000/ --max-time 3)"
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\\\\n\" http://localhost:3000/ --max-time 3)",
+      "Bash(grep -v \":0$\")",
+      "Bash(grep -v \"Image\\\\|next/image\\\\|import\\\\|//\\\\|remotePatterns\")",
+      "Bash(echo \"\\(exit: $?\\)\")",
+      "Bash(grep -rnP '^\\\\s*priority\\(\\\\s*=\\\\s*\\\\{|\\\\s*$|\\\\s*/?>\\)' app/ components/ --include=\"*.tsx\")"
     ],
     "additionalDirectories": [
       "c:\\Users\\DELL\\primeaxis-website\\app\\(pages)\\intelligence-hub\\[slug]",

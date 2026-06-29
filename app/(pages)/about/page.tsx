@@ -102,15 +102,19 @@ export default function AboutPage() {
           Hero text sits in the top portion; Mission/Vision glass cards
           overlap the lower portion of the same background photograph. ── */}
       <section className="relative overflow-hidden min-h-screen flex flex-col justify-between -mt-[102px]">
-        {/* Plain <img> (CSS-positioned full-bleed hero), so it can't take the
-            next/image `priority` prop — fetchPriority="high" is the equivalent,
-            preloading the LCP hero immediately. */}
-        <img
+        {/* Full-bleed CSS-cover hero (.about-hero-bg sets position:absolute,
+            inset:0, object-fit:cover) → next/image `fill`, not fixed width/
+            height. priority preloads the LCP hero; sizes=100vw as it spans the
+            full viewport width. */}
+        <Image
           className="about-hero-bg"
           src="https://n0jyvquhgs2welj7.public.blob.vercel-storage.com/uploads/1782263444566-666207da-chatgpt-image-jun-24-2026-02-05-51-am.png"
           alt=""
           aria-hidden="true"
-          fetchPriority="high"
+          fill
+          quality={80}
+          sizes="100vw"
+          priority
         />
         <div
           className="absolute top-0 left-0 right-0 h-[160px] z-[1] pointer-events-none"
@@ -319,11 +323,17 @@ export default function AboutPage() {
       {/* ── Three Pillars — full-bleed maritime photography behind
           frosted glass cards (image dimmed + edge-faded into the page) ── */}
       <section className="relative overflow-hidden py-[72px] max-sm:py-14" style={{ background: '#0a1628' }}>
-        <img
+        {/* Full-bleed CSS-cover background (.pillars-bg) → `fill`; below the
+            fold so loading="lazy". */}
+        <Image
           className="pillars-bg"
           src="https://n0jyvquhgs2welj7.public.blob.vercel-storage.com/uploads/1782238764166-6b82e17d-luk.png"
           alt=""
           aria-hidden="true"
+          fill
+          quality={80}
+          sizes="100vw"
+          loading="lazy"
         />
         <div className="absolute inset-0 z-[1] pointer-events-none" style={{ background: 'rgba(7, 16, 28, 0.58)' }} />
         <div
@@ -410,7 +420,7 @@ export default function AboutPage() {
                   className="object-cover"
                   style={{ objectPosition: 'center top' }}
                   sizes="(max-width: 768px) 100vw, 40vw"
-                  priority
+                  loading="lazy"
                 />
 
                 {/* Corner label — frosted-glass-over-dark-scrim recipe,

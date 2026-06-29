@@ -1,6 +1,7 @@
 'use client'
 
 import { useState, useEffect, useCallback } from 'react'
+import Image from 'next/image'
 import type { Event } from '@/types'
 import { formatDate } from '@/lib/utils'
 
@@ -113,8 +114,17 @@ export default function EventsBrowser({ events }: { events: Event[] }) {
               className="event-card group text-left flex flex-col"
             >
               <div className="event-card-media">
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img src={event.coverImage} alt={event.title} />
+                {/* Cover fills the relative 200px-tall .event-card-media box
+                    (object-fit:cover from CSS) → next/image `fill`. Below the
+                    fold so loading="lazy". */}
+                <Image
+                  src={event.coverImage}
+                  alt={event.title}
+                  fill
+                  quality={80}
+                  sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                  loading="lazy"
+                />
                 <span className="event-card-badge">{CATEGORY_LABEL[event.category]}</span>
               </div>
               <div className="event-card-body">
@@ -194,11 +204,15 @@ export default function EventsBrowser({ events }: { events: Event[] }) {
                     style={{ objectFit: 'contain' }}
                   />
                 ) : (
-                  // eslint-disable-next-line @next/next/no-img-element
-                  <img
+                  <Image
                     key={activeItem.url}
                     src={activeItem.url}
                     alt={activeItem.caption ?? activeEvent.title}
+                    width={1200}
+                    height={800}
+                    quality={80}
+                    sizes="100vw"
+                    loading="lazy"
                     className="max-h-full max-w-full rounded-lg"
                     style={{ objectFit: 'contain' }}
                   />
@@ -250,13 +264,29 @@ export default function EventsBrowser({ events }: { events: Event[] }) {
                     opacity: i === slideIndex ? 1 : 0.55,
                   }}
                 >
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img
-                    src={item.url}
-                    alt=""
-                    aria-hidden="true"
-                    className="absolute inset-0 w-full h-full object-cover"
-                  />
+                  {/* Image thumbs go through next/image (fill in the 72×48
+                      relative button); video items have no still to optimize,
+                      so they keep a raw element. */}
+                  {item.type === 'image' ? (
+                    <Image
+                      src={item.url}
+                      alt=""
+                      aria-hidden="true"
+                      fill
+                      quality={80}
+                      sizes="72px"
+                      loading="lazy"
+                      className="object-cover"
+                    />
+                  ) : (
+                    // eslint-disable-next-line @next/next/no-img-element
+                    <img
+                      src={item.url}
+                      alt=""
+                      aria-hidden="true"
+                      className="absolute inset-0 w-full h-full object-cover"
+                    />
+                  )}
                   {item.type === 'video' && (
                     <span className="absolute inset-0 flex items-center justify-center bg-black/35">
                       <svg viewBox="0 0 24 24" fill="white" className="w-4 h-4" aria-hidden="true">

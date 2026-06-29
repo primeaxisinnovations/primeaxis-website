@@ -1,5 +1,6 @@
 import { Suspense } from 'react'
 import type { Metadata } from 'next'
+import Image from 'next/image'
 import AnimatedSection from '@/components/ui/AnimatedSection'
 import IntelligenceHubGrid from '@/components/sections/IntelligenceHubGrid'
 import { getAllArticles } from '@/lib/content'
@@ -23,15 +24,17 @@ export default async function IntelligenceHubPage() {
 
       {/* Page Header */}
       <section className="relative overflow-hidden bg-deep mb-0 pt-[60px] pb-[70px] min-h-screen h-screen max-h-none flex items-end justify-start">
-        {/* Plain <img> (CSS-positioned full-bleed hero), so it can't take the
-            next/image `priority` prop — fetchPriority="high" is the equivalent,
-            preloading the LCP hero immediately. */}
-        <img
+        {/* Full-bleed CSS-cover hero (.hub-hero-bg) → next/image `fill` with
+            priority (LCP) and sizes=100vw (spans the viewport). */}
+        <Image
           className="hub-hero-bg"
           src="https://n0jyvquhgs2welj7.public.blob.vercel-storage.com/uploads/1782434695415-622356c7-frxth.png"
           alt=""
           aria-hidden="true"
-          fetchPriority="high"
+          fill
+          quality={80}
+          sizes="100vw"
+          priority
         />
         <div
           className="absolute top-0 left-0 right-0 h-[110px] z-[1] pointer-events-none"

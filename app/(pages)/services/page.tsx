@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import type { ReactElement } from 'react'
+import Image from 'next/image'
 import Link from 'next/link'
 import AnimatedSection from '@/components/ui/AnimatedSection'
 import HowWeWorkSection from '@/components/services/HowWeWorkSection'
@@ -276,11 +277,18 @@ export default function ServicesPage() {
         className="relative overflow-hidden px-12 max-md:px-5"
         style={{ background: 'transparent', paddingTop: '64px', paddingBottom: '72px' }}
       >
-        <img
+        {/* Full-bleed CSS-cover background (.services-section-bg) → `fill`.
+            It sits below the "Who We Serve" section (below the fold), so
+            loading="lazy" and no priority. */}
+        <Image
           className="services-section-bg"
           src="https://n0jyvquhgs2welj7.public.blob.vercel-storage.com/uploads/1782354512654-3483a9f6-nv.png"
           alt=""
           aria-hidden="true"
+          fill
+          quality={80}
+          sizes="100vw"
+          loading="lazy"
         />
         <div
           className="absolute inset-0 z-[1] pointer-events-none"
