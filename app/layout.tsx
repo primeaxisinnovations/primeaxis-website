@@ -67,6 +67,16 @@ export default function RootLayout({
       lang="en"
       className={`${playfair.variable} ${montserrat.variable} ${dmMono.variable}`}
     >
+      {/* Warm up the two cross-origin hosts every public page hits on a cache
+          miss — the GitHub API (content source of truth) and the Vercel Blob
+          store (uploaded images) — so DNS/TLS is already done before the first
+          request fires. */}
+      <head>
+        <link rel="preconnect" href="https://api.github.com" />
+        <link rel="preconnect" href="https://n0jyvquhgs2welj7.public.blob.vercel-storage.com" />
+        <link rel="dns-prefetch" href="https://api.github.com" />
+        <link rel="dns-prefetch" href="https://n0jyvquhgs2welj7.public.blob.vercel-storage.com" />
+      </head>
       {/* suppressHydrationWarning: the Grammarly browser extension injects
           data-gr-* attributes onto <body> after hydration — a confirmed
           benign client-only mismatch, not a real SSR/CSR divergence. */}

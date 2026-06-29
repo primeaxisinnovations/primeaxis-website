@@ -133,6 +133,9 @@ export default function HomeContent({
                 src={url}
                 alt=""
                 aria-hidden="true"
+                // First slide loads immediately (it's the LCP); the rest defer.
+                loading={i === 0 ? "eager" : "lazy"}
+                fetchPriority={i === 0 ? "high" : "auto"}
                 className="absolute inset-0 w-full h-full object-cover"
                 style={{ objectPosition: "center 40%", opacity: 0.65 }}
               />
@@ -141,6 +144,7 @@ export default function HomeContent({
                 src={url}
                 alt=""
                 aria-hidden="true"
+                loading="lazy"
                 style={{
                   position: "absolute",
                   inset: 0,
@@ -498,6 +502,7 @@ export default function HomeContent({
                 src={featuredConversation.photo}
                 alt={featuredConversation.executiveName}
                 fill
+                quality={80}
                 className="object-cover"
                 style={{ objectPosition: "center top" }}
                 sizes="(max-width: 1024px) 100vw, 50vw"

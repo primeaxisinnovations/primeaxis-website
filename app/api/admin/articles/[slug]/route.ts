@@ -2,6 +2,7 @@ import { NextResponse, type NextRequest } from 'next/server'
 import { cookies } from 'next/headers'
 import matter from 'gray-matter'
 import { ADMIN_SESSION_COOKIE, verifySessionToken } from '@/lib/admin-session'
+import { revalidatePath } from 'next/cache'
 import { getFile, createOrUpdateFile, deleteFile } from '@/lib/github'
 import { CATEGORIES } from '@/lib/categories'
 import { calculateReadingTime, stripHtml } from '@/lib/utils'
@@ -124,6 +125,12 @@ export async function PUT(request: NextRequest, { params }: RouteParams) {
     return NextResponse.json({ error: message }, { status: 500 })
   }
 
+  // On-demand ISR — reflect the edit on the live site immediately instead of
+  // waiting for the 3600s fallback window to expire.
+  revalidatePath('/intelligence-hub')
+  revalidatePath(`/intelligence-hub/${slug}`)
+  revalidatePath('/')
+
   return NextResponse.json({ success: true, slug, referenceCode })
 }
 
@@ -155,6 +162,12 @@ export async function DELETE(_request: NextRequest, { params }: RouteParams) {
     const message = error instanceof Error ? error.message : String(error)
     return NextResponse.json({ error: message }, { status: 500 })
   }
+
+  // On-demand ISR — drop the deleted article from the live listings/detail
+  // immediately instead of waiting for the 3600s fallback window to expire.
+  revalidatePath('/intelligence-hub')
+  revalidatePath(`/intelligence-hub/${slug}`)
+  revalidatePath('/')
 
   return NextResponse.json({ success: true, slug })
 }

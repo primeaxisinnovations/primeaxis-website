@@ -3,8 +3,9 @@ import { getAllConversations } from "@/lib/conversation-content";
 import HomeContent from "@/components/sections/HomeContent";
 
 // ISR: served from the CDN cache, regenerated in the background at most
-// once every 60s — a Publish/Unpublish/Save shows up within ~a minute.
-export const revalidate = 60;
+// once an hour (3600s) — a Publish/Unpublish/Save shows up within ~an hour.
+// Raised from 60s to cut GitHub-API cold-load latency on cache misses.
+export const revalidate = 3600;
 
 export default async function Home() {
   // Single getAllArticles() call, reused for the featured grid and the

@@ -1,6 +1,7 @@
 import { NextResponse, type NextRequest } from 'next/server'
 import { cookies } from 'next/headers'
 import matter from 'gray-matter'
+import { revalidatePath } from 'next/cache'
 import { ADMIN_SESSION_COOKIE, verifySessionToken } from '@/lib/admin-session'
 import { getFile, createOrUpdateFile, deleteFile } from '@/lib/github'
 
@@ -165,6 +166,12 @@ export async function PUT(request: NextRequest, { params }: RouteParams) {
     return NextResponse.json({ error: message }, { status: 500 })
   }
 
+  // On-demand ISR — reflect the edit on the live site immediately instead of
+  // waiting for the 3600s fallback window to expire.
+  revalidatePath('/executive-conversations')
+  revalidatePath(`/executive-conversations/${slug}`)
+  revalidatePath('/')
+
   return NextResponse.json({ success: true, slug, transcriptRef })
 }
 
@@ -196,6 +203,12 @@ export async function DELETE(_request: NextRequest, { params }: RouteParams) {
     const message = error instanceof Error ? error.message : String(error)
     return NextResponse.json({ error: message }, { status: 500 })
   }
+
+  // On-demand ISR — drop the deleted conversation from the live listings/detail
+  // immediately instead of waiting for the 3600s fallback window to expire.
+  revalidatePath('/executive-conversations')
+  revalidatePath(`/executive-conversations/${slug}`)
+  revalidatePath('/')
 
   return NextResponse.json({ success: true, slug })
 }

@@ -11,8 +11,9 @@ export const metadata: Metadata = {
 }
 
 // ISR: served from the CDN cache, regenerated in the background at most
-// once every 60s — a Publish/Unpublish/Save shows up within ~a minute.
-export const revalidate = 60
+// once an hour (3600s) — a Publish/Unpublish/Save shows up within ~an hour.
+// Raised from 60s to cut GitHub-API cold-load latency on cache misses.
+export const revalidate = 3600
 
 export default async function IntelligenceHubPage() {
   const articles = await getAllArticles()
@@ -22,11 +23,15 @@ export default async function IntelligenceHubPage() {
 
       {/* Page Header */}
       <section className="relative overflow-hidden bg-deep mb-0 pt-[60px] pb-[70px] min-h-screen h-screen max-h-none flex items-end justify-start">
+        {/* Plain <img> (CSS-positioned full-bleed hero), so it can't take the
+            next/image `priority` prop — fetchPriority="high" is the equivalent,
+            preloading the LCP hero immediately. */}
         <img
           className="hub-hero-bg"
           src="https://n0jyvquhgs2welj7.public.blob.vercel-storage.com/uploads/1782434695415-622356c7-frxth.png"
           alt=""
           aria-hidden="true"
+          fetchPriority="high"
         />
         <div
           className="absolute top-0 left-0 right-0 h-[110px] z-[1] pointer-events-none"

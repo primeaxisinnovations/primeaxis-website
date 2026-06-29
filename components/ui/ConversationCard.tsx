@@ -31,6 +31,7 @@ export default function ConversationCard({ conversation, className }: Conversati
             src={conversation.photo}
             alt={conversation.executiveName}
             fill
+            quality={80}
             className="object-cover"
             sizes="(max-width: 768px) 100vw, 120px"
           />

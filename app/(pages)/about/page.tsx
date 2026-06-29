@@ -102,11 +102,15 @@ export default function AboutPage() {
           Hero text sits in the top portion; Mission/Vision glass cards
           overlap the lower portion of the same background photograph. ── */}
       <section className="relative overflow-hidden min-h-screen flex flex-col justify-between -mt-[102px]">
+        {/* Plain <img> (CSS-positioned full-bleed hero), so it can't take the
+            next/image `priority` prop — fetchPriority="high" is the equivalent,
+            preloading the LCP hero immediately. */}
         <img
           className="about-hero-bg"
           src="https://n0jyvquhgs2welj7.public.blob.vercel-storage.com/uploads/1782263444566-666207da-chatgpt-image-jun-24-2026-02-05-51-am.png"
           alt=""
           aria-hidden="true"
+          fetchPriority="high"
         />
         <div
           className="absolute top-0 left-0 right-0 h-[160px] z-[1] pointer-events-none"
@@ -387,6 +391,7 @@ export default function AboutPage() {
           src="https://images.unsplash.com/photo-1578575437130-527eed3abbec?w=1600&q=80"
           alt="Aerial view of cargo vessel on open ocean"
           fill
+          quality={80}
           className="object-cover"
           sizes="100vw"
         />
@@ -401,6 +406,7 @@ export default function AboutPage() {
                   src={FOUNDER_PHOTO_URL}
                   alt="Nneoma Blessing Obi-Asualo, Founder and CEO of PrimeAxis"
                   fill
+                  quality={80}
                   className="object-cover"
                   style={{ objectPosition: 'center top' }}
                   sizes="(max-width: 768px) 100vw, 40vw"

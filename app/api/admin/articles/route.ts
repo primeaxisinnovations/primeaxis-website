@@ -2,6 +2,7 @@ import { NextResponse, type NextRequest } from 'next/server'
 import { cookies } from 'next/headers'
 import matter from 'gray-matter'
 import { ADMIN_SESSION_COOKIE, verifySessionToken } from '@/lib/admin-session'
+import { revalidatePath } from 'next/cache'
 import { listFiles, getFile, createOrUpdateFile } from '@/lib/github'
 import { CATEGORIES, CATEGORY_CODES, type Category } from '@/lib/categories'
 import { calculateReadingTime, stripHtml } from '@/lib/utils'
@@ -152,6 +153,12 @@ export async function POST(request: NextRequest) {
     const message = error instanceof Error ? error.message : String(error)
     return NextResponse.json({ error: message }, { status: 500 })
   }
+
+  // On-demand ISR — push the new article live immediately instead of waiting
+  // for the 3600s fallback window to expire.
+  revalidatePath('/intelligence-hub')
+  revalidatePath(`/intelligence-hub/${slug}`)
+  revalidatePath('/')
 
   return NextResponse.json({ success: true, slug, referenceCode })
 }

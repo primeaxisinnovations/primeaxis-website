@@ -83,6 +83,7 @@ export default function Header() {
               alt="PrimeAxis Maritime Intelligence"
               width={180}
               height={52}
+              quality={80}
               style={{ objectFit: 'contain', objectPosition: 'left center' }}
               priority
             />

@@ -14,9 +14,10 @@ const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://primeaxisinnovatio
 type PageProps = { params: Promise<{ slug: string }> }
 
 // ISR: pre-built for every known slug at deploy time, then served from the
-// CDN cache and regenerated in the background at most once every 60s — a
-// Publish/Unpublish/Save shows up within ~a minute.
-export const revalidate = 60
+// CDN cache and regenerated in the background at most once an hour (3600s) — a
+// Publish/Unpublish/Save shows up within ~an hour. Raised from 60s to cut
+// GitHub-API cold-load latency on cache misses.
+export const revalidate = 3600
 
 export async function generateStaticParams() {
   const articles = await getAllArticles()
@@ -106,6 +107,7 @@ export default async function ArticlePage({ params }: PageProps) {
             alt={article.title}
             fill
             priority
+            quality={80}
             className="object-cover"
             sizes="(max-width: 768px) 100vw, 1240px"
           />

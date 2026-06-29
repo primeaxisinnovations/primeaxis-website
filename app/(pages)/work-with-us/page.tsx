@@ -121,10 +121,14 @@ export default function WorkWithUsPage() {
         className="hero-section relative w-full overflow-hidden flex items-end"
         style={{ height: 'calc(100vh - 70px)', minHeight: '620px' }}
       >
+        {/* Plain <img> (CSS-positioned full-bleed hero), so it can't take the
+            next/image `priority` prop — fetchPriority="high" is the equivalent,
+            preloading the LCP hero immediately. */}
         <img
           className="wwu-hero-bg"
           src="https://n0jyvquhgs2welj7.public.blob.vercel-storage.com/uploads/1782497081687-925edf91-byyy.png"
           alt="PrimeAxis at Africa Maritime Summit"
+          fetchPriority="high"
         />
         <div
           className="absolute top-0 left-0 right-0 h-[140px] z-[1] pointer-events-none"

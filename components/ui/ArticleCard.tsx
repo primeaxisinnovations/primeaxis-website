@@ -31,6 +31,7 @@ export default function ArticleCard({ article, variant = 'standard', className }
             src={article.featuredImage}
             alt={article.title}
             fill
+            quality={80}
             className="object-cover"
             sizes="(max-width: 768px) 100vw, 50vw"
           />
@@ -82,6 +83,7 @@ export default function ArticleCard({ article, variant = 'standard', className }
             src={article.featuredImage}
             alt={article.title}
             fill
+            quality={80}
             className="object-cover"
             sizes="40vw"
           />
@@ -117,6 +119,7 @@ export default function ArticleCard({ article, variant = 'standard', className }
           src={article.featuredImage}
           alt={article.title}
           fill
+          quality={80}
           className="object-cover"
           sizes="(max-width: 768px) 100vw, 33vw"
         />
