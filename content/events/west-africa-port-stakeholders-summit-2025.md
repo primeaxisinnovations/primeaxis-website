@@ -1,0 +1,21 @@
+---
+title: "West Africa Port Stakeholders Summit 2025"
+date: "2025-11-18"
+category: "summit"
+status: "published"
+coverImage: "https://images.unsplash.com/photo-1494412574643-ff11b0a5c1c3?w=1200&q=80&fit=crop"
+description: "Port authorities, terminal operators, and freight leaders convene to align on the infrastructure and digitalisation priorities shaping West African trade corridors."
+gallery:
+  - url: "https://images.unsplash.com/photo-1494412574643-ff11b0a5c1c3?w=1200&q=80&fit=crop"
+    type: "image"
+    caption: "Summit opening"
+  - url: "https://images.unsplash.com/photo-1605281317010-fe5ffe798166?w=1200&q=80&fit=crop"
+    type: "image"
+    caption: "Terminal operations panel"
+  - url: "https://images.unsplash.com/photo-1577412647305-991150c7d163?w=1200&q=80&fit=crop"
+    type: "image"
+    caption: "Port digitalisation working group"
+  - url: "https://images.unsplash.com/photo-1578575437130-527eed3abbec?w=1200&q=80&fit=crop"
+    type: "image"
+    caption: "Stakeholder networking"
+---

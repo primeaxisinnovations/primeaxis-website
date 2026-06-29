@@ -1,0 +1,21 @@
+---
+title: "NIMASA Maritime Safety Summit 2026"
+date: "2026-05-20"
+category: "summit"
+status: "published"
+coverImage: "https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=1200&q=80&fit=crop"
+description: "An executive gathering of maritime safety regulators, port administrators, and industry leaders addressing Nigeria's maritime safety framework."
+gallery:
+  - url: "https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=1200&q=80&fit=crop"
+    type: "image"
+    caption: "Opening ceremony"
+  - url: "https://images.unsplash.com/photo-1587825140708-dfaf72ae4b04?w=1200&q=80&fit=crop"
+    type: "image"
+    caption: "Panel session on regional safety enforcement"
+  - url: "https://images.unsplash.com/photo-1475721027785-f74eccf877e2?w=1200&q=80&fit=crop"
+    type: "image"
+    caption: "Networking session"
+  - url: "https://images.unsplash.com/photo-1521737604893-d14cc237f11d?w=1200&q=80&fit=crop"
+    type: "image"
+    caption: "Closing remarks and communiqué"
+---
