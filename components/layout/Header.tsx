@@ -10,8 +10,8 @@ import { cn } from '@/lib/utils'
 const navLinks = [
   { label: 'Home', href: '/' },
   { label: 'About', href: '/about' },
-  { label: 'Intelligence Hub', href: '/intelligence-hub' },
-  { label: 'Executive Conversations', href: '/executive-conversations' },
+  { label: 'Intelligence', href: '/intelligence-hub' },
+  { label: 'Conversations', href: '/executive-conversations' },
   { label: 'Events', href: '/events' },
   { label: 'Services', href: '/services' },
   { label: 'Work With Us', href: '/work-with-us' },
@@ -105,14 +105,7 @@ export default function Header() {
                 href={link.href}
                 className={cn('nav-pill-link', isActive(link.href) && 'active')}
               >
-                {link.label === 'Executive Conversations' ? (
-                  <>
-                    <span className="hidden xl:inline">Executive Conversations</span>
-                    <span className="xl:hidden">Exec Conversations</span>
-                  </>
-                ) : (
-                  link.label
-                )}
+                {link.label}
               </Link>
             ))}
             <Link
