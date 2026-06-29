@@ -1,9 +1,7 @@
 ---
 executiveName: 'Dr. Pius Akutah, MON'
 title: Preparing the Nigerian Shippers' Council for a New Regulatory Era
-position: >-
-  Executive Secretary & Chief Executive Officer, Nigerian Shippers' Council
-  (NSC)
+position: 'Executive Secretary & CEO, Nigerian Shippers'' Council (NSC)'
 organisation: Nigerian Shippers' Council
 photo: >-
   https://n0jyvquhgs2welj7.public.blob.vercel-storage.com/uploads/1782373794044-532fadfb-tyu.png
