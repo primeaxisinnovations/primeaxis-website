@@ -1,6 +1,7 @@
 'use client'
 
 import { useState, useEffect, type FormEvent } from 'react'
+import Image from 'next/image'
 import Link from 'next/link'
 import { usePathname, useRouter } from 'next/navigation'
 import { Menu, X, Search } from 'lucide-react'
@@ -11,6 +12,7 @@ const navLinks = [
   { label: 'About', href: '/about' },
   { label: 'Intelligence Hub', href: '/intelligence-hub' },
   { label: 'Executive Conversations', href: '/executive-conversations' },
+  { label: 'Events', href: '/events' },
   { label: 'Services', href: '/services' },
   { label: 'Work With Us', href: '/work-with-us' },
 ]
@@ -71,14 +73,19 @@ export default function Header() {
       >
         <div className="max-w-7xl mx-auto px-6 flex items-center justify-between">
 
-          {/* Logo */}
-          <Link href="/" className="flex flex-col gap-0.5 flex-shrink-0">
-            <span className="font-display font-bold text-white text-xl tracking-[0.08em] leading-none">
-              PRIME<span className="text-gold">AXIS</span>
-            </span>
-            <span className="font-mono text-[8px] tracking-[0.3em] text-white/50 uppercase leading-none">
-              Maritime Intelligence
-            </span>
+          {/* Logo — full horizontal logo (icon + "PRIMEAXIS" + "MARITIME INTELLIGENCE"
+              wordmark baked in). Transparent PNG, light wordmark tuned for the dark
+              navy nav. Wrapper reserves min-width so the nav pills can never squeeze
+              it; object-contain keeps the lockup from cropping or distorting. */}
+          <Link href="/" className="flex items-center flex-shrink-0" style={{ minWidth: '200px' }}>
+            <Image
+              src="/logo.png"
+              alt="PrimeAxis Maritime Intelligence"
+              width={180}
+              height={52}
+              style={{ objectFit: 'contain', objectPosition: 'left center' }}
+              priority
+            />
           </Link>
 
           {/* Desktop nav — pill switcher container */}

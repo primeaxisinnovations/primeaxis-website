@@ -22,6 +22,11 @@ const ADMIN_SECTIONS: AdminSection[] = [
     description: 'Create, edit, and review executive conversations.',
     href: '/admin/conversations',
   },
+  {
+    label: 'Manage Events',
+    description: 'Create, edit, and review conferences, summits, and press briefings.',
+    href: '/admin/events',
+  },
 ]
 
 export default async function AdminDashboardPage() {

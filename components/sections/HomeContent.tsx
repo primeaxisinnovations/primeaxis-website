@@ -418,155 +418,140 @@ export default function HomeContent({
           conversation at all, the section doesn't render. */}
       {featuredConversation && (
         <section
-          className="bg-deep py-[88px] relative overflow-hidden max-sm:py-14 scroll-mt-[100px]"
+          className="w-full grid grid-cols-1 lg:grid-cols-2 min-h-[600px] scroll-mt-[100px]"
           id="conversations"
+          style={{ background: "#0d1b2a" }}
         >
-          <img
-            src="https://images.unsplash.com/photo-1568347877321-f8935c7dc5a3?w=1920&q=70&fit=crop&auto=format"
-            alt=""
-            loading="lazy"
-            aria-hidden="true"
-            className="absolute inset-0 w-full h-full object-cover pointer-events-none select-none"
-            style={{ opacity: 0.20 }}
-          />
+          {/* LEFT ─ editorial copy */}
+          <div className="fade-in flex flex-col justify-between p-[64px_56px] max-md:p-[48px_28px]">
+            <div>
+              <div className="flex items-center gap-[14px] mb-8">
+                <span className="block w-7 h-[1px] bg-gold" />
+                <span className="font-mono text-[10px] tracking-[.2em] uppercase text-gold">
+                  Featured Conversation
+                </span>
+              </div>
 
-          <div className="relative max-w-[1240px] mx-auto px-11 max-md:px-5">
-            <div className="grid grid-cols-1 lg:grid-cols-[1fr_1.1fr] gap-[72px] items-center max-sm:gap-12">
+              <blockquote className="font-display text-[clamp(20px,2.2vw,28px)] font-normal italic text-white leading-[1.55] mb-10">
+                &ldquo;{featuredConversation.pullQuote?.trim() || truncateText(featuredConversation.excerpt, 220)}&rdquo;
+              </blockquote>
+            </div>
 
-              <div className="fade-in">
-                <div className="flex items-center gap-[14px] mb-8">
-                  <span className="block w-7 h-[1px] bg-gold" />
-                  <span className="font-mono text-[10px] tracking-[.2em] uppercase text-gold">
-                    Featured Conversation
+            <div>
+              {/* Same frosted-glass-over-dark-scrim recipe as the hero
+                  card and the corner badge — one consistent device
+                  across all photo-backed surfaces. */}
+              <div
+                className="flex items-center gap-4 p-[18px_20px] mb-8 border border-white/20 backdrop-blur-md"
+                style={{
+                  background:
+                    "linear-gradient(rgba(255,255,255,0.10), rgba(255,255,255,0.10)), linear-gradient(135deg, rgba(10,20,35,0.58) 0%, rgba(10,20,35,0.34) 100%)",
+                  boxShadow: "inset 0 1px 0 rgba(255,255,255,0.16)",
+                }}
+              >
+                <div className="w-11 h-11 flex items-center justify-center flex-shrink-0 bg-teal">
+                  <span className="font-display text-[16px] font-bold text-[rgba(191,159,102,.5)]">
+                    {featuredConversation.initials}
                   </span>
                 </div>
-
-                <blockquote className="font-display text-[clamp(21px,2.1vw,29px)] font-normal italic leading-[1.48] text-white mb-8 pl-5 border-l-2 border-gold">
-                  &ldquo;{featuredConversation.pullQuote?.trim() || truncateText(featuredConversation.excerpt, 220)}&rdquo;
-                </blockquote>
-
-                {/* Same frosted-glass-over-dark-scrim recipe as the hero
-                    card and the corner badge — one consistent device
-                    across all three photo-backed surfaces. */}
-                <div
-                  className="flex items-center gap-4 p-[18px_20px] mb-8 border border-white/20 backdrop-blur-md"
-                  style={{
-                    background:
-                      "linear-gradient(rgba(255,255,255,0.10), rgba(255,255,255,0.10)), linear-gradient(135deg, rgba(10,20,35,0.58) 0%, rgba(10,20,35,0.34) 100%)",
-                    boxShadow: "inset 0 1px 0 rgba(255,255,255,0.16)",
-                  }}
-                >
-                  <div className="w-11 h-11 flex items-center justify-center flex-shrink-0 bg-teal">
-                    <span className="font-display text-[16px] font-bold text-[rgba(191,159,102,.5)]">
-                      {featuredConversation.initials}
-                    </span>
+                <div>
+                  <div className="font-display text-[16px] font-semibold text-white mb-[2px]">
+                    {featuredConversation.executiveName}
                   </div>
-                  <div>
-                    <div className="font-display text-[16px] font-semibold text-white mb-[2px]">
-                      {featuredConversation.executiveName}
-                    </div>
-                    <div className="text-[12.5px] text-white/40 font-light">
-                      {featuredConversation.position}, {featuredConversation.organisation}
-                    </div>
+                  <div className="text-[12.5px] text-white/40 font-light">
+                    {featuredConversation.position}, {featuredConversation.organisation}
                   </div>
-                </div>
-
-                <p className="text-[14.5px] leading-[1.72] font-light text-white/50 mb-9">
-                  {featuredConversation.excerpt}
-                </p>
-
-                <div className="flex items-center gap-[14px] flex-wrap">
-                  <Link
-                    href={`/executive-conversations/${featuredConversation.slug}`}
-                    className="inline-flex items-center gap-[9px] text-[12.5px] font-semibold tracking-[.06em] text-gold border border-gold px-[26px] py-3 hover:bg-gold hover:text-deep hover:-translate-y-[2px] transition-all duration-200"
-                  >
-                    Read the Conversation <ArrowRight size={13} />
-                  </Link>
-                  <Link
-                    href="/executive-conversations"
-                    className="font-mono text-[10px] tracking-[.15em] uppercase text-white/30 flex items-center gap-1.5 hover:text-white/65 transition-colors duration-200"
-                  >
-                    All Conversations <ArrowRight size={10} />
-                  </Link>
                 </div>
               </div>
 
-              <div className="fade-in" style={{ transitionDelay: "0.2s" }}>
-                <div className="relative overflow-hidden" style={{ aspectRatio: "4/5" }}>
-                  {/* Real photo takes priority, falling back to the
-                      initials gradient only when no photo is set — same
-                      conditional pattern as ConversationCard and the
-                      conversation detail page. */}
-                  {featuredConversation.photo ? (
-                    <Image
-                      src={featuredConversation.photo}
-                      alt={featuredConversation.executiveName}
-                      fill
-                      className="object-cover"
-                      style={{ objectPosition: "center top" }}
-                      sizes="(max-width: 1024px) 100vw, 50vw"
-                    />
-                  ) : (
-                    <div className="absolute inset-0 flex items-center justify-center bg-teal">
-                      <span className="font-display text-[72px] font-semibold text-white/85 tracking-wider">
-                        {featuredConversation.initials}
-                      </span>
-                    </div>
-                  )}
-                  <div
-                    className="absolute inset-0"
-                    style={{ background: "linear-gradient(180deg, transparent 0%, rgba(10,20,35,0.75) 100%)" }}
-                  />
-                  {/* Typography matches DispatchHeader (font-mono,
-                      tracking-[0.22em], text-stamp) — the same treatment
-                      used on every article/conversation detail page.
-                      Same frosted-glass-over-dark-scrim recipe as the hero
-                      card (smaller blur radius since this is a much
-                      smaller surface) — same device, not a separate
-                      experiment. */}
-                  <div
-                    className="absolute top-[22px] left-[22px] px-[13px] py-[7px] border border-white/20 backdrop-blur-md"
-                    style={{
-                      background:
-                        "linear-gradient(rgba(255,255,255,0.10), rgba(255,255,255,0.10)), linear-gradient(135deg, rgba(10,20,35,0.58) 0%, rgba(10,20,35,0.34) 100%)",
-                      boxShadow: "inset 0 1px 0 rgba(255,255,255,0.16)",
-                    }}
-                  >
-                    <span className="font-mono text-[10px] tracking-[0.22em] uppercase text-stamp">
-                      Executive Conversations
-                    </span>
-                  </div>
-                </div>
+              <p className="text-[14.5px] leading-[1.72] font-light text-white/50 mb-9">
+                {featuredConversation.excerpt}
+              </p>
 
-                {otherConversations.length > 0 && (
-                  <div className="mt-[2px] border border-t-0" style={{ background: "rgba(255,255,255,.03)", borderColor: "rgba(191,159,102,.1)" }}>
-                    {otherConversations.map((conversation) => (
-                      <Link
-                        key={conversation.slug}
-                        href={`/executive-conversations/${conversation.slug}`}
-                        className="flex items-center gap-[14px] px-5 py-[12px] border-b last:border-b-0 transition-colors duration-200 hover:bg-[rgba(191,159,102,.05)]"
-                        style={{ borderColor: "rgba(255,255,255,.05)" }}
-                      >
-                        <span className="font-mono text-[10px] text-stamp tracking-[.05em] flex-shrink-0 whitespace-nowrap">
-                          {conversation.transcriptRef}
-                        </span>
-                        <span className="flex-1 min-w-0">
-                          <span className="block text-[12.5px] text-white/70 font-medium truncate">
-                            {conversation.executiveName}
-                          </span>
-                          <span className="block text-[11px] text-white/40 font-light truncate">
-                            {conversation.title}
-                          </span>
-                        </span>
-                        <svg viewBox="0 0 24 24" fill="none" strokeWidth="1.5" className="w-[18px] h-[18px] stroke-[rgba(191,159,102,.4)] flex-shrink-0">
-                          <path d="M5 12h14M12 5l7 7-7 7" />
-                        </svg>
-                      </Link>
-                    ))}
-                  </div>
-                )}
+              <div className="flex items-center gap-[14px] flex-wrap">
+                <Link
+                  href={`/executive-conversations/${featuredConversation.slug}`}
+                  className="inline-flex items-center gap-[9px] text-[12.5px] font-semibold tracking-[.06em] text-gold border border-gold px-[26px] py-3 hover:bg-gold hover:text-deep hover:-translate-y-[2px] transition-all duration-200"
+                >
+                  Read the Conversation <ArrowRight size={13} />
+                </Link>
+                <Link
+                  href="/executive-conversations"
+                  className="font-mono text-[10px] tracking-[.15em] uppercase text-white/30 flex items-center gap-1.5 hover:text-white/65 transition-colors duration-200"
+                >
+                  All Conversations <ArrowRight size={10} />
+                </Link>
               </div>
             </div>
+          </div>
+
+          {/* RIGHT ─ full-bleed executive photo */}
+          <div
+            className="fade-in relative overflow-hidden h-full min-h-[580px] max-md:min-h-[440px]"
+            style={{ transitionDelay: "0.2s" }}
+          >
+            {/* Real photo takes priority, falling back to the initials
+                gradient only when no photo is set — same conditional
+                pattern as ConversationCard and the conversation page. */}
+            {featuredConversation.photo ? (
+              <Image
+                src={featuredConversation.photo}
+                alt={featuredConversation.executiveName}
+                fill
+                className="object-cover"
+                style={{ objectPosition: "center top" }}
+                sizes="(max-width: 1024px) 100vw, 50vw"
+              />
+            ) : (
+              <div className="absolute inset-0 flex items-center justify-center bg-teal">
+                <span className="font-display text-[72px] font-semibold text-white/85 tracking-wider">
+                  {featuredConversation.initials}
+                </span>
+              </div>
+            )}
+
+            {/* Corner badge — same frosted-glass recipe, smaller blur. */}
+            <div
+              className="absolute top-[22px] left-[22px] px-[13px] py-[7px] border border-white/20 backdrop-blur-md"
+              style={{
+                background:
+                  "linear-gradient(rgba(255,255,255,0.10), rgba(255,255,255,0.10)), linear-gradient(135deg, rgba(10,20,35,0.58) 0%, rgba(10,20,35,0.34) 100%)",
+                boxShadow: "inset 0 1px 0 rgba(255,255,255,0.16)",
+              }}
+            >
+              <span className="font-mono text-[10px] tracking-[0.22em] uppercase text-stamp">
+                Executive Conversations
+              </span>
+            </div>
+
+            {otherConversations.length > 0 && (
+              <div
+                className="absolute inset-x-0 bottom-0 pt-16"
+                style={{ background: "linear-gradient(180deg, transparent 0%, rgba(10,20,35,0.92) 55%)" }}
+              >
+                {otherConversations.slice(0, 2).map((conversation) => (
+                  <Link
+                    key={conversation.slug}
+                    href={`/executive-conversations/${conversation.slug}`}
+                    className="flex items-center gap-[14px] px-6 py-[14px] border-t transition-colors duration-200 hover:bg-[rgba(191,159,102,.08)]"
+                    style={{ borderColor: "rgba(255,255,255,.08)" }}
+                  >
+                    <span className="font-mono text-[10px] text-stamp tracking-[.05em] flex-shrink-0 whitespace-nowrap">
+                      {conversation.transcriptRef}
+                    </span>
+                    <span className="flex-1 min-w-0">
+                      <span className="block text-[12.5px] text-white/80 font-medium truncate">
+                        {conversation.executiveName}
+                      </span>
+                      <span className="block text-[11px] text-white/45 font-light truncate">
+                        {conversation.title}
+                      </span>
+                    </span>
+                    <ArrowRight size={16} strokeWidth={1.5} />
+                  </Link>
+                ))}
+              </div>
+            )}
           </div>
         </section>
       )}
