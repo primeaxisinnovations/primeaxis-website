@@ -4,6 +4,7 @@ import { GoogleAnalytics } from '@next/third-parties/google'
 import './globals.css'
 import Header from '@/components/layout/Header'
 import Footer from '@/components/layout/Footer'
+import AdminShortcut from '@/components/layout/AdminShortcut'
 
 // ── Google Analytics (GA4) ────────────────────────────────────────────
 // NEXT_PUBLIC_GA_MEASUREMENT_ID must be set to a real GA4 Measurement ID
@@ -70,6 +71,7 @@ export default function RootLayout({
           data-gr-* attributes onto <body> after hydration — a confirmed
           benign client-only mismatch, not a real SSR/CSR divergence. */}
       <body className="font-sans" suppressHydrationWarning>
+        <AdminShortcut />
         <Header />
         <main className="pt-[102px] bg-[#0D1824]">{children}</main>
         <Footer />
