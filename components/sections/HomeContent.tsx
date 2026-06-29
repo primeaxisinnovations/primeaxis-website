@@ -129,30 +129,30 @@ export default function HomeContent({
             style={{ opacity: i === activeSlide ? 1 : 0, transitionDuration: "1500ms" }}
           >
             {i < 2 ? (
-              <img
+              <Image
                 src={url}
                 alt=""
                 aria-hidden="true"
-                // First slide loads immediately (it's the LCP); the rest defer.
-                loading={i === 0 ? "eager" : "lazy"}
-                fetchPriority={i === 0 ? "high" : "auto"}
-                className="absolute inset-0 w-full h-full object-cover"
+                fill
+                quality={80}
+                sizes="100vw"
+                // Slide 0 is the LCP → priority; the rest lazy-load.
+                priority={i === 0}
+                loading={i === 0 ? undefined : "lazy"}
+                className="object-cover"
                 style={{ objectPosition: "center 40%", opacity: 0.65 }}
               />
             ) : (
-              <img
+              <Image
                 src={url}
                 alt=""
                 aria-hidden="true"
+                fill
+                quality={80}
+                sizes="100vw"
                 loading="lazy"
-                style={{
-                  position: "absolute",
-                  inset: 0,
-                  width: "100%",
-                  height: "100%",
-                  objectFit: "cover",
-                  objectPosition: "center",
-                }}
+                className="object-cover"
+                style={{ objectPosition: "center" }}
               />
             )}
           </div>

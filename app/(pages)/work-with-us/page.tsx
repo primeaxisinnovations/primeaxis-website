@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import type { ReactElement } from 'react'
+import Image from 'next/image'
 import Link from 'next/link'
 import AnimatedSection from '@/components/ui/AnimatedSection'
 import WhyPartnerSection from '@/components/work-with-us/WhyPartnerSection'
@@ -121,14 +122,16 @@ export default function WorkWithUsPage() {
         className="hero-section relative w-full overflow-hidden flex items-end"
         style={{ height: 'calc(100vh - 70px)', minHeight: '620px' }}
       >
-        {/* Plain <img> (CSS-positioned full-bleed hero), so it can't take the
-            next/image `priority` prop — fetchPriority="high" is the equivalent,
-            preloading the LCP hero immediately. */}
-        <img
+        {/* Full-bleed CSS-cover hero (.wwu-hero-bg) → next/image `fill` with
+            priority (LCP) and sizes=100vw (spans the viewport). */}
+        <Image
           className="wwu-hero-bg"
           src="https://n0jyvquhgs2welj7.public.blob.vercel-storage.com/uploads/1782497081687-925edf91-byyy.png"
           alt="PrimeAxis at Africa Maritime Summit"
-          fetchPriority="high"
+          fill
+          quality={80}
+          sizes="100vw"
+          priority
         />
         <div
           className="absolute top-0 left-0 right-0 h-[140px] z-[1] pointer-events-none"
@@ -166,11 +169,17 @@ export default function WorkWithUsPage() {
 
       {/* ── Four pathway cards — glassmorphism cards over a full-bleed photo ── */}
       <section className="relative overflow-hidden py-[72px] max-sm:py-14" style={{ background: '#0a1628' }}>
-        <img
+        {/* Full-bleed CSS-cover background (.wwu-cards-bg) → `fill`; below the
+            fold so loading="lazy". */}
+        <Image
           className="wwu-cards-bg"
           src="https://n0jyvquhgs2welj7.public.blob.vercel-storage.com/uploads/1782530981515-c6fa9ebf-ghjjj.png"
           alt=""
           aria-hidden="true"
+          fill
+          quality={80}
+          sizes="100vw"
+          loading="lazy"
         />
         <div className="absolute inset-0 z-[1] pointer-events-none" style={{ background: 'rgba(7, 14, 28, 0.60)' }} />
         <div
