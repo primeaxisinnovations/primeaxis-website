@@ -1,106 +1,440 @@
 ---
 executiveName: Dr. Kevin Okonna
-title: Reengineering Maritime Education for the Blue Economy Era
-position: Acting Rector
+title: >-
+  Building World-Class Maritime Professionals: How Maritime Academy of Nigeria
+  is Transforming Seafarer Training
+position: 'Acting Rector, Maritime Academy of Nigeria (MAN)'
 organisation: 'Maritime Academy of Nigeria (MAN), Oron'
 photo: >-
-  https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=600&q=80&fit=crop
+  https://n0jyvquhgs2welj7.public.blob.vercel-storage.com/uploads/1782704758909-f603e26d-nu.png
 initials: KO
 excerpt: >-
-  Dr. Okonna on transforming seafarer training curricula for STCW compliance,
-  closing the gap between academic qualification and operational readiness, and
-  positioning Nigerian seafarers as first-choice crew in global maritime
-  markets.
+  One of our key achievements has been strengthening academic and operational
+  stability while improving training delivery systems. We have recruited 11
+  maritime professional lecturers, including three Master Mariners and two
+  marine engineers. One of them is an internationally recognised simulator
+  training expert.
 date: '2026-04-28'
 transcriptRef: EC-2026-001
 qa:
   - question: >-
-      The Maritime Academy of Nigeria has trained thousands of seafarers over
-      its history. What is the most honest assessment of the gap between your
-      graduates' qualifications and what the global crewing market actually
-      demands?
+      What are the key achievements and challenges in recent institutional
+      reforms at the Maritime Academy of Nigeria?
     answer: >-
-      <p>The formal qualification gap is manageable — our STCW certification
-      process satisfies the letter of international requirements. The practical
-      competency gap is more significant and harder to close: our simulators are
-      dated relative to the equipment our graduates will encounter on a modern
-      vessel, our training vessels are not representative of the contemporary
-      fleet, and some instructors have not maintained recent operational sea
-      time. The consequence is graduates who can pass certification exams but
-      who need more time than they should to develop full operational confidence
-      — and in a competitive crewing market, that transition gap has direct
-      commercial consequences for the candidates and for Nigeria's reputation as
-      a crewing source.</p>
+      <p class="MsoNormal">We have made significant progress in institutional
+
+      stability, training quality and standards enhancement.</p><p
+      class="MsoNormal">One of our key achievements has been strengthening
+      academic
+
+      and operational stability while improving training delivery systems. We
+      have
+
+      recruited 11 maritime professional lecturers, including three Master
+      Mariners
+
+      and two marine engineers. One of them is an internationally recognised
+
+      simulator training expert.</p><p class="MsoNormal">We have also improved
+      infrastructure maintenance systems and
+
+      strengthened quality assurance frameworks. In addition, 75 staff members
+      have
+
+      received training across different aspects of quality management
+      systems.</p><p class="MsoNormal">We have implemented ISO 9001:2015
+      awareness programmes,
+
+      including training staff as internal auditors and lead
+      auditors.&nbsp;</p><p class="MsoNormal">Furthermore, 12 staff members have
+      been trained to
+
+      certification level in educational and organisational management
+      systems.</p><p class="MsoNormal">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      </p><p class="MsoNormal">These efforts form part of our broader objective
+      of securing
+
+      international certification for the Academy's quality management
+      systems.<o:p></o:p></p>
   - question: >-
-      STCW sets the regulatory floor for seafarer certification. How does the
-      Academy position itself above that minimum standard?
+      Modern maritime training now relies heavily on simulation and advanced
+      technology. How are these innovations transforming hands-on learning at
+      MAN?
     answer: >-
-      <p>STCW was designed as a floor, and institutions that train only to that
-      floor produce seafarers whose competitiveness ceiling is structurally
-      limited from the start. Quality above the baseline means simulation
-      training that places cadets under realistic operational stress before
-      their first vessel assignment; maritime English and communication training
-      at the level international ship managers actually expect from officers
-      rather than ratings; and leadership development that explicitly prepares
-      graduates for the senior officer track rather than entry-level positions
-      only. We are working with NIMASA to secure the infrastructure investment
-      that makes this level of training deliverable — the intent is clear and
-      the roadmap is documented, but the constraint is capital.</p>
+      <p class="MsoNormal">The modern shipping industry requires competent
+      personnel
+
+      with strong practical experience. This is the foundation of our training
+
+      philosophy.</p><p class="MsoNormal">We begin with smart classrooms
+      equipped with digital boards
+
+      and internet connectivity, giving cadets access to global learning
+      resources.</p><p class="MsoNormal">From there, students progress to
+      laboratories and advanced
+
+      simulators. These simulators provide the first layer of hands-on
+      experience,
+
+      allowing cadets to safely experience scenarios that would be too risky to
+
+      replicate at sea.</p><p class="MsoNormal">As part of the Federal
+      Government's Renewed Hope Agenda, the
+
+      Academy has invested in a comprehensive suite of maritime training
+      simulators.
+
+      We currently operate eight categories of simulators integrated into full
+
+      mission bridge and full mission engine room systems.<o:p></o:p></p><p
+      class="MsoNormal">Cadets progress from basic simulation exercises to fully
+
+      integrated bridge and engine room environments where they replicate real
+      vessel
+
+      operations.</p><p class="MsoNormal">We have also introduced immersive
+      virtual reality simulation
+
+      platforms, allowing cadets to interact with virtual engine rooms in
+      full-scale
+
+      environments.</p><p class="MsoNormal">In addition, we are acquiring
+      advanced standalone
+
+      high-voltage simulators to further strengthen our training capacity.</p><p
+      class="MsoNormal">Beyond simulation, our marine engineering workshops
+      remain
+
+      central to practical training.</p><p class="MsoNormal">These include
+      welding workshops, refrigeration and air-conditioning
+
+      laboratories, electrical and electronics workshops, and a fully functional
+
+      marine engineering workshop.<o:p></o:p></p><p
+      class="MsoNormal"><o:p>&nbsp;</o:p></p><p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      </p><p class="MsoNormal">In fact, no cadet graduates from the Marine
+      Engineering
+
+      programme—whether at National Diploma or Higher National Diploma
+      level—without
+
+      dismantling, assembling and operating a complete marine engine. This
+      practical
+
+      approach is central to our training philosophy.<o:p></o:p></p>
   - question: >-
-      What international academic partnerships is the Academy developing, and
-      what do you want those partnerships to actually deliver for your
-      graduates?
+      How is the Academy strengthening collaboration with international maritime
+      bodies, shipowners and training institutions to improve cadet exposure and
+      global employability?
     answer: >-
-      <p>We have an existing relationship with the World Maritime University
-      through the IMO's technical cooperation framework, and we are exploring
-      closer engagement that would benefit qualifying MAN graduates seeking
-      advanced maritime education internationally. Beyond WMU, we are in
-      dialogue with a range of international maritime education providers about
-      specialist short courses and advanced programming for our graduates. The
-      principle underlying all of these is the same: MAN qualifications should
-      function as a credible foundation for further international study, not as
-      a terminal credential that closes opportunities — and meeting that
-      standard requires our academic outputs to be genuinely comparable with
-      international peers.</p>
+      <p class="MsoNormal">We recognise that maritime training must be globally
+
+      relevant. Our goal is to ensure cadets are not only trained locally but
+      are
+
+      also integrated into international professional networks.</p><p
+      class="MsoNormal">To achieve this, we encourage cadets to register with
+
+      internationally recognised professional bodies,
+      including:<o:p></o:p></p><p class="MsoNormal">●The Nautical Institute
+      (Nautical Science)<o:p></o:p></p><p class="MsoNormal">●IMarEST (Marine
+      Engineering)<o:p></o:p></p><p class="MsoNormal">●The Chartered Institute
+      of Logistics and Transport (CILT)
+
+      (Maritime Transport and Business Management)</p><p class="MsoNormal">The
+      Nautical Institute has also granted recognition to the
+
+      Maritime Academy of Nigeria, reflecting the strength of our training
+      standards.</p><p class="MsoNormal">By combining hands-on training, quality
+      management systems
+
+      and international professional integration, we are producing graduates who
+      are
+
+      globally competitive.</p><p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      </p><p class="MsoNormal">As a result, shipowners increasingly seek out our
+      cadets
+
+      because of their practical competence and industry
+      readiness.<o:p></o:p></p>
   - question: >-
-      Nigerian seafarers have a strong reputation in certain market segments.
-      What would it take to elevate that reputation to first-choice crew status
-      across the board?
+      What role does international collaboration play in strengthening training
+      standards and improving sea-time exposure for cadets?
     answer: >-
-      <p>Reputation in the crewing market compounds through three mechanisms:
-      consistent performance, documentation integrity, and the network effects
-      of satisfied ship managers recommending your seafarers to peers. Nigerian
-      seafarers have demonstrated genuine competence — particularly on offshore
-      support vessels and certain bulk carrier operations — and that has created
-      pockets of real commercial demand. Converting those pockets into a
-      sector-spanning preference requires, first, that our certification systems
-      are credible and internationally trusted (NIMASA has made material
-      improvements here), and second, that our graduates perform well enough in
-      their initial positions that the ship manager wants to hire another
-      MAN-trained seafarer. That word-of-mouth dynamic scales faster than any
-      formal marketing effort once the baseline quality is consistently
-      established.</p>
+      <p class="MsoNormal">Collaboration is central to our strategy.</p><p
+      class="MsoNormal">A major challenge in maritime training is ensuring
+      adequate
+
+      sea-time experience in line with the requirements of the STCW
+      Convention.</p><p class="MsoNormal">Without sufficient sea-time, cadets
+      cannot progress to full certification
+
+      and professional employment.</p><p class="MsoNormal">To address this
+      challenge, we have engaged shipowners,
+
+      including the Ship Owners Association of Nigeria, to support cadet
+      sea-time
+
+      placement and bridge the gap between academic training and professional
+
+      certification.</p><p class="MsoNormal">We have also engaged Nigeria LNG
+      Shipping and Marine
+
+      Services (NSML) to strengthen onboard training opportunities.</p><p
+      class="MsoNormal">Internationally, we are working with the Regional
+      Maritime
+
+      University (RMU) to facilitate lecturer exchanges, student exchange
+      programmes
+
+      and joint quality assurance initiatives.</p><p class="MsoNormal">We are
+      also collaborating with:<o:p></o:p></p><p class="MsoNormal">The Nautical
+      Institute (UK) on simulator accreditation and
+
+      Dynamic Positioning (DP) training<o:p></o:p></p><p class="MsoNormal">●
+      IMarEST on course accreditation<o:p></o:p></p><p class="MsoNormal">●
+      Chartered Institute of Logistics and Transport (CILT)
+
+      Nigeria on cadet development<o:p></o:p></p><p class="MsoNormal">● Abuja
+      MoU on the development and delivery of accredited
+
+      Port State Control training courses in collaboration with NIMASA</p><p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      </p><p class="MsoNormal">These partnerships are designed to align our
+      training with
+
+      international standards while expanding cadet exposure to global maritime
+      best
+
+      practices.<o:p></o:p></p>
   - question: >-
-      The Academy's physical infrastructure requires significant capital
-      investment. What scale of investment is needed, and how are you
-      approaching the funding challenge?
+      What strategies are being implemented to ensure long-term sustainability
+      and funding stability for the Academy?
     answer: >-
-      <p>Our capital investment framework identifies a substantial multi-year
-      programme of priority infrastructure upgrades — accommodation facilities,
-      simulation equipment, training vessels, and laboratory systems that
-      reflect the maritime industry we are training people to serve rather than
-      the one that existed when much of this infrastructure was originally
-      commissioned. The funding pathway is three-part: federal budgetary
-      allocations, which we are actively advocating for through the Ministry;
-      NIMASA's statutory maritime fund allocation; and industry partnership
-      arrangements that offer sponsors access to a pipeline of trained seafarers
-      in exchange for facility capital support. Several Nigerian and
-      international maritime companies have expressed serious interest in that
-      last category, and we are working through the governance framework to make
-      those arrangements operational. An Academy that cannot modernise its
-      infrastructure will produce graduates who are not competitive — and that
-      is a failure not just of this institution but of the sector's capacity
-      development ambitions as a whole.</p>
+      <p class="MsoNormal">Sustainability is central to our institutional
+      planning.</p><p class="MsoNormal">We have strong government support under
+      the leadership of
+
+      President Bola Ahmed Tinubu, alongside effective collaboration with the
+
+      National Assembly, particularly regarding Nigeria's obligations under the
+
+      International Maritime Organization framework.</p><p class="MsoNormal">We
+      have developed a structured five-year strategic
+
+      development plan based on a comprehensive SWOT analysis. The plan
+      establishes
+
+      clear short-, medium- and long-term institutional goals and is currently
+
+      awaiting ministerial approval.&nbsp;</p><p class="MsoNormal">One of our
+      most significant achievements has been developing
+
+      a dedicated Condition of Service for staff—something the Academy had never
+
+      previously established. It has been processed through the Office of the
+      Head of
+
+      the Civil Service of the Federation and approved, significantly
+      strengthening
+
+      staff welfare, motivation and retention.</p><p class="MsoNormal">We are
+      also reinforcing maintenance systems across the
+
+      campus to ensure the long-term sustainability of our infrastructure and
+
+      training facilities.</p><p class="MsoNormal">Ultimately, our
+      sustainability framework is built on three
+
+      pillars:<o:p></o:p></p><p class="MsoNormal">● Strategic
+      planning<o:p></o:p></p><p class="MsoNormal">● Human resource development
+      and retention<o:p></o:p></p><p class="MsoNormal">● Infrastructure
+      maintenance and operational efficiency<o:p></o:p></p><p
+      class="MsoNormal"><o:p>&nbsp;</o:p></p><p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      </p><p class="MsoNormal">Together, these pillars position the Academy to
+      continue
+
+      delivering world-class maritime education for Nigeria and the wider West
+      and
+
+      Central African region.<o:p></o:p></p>
 status: published
+introduction: |-
+  <p class="MsoNormal">In an era where global maritime standards are
+  non-negotiable, Nigeria must equip its workforce to compete effectively in
+  international shipping and logistics.</p>
+
+  <p class="MsoNormal">The Maritime Academy of Nigeria (MAN) is strategically
+  positioned to deliver on this mandate by blending technology, international
+  collaboration and institutional reform to produce world-class maritime
+  professionals.</p>
+
+  <p class="MsoNormal">At the heart of this transformation is a clear national
+  objective: developing a skilled maritime workforce is not just an educational
+  priority, but a key pillar in unlocking Nigeria's economic potential and
+  strengthening its leadership in the Blue Economy.</p>
+
+  <p class="MsoNormal">In this Executive Conversation, Dr. Kevin Okonna, Acting
+  Rector of MAN, discusses institutional reforms, simulator-based training,
+  international partnerships, quality management systems and the long-term
+  sustainability of maritime manpower development in Nigeria.<o:p></o:p></p>
+pullQuote: >-
+  "We are producing globally competitive maritime professionals through quality
+  education, practical training and international collaboration."
+editorsNote: >-
+  <p class="MsoNormal">The Maritime Academy of Nigeria (MAN) continues to play a
+
+  central role in developing Nigeria's maritime human capital
+  pipeline.<o:p></o:p></p>
+
+
+  <p class="MsoNormal">Through curriculum reform, infrastructure investment and
+
+  international collaboration, the Academy is positioning itself as a leading
+
+  maritime training institution in West and Central Africa.<o:p></o:p></p>
 ---
 
