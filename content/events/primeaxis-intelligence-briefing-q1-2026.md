@@ -1,14 +1,14 @@
 ---
-title: PrimeAxis Maritime Intelligence Briefing — Q1 2026
-date: '2026-02-04'
+title: Lagos Launches Omi Eko Water Transport Project
+date: '2025-10-17'
 category: press-briefing
 status: published
 coverImage: >-
   https://n0jyvquhgs2welj7.public.blob.vercel-storage.com/uploads/1782767427189-5ff638ba-whatsapp-image-2026-06-15-at-18-58-14.jpg
 description: >-
-  PrimeAxis presents its first-quarter intelligence briefing to maritime press
-  and stakeholders, unpacking trade flows, port performance, and regulatory
-  shifts across West Africa.
+  Lagos State officially launched the Omi Eko Project, a landmark initiative
+  designed to expand safe, sustainable and modern inland water transportation
+  across Lagos.
 gallery:
   - url: >-
       https://n0jyvquhgs2welj7.public.blob.vercel-storage.com/uploads/1782767441871-1602c366-whatsapp-image-2026-06-15-at-18-57-41-2.jpg
