@@ -3,6 +3,7 @@ import type { Metadata } from 'next'
 import Image from 'next/image'
 import AnimatedSection from '@/components/ui/AnimatedSection'
 import IntelligenceHubGrid from '@/components/sections/IntelligenceHubGrid'
+import BreakingBar from '@/components/sections/BreakingBar'
 import { getAllArticles } from '@/lib/content'
 
 export const metadata: Metadata = {
@@ -21,6 +22,8 @@ export default async function IntelligenceHubPage() {
 
   return (
     <div className="min-h-screen">
+
+      <BreakingBar />
 
       {/* Page Header */}
       <section className="relative overflow-hidden bg-deep mb-0 pt-[60px] pb-[70px] min-h-screen h-screen max-h-none flex items-end justify-start">

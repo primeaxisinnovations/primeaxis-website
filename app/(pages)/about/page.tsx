@@ -3,6 +3,7 @@ import type { ReactElement } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 import AnimatedSection from '@/components/ui/AnimatedSection'
+import BreakingBar from '@/components/sections/BreakingBar'
 
 const FOUNDER_PHOTO_URL =
   'https://n0jyvquhgs2welj7.public.blob.vercel-storage.com/founder/nneoma-obi-asualo.jpg'
@@ -97,6 +98,8 @@ const PILLARS: Array<{
 export default function AboutPage() {
   return (
     <div className="min-h-screen bg-cream">
+
+      <BreakingBar />
 
       {/* ── About Hero + Mission/Vision — combined full-bleed section.
           Hero text sits in the top portion; Mission/Vision glass cards

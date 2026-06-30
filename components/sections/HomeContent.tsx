@@ -4,7 +4,6 @@ import { useEffect, useRef, useState, ReactElement } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { LayoutGrid } from "lucide-react";
-import BreakingBar from "@/components/sections/BreakingBar";
 import ArticleCard from "@/components/ui/ArticleCard";
 import { CATEGORIES, categoryToSlug } from "@/lib/categories";
 import { CATEGORY_ICONS } from "@/lib/category-icons";
@@ -77,14 +76,12 @@ const SERVICE_ICONS: Record<string, ReactElement> = {
 
 interface HomeContentProps {
   featuredArticles: Article[];
-  latestArticles: Article[];
   featuredConversation: Conversation | undefined;
   otherConversations: Conversation[];
 }
 
 export default function HomeContent({
   featuredArticles,
-  latestArticles,
   featuredConversation,
   otherConversations,
 }: HomeContentProps) {
@@ -115,8 +112,6 @@ export default function HomeContent({
 
   return (
     <>
-      <BreakingBar articles={latestArticles} />
-
       {/* ── HERO — full-screen fade carousel ──────────────────── */}
       <section
         className="hero-section hero-carousel min-h-screen grid grid-rows-[1fr_auto] bg-deep relative overflow-hidden -mt-[102px]"
@@ -194,91 +189,34 @@ export default function HomeContent({
         {/* Main hero content — pt accounts for breaking bar (38px) + header (64px) */}
         <div className="relative z-[2] flex items-center pt-[200px] pb-20 max-sm:pt-[150px] max-sm:pb-12">
           <div className="max-w-[1240px] mx-auto px-11 max-md:px-5 w-full">
-            <div className="grid grid-cols-1 lg:grid-cols-[1.1fr_1fr] gap-20 items-center">
+            <div className="max-w-[720px]">
+              <h1 className="hero-headline-anim font-display text-[clamp(38px,4.8vw,68px)] font-bold leading-[1.06] text-white mb-[22px]">
+                The Platform That
+                <br />
+                Shapes <em className="text-gold italic">Africa&apos;s Maritime</em>
+                <br />
+                Industry Narrative
+              </h1>
 
-              {/* Left: editorial statement */}
-              <div>
-                <h1 className="hero-headline-anim font-display text-[clamp(38px,4.8vw,68px)] font-bold leading-[1.06] text-white mb-[22px]">
-                  The Platform That
-                  <br />
-                  Shapes <em className="text-gold italic">Africa&apos;s Maritime</em>
-                  <br />
-                  Industry Narrative
-                </h1>
+              <p className="hero-standfirst-anim text-[16.5px] font-light leading-[1.7] text-white/60 max-w-[520px] mb-11">
+                PrimeAxis is Africa&apos;s maritime intelligence and strategic communications platform — where executives engage, narratives are shaped, and industry authority is built. Insight that informs. Media that matters.
+              </p>
 
-                <p className="hero-standfirst-anim text-[16.5px] font-light leading-[1.7] text-white/60 max-w-[520px] mb-11">
-                  PrimeAxis is Africa&apos;s maritime intelligence and strategic communications platform — where executives engage, narratives are shaped, and industry authority is built. Insight that informs. Media that matters.
-                </p>
-
-                <div className="hero-actions-anim flex gap-3 flex-wrap">
-                  <a
-                    href="#intelligence"
-                    className="inline-flex items-center gap-2 text-[13px] font-semibold tracking-[.06em] text-deep bg-gold px-7 py-[13px] hover:bg-gold-l hover:-translate-y-[2px] hover:shadow-[0_6px_24px_rgba(191,159,102,.28)] transition-all duration-200"
-                  >
-                    Read the Intelligence
-                    <ArrowRight strokeWidth={2.5} />
-                  </a>
-                  <a
-                    href="#work-with"
-                    className="inline-flex items-center gap-2 text-[13px] font-medium tracking-[.04em] text-white/75 border border-white/20 px-7 py-[13px] hover:border-gold hover:text-gold hover:-translate-y-[2px] transition-all duration-200"
-                  >
-                    Work With Us
-                    <ArrowRight />
-                  </a>
-                </div>
-              </div>
-
-              {/* Right: featured analysis card — frosted glass over a dark
-                  scrim. The scrim isn't decorative: the hero's ambient
-                  gradient fades out toward the right (strongest at 28% from
-                  the left, down to 18% here), so this corner is the
-                  brightest part of the carousel image. A glass tint alone
-                  would wash out the white text; the gradient layer beneath
-                  it restores contrast without losing the frosted look. */}
-              <div
-                className="hero-card-anim hidden lg:block relative border border-white/20 backdrop-blur-lg"
-                style={{
-                  background:
-                    "linear-gradient(rgba(255,255,255,0.10), rgba(255,255,255,0.10)), linear-gradient(135deg, rgba(10,20,35,0.58) 0%, rgba(10,20,35,0.34) 100%)",
-                  boxShadow: "0 8px 40px rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,255,255,0.16)",
-                  maxWidth: "480px",
-                  padding: "28px 32px 32px",
-                  alignSelf: "flex-end",
-                  marginTop: "auto",
-                  marginBottom: "32px",
-                  marginLeft: "32px",
-                }}
-              >
-                <div
-                  className="absolute top-0 left-0 right-0 h-[2px]"
-                  style={{ background: "linear-gradient(90deg, #BF9F66, transparent)" }}
-                />
-                <div className="font-mono text-[10px] tracking-[.18em] uppercase text-gold mb-[18px] flex items-center gap-2">
-                  <span className="w-2 h-2 rounded-full bg-gold animate-pulse-dot flex-shrink-0" />
-                  Featured Analysis
-                </div>
-                <h2 className="font-display font-semibold text-white mb-[14px]" style={{ fontSize: "clamp(18px, 2vw, 24px)", lineHeight: 1.25 }}>
-                  Nigeria&apos;s Cabotage Regime at a Crossroads: The 2025 Amendment and What It Means for Indigenous Shipping
-                </h2>
-                <p
-                  className="text-[13.5px] leading-[1.7] font-light text-white/50 mb-6"
-                  style={{
-                    display: "-webkit-box",
-                    WebkitLineClamp: 2,
-                    WebkitBoxOrient: "vertical",
-                    overflow: "hidden",
-                  }}
+              <div className="hero-actions-anim flex gap-3 flex-wrap">
+                <a
+                  href="#intelligence"
+                  className="inline-flex items-center gap-2 text-[13px] font-semibold tracking-[.06em] text-deep bg-gold px-7 py-[13px] hover:bg-gold-l hover:-translate-y-[2px] hover:shadow-[0_6px_24px_rgba(191,159,102,.28)] transition-all duration-200"
                 >
-                  The latest regulatory amendments present both historic opportunity and significant risk for Nigerian shipowners navigating a shifting compliance environment.
-                </p>
-                <div className="flex items-center justify-between pt-5 border-t" style={{ borderColor: "rgba(255,255,255,.07)" }}>
-                  <span className="text-[12px] text-white/35 font-light">
-                    By <strong className="text-white/60 font-medium">PrimeAxis Editorial</strong> · 12 min read
-                  </span>
-                  <a href="#" className="font-mono text-[10.5px] tracking-[.12em] uppercase text-gold flex items-center gap-1.5 hover:gap-2.5 transition-all duration-200">
-                    Read <ArrowRight size={10} strokeWidth={2.5} />
-                  </a>
-                </div>
+                  Read the Intelligence
+                  <ArrowRight strokeWidth={2.5} />
+                </a>
+                <a
+                  href="#work-with"
+                  className="inline-flex items-center gap-2 text-[13px] font-medium tracking-[.04em] text-white/75 border border-white/20 px-7 py-[13px] hover:border-gold hover:text-gold hover:-translate-y-[2px] transition-all duration-200"
+                >
+                  Work With Us
+                  <ArrowRight />
+                </a>
               </div>
             </div>
           </div>

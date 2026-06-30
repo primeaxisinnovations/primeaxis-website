@@ -3,6 +3,7 @@ import Image from 'next/image'
 import { getAllConversations } from '@/lib/conversation-content'
 import AnimatedSection from '@/components/ui/AnimatedSection'
 import ConversationCard from '@/components/ui/ConversationCard'
+import BreakingBar from '@/components/sections/BreakingBar'
 
 export const metadata: Metadata = {
   title: 'Executive Conversations | PrimeAxis',
@@ -20,6 +21,8 @@ export default async function ExecutiveConversationsPage() {
 
   return (
     <div className="min-h-screen bg-cream">
+
+      <BreakingBar />
 
       {/* Page Header — full-viewport hero photograph, bleeding behind the
           transparent fixed header (-mt cancels the global main pt-[102px]) ── */}

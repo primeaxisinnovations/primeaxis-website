@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import Image from 'next/image'
 import { getAllEvents } from '@/lib/events'
 import EventsBrowser from '@/components/events/EventsBrowser'
+import BreakingBar from '@/components/sections/BreakingBar'
 
 export const metadata: Metadata = {
   title: 'Events | PrimeAxis',
@@ -19,6 +20,8 @@ export default async function EventsPage() {
 
   return (
     <div className="min-h-screen" style={{ background: '#0D1824' }}>
+
+      <BreakingBar />
 
       {/* Page Header — full-viewport hero photograph, bleeding behind the
           transparent fixed header (-mt cancels the global main pt-[102px]) ── */}
