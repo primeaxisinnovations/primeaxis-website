@@ -91,13 +91,14 @@ export default function Header() {
               wordmark baked in). Transparent PNG, light wordmark tuned for the dark
               navy nav. Wrapper reserves min-width so the nav pills can never squeeze
               it; object-contain keeps the lockup from cropping or distorting. */}
-          <Link href="/" className="flex items-center flex-shrink-0" style={{ minWidth: '200px' }}>
+          <Link href="/" className="flex items-center flex-shrink-0" style={{ minWidth: 0 }}>
             <Image
-              src="/logo.png"
+              src="/images/logo.png"
               alt="PrimeAxis Maritime Intelligence"
-              width={180}
-              height={52}
+              width={220}
+              height={64}
               quality={80}
+              className="h-10 md:h-[68px] w-auto"
               style={{ objectFit: 'contain', objectPosition: 'left center' }}
               priority
             />

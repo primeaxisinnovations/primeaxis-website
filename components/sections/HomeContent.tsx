@@ -189,34 +189,32 @@ export default function HomeContent({
         {/* Main hero content — pt accounts for breaking bar (38px) + header (64px) */}
         <div className="relative z-[2] flex items-center pt-[200px] pb-20 max-sm:pt-[150px] max-sm:pb-12">
           <div className="max-w-[1240px] mx-auto px-11 max-md:px-5 w-full">
-            <div className="max-w-[720px]">
-              <h1 className="hero-headline-anim font-display text-[clamp(38px,4.8vw,68px)] font-bold leading-[1.06] text-white mb-[22px]">
-                The Platform That
+            <div className="max-w-[720px] mx-auto">
+              <h1 className="hero-headline-anim font-display text-[clamp(28px,3.6vw,46px)] font-bold leading-[1.18] text-white mb-5 text-center max-w-[780px] mx-auto">
+                Leading the <span style={{ color: "#c8a96e" }}>Conversation</span> on
                 <br />
-                Shapes <em className="text-gold italic">Africa&apos;s Maritime</em>
-                <br />
-                Industry Narrative
+                <span style={{ color: "#c8a96e" }}>Africa&apos;s Maritime</span> Industry
               </h1>
 
-              <p className="hero-standfirst-anim text-[16.5px] font-light leading-[1.7] text-white/60 max-w-[520px] mb-11">
-                PrimeAxis is Africa&apos;s maritime intelligence and strategic communications platform — where executives engage, narratives are shaped, and industry authority is built. Insight that informs. Media that matters.
+              <p className="hero-standfirst-anim text-[16.5px] font-light leading-[1.7] text-white/60 max-w-[520px] mx-auto mb-11 text-center">
+                Trusted insights and expert perspectives shaping decisions across Africa&apos;s maritime ecosystem.
               </p>
 
-              <div className="hero-actions-anim flex gap-3 flex-wrap">
-                <a
-                  href="#intelligence"
+              <div className="hero-actions-anim flex gap-3 flex-wrap justify-center">
+                <Link
+                  href="/intelligence-hub"
                   className="inline-flex items-center gap-2 text-[13px] font-semibold tracking-[.06em] text-deep bg-gold px-7 py-[13px] hover:bg-gold-l hover:-translate-y-[2px] hover:shadow-[0_6px_24px_rgba(191,159,102,.28)] transition-all duration-200"
                 >
-                  Read the Intelligence
+                  Explore Insights
                   <ArrowRight strokeWidth={2.5} />
-                </a>
-                <a
-                  href="#work-with"
+                </Link>
+                <Link
+                  href="/executive-conversations"
                   className="inline-flex items-center gap-2 text-[13px] font-medium tracking-[.04em] text-white/75 border border-white/20 px-7 py-[13px] hover:border-gold hover:text-gold hover:-translate-y-[2px] transition-all duration-200"
                 >
-                  Work With Us
+                  Join the Conversation
                   <ArrowRight />
-                </a>
+                </Link>
               </div>
             </div>
           </div>
