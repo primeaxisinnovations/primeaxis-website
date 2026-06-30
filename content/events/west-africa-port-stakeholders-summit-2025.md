@@ -1,14 +1,13 @@
 ---
-title: West Africa Port Stakeholders Summit 2025
-date: '2025-11-18'
+title: Regional Ferry Safety Conference 2025
+date: '2025-06-25'
 category: summit
 status: published
 coverImage: >-
   https://n0jyvquhgs2welj7.public.blob.vercel-storage.com/uploads/1782767601948-a7dfad94-whatsapp-image-2026-06-15-at-18-56-41-3.jpg
 description: >-
-  Port authorities, terminal operators, and freight leaders convene to align on
-  the infrastructure and digitalisation priorities shaping West African trade
-  corridors.
+  Maritime leaders from across West and Central Africa met in Lagos to advance
+  ferry safety, regional collaboration and inland water transport reforms.
 gallery:
   - url: >-
       https://n0jyvquhgs2welj7.public.blob.vercel-storage.com/uploads/1782767551215-29e2683e-whatsapp-image-2026-06-15-at-18-56-40-1.jpg
