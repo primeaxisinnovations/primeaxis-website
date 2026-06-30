@@ -10,7 +10,7 @@ excerpt: >-
   into new terminals, deeper drafts, larger cranes, and modern container
   facilities.
 category: Ports & Infrastructure
-author: PrimeAxis Intelligence Desk
+author: PrimeAxis Insight
 date: '2026-06-25'
 readingTime: 4 min read
 featuredImage: >-
