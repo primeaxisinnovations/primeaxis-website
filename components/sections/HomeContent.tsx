@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState, ReactElement } from "react";
+import { useEffect, ReactElement } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { LayoutGrid } from "lucide-react";
@@ -22,14 +22,6 @@ function ArrowRight({ size = 14, strokeWidth = 2 }: { size?: number; strokeWidth
     </svg>
   );
 }
-
-const CAROUSEL_SLIDES = [
-  "https://images.unsplash.com/photo-1605745341112-85968b19335b?w=1920&q=85&fit=crop&auto=format",
-  "https://images.unsplash.com/photo-1678182451047-196f22a4143e?w=1920&q=85&fit=crop&auto=format",
-  "https://n0jyvquhgs2welj7.public.blob.vercel-storage.com/uploads/1782718239222-cfa6b73f-landscape.png",
-  "https://n0jyvquhgs2welj7.public.blob.vercel-storage.com/uploads/1782719629319-95f5d22f-thuy.png",
-  "https://n0jyvquhgs2welj7.public.blob.vercel-storage.com/uploads/1782718362858-5197695e-n.png",
-];
 
 const FEATURED_BEAT_NAMES = new Set([
   "Maritime Policy",
@@ -85,9 +77,6 @@ export default function HomeContent({
   featuredConversation,
   otherConversations,
 }: HomeContentProps) {
-  const [activeSlide, setActiveSlide] = useState(0);
-  const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
-
   // Intersection-observer fade-ins
   useEffect(() => {
     const io = new IntersectionObserver(
@@ -102,65 +91,15 @@ export default function HomeContent({
     return () => io.disconnect();
   }, []);
 
-  // Hero carousel: auto-advance every 5 s
-  useEffect(() => {
-    intervalRef.current = setInterval(() => {
-      setActiveSlide((prev) => (prev + 1) % CAROUSEL_SLIDES.length);
-    }, 5000);
-    return () => { if (intervalRef.current) clearInterval(intervalRef.current); };
-  }, []);
-
   return (
     <>
       {/* ── HERO — full-screen fade carousel ──────────────────── */}
       <section
-        className="hero-section hero-carousel min-h-screen grid grid-rows-[1fr_auto] bg-deep relative overflow-hidden -mt-[102px]"
+        className="hero-section min-h-screen grid grid-rows-[1fr_auto] relative overflow-hidden -mt-[102px]"
+        style={{
+          background: "linear-gradient(135deg, #0d1b2a 0%, #1a2d45 50%, #0d1b2a 100%)",
+        }}
       >
-        {/* Carousel slides */}
-        {CAROUSEL_SLIDES.map((url, i) => (
-          <div
-            key={url}
-            className="absolute inset-0 transition-opacity ease-in-out"
-            style={{ opacity: i === activeSlide ? 1 : 0, transitionDuration: "1500ms" }}
-          >
-            {i < 2 ? (
-              <Image
-                src={url}
-                alt=""
-                aria-hidden="true"
-                fill
-                quality={80}
-                sizes="100vw"
-                // Slide 0 is the LCP → priority; the rest lazy-load.
-                priority={i === 0}
-                loading={i === 0 ? undefined : "lazy"}
-                className="object-cover"
-                style={{ objectPosition: "center 40%", opacity: 0.65 }}
-              />
-            ) : (
-              <Image
-                src={url}
-                alt=""
-                aria-hidden="true"
-                fill
-                quality={80}
-                sizes="100vw"
-                loading="lazy"
-                className="object-cover"
-                style={{ objectPosition: "center" }}
-              />
-            )}
-          </div>
-        ))}
-
-        {/* Directional gradient overlay */}
-        <div
-          className="absolute inset-0"
-          style={{
-            background:
-              "linear-gradient(to right, rgba(21,28,46,.75) 28%, rgba(21,28,46,.18) 100%), linear-gradient(to top, rgba(21,28,46,.68) 0%, transparent 45%)",
-          }}
-        />
         {/* Atmospheric radial glows */}
         <div
           className="absolute inset-0 pointer-events-none"
@@ -218,22 +157,6 @@ export default function HomeContent({
               </div>
             </div>
           </div>
-        </div>
-
-        {/* Carousel navigation dots */}
-        <div className="absolute bottom-24 left-0 right-0 z-[3] flex justify-center items-center gap-2 max-sm:hidden">
-          {CAROUSEL_SLIDES.map((_, i) => (
-            <button
-              key={i}
-              onClick={() => setActiveSlide(i)}
-              aria-label={`Go to slide ${i + 1}`}
-              className={`btn-bare h-[5px] transition-all duration-300 ${
-                i === activeSlide
-                  ? "w-6 bg-gold"
-                  : "w-[5px] rounded-full bg-white/35 hover:bg-white/60"
-              }`}
-            />
-          ))}
         </div>
 
       </section>
