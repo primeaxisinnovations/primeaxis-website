@@ -266,6 +266,16 @@
   }
 }
 
+/* Mobile object-position — the container ship sits in the RIGHT half of the
+   frame (the left half is empty ocean), so a portrait crop must bias hard to
+   the right or the ship is cut off entirely. Vertical centre is fine: the
+   ship spans the full height. */
+@media (max-width: 768px) {
+  .about-hero-bg {
+    object-position: 78% center;
+  }
+}
+
 /* ── INTELLIGENCE HUB HERO (Intelligence Hub page) ─────────────── */
 @layer components {
   .hub-hero-bg {
@@ -331,6 +341,14 @@
     padding: 22px 20px 26px;
     max-width: none;
   }
+
+  /* The working port — ship, cranes, trucks, containers — sits in the lower
+     half; the top half is sky. Desktop's 35% reads well in landscape, but a
+     portrait crop at 35% fills the frame with sky and cuts the port. Push
+     down to 55% so the actual maritime subject stays in view. */
+  .hub-hero-bg {
+    object-position: center 55%;
+  }
 }
 
 /* ── NAV PILL SWITCHER (Header desktop nav) ────────────────────
@@ -380,6 +398,16 @@
     object-position: center center;
     z-index: 0;
     filter: brightness(0.45) saturate(0.85) contrast(1.05);
+  }
+
+  /* Mobile object-position — this is a darkened atmospheric backdrop behind
+     the glass service cards rather than a subject hero, but the lone canoe
+     sits in the lower-left quadrant. A gentle bias toward it keeps the frame
+     from cropping to empty open water on a tall screen. */
+  @media (max-width: 768px) {
+    .services-section-bg {
+      object-position: 40% 60%;
+    }
   }
 
   .svc-card {
@@ -978,6 +1006,16 @@
   }
 }
 
+/* Mobile object-position — the four executives stand centred with their faces
+   in the upper third of the frame. Desktop's 18% sits a touch high for a
+   portrait crop; 28% centres the faces in view while the full bodies fill the
+   space below (the heading sits at the bottom of the section). */
+@media (max-width: 768px) {
+  .wwu-hero-bg {
+    object-position: center 28%;
+  }
+}
+
 /* ── WORK WITH US — FOUR-CARD PHOTO BACKGROUND ──────────────────
    Scoped to the pathway-cards section only — not the shared
    .glass-card recipe, since this section sits on a full-bleed photo
@@ -1255,21 +1293,50 @@
     min-height: 100svh !important;
   }
 
-  /* All hero sections: positioning context + a safety floor so the section
-     can never collapse to zero height (larger explicit heights still win). */
+  /* All hero sections: positioning context + a safety floor. Portrait phones
+     crop landscape hero photos harder, so the floor is generous (larger
+     explicit heights such as min-h-screen still win) to give the subject
+     room rather than collapsing to a thin sliver. */
   .hero-section {
     position: relative !important;
-    min-height: 480px;
+    min-height: 70svh;
   }
 
-  /* Force the hero background image to cover the section on mobile. */
+  /* Force the hero background image to cover the section on mobile. We
+     deliberately do NOT set object-position here — that's tuned per page
+     (.wwu-hero-bg, .hub-hero-bg, .hero-exec-image, .hero-events-image, …)
+     because each photo's subject sits in a different part of the frame. A
+     blanket center crop here was what pushed those subjects out of frame on
+     narrow screens. */
   .hero-section img {
     position: absolute !important;
     inset: 0 !important;
     width: 100% !important;
     height: 100% !important;
     object-fit: cover !important;
-    object-position: center !important;
+  }
+}
+
+/* Executive Conversations & Events heroes carry .hero-section (so the global
+   rule above no longer dictates their crop). They have no dedicated *-bg class,
+   so their object-position lives here. Desktop keeps centre; mobile is tuned
+   per photo below. */
+.hero-exec-image,
+.hero-events-image {
+  object-position: center center;
+}
+
+@media (max-width: 768px) {
+  /* Exec: two seated speakers (woman left, man right), faces in the upper
+     third with a plant between them — bias up so the faces stay in frame
+     rather than the crop settling on their laps. */
+  .hero-exec-image {
+    object-position: center 30%;
+  }
+  /* Events: the audience fills the LOWER half; the top half is dark bokeh.
+     Push down so the crowd, not the empty dark ceiling, occupies the frame. */
+  .hero-events-image {
+    object-position: center 68%;
   }
 }
 

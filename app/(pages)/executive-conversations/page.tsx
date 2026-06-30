@@ -31,7 +31,7 @@ export default async function ExecutiveConversationsPage() {
           priority
           quality={80}
           sizes="100vw"
-          className="object-cover object-center"
+          className="object-cover hero-exec-image"
         />
         <div
           className="absolute inset-x-0 top-0 h-[80px]"

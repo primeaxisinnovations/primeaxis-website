@@ -30,7 +30,7 @@ export default async function EventsPage() {
           priority
           quality={80}
           sizes="100vw"
-          className="object-cover object-center"
+          className="object-cover hero-events-image"
         />
         <div
           className="absolute inset-0"
