@@ -2,6 +2,7 @@ import { NextResponse, type NextRequest } from 'next/server'
 import { cookies } from 'next/headers'
 import { randomUUID } from 'crypto'
 import { put } from '@vercel/blob'
+import sharp from 'sharp'
 import { ADMIN_SESSION_COOKIE, verifySessionToken } from '@/lib/admin-session'
 
 // Always hits Vercel Blob live — never cached.
@@ -17,6 +18,8 @@ const ALLOWED_TYPES: Record<string, string> = {
   'video/webm': 'webm',
   'video/ogg': 'ogv',
 }
+
+const IMAGE_TYPES = new Set(['image/jpeg', 'image/png', 'image/webp'])
 
 // Strips the extension, lowercases, replaces anything that isn't
 // alphanumeric/hyphen with a hyphen, and collapses/trims the result — so
@@ -65,6 +68,26 @@ export async function POST(request: NextRequest) {
   const pathname = `uploads/${uniqueId}-${sanitizeFilenameBase(file.name)}.${extension}`
 
   try {
+    // Images: compress + convert to WebP via sharp. Videos: upload as-is.
+    if (IMAGE_TYPES.has(file.type)) {
+      const buffer = Buffer.from(await file.arrayBuffer())
+
+      const optimized = await sharp(buffer)
+        .resize(1600, null, {
+          withoutEnlargement: true, // never upscale small images
+        })
+        .webp({ quality: 82 })
+        .toBuffer()
+
+      const webpPathname = pathname.replace(/\.(jpg|jpeg|png|webp)$/i, '.webp')
+
+      const blob = await put(webpPathname, optimized, {
+        access: 'public',
+        contentType: 'image/webp',
+      })
+      return NextResponse.json({ url: blob.url })
+    }
+
     const blob = await put(pathname, file, {
       access: 'public',
       contentType: file.type,
