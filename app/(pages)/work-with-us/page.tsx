@@ -3,6 +3,7 @@ import type { ReactElement } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 import AnimatedSection from '@/components/ui/AnimatedSection'
+import NewsletterForm from '@/components/ui/NewsletterForm'
 import WhyPartnerSection from '@/components/work-with-us/WhyPartnerSection'
 
 export const metadata: Metadata = {
@@ -124,13 +125,25 @@ export default function WorkWithUsPage() {
       >
         {/* Full-bleed CSS-cover hero (.wwu-hero-bg) → next/image `fill` with
             priority (LCP) and sizes=100vw (spans the viewport). */}
+        {/* Desktop hero image */}
         <Image
-          className="wwu-hero-bg"
+          className="wwu-hero-bg hidden md:block"
           src="https://n0jyvquhgs2welj7.public.blob.vercel-storage.com/uploads/1782497081687-925edf91-byyy.png"
           alt="PrimeAxis at Africa Maritime Summit"
           fill
           quality={80}
           sizes="100vw"
+          priority
+        />
+        {/* Mobile hero image — dedicated portrait crop */}
+        <Image
+          className="wwu-hero-bg block md:hidden"
+          src="/images/hero-workwithus-mobile.png"
+          alt="PrimeAxis at Africa Maritime Summit"
+          fill
+          quality={80}
+          sizes="100vw"
+          style={{ objectFit: 'cover', objectPosition: 'center' }}
           priority
         />
         <div
@@ -247,19 +260,7 @@ export default function WorkWithUsPage() {
             Strategic intelligence, policy analysis, and industry perspectives — direct to your
             inbox, free.
           </p>
-          <div className="flex max-sm:flex-col">
-            <input
-              type="email"
-              placeholder="Your professional email address"
-              className="flex-1 font-sans text-[13.5px] px-[18px] py-[13px] border border-white/10 bg-white/5 text-white placeholder:text-white/30 outline-none focus:border-gold transition-colors duration-200"
-            />
-            <button
-              type="submit"
-              className="font-sans text-[13px] font-semibold tracking-[.04em] bg-gold text-deep px-6 py-[13px] whitespace-nowrap hover:bg-gold-light transition-colors duration-200 max-sm:w-full"
-            >
-              Subscribe Free
-            </button>
-          </div>
+          <NewsletterForm variant="dark" />
         </div>
       </section>
 

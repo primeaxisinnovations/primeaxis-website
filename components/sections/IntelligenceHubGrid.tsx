@@ -43,7 +43,7 @@ export default function IntelligenceHubGrid({ articles }: IntelligenceHubGridPro
         {/* Category filter pills — dark navy container */}
         <AnimatedSection>
           <div
-            className="flex flex-wrap gap-2 mt-[32px] mb-10"
+            className="hidden md:flex flex-wrap gap-2 mt-[32px] mb-10"
             style={{
               background: '#1a2535',
               border: '1px solid rgba(255,255,255,0.08)',
@@ -78,6 +78,31 @@ export default function IntelligenceHubGrid({ articles }: IntelligenceHubGridPro
             ))}
           </div>
         </AnimatedSection>
+
+        {/* Category filter — mobile-only dropdown (≤768px) */}
+        <div className="md:hidden w-full mt-8 mb-6">
+          <select
+            value={activeCategory ?? 'all'}
+            onChange={(e) =>
+              handleCategoryChange(e.target.value === 'all' ? null : e.target.value)
+            }
+            className="w-full px-4 py-3 rounded-lg border text-sm font-mono tracking-widest uppercase"
+            style={{
+              background: '#f5f0e8',
+              borderColor: 'rgba(200,169,110,0.60)',
+              borderWidth: '1.5px',
+              color: '#151C2E',
+              outline: 'none',
+            }}
+          >
+            <option value="all">All Categories</option>
+            {CATEGORIES.map((cat) => (
+              <option key={cat} value={cat}>
+                {cat}
+              </option>
+            ))}
+          </select>
+        </div>
 
         {/* Article grid — silky reading surface */}
         <div className="bg-white/82 backdrop-blur-sm rounded-sm2 border border-white/25 p-8 max-sm:p-6">

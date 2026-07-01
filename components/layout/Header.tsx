@@ -17,6 +17,18 @@ const navLinks = [
   { label: 'Work With Us', href: '/work-with-us' },
 ]
 
+// Routes that render the fixed <BreakingBar /> (38px, pinned to top-0). On
+// these the header drops 38px so it sits just beneath the bar rather than
+// underneath it. Exact-match only: article/detail routes like
+// /intelligence-hub/[slug] don't carry the bar, so they stay at top-0.
+const BREAKING_BAR_ROUTES = [
+  '/',
+  '/about',
+  '/intelligence-hub',
+  '/executive-conversations',
+  '/events',
+]
+
 export default function Header() {
   const [scrolled, setScrolled] = useState(false)
   const [isOpen, setIsOpen] = useState(false)
@@ -60,12 +72,14 @@ export default function Header() {
   const isActive = (href: string) =>
     href === '/' ? pathname === '/' : pathname.startsWith(href)
 
+  const hasBreakingBar = BREAKING_BAR_ROUTES.includes(pathname)
+
   return (
     <>
       <header
         className={cn(
           'fixed left-0 right-0 z-[100] transition-all duration-300',
-          pathname === '/' ? 'top-[38px]' : 'top-0',
+          hasBreakingBar ? 'top-[38px]' : 'top-0',
           scrolled
             ? 'bg-deep/95 backdrop-blur-md border-b border-gold/20 py-3'
             : 'bg-transparent py-5'
@@ -77,13 +91,14 @@ export default function Header() {
               wordmark baked in). Transparent PNG, light wordmark tuned for the dark
               navy nav. Wrapper reserves min-width so the nav pills can never squeeze
               it; object-contain keeps the lockup from cropping or distorting. */}
-          <Link href="/" className="flex items-center flex-shrink-0" style={{ minWidth: '200px' }}>
+          <Link href="/" className="flex items-center flex-shrink-0" style={{ minWidth: 0 }}>
             <Image
-              src="/logo.png"
+              src="/images/logo.png"
               alt="PrimeAxis Maritime Intelligence"
-              width={180}
-              height={52}
+              width={220}
+              height={64}
               quality={80}
+              className="h-10 md:h-[68px] w-auto"
               style={{ objectFit: 'contain', objectPosition: 'left center' }}
               priority
             />

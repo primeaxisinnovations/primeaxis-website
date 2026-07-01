@@ -57,6 +57,17 @@ export const metadata: Metadata = {
     type: 'website',
   },
   verification: googleSiteVerification ? { google: googleSiteVerification } : undefined,
+  icons: {
+    icon: '/favicon-32.png',
+    apple: '/favicon-180.png',
+    other: [
+      {
+        rel: 'icon',
+        url: '/favicon-512.png',
+        sizes: '512x512',
+      },
+    ],
+  },
 }
 
 export default function RootLayout({

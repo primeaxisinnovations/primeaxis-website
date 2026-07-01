@@ -3,6 +3,7 @@ import Image from 'next/image'
 import { getAllConversations } from '@/lib/conversation-content'
 import AnimatedSection from '@/components/ui/AnimatedSection'
 import ConversationCard from '@/components/ui/ConversationCard'
+import BreakingBar from '@/components/sections/BreakingBar'
 
 export const metadata: Metadata = {
   title: 'Executive Conversations | PrimeAxis',
@@ -21,9 +22,12 @@ export default async function ExecutiveConversationsPage() {
   return (
     <div className="min-h-screen bg-cream">
 
+      <BreakingBar />
+
       {/* Page Header — full-viewport hero photograph, bleeding behind the
           transparent fixed header (-mt cancels the global main pt-[102px]) ── */}
       <section className="hero-section relative min-h-screen overflow-hidden -mt-[102px]">
+        {/* Desktop hero image */}
         <Image
           src="https://n0jyvquhgs2welj7.public.blob.vercel-storage.com/uploads/1782264691397-a9a17b5b-nym.png"
           alt="Executive conversation interview"
@@ -31,7 +35,18 @@ export default async function ExecutiveConversationsPage() {
           priority
           quality={80}
           sizes="100vw"
-          className="object-cover object-center"
+          className="object-cover hero-exec-image hidden md:block"
+        />
+        {/* Mobile hero image — dedicated portrait crop */}
+        <Image
+          src="/images/hero-conversations-mobile.png"
+          alt="Executive conversation interview"
+          fill
+          priority
+          quality={80}
+          sizes="100vw"
+          className="object-cover block md:hidden"
+          style={{ objectFit: 'cover', objectPosition: 'center' }}
         />
         <div
           className="absolute inset-x-0 top-0 h-[80px]"

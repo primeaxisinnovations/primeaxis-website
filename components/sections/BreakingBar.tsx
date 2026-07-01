@@ -1,14 +1,13 @@
 import Link from 'next/link'
+import { getAllArticles } from '@/lib/content'
 import type { Article } from '@/types'
 
-interface BreakingBarProps {
-  // The caller (app/page.tsx, a Server Component) fetches these live via
-  // getAllArticles() — BreakingBar itself can't call it directly, since it's
-  // rendered inside HomeContent, a 'use client' tree, and getAllArticles()
-  // depends on Node-only modules (lib/github.ts) that can't ship to the
-  // browser bundle.
-  articles: Article[]
-}
+// Self-contained Server Component: fetches its own published articles via
+// getAllArticles() so it can be dropped into any Server Component page with no
+// props. The markup is purely presentational (Links + a CSS-only ticker
+// animation), so it ships no client JS. getAllArticles() is request-memoized
+// (React cache()), so rendering this alongside a page that already calls it
+// costs a single GitHub request, not two.
 
 function TickerItems({ articles, copyKey }: { articles: Article[]; copyKey: string }) {
   return (
@@ -25,9 +24,11 @@ function TickerItems({ articles, copyKey }: { articles: Article[]; copyKey: stri
   )
 }
 
-export default function BreakingBar({ articles }: BreakingBarProps) {
-  // Never show fake/placeholder headlines — if there's nothing real to
-  // show (no published articles), there's no bar at all.
+export default async function BreakingBar() {
+  // Mirror the homepage's previous behaviour: the five most recent published
+  // articles. Never show fake/placeholder headlines — if there's nothing real
+  // to show (no published articles), there's no bar at all.
+  const articles = (await getAllArticles()).slice(0, 5)
   if (articles.length === 0) return null
 
   return (

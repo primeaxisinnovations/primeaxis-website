@@ -1,21 +1,29 @@
 ---
-title: "NIMASA Maritime Safety Summit 2026"
-date: "2026-05-20"
-category: "summit"
-status: "published"
-coverImage: "https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=1200&q=80&fit=crop"
-description: "An executive gathering of maritime safety regulators, port administrators, and industry leaders addressing Nigeria's maritime safety framework."
+title: WISTA Nigeria Executive Committee Strategy Meeting
+date: '2025-11-01'
+category: summit
+status: published
+coverImage: >-
+  https://n0jyvquhgs2welj7.public.blob.vercel-storage.com/uploads/1782767183479-d2a52c81-whatsapp-image-2026-06-15-at-18-57-55-3.jpg
+description: >-
+  President and Executive Committee members met to review strategic priorities
+  for advancing women's leadership across Nigeria's maritime industry.
 gallery:
-  - url: "https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=1200&q=80&fit=crop"
-    type: "image"
-    caption: "Opening ceremony"
-  - url: "https://images.unsplash.com/photo-1587825140708-dfaf72ae4b04?w=1200&q=80&fit=crop"
-    type: "image"
-    caption: "Panel session on regional safety enforcement"
-  - url: "https://images.unsplash.com/photo-1475721027785-f74eccf877e2?w=1200&q=80&fit=crop"
-    type: "image"
-    caption: "Networking session"
-  - url: "https://images.unsplash.com/photo-1521737604893-d14cc237f11d?w=1200&q=80&fit=crop"
-    type: "image"
-    caption: "Closing remarks and communiqué"
+  - url: >-
+      https://n0jyvquhgs2welj7.public.blob.vercel-storage.com/uploads/1782767200874-7e2e29de-whatsapp-image-2026-06-15-at-18-57-57-1.jpg
+    type: image
+    caption: Opening ceremony
+  - url: >-
+      https://n0jyvquhgs2welj7.public.blob.vercel-storage.com/uploads/1782767215975-aa3e564a-whatsapp-image-2026-06-15-at-18-57-56-2.jpg
+    type: image
+    caption: Panel session on regional safety enforcement
+  - url: >-
+      https://n0jyvquhgs2welj7.public.blob.vercel-storage.com/uploads/1782767226989-d7cfcc0c-whatsapp-image-2026-06-15-at-18-57-57.jpg
+    type: image
+    caption: Networking session
+  - url: >-
+      https://n0jyvquhgs2welj7.public.blob.vercel-storage.com/uploads/1782767299767-d861a691-whatsapp-image-2026-06-15-at-18-58-02-1.jpg
+    type: image
+    caption: Closing remarks and communiqué
 ---
+

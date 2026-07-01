@@ -9,6 +9,7 @@
 // for the `export const dynamic = 'force-dynamic'` this requires, and the
 // rate-limit/latency/availability notes recorded alongside it.
 
+import { cache } from 'react'
 import matter from 'gray-matter'
 import { listFiles, getFile } from './github'
 import type { Article } from '@/types'
@@ -53,7 +54,11 @@ async function fetchArticle(filename: string): Promise<Article | null> {
 
 // Public-facing pages only ever see published articles — drafts are visible
 // solely through the admin list, which reads lib/github.ts directly.
-export async function getAllArticles(): Promise<Article[]> {
+//
+// Wrapped in React cache() so multiple server components in the same request
+// (e.g. a page plus its self-fetching <BreakingBar />) share one GitHub call
+// instead of each hitting the API.
+export const getAllArticles = cache(async function getAllArticles(): Promise<Article[]> {
   const filenames = (await listFiles(ARTICLES_DIR)).filter((name) => name.endsWith('.md'))
   // allSettled, not all — fetchArticle already catches its own errors and
   // never rejects, but this is the belt-and-suspenders guarantee that one
@@ -68,7 +73,7 @@ export async function getAllArticles(): Promise<Article[]> {
   }
 
   return articles.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
-}
+})
 
 // Fetches the single file directly rather than scanning getAllArticles() —
 // a detail page view should cost one GitHub request, not one-per-article.

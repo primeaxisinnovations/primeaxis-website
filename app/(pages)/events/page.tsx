@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import Image from 'next/image'
 import { getAllEvents } from '@/lib/events'
 import EventsBrowser from '@/components/events/EventsBrowser'
+import BreakingBar from '@/components/sections/BreakingBar'
 
 export const metadata: Metadata = {
   title: 'Events | PrimeAxis',
@@ -20,17 +21,19 @@ export default async function EventsPage() {
   return (
     <div className="min-h-screen" style={{ background: '#0D1824' }}>
 
+      <BreakingBar />
+
       {/* Page Header — full-viewport hero photograph, bleeding behind the
           transparent fixed header (-mt cancels the global main pt-[102px]) ── */}
       <section className="hero-section relative min-h-screen overflow-hidden -mt-[102px]">
         <Image
-          src="https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=1600&q=80&fit=crop"
+          src="/images/Events.png"
           alt="Maritime conference gathering"
           fill
           priority
           quality={80}
           sizes="100vw"
-          className="object-cover object-center"
+          className="object-cover hero-events-image"
         />
         <div
           className="absolute inset-0"

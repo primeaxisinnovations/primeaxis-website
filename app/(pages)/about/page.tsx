@@ -3,6 +3,7 @@ import type { ReactElement } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 import AnimatedSection from '@/components/ui/AnimatedSection'
+import BreakingBar from '@/components/sections/BreakingBar'
 
 const FOUNDER_PHOTO_URL =
   'https://n0jyvquhgs2welj7.public.blob.vercel-storage.com/founder/nneoma-obi-asualo.jpg'
@@ -98,6 +99,8 @@ export default function AboutPage() {
   return (
     <div className="min-h-screen bg-cream">
 
+      <BreakingBar />
+
       {/* ── About Hero + Mission/Vision — combined full-bleed section.
           Hero text sits in the top portion; Mission/Vision glass cards
           overlap the lower portion of the same background photograph. ── */}
@@ -133,7 +136,7 @@ export default function AboutPage() {
         />
 
         {/* Hero text — centred, floating in the middle of the section */}
-        <div className="relative z-[3] w-full flex flex-col items-center justify-center text-center pt-[100px] pb-[60px] px-[56px] max-md:px-5">
+        <div className="relative z-[3] w-full flex flex-col items-center justify-center text-center pt-[170px] pb-[60px] px-[56px] max-md:px-5">
           <AnimatedSection>
             <h1 className="font-display text-[clamp(28px,4vw,54px)] font-bold text-white leading-[1.1] max-w-[700px] mx-auto text-center mb-4">
               Shaping Africa&apos;s Maritime Conversations
@@ -489,6 +492,9 @@ export default function AboutPage() {
       <section className="py-[56px] max-sm:py-14 bg-cream">
         <div className="max-w-[1240px] mx-auto px-11 max-md:px-5 text-center">
           <AnimatedSection>
+            <p className="font-sans text-[15px] font-light leading-[1.78] text-ink max-w-[640px] mx-auto mb-8 text-center">
+              We&apos;re committed to producing independent, evidence-based maritime intelligence that informs policy, business strategy and industry decision-making across Africa. Our work is guided by accuracy, integrity, credibility and responsible analysis.
+            </p>
             <span className="block font-mono text-[10.5px] tracking-[0.2em] uppercase text-gold mb-4">
               Start Exploring
             </span>
