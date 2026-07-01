@@ -138,7 +138,7 @@ export default function HomeContent({
           className="absolute inset-0"
           style={{
             background:
-              "linear-gradient(to right, rgba(21,28,46,.75) 28%, rgba(21,28,46,.18) 100%), linear-gradient(to top, rgba(21,28,46,.68) 0%, transparent 45%)",
+              "linear-gradient(to right, rgba(21,28,46,.83) 28%, rgba(21,28,46,.20) 100%), linear-gradient(to top, rgba(21,28,46,.75) 0%, transparent 45%)",
           }}
         />
 
@@ -163,9 +163,12 @@ export default function HomeContent({
           <div className="max-w-[1240px] mx-auto px-11 max-md:px-5 w-full">
             <div className="max-w-[720px] mx-auto">
               <h1 className="hero-headline-anim font-display text-[clamp(28px,3.6vw,46px)] font-bold leading-[1.18] text-white mb-5 text-center max-w-[780px] mx-auto">
-                Leading the <span style={{ color: "#c8a96e" }}>Conversation</span> on
+                Leading the{" "}
+                <span style={{ color: "#c8a96e" }}>Conversation</span>
+                {" "}on{" "}
                 <br />
-                <span style={{ color: "#c8a96e" }}>Africa&apos;s Maritime</span> Industry
+                <span style={{ color: "#c8a96e" }}>Africa&apos;s Maritime</span>
+                {" "}Industry
               </h1>
 
               <p className="hero-standfirst-anim text-[16.5px] font-light leading-[1.7] text-white/60 max-w-[520px] mx-auto mb-11 text-center">
