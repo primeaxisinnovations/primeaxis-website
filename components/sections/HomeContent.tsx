@@ -170,7 +170,7 @@ export default function HomeContent({
               </h1>
 
               <p className="hero-standfirst-anim text-[16.5px] font-light leading-[1.7] text-white/60 max-w-[520px] mx-auto mb-11 text-center">
-                Trusted insights and expert perspectives shaping decisions across Africa&apos;s maritime ecosystem.
+                PrimeAxis is Africa&apos;s maritime intelligence and strategic communications platform — where executives engage, narratives are shaped, and industry authority is built. Insight that informs. Media that matters.
               </p>
 
               <div className="hero-actions-anim flex gap-3 flex-wrap justify-center">
