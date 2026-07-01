@@ -4,9 +4,11 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { getAllConversations, getConversationBySlug } from '@/lib/conversation-content'
 import { formatDate } from '@/lib/utils'
+import { paragraphExcerpt, ogDescription } from '@/lib/share-excerpt'
 import AnimatedSection from '@/components/ui/AnimatedSection'
 import ConversationCard from '@/components/ui/ConversationCard'
 import DispatchHeader from '@/components/ui/DispatchHeader'
+import NewsletterForm from '@/components/ui/NewsletterForm'
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://primeaxisinnovations.com.ng'
 
@@ -27,12 +29,27 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const { slug } = await params
   const conversation = await getConversationBySlug(slug)
   if (!conversation) return {}
+  // Conversations have no article body. Prefer the first paragraph of the
+  // (optional, HTML) introduction; otherwise keep the hand-written standfirst
+  // excerpt, which is already a purpose-built OG-length summary.
+  const description =
+    (conversation.introduction && ogDescription(conversation.introduction)) ||
+    conversation.excerpt
+  const ogTitle = `${conversation.executiveName} — ${conversation.title}`
   return {
     title: `${conversation.executiveName} | Executive Conversations | PrimeAxis`,
-    description: conversation.excerpt,
+    description,
     openGraph: {
-      title: `${conversation.executiveName} — ${conversation.title}`,
-      description: conversation.excerpt,
+      title: ogTitle,
+      description,
+      images: [{ url: conversation.photo }],
+      type: 'article',
+    },
+    twitter: {
+      card: 'summary',
+      title: ogTitle,
+      description,
+      images: [conversation.photo],
     },
   }
 }
@@ -66,6 +83,19 @@ export default async function ConversationPage({ params }: PageProps) {
   const encodedTitle = encodeURIComponent(
     `${conversation.executiveName} — ${conversation.title} | PrimeAxis`
   )
+
+  // WhatsApp shares carry a real excerpt (first two paragraphs). Conversations
+  // have no body, so use the introduction prose when present, else the
+  // standfirst excerpt. WhatsApp renders this text directly.
+  const whatsappExcerpt = paragraphExcerpt(
+    conversation.introduction ?? conversation.excerpt,
+    2,
+    400
+  )
+  const whatsappText = whatsappExcerpt
+    ? `${conversation.executiveName} — ${conversation.title}\n\n${whatsappExcerpt}…\n\nRead more: ${pageUrl}`
+    : `${conversation.executiveName} — ${conversation.title}\n\n${pageUrl}`
+  const whatsappShareUrl = `https://wa.me/?text=${encodeURIComponent(whatsappText)}`
 
   return (
     <div className="min-h-screen bg-cream">
@@ -304,7 +334,7 @@ export default async function ConversationPage({ params }: PageProps) {
 
               {/* WhatsApp */}
               <a
-                href={`https://wa.me/?text=${encodedTitle}%20${encodedUrl}`}
+                href={whatsappShareUrl}
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="Share on WhatsApp"
@@ -434,19 +464,7 @@ export default async function ConversationPage({ params }: PageProps) {
             Strategic intelligence, policy analysis, and industry perspectives — direct to your
             inbox, free.
           </p>
-          <div className="flex max-sm:flex-col">
-            <input
-              type="email"
-              placeholder="Your professional email address"
-              className="flex-1 font-sans text-[13.5px] px-[18px] py-[13px] border border-white/10 bg-white/5 text-white placeholder:text-white/30 outline-none focus:border-gold transition-colors duration-200"
-            />
-            <button
-              type="submit"
-              className="font-sans text-[13px] font-semibold tracking-[.04em] bg-gold text-deep px-6 py-[13px] whitespace-nowrap hover:bg-gold-light transition-colors duration-200 max-sm:w-full"
-            >
-              Subscribe Free
-            </button>
-          </div>
+          <NewsletterForm variant="dark" />
         </div>
       </section>
 

@@ -4,10 +4,12 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { getAllArticles, getArticleBySlug } from '@/lib/content'
 import { formatDate } from '@/lib/utils'
+import { paragraphExcerpt, ogDescription } from '@/lib/share-excerpt'
 import AnimatedSection from '@/components/ui/AnimatedSection'
 import Tag from '@/components/ui/Tag'
 import ArticleCard from '@/components/ui/ArticleCard'
 import DispatchHeader from '@/components/ui/DispatchHeader'
+import NewsletterForm from '@/components/ui/NewsletterForm'
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://primeaxisinnovations.com.ng'
 
@@ -28,13 +30,24 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const { slug } = await params
   const article = await getArticleBySlug(slug)
   if (!article) return {}
+  // Strongest OG excerpt: first paragraph of the (HTML) body, cleaned and
+  // truncated to the ~200-char window these platforms actually display.
+  // Falls back to the hand-written excerpt if the body yields no text.
+  const description = ogDescription(article.body) || article.excerpt
   return {
     title: `${article.title} | PrimeAxis Maritime Intelligence`,
-    description: article.excerpt,
+    description,
     openGraph: {
       title: article.title,
-      description: article.excerpt,
+      description,
       images: [{ url: article.featuredImage }],
+      type: 'article',
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: article.title,
+      description,
+      images: [article.featuredImage],
     },
   }
 }
@@ -58,6 +71,14 @@ export default async function ArticlePage({ params }: PageProps) {
   const pageUrl = `${SITE_URL}/intelligence-hub/${article.slug}`
   const encodedUrl = encodeURIComponent(pageUrl)
   const encodedTitle = encodeURIComponent(article.title)
+
+  // WhatsApp shares carry a real excerpt (first two paragraphs of the body)
+  // because WhatsApp renders the passed text directly — unlike the OG scrapers.
+  const whatsappExcerpt = paragraphExcerpt(article.body, 2, 400)
+  const whatsappText = whatsappExcerpt
+    ? `${article.title}\n\n${whatsappExcerpt}…\n\nRead more: ${pageUrl}`
+    : `${article.title}\n\n${pageUrl}`
+  const whatsappShareUrl = `https://wa.me/?text=${encodeURIComponent(whatsappText)}`
 
   return (
     <div className="min-h-screen bg-cream">
@@ -189,7 +210,7 @@ export default async function ArticlePage({ params }: PageProps) {
 
               {/* WhatsApp */}
               <a
-                href={`https://wa.me/?text=${encodedTitle}%20${encodedUrl}`}
+                href={whatsappShareUrl}
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="Share on WhatsApp"
@@ -264,19 +285,7 @@ export default async function ArticlePage({ params }: PageProps) {
             Strategic intelligence, policy analysis, and industry perspectives — direct to your
             inbox, free.
           </p>
-          <div className="flex max-sm:flex-col">
-            <input
-              type="email"
-              placeholder="Your professional email address"
-              className="flex-1 font-sans text-[13.5px] px-[18px] py-[13px] border border-white/10 bg-white/5 text-white placeholder:text-white/30 outline-none focus:border-gold transition-colors duration-200"
-            />
-            <button
-              type="submit"
-              className="font-sans text-[13px] font-semibold tracking-[.04em] bg-gold text-deep px-6 py-[13px] whitespace-nowrap hover:bg-gold-light transition-colors duration-200 max-sm:w-full"
-            >
-              Subscribe Free
-            </button>
-          </div>
+          <NewsletterForm variant="dark" />
         </div>
       </section>
 

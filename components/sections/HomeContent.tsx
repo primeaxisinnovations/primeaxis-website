@@ -5,6 +5,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { LayoutGrid } from "lucide-react";
 import ArticleCard from "@/components/ui/ArticleCard";
+import NewsletterForm from "@/components/ui/NewsletterForm";
 import { CATEGORIES, categoryToSlug } from "@/lib/categories";
 import { CATEGORY_ICONS } from "@/lib/category-icons";
 import { services } from "@/lib/placeholder-data";
@@ -641,16 +642,7 @@ export default function HomeContent({
               Join maritime executives, policy professionals, and industry decision-makers who receive curated intelligence, executive insights, and strategic perspectives on Africa&apos;s maritime and blue economy sector — direct to their inbox.
             </p>
 
-            <form className="flex max-sm:flex-col max-w-[460px] mx-auto mb-[14px]" onSubmit={(e) => e.preventDefault()}>
-              <input
-                type="email"
-                placeholder="Your professional email address"
-                className="flex-1 font-sans text-[13.5px] px-[18px] py-[13px] border border-cream-dark max-sm:border-r border-r-0 bg-white text-ink outline-none focus:border-gold placeholder:text-muted transition-colors duration-200"
-              />
-              <button type="submit" className="font-sans text-[13px] font-semibold tracking-[.04em] bg-deep text-white px-6 py-[13px] whitespace-nowrap hover:bg-teal transition-colors duration-200 max-sm:w-full">
-                Subscribe Free
-              </button>
-            </form>
+            <NewsletterForm variant="light" />
 
             <p className="font-mono text-[9.5px] tracking-[.1em] text-muted">
               No noise. Only intelligence. Unsubscribe anytime.

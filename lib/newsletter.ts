@@ -1,0 +1,35 @@
+import { put, get } from '@vercel/blob'
+
+interface Subscriber {
+  email: string
+  subscribedAt: string
+}
+
+const SUBSCRIBERS_PATH = 'newsletter/subscribers.json'
+
+export async function getSubscribers(): Promise<Subscriber[]> {
+  try {
+    // Private blob: `get` authenticates via BLOB_READ_WRITE_TOKEN and resolves
+    // the store URL from the pathname — an anonymous fetch would be rejected.
+    const result = await get(SUBSCRIBERS_PATH, { access: 'private' })
+    if (!result || result.statusCode !== 200) return []
+    return (await new Response(result.stream).json()) as Subscriber[]
+  } catch {
+    return []
+  }
+}
+
+export async function addSubscriber(email: string): Promise<{ success: boolean; error?: string }> {
+  const existing = await getSubscribers()
+  if (existing.some((s) => s.email.toLowerCase() === email.toLowerCase())) {
+    return { success: false, error: 'Already subscribed' }
+  }
+  const updated = [...existing, { email, subscribedAt: new Date().toISOString() }]
+  await put(SUBSCRIBERS_PATH, JSON.stringify(updated, null, 2), {
+    access: 'private',
+    contentType: 'application/json',
+    addRandomSuffix: false,
+    allowOverwrite: true,
+  })
+  return { success: true }
+}
