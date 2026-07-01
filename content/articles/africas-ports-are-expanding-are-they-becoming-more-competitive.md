@@ -11,10 +11,10 @@ excerpt: >-
   facilities.
 category: Ports & Infrastructure
 author: PrimeAxis Insight
-date: '2026-06-25'
+date: '2026-06-23'
 readingTime: 4 min read
 featuredImage: >-
-  https://n0jyvquhgs2welj7.public.blob.vercel-storage.com/uploads/1782352120558-97f793eb-a7.png
+  https://n0jyvquhgs2welj7.public.blob.vercel-storage.com/uploads/1782911617653-bb13bfe0-2.webp
 tags: []
 referenceCode: PI-2026-002
 status: published
