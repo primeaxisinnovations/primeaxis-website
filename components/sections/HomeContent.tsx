@@ -164,12 +164,9 @@ export default function HomeContent({
           <div className="max-w-[1240px] mx-auto px-11 max-md:px-5 w-full">
             <div className="max-w-[720px] mx-auto">
               <h1 className="hero-headline-anim font-display text-[clamp(28px,3.6vw,46px)] font-bold leading-[1.18] text-white mb-5 text-center max-w-[780px] mx-auto">
-                Leading the{" "}
-                <span style={{ color: "#c8a96e" }}>Conversation</span>
-                {" "}on{" "}
+                The Platform Shaping{" "}
                 <br />
-                <span style={{ color: "#c8a96e" }}>Africa&apos;s Maritime</span>
-                {" "}Industry
+                <span style={{ color: "#c8a96e" }}>Africa&apos;s Maritime Narrative</span>
               </h1>
 
               <p className="hero-standfirst-anim text-[16.5px] font-light leading-[1.7] text-white/60 max-w-[520px] mx-auto mb-11 text-center">
