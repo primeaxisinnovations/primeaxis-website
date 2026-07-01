@@ -27,6 +27,11 @@ const ADMIN_SECTIONS: AdminSection[] = [
     description: 'Create, edit, and review conferences, summits, and press briefings.',
     href: '/admin/events',
   },
+  {
+    label: 'Newsletter Subscribers',
+    description: 'View, export, and manage newsletter subscribers.',
+    href: '/admin/newsletter',
+  },
 ]
 
 export default async function AdminDashboardPage() {

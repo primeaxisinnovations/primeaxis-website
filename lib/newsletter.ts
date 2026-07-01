@@ -33,3 +33,23 @@ export async function addSubscriber(email: string): Promise<{ success: boolean; 
   })
   return { success: true }
 }
+
+export async function removeSubscriber(email: string): Promise<{ success: boolean; error?: string }> {
+  const existing = await getSubscribers()
+  const filtered = existing.filter((s) => s.email.toLowerCase() !== email.toLowerCase())
+
+  if (filtered.length === existing.length) {
+    return { success: false, error: 'Subscriber not found' }
+  }
+
+  // Keep 'private' to match addSubscriber — this store was switched to private
+  // access, and a 'public' write here would flip the whole file back to public.
+  await put(SUBSCRIBERS_PATH, JSON.stringify(filtered, null, 2), {
+    access: 'private',
+    contentType: 'application/json',
+    addRandomSuffix: false,
+    allowOverwrite: true,
+  })
+
+  return { success: true }
+}
