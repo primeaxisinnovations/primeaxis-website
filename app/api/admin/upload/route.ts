@@ -70,13 +70,7 @@ export async function POST(request: NextRequest) {
   try {
     // Images: compress + convert to WebP via sharp. Videos: upload as-is.
     if (IMAGE_TYPES.has(file.type)) {
-      // Copy the bytes into a fresh Buffer. On Vercel's runtime,
-      // file.arrayBuffer() can be backed by a SharedArrayBuffer, and
-      // Buffer.from(arrayBuffer) only creates a *view* over it — sharp's
-      // native binding then rejects it with "ArrayBuffer: SharedArrayBuffer
-      // is not allowed". Going through a Uint8Array forces a real copy onto
-      // a regular ArrayBuffer.
-      const buffer = Buffer.from(new Uint8Array(await file.arrayBuffer()))
+      const buffer = Buffer.from(await file.arrayBuffer())
 
       const optimized = await sharp(buffer)
         .resize(1600, null, {
@@ -87,7 +81,14 @@ export async function POST(request: NextRequest) {
 
       const webpPathname = pathname.replace(/\.(jpg|jpeg|png|webp)$/i, '.webp')
 
-      const blob = await put(webpPathname, optimized, {
+      // In Vercel's runtime sharp's output Buffer can be backed by a
+      // SharedArrayBuffer, and @vercel/blob's put() sends it via fetch
+      // (undici), which rejects SharedArrayBuffer-backed bodies with
+      // "ArrayBuffer: SharedArrayBuffer is not allowed". new Uint8Array(...)
+      // copies the bytes into a fresh, non-shared ArrayBuffer; Buffer.from
+      // wraps that same buffer (no extra copy) so it satisfies put()'s type.
+      const safeBody = Buffer.from(new Uint8Array(optimized).buffer)
+      const blob = await put(webpPathname, safeBody, {
         access: 'public',
         contentType: 'image/webp',
       })
