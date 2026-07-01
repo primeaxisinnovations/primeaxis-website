@@ -70,7 +70,13 @@ export async function POST(request: NextRequest) {
   try {
     // Images: compress + convert to WebP via sharp. Videos: upload as-is.
     if (IMAGE_TYPES.has(file.type)) {
-      const buffer = Buffer.from(await file.arrayBuffer())
+      // Copy the bytes into a fresh Buffer. On Vercel's runtime,
+      // file.arrayBuffer() can be backed by a SharedArrayBuffer, and
+      // Buffer.from(arrayBuffer) only creates a *view* over it — sharp's
+      // native binding then rejects it with "ArrayBuffer: SharedArrayBuffer
+      // is not allowed". Going through a Uint8Array forces a real copy onto
+      // a regular ArrayBuffer.
+      const buffer = Buffer.from(new Uint8Array(await file.arrayBuffer()))
 
       const optimized = await sharp(buffer)
         .resize(1600, null, {
