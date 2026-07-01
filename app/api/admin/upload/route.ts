@@ -67,25 +67,17 @@ export async function POST(request: NextRequest) {
   const uniqueId = `${Date.now()}-${randomUUID().slice(0, 8)}`
   const pathname = `uploads/${uniqueId}-${sanitizeFilenameBase(file.name)}.${extension}`
 
-  // DIAGNOSTIC: reports whether a buffer's underlying ArrayBuffer is shared —
-  // this is what undici rejects. Remove once the SharedArrayBuffer issue is fixed.
-  const isSAB = (u8: Uint8Array) => u8.buffer instanceof SharedArrayBuffer
-
   try {
     // Images: compress + convert to WebP via sharp. Videos: upload as-is.
     if (IMAGE_TYPES.has(file.type)) {
-      console.log('CHECKPOINT 1 START — Buffer.from(await file.arrayBuffer())')
       const buffer = Buffer.from(await file.arrayBuffer())
-      console.log(`CHECKPOINT 1 OK — input buffer isSAB=${isSAB(buffer)} bytes=${buffer.byteLength}`)
 
-      console.log('CHECKPOINT 2 START — sharp(...).toBuffer()')
       const optimized = await sharp(buffer)
         .resize(1600, null, {
           withoutEnlargement: true, // never upscale small images
         })
         .webp({ quality: 82 })
         .toBuffer()
-      console.log(`CHECKPOINT 2 OK — sharp output isSAB=${isSAB(optimized)} bytes=${optimized.byteLength}`)
 
       const webpPathname = pathname.replace(/\.(jpg|jpeg|png|webp)$/i, '.webp')
 
@@ -96,13 +88,10 @@ export async function POST(request: NextRequest) {
       // copies the bytes into a fresh, non-shared ArrayBuffer; Buffer.from
       // wraps that same buffer (no extra copy) so it satisfies put()'s type.
       const safeBody = Buffer.from(new Uint8Array(optimized).buffer)
-
-      console.log(`CHECKPOINT 3 START — put(image) safeBody isSAB=${isSAB(safeBody)} bytes=${safeBody.byteLength}`)
       const blob = await put(webpPathname, safeBody, {
         access: 'public',
         contentType: 'image/webp',
       })
-      console.log('CHECKPOINT 3 OK — put(image) returned', blob.url)
       return NextResponse.json({ url: blob.url })
     }
 
@@ -112,8 +101,6 @@ export async function POST(request: NextRequest) {
     })
     return NextResponse.json({ url: blob.url })
   } catch (error) {
-    // DIAGNOSTIC: full error + stack so the Vercel log shows exactly where it threw.
-    console.error('UPLOAD ERROR —', error)
     const message = error instanceof Error ? error.message : String(error)
     return NextResponse.json({ error: `Upload failed: ${message}` }, { status: 500 })
   }
