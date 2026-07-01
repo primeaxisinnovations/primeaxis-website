@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, ReactElement } from "react";
+import { useEffect, useRef, useState, ReactElement } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { LayoutGrid } from "lucide-react";
@@ -22,6 +22,12 @@ function ArrowRight({ size = 14, strokeWidth = 2 }: { size?: number; strokeWidth
     </svg>
   );
 }
+
+const CAROUSEL_SLIDES = [
+  "/images/Hero-1.png",
+  "/images/Hero-2.png",
+  "/images/Hero-3.png",
+];
 
 const FEATURED_BEAT_NAMES = new Set([
   "Maritime Policy",
@@ -77,6 +83,9 @@ export default function HomeContent({
   featuredConversation,
   otherConversations,
 }: HomeContentProps) {
+  const [activeSlide, setActiveSlide] = useState(0);
+  const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
+
   // Intersection-observer fade-ins
   useEffect(() => {
     const io = new IntersectionObserver(
@@ -91,21 +100,45 @@ export default function HomeContent({
     return () => io.disconnect();
   }, []);
 
+  // Hero carousel: auto-advance every 5 s
+  useEffect(() => {
+    intervalRef.current = setInterval(() => {
+      setActiveSlide((prev) => (prev + 1) % CAROUSEL_SLIDES.length);
+    }, 5000);
+    return () => { if (intervalRef.current) clearInterval(intervalRef.current); };
+  }, []);
+
   return (
     <>
       {/* ── HERO — full-screen fade carousel ──────────────────── */}
       <section
-        className="hero-section min-h-screen grid grid-rows-[1fr_auto] relative overflow-hidden -mt-[102px]"
-        style={{
-          background: "linear-gradient(135deg, #0d1b2a 0%, #1a2d45 50%, #0d1b2a 100%)",
-        }}
+        className="hero-section hero-carousel min-h-screen grid grid-rows-[1fr_auto] bg-deep relative overflow-hidden -mt-[102px]"
       >
-        {/* Atmospheric radial glows */}
+        {/* Carousel slides */}
+        {CAROUSEL_SLIDES.map((url, i) => (
+          <div
+            key={url}
+            className="absolute inset-0 transition-opacity ease-in-out"
+            style={{ opacity: i === activeSlide ? 1 : 0, transitionDuration: "1500ms" }}
+          >
+            <Image
+              src={url}
+              alt="PrimeAxis Maritime Intelligence"
+              fill
+              quality={85}
+              sizes="100vw"
+              style={{ objectFit: "cover", objectPosition: "center" }}
+              {...(i === 0 ? { priority: true } : { loading: "lazy" as const })}
+            />
+          </div>
+        ))}
+
+        {/* Directional gradient overlay */}
         <div
-          className="absolute inset-0 pointer-events-none"
+          className="absolute inset-0"
           style={{
             background:
-              "radial-gradient(ellipse 90% 70% at 65% 40%, rgba(0,77,99,.55) 0%, transparent 65%), radial-gradient(ellipse 50% 60% at 5% 90%, rgba(0,40,56,.7) 0%, transparent 55%), radial-gradient(ellipse 40% 40% at 90% 10%, rgba(191,159,102,.04) 0%, transparent 50%)",
+              "linear-gradient(to right, rgba(21,28,46,.75) 28%, rgba(21,28,46,.18) 100%), linear-gradient(to top, rgba(21,28,46,.68) 0%, transparent 45%)",
           }}
         />
 
@@ -157,6 +190,22 @@ export default function HomeContent({
               </div>
             </div>
           </div>
+        </div>
+
+        {/* Carousel navigation dots */}
+        <div className="absolute bottom-24 left-0 right-0 z-[3] flex justify-center items-center gap-2 max-sm:hidden">
+          {CAROUSEL_SLIDES.map((_, i) => (
+            <button
+              key={i}
+              onClick={() => setActiveSlide(i)}
+              aria-label={`Go to slide ${i + 1}`}
+              className={`btn-bare h-[5px] transition-all duration-300 ${
+                i === activeSlide
+                  ? "w-6 bg-gold"
+                  : "w-[5px] rounded-full bg-white/35 hover:bg-white/60"
+              }`}
+            />
+          ))}
         </div>
 
       </section>
