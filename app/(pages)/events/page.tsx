@@ -27,7 +27,7 @@ export default async function EventsPage() {
           transparent fixed header (-mt cancels the global main pt-[102px]) ── */}
       <section className="hero-section relative min-h-screen overflow-hidden -mt-[102px]">
         <Image
-          src="https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=1600&q=80&fit=crop"
+          src="/images/Events.png"
           alt="Maritime conference gathering"
           fill
           priority
