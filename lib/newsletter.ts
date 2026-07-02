@@ -7,11 +7,21 @@ interface Subscriber {
 
 const SUBSCRIBERS_PATH = 'newsletter/subscribers.json'
 
+// Dedicated Blob store for newsletter data, kept separate from the image
+// upload store. Every get()/put() below passes this token explicitly — the
+// SDK would otherwise fall back to process.env.BLOB_READ_WRITE_TOKEN (the
+// image store), silently writing subscribers to the wrong store.
+const NEWSLETTER_BLOB_TOKEN = process.env.NEWSLETTER_READ_WRITE_TOKEN
+
 export async function getSubscribers(): Promise<Subscriber[]> {
+  if (!NEWSLETTER_BLOB_TOKEN) {
+    console.error('NEWSLETTER_READ_WRITE_TOKEN is not set — cannot read subscribers')
+    return []
+  }
   try {
-    // Private blob: `get` authenticates via BLOB_READ_WRITE_TOKEN and resolves
+    // Private blob: `get` authenticates via the newsletter token and resolves
     // the store URL from the pathname — an anonymous fetch would be rejected.
-    const result = await get(SUBSCRIBERS_PATH, { access: 'private' })
+    const result = await get(SUBSCRIBERS_PATH, { access: 'private', token: NEWSLETTER_BLOB_TOKEN })
     if (!result || result.statusCode !== 200) return []
     return (await new Response(result.stream).json()) as Subscriber[]
   } catch {
@@ -20,6 +30,10 @@ export async function getSubscribers(): Promise<Subscriber[]> {
 }
 
 export async function addSubscriber(email: string): Promise<{ success: boolean; error?: string }> {
+  if (!NEWSLETTER_BLOB_TOKEN) {
+    console.error('NEWSLETTER_READ_WRITE_TOKEN is not set — cannot save subscriber')
+    return { success: false, error: 'Failed to save subscription' }
+  }
   try {
     const existing = await getSubscribers()
     if (existing.some((s) => s.email.toLowerCase() === email.toLowerCase())) {
@@ -31,6 +45,7 @@ export async function addSubscriber(email: string): Promise<{ success: boolean; 
       contentType: 'application/json',
       addRandomSuffix: false,
       allowOverwrite: true,
+      token: NEWSLETTER_BLOB_TOKEN,
     })
     return { success: true }
   } catch (error) {
@@ -44,6 +59,10 @@ export async function addSubscriber(email: string): Promise<{ success: boolean; 
 }
 
 export async function removeSubscriber(email: string): Promise<{ success: boolean; error?: string }> {
+  if (!NEWSLETTER_BLOB_TOKEN) {
+    console.error('NEWSLETTER_READ_WRITE_TOKEN is not set — cannot remove subscriber')
+    return { success: false, error: 'Failed to remove subscriber' }
+  }
   const existing = await getSubscribers()
   const filtered = existing.filter((s) => s.email.toLowerCase() !== email.toLowerCase())
 
@@ -58,6 +77,7 @@ export async function removeSubscriber(email: string): Promise<{ success: boolea
     contentType: 'application/json',
     addRandomSuffix: false,
     allowOverwrite: true,
+    token: NEWSLETTER_BLOB_TOKEN,
   })
 
   return { success: true }
