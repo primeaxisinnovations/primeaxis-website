@@ -1,6 +1,6 @@
 ---
 title: Regional ferry safety conference
-date: '2025-10-17'
+date: '2025-06-25'
 category: conference
 status: published
 coverImage: >-
