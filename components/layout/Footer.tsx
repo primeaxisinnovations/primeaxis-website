@@ -59,7 +59,7 @@ const socialLinks = [
   { Icon: FacebookIcon, label: 'Facebook', href: 'https://www.facebook.com/profile.php?id=61591338662946&rdid=6veXNrZObh7PiX9Y&share_url=https%3A%2F%2Fwww.facebook.com%2Fshare%2F1CBjs9ft7R%2F#' },
   { Icon: InstagramIcon, label: 'Instagram', href: 'https://www.instagram.com/primeaxisnews?utm_source=qr&igsh=MThsczE5OWZzbWZleA==' },
   { Icon: YouTubeIcon, label: 'YouTube', href: 'https://youtube.com/@primeaxislive?si=daLsFBSzJReYW_rI' },
-  { Icon: MessageCircle, label: 'WhatsApp', href: '#' },
+  { Icon: MessageCircle, label: 'WhatsApp', href: 'https://whatsapp.com/channel/0029Vb7y3bXCMY0MpEokHF36' },
 ]
 
 const columnHeading = 'font-mono text-[9.5px] tracking-[0.2em] text-gold/60 uppercase mb-5'
