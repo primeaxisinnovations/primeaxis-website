@@ -122,15 +122,42 @@ export default function HomeContent({
             className="absolute inset-0 transition-opacity ease-in-out"
             style={{ opacity: i === activeSlide ? 1 : 0, transitionDuration: "1500ms" }}
           >
-            <Image
-              src={url}
-              alt="PrimeAxis Maritime Intelligence"
-              fill
-              quality={85}
-              sizes="100vw"
-              style={{ objectFit: "cover", objectPosition: "center" }}
-              {...(i === 0 ? { priority: true } : { loading: "lazy" as const })}
-            />
+            {i === 1 ? (
+              <>
+                {/* Desktop version - slide 2 */}
+                <Image
+                  src="/images/Hero-1.2.png"
+                  alt="PrimeAxis Maritime Intelligence"
+                  fill
+                  quality={85}
+                  sizes="100vw"
+                  className="hidden md:block"
+                  style={{ objectFit: "cover", objectPosition: "center" }}
+                  loading="lazy"
+                />
+                {/* Mobile version - slide 2 */}
+                <Image
+                  src="/images/hero-1.2-mobile.png"
+                  alt="PrimeAxis Maritime Intelligence"
+                  fill
+                  quality={85}
+                  sizes="100vw"
+                  className="block md:hidden"
+                  style={{ objectFit: "cover", objectPosition: "center" }}
+                  loading="lazy"
+                />
+              </>
+            ) : (
+              <Image
+                src={url}
+                alt="PrimeAxis Maritime Intelligence"
+                fill
+                quality={85}
+                sizes="100vw"
+                style={{ objectFit: "cover", objectPosition: "center" }}
+                {...(i === 0 ? { priority: true } : { loading: "lazy" as const })}
+              />
+            )}
           </div>
         ))}
 
