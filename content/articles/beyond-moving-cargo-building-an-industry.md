@@ -1,5 +1,5 @@
 ---
-title: Beyond Moving Cargo. Building an Industry.
+title: COULD AFRICA BECOME A GLOBAL MARITIME SERVICES HUB?
 excerpt: >-
   A globally competitive maritime ecosystem is built on more than ports. It is
   built on institutions, expertise, finance, technology, regulation, and
