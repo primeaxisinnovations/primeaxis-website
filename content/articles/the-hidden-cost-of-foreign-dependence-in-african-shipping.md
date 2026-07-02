@@ -10,7 +10,7 @@ excerpt: >-
   ecosystem.
 category: Shipping & Logistics
 author: PrimeAxis Insights
-date: '2026-07-28'
+date: '2026-06-28'
 readingTime: 3 min read
 featuredImage: >-
   https://n0jyvquhgs2welj7.public.blob.vercel-storage.com/uploads/1782958031508-f3a0507d-7.webp

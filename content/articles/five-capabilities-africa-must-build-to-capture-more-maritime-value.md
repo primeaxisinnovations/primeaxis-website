@@ -5,7 +5,7 @@ excerpt: >-
   on external shipping capacity.
 category: Blue Economy
 author: PrimeAxis Insights
-date: '2026-07-29'
+date: '2026-06-29'
 readingTime: 3 min read
 featuredImage: >-
   https://n0jyvquhgs2welj7.public.blob.vercel-storage.com/uploads/1782960626652-a9b9fc7c-8.webp

@@ -26,7 +26,7 @@ function ArrowRight({ size = 14, strokeWidth = 2 }: { size?: number; strokeWidth
 
 const CAROUSEL_SLIDES = [
   "/images/Hero-1.png",
-  "/images/Hero-2.png",
+  "/images/Hero-1.2.png",
   "/images/Hero-3.png",
 ];
 

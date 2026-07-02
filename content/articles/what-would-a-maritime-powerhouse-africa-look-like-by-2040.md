@@ -6,7 +6,7 @@ excerpt: >-
   value chain.
 category: Industry Intelligence
 author: PrimeAxis Intelligence Desk
-date: '2026-07-30'
+date: '2026-06-30'
 readingTime: 3 min read
 featuredImage: >-
   https://n0jyvquhgs2welj7.public.blob.vercel-storage.com/uploads/1782961977790-d1398b91-9.webp
