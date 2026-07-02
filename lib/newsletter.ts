@@ -36,7 +36,9 @@ export async function addSubscriber(email: string): Promise<{ success: boolean; 
   } catch (error) {
     // A Blob write failure (e.g. missing token) must return a clear result
     // instead of throwing, so the route can respond with proper JSON.
-    console.error('addSubscriber failed:', error)
+    console.error('addSubscriber failed - full error:', error)
+    console.error('addSubscriber failed - error message:', error instanceof Error ? error.message : String(error))
+    console.error('addSubscriber failed - error stack:', error instanceof Error ? error.stack : 'no stack')
     return { success: false, error: 'Failed to save subscription' }
   }
 }
