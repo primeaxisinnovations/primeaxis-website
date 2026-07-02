@@ -9,7 +9,7 @@ author: PrimeAxis Intelligence Desk
 date: '2026-06-30'
 readingTime: 3 min read
 featuredImage: >-
-  https://n0jyvquhgs2welj7.public.blob.vercel-storage.com/uploads/1782961977790-d1398b91-9.webp
+  https://n0jyvquhgs2welj7.public.blob.vercel-storage.com/uploads/1782984976509-76fbc0cc-99.webp
 tags: []
 referenceCode: II-2026-003
 status: published
