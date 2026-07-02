@@ -12,7 +12,7 @@ const navLinks = [
   { label: 'About', href: '/about' },
   { label: 'Intelligence', href: '/intelligence-hub' },
   { label: 'Conversations', href: '/executive-conversations' },
-  { label: 'Events', href: '/events' },
+  { label: 'Sector Insights', href: '/events' },
   { label: 'Services', href: '/services' },
   { label: 'Work With Us', href: '/work-with-us' },
 ]
