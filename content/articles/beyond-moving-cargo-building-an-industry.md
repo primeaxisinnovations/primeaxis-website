@@ -6,7 +6,7 @@ excerpt: >-
   professional services.
 category: Industry Intelligence
 author: Nneoma Obi-Asualo
-date: '2026-06-30'
+date: '2026-07-01'
 readingTime: 3 min read
 featuredImage: >-
   https://n0jyvquhgs2welj7.public.blob.vercel-storage.com/uploads/1782963266998-59f3c89b-10.webp
