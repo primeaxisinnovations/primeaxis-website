@@ -524,7 +524,7 @@ export default function HomeContent({
                 Strategic Services for<br />the Maritime Sector
               </h2>
             </div>
-            <a href="#" className="font-mono text-[10.5px] tracking-[.14em] uppercase text-teal flex items-center gap-[7px] pb-1 whitespace-nowrap hover:gap-[13px] hover:text-gold transition-all duration-200">
+            <a href="/services" className="font-mono text-[10.5px] tracking-[.14em] uppercase text-teal flex items-center gap-[7px] pb-1 whitespace-nowrap hover:gap-[13px] hover:text-gold transition-all duration-200">
               View All Services <ArrowRight size={14} />
             </a>
           </div>
@@ -549,7 +549,7 @@ export default function HomeContent({
               Ready to elevate your position in Africa&apos;s maritime sector?{" "}
               <strong className="text-ink font-medium">Let&apos;s build something significant together.</strong>
             </p>
-            <a href="#work-with" className="inline-flex items-center gap-2 text-[13px] font-semibold tracking-[.05em] text-white bg-teal px-7 py-3 hover:bg-deep hover:-translate-y-[2px] transition-all duration-200">
+            <a href="/work-with-us" className="inline-flex items-center gap-2 text-[13px] font-semibold tracking-[.05em] text-white bg-teal px-7 py-3 hover:bg-deep hover:-translate-y-[2px] transition-all duration-200">
               Start a Conversation <ArrowRight size={13} />
             </a>
           </div>
@@ -584,10 +584,10 @@ export default function HomeContent({
                 Whether you are an organisation seeking strategic communications support, an executive building industry authority, or a partner exploring collaboration — PrimeAxis creates the platform for meaningful, long-term engagement across Africa&apos;s maritime ecosystem.
               </p>
               <div className="flex items-center gap-3 flex-wrap">
-                <a href="#" className="inline-flex items-center gap-2 text-[13px] font-semibold tracking-[.06em] text-deep bg-gold px-7 py-[13px] hover:bg-gold-l hover:-translate-y-[2px] hover:shadow-[0_6px_24px_rgba(191,159,102,.28)] transition-all duration-200">
+                <a href="/work-with-us" className="inline-flex items-center gap-2 text-[13px] font-semibold tracking-[.06em] text-deep bg-gold px-7 py-[13px] hover:bg-gold-l hover:-translate-y-[2px] hover:shadow-[0_6px_24px_rgba(191,159,102,.28)] transition-all duration-200">
                   Start a Conversation <ArrowRight strokeWidth={2.5} />
                 </a>
-                <a href="#services" className="inline-flex items-center gap-2 text-[13px] font-medium tracking-[.04em] text-white/75 border border-white/20 px-7 py-[13px] hover:border-gold hover:text-gold hover:-translate-y-[2px] transition-all duration-200">
+                <a href="/services" className="inline-flex items-center gap-2 text-[13px] font-medium tracking-[.04em] text-white/75 border border-white/20 px-7 py-[13px] hover:border-gold hover:text-gold hover:-translate-y-[2px] transition-all duration-200">
                   View All Services
                 </a>
               </div>
