@@ -217,7 +217,7 @@ export default function AboutPage() {
               About PrimeAxis
             </span>
 
-            <div className="flex items-center justify-center gap-12 mb-10">
+            <div className="grid grid-cols-2 gap-8 max-md:gap-y-10 md:flex md:items-center md:justify-center md:gap-12 mb-10">
               {[
                 {
                   label: 'Intelligence',
