@@ -120,7 +120,7 @@ export default function WorkWithUsPage() {
 
       {/* ── Page Header / Hero ───────────────────────────────────── */}
       <section
-        className="hero-section relative w-full overflow-hidden flex items-end"
+        className="hero-section relative w-full overflow-hidden flex items-end max-md:items-center"
         style={{ height: 'calc(100vh - 70px)', minHeight: '620px' }}
       >
         {/* Full-bleed CSS-cover hero (.wwu-hero-bg) → next/image `fill` with
@@ -161,7 +161,9 @@ export default function WorkWithUsPage() {
               className="font-display text-[clamp(28px,4vw,54px)] font-semibold text-white leading-[1.1] mb-5 text-center mx-auto"
               style={{ maxWidth: '680px' }}
             >
-              Let&apos;s Build Africa&apos;s Maritime Future Together
+              Let&apos;s Build{' '}
+              <span style={{ color: '#c8a96e' }}>Africa&apos;s Maritime Future</span>
+              {' '}Together
             </h1>
             <p
               className="font-sans text-[16px] leading-relaxed text-center mx-auto"
