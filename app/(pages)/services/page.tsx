@@ -174,7 +174,7 @@ const PROCESS_STEPS: Array<{ title: string; description: string; icon: ReactElem
 const WHO_WE_SERVE_CARDS = [
   {
     badge: 'GOVERNMENT',
-    image: 'https://images.unsplash.com/photo-1464938050520-ef2270bb8ce8?w=800&q=80',
+    image: '/images/Government.png',
     title: 'Government & Regulators',
     body: "Port authorities, maritime ministries, and regulatory bodies shaping Africa's blue economy policy and governance.",
   },
@@ -186,7 +186,7 @@ const WHO_WE_SERVE_CARDS = [
   },
   {
     badge: 'FINANCE',
-    image: 'https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=800&q=80',
+    image: '/images/Finance.png',
     title: 'Investors & Finance',
     body: 'Private equity, development finance, and institutional investors navigating blue economy opportunities across African markets.',
   },
@@ -255,8 +255,15 @@ export default function ServicesPage() {
               {WHO_WE_SERVE_CARDS.map((card) => (
                 <div key={card.title} className="services-who-card">
                   <div className="services-who-card-image">
-                    {/* eslint-disable-next-line @next/next/no-img-element */}
-                    <img src={card.image} alt={card.title} />
+                    <Image
+                      src={card.image}
+                      alt={card.title}
+                      fill
+                      quality={80}
+                      sizes="(max-width: 768px) 100vw, 33vw"
+                      style={{ objectFit: 'cover', objectPosition: 'center' }}
+                      loading="lazy"
+                    />
                     <div className="services-who-card-overlay" />
                     <span className="services-who-badge">{card.badge}</span>
                   </div>
