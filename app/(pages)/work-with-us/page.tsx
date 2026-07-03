@@ -143,7 +143,6 @@ export default function WorkWithUsPage() {
           fill
           quality={80}
           sizes="100vw"
-          style={{ objectFit: 'cover', objectPosition: 'center' }}
           priority
         />
         <div
