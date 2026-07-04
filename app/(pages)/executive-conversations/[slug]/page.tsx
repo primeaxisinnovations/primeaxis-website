@@ -9,6 +9,7 @@ import AnimatedSection from '@/components/ui/AnimatedSection'
 import ConversationCard from '@/components/ui/ConversationCard'
 import DispatchHeader from '@/components/ui/DispatchHeader'
 import NewsletterForm from '@/components/ui/NewsletterForm'
+import ProtectedContent from '@/components/ui/ProtectedContent'
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://primeaxisinnovations.com.ng'
 
@@ -114,7 +115,27 @@ export default async function ConversationPage({ params }: PageProps) {
       </div>
 
       {/* ── Header — dark ───────────────────────────────────────────── */}
-      <section className="bg-deep pt-[60px] pb-[72px]">
+      <section className="relative bg-deep pt-[60px] pb-[72px]">
+        {/* Source attribution watermark — pinned to the dark header band (the
+            conversation's "cover" surface; there is no full-bleed hero image,
+            and the 140px portrait is too small to stamp). Legible white on the
+            dark band via text-shadow, so the source travels with a screenshot. */}
+        <div
+          style={{
+            position: 'absolute',
+            bottom: '12px',
+            right: '16px',
+            zIndex: 2,
+            fontFamily: 'var(--font-mono)',
+            fontSize: '10px',
+            letterSpacing: '0.08em',
+            color: 'rgba(255,255,255,0.55)',
+            textShadow: '0 1px 3px rgba(0,0,0,0.6)',
+            pointerEvents: 'none',
+          }}
+        >
+          © PRIMEAXIS INNOVATIONS
+        </div>
         <div className="max-w-[1240px] mx-auto px-11 max-md:px-5">
           <AnimatedSection>
 
@@ -187,11 +208,13 @@ export default async function ConversationPage({ params }: PageProps) {
         <section style={{ background: '#F5F0E8' }}>
           <div className="max-w-[780px] mx-auto pt-16 pb-0 px-12 max-sm:px-5">
             <AnimatedSection>
-              <div
-                className="article-prose"
-                style={{ fontSize: '16px', lineHeight: 1.85, color: '#1C2B4A', fontWeight: 300 }}
-                dangerouslySetInnerHTML={{ __html: conversation.introduction }}
-              />
+              <ProtectedContent className="conversation-body">
+                <div
+                  className="article-prose"
+                  style={{ fontSize: '16px', lineHeight: 1.85, color: '#1C2B4A', fontWeight: 300 }}
+                  dangerouslySetInnerHTML={{ __html: conversation.introduction }}
+                />
+              </ProtectedContent>
             </AnimatedSection>
           </div>
         </section>
@@ -218,6 +241,7 @@ export default async function ConversationPage({ params }: PageProps) {
 
           <div>
 
+            <ProtectedContent className="conversation-body">
             {conversation.qa.map((pair, i) => (
               <div key={i}>
                 {/* Thin gold separator between the previous answer and this question */}
@@ -288,6 +312,24 @@ export default async function ConversationPage({ params }: PageProps) {
                 />
               </div>
             ))}
+            </ProtectedContent>
+
+            {/* Source attribution — closes the transcript so the credit is
+                carried along with any copied/screenshotted content. Wording
+                adapted for an interview ("featured" rather than "published"). */}
+            <div
+              style={{
+                marginTop: '32px',
+                paddingTop: '20px',
+                borderTop: '1px solid rgba(200,169,110,0.20)',
+                fontFamily: 'var(--font-mono)',
+                fontSize: '11px',
+                letterSpacing: '0.06em',
+                color: 'rgba(200,169,110,0.70)',
+              }}
+            >
+              Originally featured by PrimeAxis Innovations Limited — primeaxisinnovations.com.ng
+            </div>
 
             {/* ── Share row ──────────────────────────────────────────── */}
             <div className="flex items-center gap-3 pt-8 mt-[56px] border-t border-border">

@@ -10,6 +10,7 @@ import Tag from '@/components/ui/Tag'
 import ArticleCard from '@/components/ui/ArticleCard'
 import DispatchHeader from '@/components/ui/DispatchHeader'
 import NewsletterForm from '@/components/ui/NewsletterForm'
+import ProtectedContent from '@/components/ui/ProtectedContent'
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://primeaxisinnovations.com.ng'
 
@@ -132,6 +133,25 @@ export default async function ArticlePage({ params }: PageProps) {
             className="object-cover"
             sizes="(max-width: 768px) 100vw, 1240px"
           />
+          {/* Source attribution watermark — text-shadow (not a background box)
+              keeps it legible over any photo while reading as a subtle credit,
+              so the source travels with any screenshot/photo of this page. */}
+          <div
+            style={{
+              position: 'absolute',
+              bottom: '12px',
+              right: '16px',
+              zIndex: 2,
+              fontFamily: 'var(--font-mono)',
+              fontSize: '10px',
+              letterSpacing: '0.08em',
+              color: 'rgba(255,255,255,0.55)',
+              textShadow: '0 1px 3px rgba(0,0,0,0.6)',
+              pointerEvents: 'none',
+            }}
+          >
+            © PRIMEAXIS INNOVATIONS
+          </div>
         </div>
 
         {/* ── Article Body ───────────────────────────────────── */}
@@ -144,10 +164,28 @@ export default async function ArticlePage({ params }: PageProps) {
                 inside the authenticated admin's own article editor — it is never
                 derived from public user input. Do not copy this pattern for any
                 content that originates outside the admin CMS. */}
+            <ProtectedContent className="article-body">
+              <div
+                className="article-prose article-content"
+                dangerouslySetInnerHTML={{ __html: article.body }}
+              />
+            </ProtectedContent>
+
+            {/* Source attribution — closes the editorial body so the credit is
+                carried along with any copied/screenshotted text. */}
             <div
-              className="article-prose article-content"
-              dangerouslySetInnerHTML={{ __html: article.body }}
-            />
+              style={{
+                marginTop: '32px',
+                paddingTop: '20px',
+                borderTop: '1px solid rgba(200,169,110,0.20)',
+                fontFamily: 'var(--font-mono)',
+                fontSize: '11px',
+                letterSpacing: '0.06em',
+                color: 'rgba(200,169,110,0.70)',
+              }}
+            >
+              Originally published by PrimeAxis Innovations Limited — primeaxisinnovations.com.ng
+            </div>
 
             {/* Tags */}
             {article.tags && article.tags.length > 0 && (
