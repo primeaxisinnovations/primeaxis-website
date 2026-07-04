@@ -957,6 +957,19 @@
   margin-bottom: 1.5rem;
 }
 
+/* ── SOFT COPY DETERRENT ─────────────────────────────────────────
+   Disables text selection on the prose body of article and conversation
+   detail pages ONLY (applied via ProtectedContent). Soft deterrent, not
+   security. Scoped to these two classes so headers, nav, buttons, share
+   links, forms, the newsletter signup, and the entire /admin panel remain
+   fully selectable — they never carry these classes. */
+.article-body,
+.conversation-body {
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+}
+
 /* ── CONTACT — HERO PHOTO BACKGROUND ─────────────────────────────
    Scoped to the page-header/hero section only. */
 @layer components {
