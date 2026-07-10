@@ -13,7 +13,7 @@ excerpt: >-
   MoU regime. Every activity we undertake—capacity building, inspector training,
   technical cooperation, and harmonisation of inspection procedures—is directed
   toward this objective.
-date: '2026-06-29'
+date: '2026-06-24'
 transcriptRef: EC-2026-002
 qa:
   - question: >-
