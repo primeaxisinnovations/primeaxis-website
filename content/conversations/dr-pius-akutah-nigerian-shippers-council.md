@@ -12,7 +12,7 @@ excerpt: >-
   Marine and Blue Economy, the Nigerian Shippers' Council (NSC) is undergoing a
   major institutional transformation—from a traditional shipper protection
   agency into a broader economic regulator for the port and logistics sector.
-date: '2026-06-01'
+date: '2026-06-24'
 transcriptRef: EC-2026-003
 qa:
   - question: >-
