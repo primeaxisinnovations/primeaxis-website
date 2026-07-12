@@ -22,9 +22,7 @@ status: published
 of land borders. Recognising this reality, the Nigeria Customs Service (NCS) is
 shifting from a manpower-intensive enforcement model to one driven by
 intelligence, technology and strategic partnerships—a transition that could
-redefine border governance in Africa's largest economy.<o:p></o:p></p>
-
-<p class="MsoNormal"><o:p>&nbsp;</o:p></p>
+redefine border governance in Africa's largest economy.</p>
 
 <p class="MsoNormal">Speaking on the Nigerian Television Authority's Good Morning
 Nigeria, the National Public Relations Officer of the NCS, Deputy Comptroller
@@ -35,7 +33,7 @@ engagement to strengthen border security while facilitating legitimate trade.</p
 
 <p class="MsoNormal">The shift reflects a growing recognition that conventional
 enforcement alone is no longer sufficient to secure one of Africa's largest and
-most complex border networks.<o:p></o:p></p><p class="MsoNormal"><img src="https://n0jyvquhgs2welj7.public.blob.vercel-storage.com/uploads/1783863912623-f08bb928-3-sitted.webp" alt=""></p><p class="MsoNormal"><b><br></b></p><p class="MsoNormal"><b>Intelligence Becomes the First Line of Defence</b></p>
+most complex border networks.<o:p></o:p></p><p class="MsoNormal"><img src="https://n0jyvquhgs2welj7.public.blob.vercel-storage.com/uploads/1783863912623-f08bb928-3-sitted.webp" alt=""></p><h3><b>Intelligence Becomes the First Line of Defence</b></h3>
 
 <p class="MsoNormal">At the heart of the new strategy is an intelligence-first
 operating model.</p>
@@ -63,7 +61,7 @@ become more effective than blanket physical inspections.<o:p></o:p></p>
 
 <p class="MsoNormal"><o:p>&nbsp;</o:p></p>
 
-<p class="MsoNormal"><b>Geospatial Technology Moves from Concept to Deployment</b></p>
+<h3><b>Geospatial Technology Moves from Concept to Deployment</b></h3>
 
 <p class="MsoNormal">One of the most significant announcements was the Service's
 expansion of geospatial technology as part of its border management strategy.</p>
@@ -86,7 +84,7 @@ difficult border corridors.</p>
 kilometres of land borders, location intelligence could become one of its most
 valuable operational assets.</p><p class="MsoNormal"><o:p><img src="https://n0jyvquhgs2welj7.public.blob.vercel-storage.com/uploads/1783864465506-61c7d904-ev.webp" alt=""></o:p></p>
 
-<p class="MsoNormal"><b><br></b></p><p class="MsoNormal"><b>Border Communities Become Part of the Security Architecture</b><o:p></o:p></p>
+<p class="MsoNormal"><b style="color: rgb(21, 28, 46); font-family: &quot;Playfair Display&quot;, &quot;Playfair Display Fallback&quot;, Georgia, serif; font-size: 18px;">Border Communities Become Part of the Security Architecture</b></p>
 
 <p class="MsoNormal">The strategy extends beyond technology.<o:p></o:p></p>
 
@@ -108,7 +106,7 @@ intelligence gathering and strengthening national security.<o:p></o:p></p>
 
 <p class="MsoNormal"><o:p>&nbsp;</o:p></p>
 
-<p class="MsoNormal"><b>Intelligence Requires Collaboration</b></p>
+<h3><b>Intelligence Requires Collaboration</b></h3>
 
 <p class="MsoNormal">Another defining feature of the emerging strategy is
 interoperability.</p>
@@ -129,11 +127,9 @@ seizure of illicit drugs and endangered wildlife products.</p>
 
 <p class="MsoNormal">In an era of increasingly interconnected supply chains and
 transnational crime, intelligence sharing is becoming as important as physical
-enforcement.<o:p></o:p></p>
+enforcement.</p><p class="MsoNormal"><o:p><img src="https://n0jyvquhgs2welj7.public.blob.vercel-storage.com/uploads/1783865215940-6324c779-chatgpt-image-jul-12-2026-03-06-21-pm.webp" alt=""></o:p></p>
 
-<p class="MsoNormal"><o:p>&nbsp;<img src="https://n0jyvquhgs2welj7.public.blob.vercel-storage.com/uploads/1783865215940-6324c779-chatgpt-image-jul-12-2026-03-06-21-pm.webp" alt=""></o:p></p>
-
-<p class="MsoNormal"><b>Beyond Enforcement</b></p>
+<h3><b>Beyond Enforcement</b></h3>
 
 <p class="MsoNormal">A notable aspect of Maiwada's presentation was his emphasis
 on balancing enforcement with persuasion.</p>
@@ -153,7 +149,7 @@ environment.<o:p></o:p></p>
 
 <p class="MsoNormal"><o:p>&nbsp;</o:p></p>
 
-<p class="MsoNormal"><b>What This Means for Trade</b></p>
+<h3><b>What This Means for Trade</b></h3>
 
 <p class="MsoNormal">The Customs Service's evolving strategy comes at a time when
 Nigeria is seeking to strengthen trade competitiveness while enhancing national
@@ -167,7 +163,7 @@ chain efficiency and protect legitimate trade from illicit activities.</p>
 <p class="MsoNormal">For Customs, success will ultimately be measured not only by
 seizures and arrests but also by its ability to facilitate compliant trade,
 improve revenue collection and build confidence in Nigeria's border management
-system.<br><br></p><p class="MsoNormal"><b>PrimeAxis Insight</b></p><p class="MsoNormal">The shift outlined by the Nigeria Customs Service reflects
+system.<br><br></p><h3><b>PrimeAxis Insight</b></h3><p class="MsoNormal">The shift outlined by the Nigeria Customs Service reflects
 more than an operational adjustment—it signals a strategic evolution in how
 border security is being conceived.</p><p class="MsoNormal">As illicit trade networks become increasingly sophisticated
 and regional commerce expands under the African Continental Free Trade Area,
