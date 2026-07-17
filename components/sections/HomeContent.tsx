@@ -5,6 +5,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { LayoutGrid } from "lucide-react";
 import ArticleCard from "@/components/ui/ArticleCard";
+import ViewCounter from "@/components/ui/ViewCounter";
 import NewsletterForm from "@/components/ui/NewsletterForm";
 import { CATEGORIES, categoryToSlug } from "@/lib/categories";
 import { CATEGORY_ICONS } from "@/lib/category-icons";
@@ -77,12 +78,17 @@ interface HomeContentProps {
   featuredArticles: Article[];
   featuredConversation: Conversation | undefined;
   otherConversations: Conversation[];
+  // slug → view count maps, fetched once by the server page. Read-only here.
+  articleViewCounts: Record<string, number>;
+  conversationViewCounts: Record<string, number>;
 }
 
 export default function HomeContent({
   featuredArticles,
   featuredConversation,
   otherConversations,
+  articleViewCounts,
+  conversationViewCounts,
 }: HomeContentProps) {
   const [activeSlide, setActiveSlide] = useState(0);
   const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
@@ -347,7 +353,13 @@ export default function HomeContent({
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {featuredArticles.map((article) => (
-              <ArticleCard key={article.slug} article={article} variant="standard" className="fade-in" />
+              <ArticleCard
+                key={article.slug}
+                article={article}
+                variant="standard"
+                className="fade-in"
+                viewCount={articleViewCounts[article.slug] ?? 0}
+              />
             ))}
           </div>
         </div>
@@ -401,6 +413,14 @@ export default function HomeContent({
                   <div className="text-[12.5px] text-white/40 font-light">
                     {featuredConversation.position}, {featuredConversation.organisation}
                   </div>
+                  {/* Read-only view count — a card/feature block never counts
+                      as a view; that happens only on the detail page. Colour
+                      overridden for the dark surface (twMerge lets it win). */}
+                  <ViewCounter
+                    mode="display"
+                    count={conversationViewCounts[featuredConversation.slug] ?? 0}
+                    className="mt-1.5 text-white/40"
+                  />
                 </div>
               </div>
 

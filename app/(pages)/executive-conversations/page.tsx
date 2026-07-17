@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import Image from 'next/image'
 import { getAllConversations } from '@/lib/conversation-content'
+import { getAllViewCounts } from '@/lib/view-counts'
 import AnimatedSection from '@/components/ui/AnimatedSection'
 import ConversationCard from '@/components/ui/ConversationCard'
 import BreakingBar from '@/components/sections/BreakingBar'
@@ -18,6 +19,8 @@ export const revalidate = 3600
 
 export default async function ExecutiveConversationsPage() {
   const conversations = await getAllConversations()
+  // One Blob read for the whole page — every card's read-only badge.
+  const viewCounts = await getAllViewCounts('conversation')
 
   return (
     <div className="min-h-screen bg-cream">
@@ -80,7 +83,11 @@ export default async function ExecutiveConversationsPage() {
           <AnimatedSection delay={100}>
             <div className="flex flex-col gap-4">
               {conversations.map((conversation) => (
-                <ConversationCard key={conversation.slug} conversation={conversation} />
+                <ConversationCard
+                  key={conversation.slug}
+                  conversation={conversation}
+                  viewCount={viewCounts[conversation.slug] ?? 0}
+                />
               ))}
             </div>
           </AnimatedSection>

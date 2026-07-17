@@ -3,6 +3,7 @@ import Image from 'next/image'
 import { ArrowRight } from 'lucide-react'
 import type { Article } from '@/types'
 import Tag from './Tag'
+import ViewCounter from './ViewCounter'
 import { cn, formatDate } from '@/lib/utils'
 
 type CardVariant = 'hero' | 'standard' | 'horizontal'
@@ -11,9 +12,14 @@ interface ArticleCardProps {
   article: Article
   variant?: CardVariant
   className?: string
+  // Read-only view count for this card. When omitted (e.g. a listing that
+  // doesn't wire counts), the eye badge is simply not rendered. A card in a
+  // grid is display-only and never increments — increments happen solely on
+  // the detail page's interactive ViewCounter.
+  viewCount?: number
 }
 
-export default function ArticleCard({ article, variant = 'standard', className }: ArticleCardProps) {
+export default function ArticleCard({ article, variant = 'standard', className, viewCount }: ArticleCardProps) {
   if (variant === 'hero') {
     return (
       <Link
@@ -58,6 +64,12 @@ export default function ArticleCard({ article, variant = 'standard', className }
               <span>{formatDate(article.date)}</span>
               <span className="text-border">·</span>
               <span>{article.readingTime}</span>
+              {typeof viewCount === 'number' && (
+                <>
+                  <span className="text-border">·</span>
+                  <ViewCounter mode="display" count={viewCount} />
+                </>
+              )}
             </div>
             <div className="w-9 h-9 rounded-full border border-gold flex items-center justify-center text-gold group-hover:bg-gold group-hover:text-deep transition-all duration-200 flex-shrink-0">
               <ArrowRight size={15} />
@@ -95,9 +107,15 @@ export default function ArticleCard({ article, variant = 'standard', className }
               {article.title}
             </h3>
           </div>
-          <span className="font-mono text-[10px] text-muted uppercase tracking-[0.12em] mt-2">
-            {formatDate(article.date)}
-          </span>
+          <div className="flex flex-wrap items-center gap-x-2 gap-y-1 font-mono text-[10px] text-muted uppercase tracking-[0.12em] mt-2">
+            <span>{formatDate(article.date)}</span>
+            {typeof viewCount === 'number' && (
+              <>
+                <span className="text-border">·</span>
+                <ViewCounter mode="display" count={viewCount} />
+              </>
+            )}
+          </div>
         </div>
       </Link>
     )
@@ -135,7 +153,15 @@ export default function ArticleCard({ article, variant = 'standard', className }
         <div className="flex items-center justify-between gap-3">
           <div className="font-mono text-[10px] text-muted uppercase tracking-[0.12em] min-w-0">
             <div className="truncate">{article.author}</div>
-            <div className="mt-0.5">{formatDate(article.date)} · {article.readingTime}</div>
+            <div className="mt-0.5 flex flex-wrap items-center gap-x-2 gap-y-0.5">
+              <span>{formatDate(article.date)} · {article.readingTime}</span>
+              {typeof viewCount === 'number' && (
+                <>
+                  <span className="text-border">·</span>
+                  <ViewCounter mode="display" count={viewCount} />
+                </>
+              )}
+            </div>
           </div>
           <div className="w-8 h-8 rounded-full border border-gold flex items-center justify-center text-gold group-hover:bg-gold group-hover:text-deep transition-all duration-200 flex-shrink-0">
             <ArrowRight size={13} />

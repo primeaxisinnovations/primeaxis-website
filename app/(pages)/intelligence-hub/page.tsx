@@ -5,6 +5,7 @@ import AnimatedSection from '@/components/ui/AnimatedSection'
 import IntelligenceHubGrid from '@/components/sections/IntelligenceHubGrid'
 import BreakingBar from '@/components/sections/BreakingBar'
 import { getAllArticles } from '@/lib/content'
+import { getAllViewCounts } from '@/lib/view-counts'
 
 export const metadata: Metadata = {
   title: 'Intelligence Hub | PrimeAxis Maritime Intelligence',
@@ -19,6 +20,9 @@ export const revalidate = 3600
 
 export default async function IntelligenceHubPage() {
   const articles = await getAllArticles()
+  // One Blob read for the whole page — every card's read-only badge, no
+  // per-card fetch (getAllViewCounts is a single blob read of the slug→count map).
+  const viewCounts = await getAllViewCounts('article')
 
   return (
     <div className="min-h-screen">
@@ -59,7 +63,7 @@ export default async function IntelligenceHubPage() {
 
       {/* Category filter + article grid */}
       <Suspense>
-        <IntelligenceHubGrid articles={articles} />
+        <IntelligenceHubGrid articles={articles} viewCounts={viewCounts} />
       </Suspense>
 
     </div>

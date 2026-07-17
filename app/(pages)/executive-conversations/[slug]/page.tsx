@@ -3,10 +3,12 @@ import type { Metadata } from 'next'
 import Image from 'next/image'
 import Link from 'next/link'
 import { getAllConversations, getConversationBySlug } from '@/lib/conversation-content'
+import { getAllViewCounts } from '@/lib/view-counts'
 import { formatDate } from '@/lib/utils'
 import { paragraphExcerpt, ogDescription } from '@/lib/share-excerpt'
 import AnimatedSection from '@/components/ui/AnimatedSection'
 import ConversationCard from '@/components/ui/ConversationCard'
+import ViewCounter from '@/components/ui/ViewCounter'
 import DispatchHeader from '@/components/ui/DispatchHeader'
 import NewsletterForm from '@/components/ui/NewsletterForm'
 import ProtectedContent from '@/components/ui/ProtectedContent'
@@ -78,6 +80,11 @@ export default async function ConversationPage({ params }: PageProps) {
   if (!conversation) notFound()
 
   const others = (await getAllConversations()).filter((c) => c.slug !== conversation.slug)
+
+  // One Blob read for the whole map: seeds this conversation's interactive
+  // counter AND every "More Conversations" card's read-only badge.
+  const viewCounts = await getAllViewCounts('conversation')
+  const viewCount = viewCounts[conversation.slug] ?? 0
 
   const pageUrl = `${SITE_URL}/executive-conversations/${conversation.slug}`
   const encodedUrl = encodeURIComponent(pageUrl)
@@ -192,9 +199,19 @@ export default async function ConversationPage({ params }: PageProps) {
               {conversation.excerpt}
             </p>
 
-            <p className="font-mono text-[10px] uppercase tracking-[0.15em] text-white/25 mt-7">
-              Published {formatDate(conversation.date)}
-            </p>
+            <div className="flex flex-wrap items-center gap-x-3 gap-y-1 font-mono text-[10px] uppercase tracking-[0.15em] text-white/25 mt-7">
+              <span>Published {formatDate(conversation.date)}</span>
+              <span aria-hidden>·</span>
+              {/* Interactive: records one view per visitor session on mount.
+                  Colour overridden for the dark header (twMerge lets it win). */}
+              <ViewCounter
+                mode="interactive"
+                type="conversation"
+                slug={conversation.slug}
+                initialCount={viewCount}
+                className="text-white/40"
+              />
+            </div>
 
           </AnimatedSection>
         </div>
@@ -485,7 +502,11 @@ export default async function ConversationPage({ params }: PageProps) {
             </div>
             <div className="flex flex-col gap-4">
               {others.map((c) => (
-                <ConversationCard key={c.slug} conversation={c} />
+                <ConversationCard
+                  key={c.slug}
+                  conversation={c}
+                  viewCount={viewCounts[c.slug] ?? 0}
+                />
               ))}
             </div>
           </div>

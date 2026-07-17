@@ -13,9 +13,11 @@ const PAGE_SIZE = 6
 
 interface IntelligenceHubGridProps {
   articles: Article[]
+  // slug → view count, fetched once by the server page. Read-only on cards.
+  viewCounts: Record<string, number>
 }
 
-export default function IntelligenceHubGrid({ articles }: IntelligenceHubGridProps) {
+export default function IntelligenceHubGrid({ articles, viewCounts }: IntelligenceHubGridProps) {
   const searchParams = useSearchParams()
   const categoryParam = searchParams.get('category')
   const matchedCategory = CATEGORIES.find((cat) => categoryToSlug(cat) === categoryParam) ?? null
@@ -115,11 +117,20 @@ export default function IntelligenceHubGrid({ articles }: IntelligenceHubGridPro
           ) : (
             <AnimatedSection delay={100}>
               <div className="flex flex-col gap-10">
-                <ArticleCard article={visible[0]} variant="hero" />
+                <ArticleCard
+                  article={visible[0]}
+                  variant="hero"
+                  viewCount={viewCounts[visible[0].slug] ?? 0}
+                />
                 {visible.length > 1 && (
                   <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
                     {visible.slice(1).map((article) => (
-                      <ArticleCard key={article.slug} article={article} variant="standard" />
+                      <ArticleCard
+                        key={article.slug}
+                        article={article}
+                        variant="standard"
+                        viewCount={viewCounts[article.slug] ?? 0}
+                      />
                     ))}
                   </div>
                 )}

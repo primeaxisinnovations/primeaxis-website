@@ -2,14 +2,18 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { ArrowRight } from 'lucide-react'
 import type { Conversation } from '@/types'
+import ViewCounter from './ViewCounter'
 import { cn, formatDate } from '@/lib/utils'
 
 interface ConversationCardProps {
   conversation: Conversation
   className?: string
+  // Read-only view count for this card. Omitted → no eye badge. Display-only:
+  // a card in a listing never increments; that happens only on the detail page.
+  viewCount?: number
 }
 
-export default function ConversationCard({ conversation, className }: ConversationCardProps) {
+export default function ConversationCard({ conversation, className, viewCount }: ConversationCardProps) {
   return (
     <Link
       href={`/executive-conversations/${conversation.slug}`}
@@ -64,9 +68,15 @@ export default function ConversationCard({ conversation, className }: Conversati
             Read Conversation
             <ArrowRight size={13} />
           </span>
-          <span className="font-mono text-[10px] text-muted uppercase tracking-[0.1em]">
-            {formatDate(conversation.date)}
-          </span>
+          <div className="flex items-center gap-x-2 font-mono text-[10px] text-muted uppercase tracking-[0.1em]">
+            <span>{formatDate(conversation.date)}</span>
+            {typeof viewCount === 'number' && (
+              <>
+                <span className="text-border">·</span>
+                <ViewCounter mode="display" count={viewCount} />
+              </>
+            )}
+          </div>
         </div>
       </div>
     </Link>
