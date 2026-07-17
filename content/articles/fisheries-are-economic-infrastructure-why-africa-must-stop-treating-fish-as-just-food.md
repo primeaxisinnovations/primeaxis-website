@@ -7,7 +7,7 @@ excerpt: >-
   centres on roads, railways, ports, airports and power plants. These assets
   attract billions in public investment because they move goods, connect markets
   and drive economic growth.
-category: Trade & Facilitation
+category: Blue Economy
 author: By Nneoma Blessing Obi-Asualo
 date: '2026-07-17'
 readingTime: 6 min read
