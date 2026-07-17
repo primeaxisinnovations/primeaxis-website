@@ -14,7 +14,7 @@ excerpt: >-
   maritime professional lecturers, including three Master Mariners and two
   marine engineers. One of them is an internationally recognised simulator
   training expert.
-date: '2026-04-28'
+date: '2026-06-22'
 transcriptRef: EC-2026-001
 qa:
   - question: >-
@@ -192,13 +192,14 @@ qa:
       class="MsoNormal">To achieve this, we encourage cadets to register with
 
       internationally recognised professional bodies,
-      including:<o:p></o:p></p><p class="MsoNormal">●The Nautical Institute
-      (Nautical Science)<o:p></o:p></p><p class="MsoNormal">●IMarEST (Marine
-      Engineering)<o:p></o:p></p><p class="MsoNormal">●The Chartered Institute
-      of Logistics and Transport (CILT)
+      including:<o:p></o:p></p><p class="MsoNormal"><ul><li>The Nautical
+      Institute (Nautical Science)</li><li>IMarEST (Marine
+      Engineering)</li><li>The Chartered Institute of Logistics and Transport
+      (CILT)
 
-      (Maritime Transport and Business Management)</p><p class="MsoNormal">The
-      Nautical Institute has also granted recognition to the
+      (Maritime Transport and Business Management)</li></ul></p><p
+      class="MsoNormal">The Nautical Institute has also granted recognition to
+      the
 
       Maritime Academy of Nigeria, reflecting the strength of our training
       standards.</p><p class="MsoNormal">By combining hands-on training, quality
@@ -269,14 +270,16 @@ qa:
       also collaborating with:<o:p></o:p></p><p class="MsoNormal">The Nautical
       Institute (UK) on simulator accreditation and
 
-      Dynamic Positioning (DP) training<o:p></o:p></p><p class="MsoNormal">●
-      IMarEST on course accreditation<o:p></o:p></p><p class="MsoNormal">●
-      Chartered Institute of Logistics and Transport (CILT)
+      Dynamic Positioning (DP) training<o:p></o:p></p><p
+      class="MsoNormal"><ul><li>IMarEST on course
+      accreditation</li><li>Chartered Institute of Logistics and Transport
+      (CILT)
 
-      Nigeria on cadet development<o:p></o:p></p><p class="MsoNormal">● Abuja
-      MoU on the development and delivery of accredited
+      Nigeria on cadet development</li><li>Abuja MoU on the development and
+      delivery of accredited
 
-      Port State Control training courses in collaboration with NIMASA</p><p>
+      Port State Control training courses in collaboration with
+      NIMASA</li></ul></p><p>
 
 
 
@@ -359,11 +362,10 @@ qa:
       training facilities.</p><p class="MsoNormal">Ultimately, our
       sustainability framework is built on three
 
-      pillars:<o:p></o:p></p><p class="MsoNormal">● Strategic
-      planning<o:p></o:p></p><p class="MsoNormal">● Human resource development
-      and retention<o:p></o:p></p><p class="MsoNormal">● Infrastructure
-      maintenance and operational efficiency<o:p></o:p></p><p
-      class="MsoNormal"><o:p>&nbsp;</o:p></p><p>
+      pillars:<o:p></o:p></p><p class="MsoNormal"><ul><li>Strategic
+      planning</li><li>Human resource development and
+      retention</li><li>Infrastructure maintenance and operational
+      efficiency</li></ul></p><p>
 
 
 

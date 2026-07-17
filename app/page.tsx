@@ -1,5 +1,6 @@
 import { getAllArticles } from "@/lib/content";
 import { getAllConversations } from "@/lib/conversation-content";
+import { getAllViewCounts } from "@/lib/view-counts";
 import HomeContent from "@/components/sections/HomeContent";
 import BreakingBar from "@/components/sections/BreakingBar";
 
@@ -17,6 +18,10 @@ export default async function Home() {
   const conversations = await getAllConversations();
   const [featuredConversation, ...otherConversations] = conversations;
 
+  // One Blob read per content type — read-only badges on the featured cards.
+  const articleViewCounts = await getAllViewCounts("article");
+  const conversationViewCounts = await getAllViewCounts("conversation");
+
   return (
     <>
       {/* Self-fetching breaking-news bar — fetches its own articles; the
@@ -26,6 +31,8 @@ export default async function Home() {
         featuredArticles={featuredArticles}
         featuredConversation={featuredConversation}
         otherConversations={otherConversations.slice(0, 3)}
+        articleViewCounts={articleViewCounts}
+        conversationViewCounts={conversationViewCounts}
       />
     </>
   );

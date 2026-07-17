@@ -3,11 +3,13 @@ import type { Metadata } from 'next'
 import Image from 'next/image'
 import Link from 'next/link'
 import { getAllArticles, getArticleBySlug } from '@/lib/content'
+import { getAllViewCounts } from '@/lib/view-counts'
 import { formatDate } from '@/lib/utils'
 import { paragraphExcerpt, ogDescription } from '@/lib/share-excerpt'
 import AnimatedSection from '@/components/ui/AnimatedSection'
 import Tag from '@/components/ui/Tag'
 import ArticleCard from '@/components/ui/ArticleCard'
+import ViewCounter from '@/components/ui/ViewCounter'
 import DispatchHeader from '@/components/ui/DispatchHeader'
 import NewsletterForm from '@/components/ui/NewsletterForm'
 import ProtectedContent from '@/components/ui/ProtectedContent'
@@ -59,6 +61,11 @@ export default async function ArticlePage({ params }: PageProps) {
   if (!article) notFound()
 
   const allArticles = await getAllArticles()
+
+  // One Blob read for the whole map: seeds this article's interactive counter
+  // AND every related card's read-only badge without a per-card fetch.
+  const viewCounts = await getAllViewCounts('article')
+  const viewCount = viewCounts[article.slug] ?? 0
 
   // Related: same-category articles first, filled with most-recent others to reach 3
   const sameCategory = allArticles.filter(
@@ -112,6 +119,14 @@ export default async function ArticlePage({ params }: PageProps) {
               <span>{formatDate(article.date)}</span>
               <span aria-hidden>·</span>
               <span>{article.readingTime}</span>
+              <span aria-hidden>·</span>
+              {/* Interactive: records one view per visitor session on mount. */}
+              <ViewCounter
+                mode="interactive"
+                type="article"
+                slug={article.slug}
+                initialCount={viewCount}
+              />
             </div>
             <DispatchHeader
               refCode={article.referenceCode}
@@ -302,7 +317,12 @@ export default async function ArticlePage({ params }: PageProps) {
             </div>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               {related.map((a) => (
-                <ArticleCard key={a.slug} article={a} variant="horizontal" />
+                <ArticleCard
+                  key={a.slug}
+                  article={a}
+                  variant="horizontal"
+                  viewCount={viewCounts[a.slug] ?? 0}
+                />
               ))}
             </div>
           </div>
