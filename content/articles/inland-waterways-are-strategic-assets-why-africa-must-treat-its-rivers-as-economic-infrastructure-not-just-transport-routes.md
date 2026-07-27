@@ -1,7 +1,5 @@
 ---
-title: >-
-  Inland Waterways Are Strategic Assets:  Why Africa Must Treat Its Rivers as
-  Economic Infrastructure, Not Just Transport Routes
+title: Inland Waterways Are Strategic Assets
 excerpt: >-
   Africa's competitiveness in the twenty-first century will not be determined
   solely by the size of its seaports, the expansion of its highways, or the
@@ -18,7 +16,7 @@ tags: []
 referenceCode: PI-2026-004
 status: published
 ---
-<p>Africa's competitiveness in the twenty-first century will
+<h2>Why Africa Must Treat Its Rivers as Economic Infrastructure, Not Just Transport Routes</h2><p><br>Africa's competitiveness in the twenty-first century will
 not be determined solely by the size of its seaports, the expansion of its
 highways, or the kilometres of rail it builds. It will increasingly be defined
 by something less visible but far more consequential: how efficiently goods
