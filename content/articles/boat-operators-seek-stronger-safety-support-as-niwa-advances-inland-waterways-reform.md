@@ -11,7 +11,7 @@ author: Nneoma Blessing Obi-Asualo
 date: '2026-07-31'
 readingTime: 3 min read
 featuredImage: >-
-  https://n0jyvquhgs2welj7.public.blob.vercel-storage.com/uploads/1785507697874-d1638f3a-whatsapp-image-2026-07-31-at-14-56-58.webp
+  https://n0jyvquhgs2welj7.public.blob.vercel-storage.com/uploads/1785509857741-ad0f866e-chatgpt-image-jul-31-2026-03-52-12-pm.webp
 tags: []
 referenceCode: MS-2026-001
 status: published
@@ -97,9 +97,7 @@ within the Federal Capital Territory.</p>
 
 <p class="MsoNormal">She expressed confidence that closer collaboration between
 regulators and operators would contribute to safer and more efficient inland
-water transport services.<o:p></o:p></p>
-
-<p class="MsoNormal"><o:p>&nbsp;</o:p></p>
+water transport services.</p>
 
 <h2>PrimeAxis Insight</h2>
 
