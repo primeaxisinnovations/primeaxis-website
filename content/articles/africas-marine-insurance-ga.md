@@ -234,7 +234,7 @@ That is a significant shift.</p><h3>Building an African Maritime Risk
 Ecosystem&nbsp;</h3><p>Africa therefore needs to think beyond
 increasing insurance penetration.
 It needs a stronger maritime risk ecosystem
-connecting:&nbsp;</p><p><ul><li>insurers and reinsurers;&nbsp;</li><li>maritime regulators;&nbsp;</li><li>shipowners and operators;&nbsp;</li><li>banks and other financiers;&nbsp;</li><li>ports and terminal operators;&nbsp;</li><li>brokers and underwriters;&nbsp;</li><li>maritime security institutions;&nbsp;</li><li>technology companies;&nbsp;</li><li>data and intelligence providers;&nbsp;</li><li>legal and claims professionals;&nbsp;</li><li>research institutions.&nbsp;</li></ul></p><p>The objective should be an integrated chain:
+connecting:&nbsp;</p><p></p><ul><li>insurers and reinsurers;&nbsp;</li><li>maritime regulators;&nbsp;</li><li>shipowners and operators;&nbsp;</li><li>banks and other financiers;&nbsp;</li><li>ports and terminal operators;&nbsp;</li><li>brokers and underwriters;&nbsp;</li><li>maritime security institutions;&nbsp;</li><li>technology companies;&nbsp;</li><li>data and intelligence providers;&nbsp;</li><li>legal and claims professionals;&nbsp;</li><li>research institutions.&nbsp;</li></ul><p></p><p>The objective should be an integrated chain:
 <b>Risk identification → risk intelligence → risk
 pricing → risk transfer → risk financing → risk
 recovery.</b></p><p>Each link affects the next.
@@ -253,10 +253,9 @@ economy will create more assets, more
 transactions, greater exposure and increasingly
 interconnected risks.&nbsp;</p><p>The opportunity is therefore to build a financial
 ecosystem capable of supporting that growth.
-That means:&nbsp;</p><p>deeper marine insurance markets;&nbsp;</p><p>stronger underwriting expertise;&nbsp;</p><p>greater reinsurance capacity;&nbsp;</p><p>better maritime data;&nbsp;</p><p>more sophisticated risk modelling;&nbsp;</p><p>products designed for emerging Blue
-Economy sectors;&nbsp;</p><p>and
-stronger integration between insurance and
-maritime finance.&nbsp;</p><p>The objective is not simply to insure more.
+That means:&nbsp;</p><p><ul><li>deeper marine insurance markets;&nbsp;</li><li>stronger underwriting expertise;&nbsp;</li><li>greater reinsurance capacity;&nbsp;</li><li>better maritime data;&nbsp;</li><li>more sophisticated risk modelling;&nbsp;</li><li>products designed for emerging Blue
+Economy sectors; and</li><li>stronger integration between insurance and
+maritime finance.&nbsp;</li></ul></p><p>The objective is not simply to insure more.
 <b>It is to understand risk better, transfer it more
 efficiently and retain more of the financial value
 created by that risk management within Africa.</b></p><h3>The Risk Architecture Africa Cannot
