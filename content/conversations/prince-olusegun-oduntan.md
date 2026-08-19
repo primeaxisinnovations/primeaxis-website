@@ -744,6 +744,9 @@ pullQuote: >-
   entire process is defeated.”
 
   — Prince Olusegun Oduntan
+closingQuote: |-
+  “You cannot determine anything when the process is not predictable.”
+  — Prince Olusegun Oduntan
 editorsNote: >-
   <p class="MsoNormal">The Association of Nigerian Licensed Customs Agents
   (ANLCA),
