@@ -5,7 +5,7 @@ excerpt: >-
   indigenous shipping, efficient ports, maritime investment, better regulation,
   trade facilitation and a thriving blue economy. It also wants the public to
   understand these developments.
-category: Trade & Facilitation
+category: Industry Intelligence
 author: By PrimeAxis Insights
 date: '2026-08-14'
 readingTime: 8 min read
