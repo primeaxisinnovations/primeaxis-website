@@ -7,8 +7,12 @@ import { usePathname, useRouter } from 'next/navigation'
 import { Menu, X, Search } from 'lucide-react'
 import { cn } from '@/lib/utils'
 
+// Order is editorial, not alphabetical: News sits directly after Home because
+// it is the most frequently updated section, and ahead of Intelligence because
+// reporting precedes analysis. Contact is appended separately below.
 const navLinks = [
   { label: 'Home', href: '/' },
+  { label: 'News', href: '/news' },
   { label: 'About', href: '/about' },
   { label: 'Intelligence', href: '/intelligence-hub' },
   { label: 'Conversations', href: '/executive-conversations' },
@@ -23,6 +27,7 @@ const navLinks = [
 // /intelligence-hub/[slug] don't carry the bar, so they stay at top-0.
 const BREAKING_BAR_ROUTES = [
   '/',
+  '/news',
   '/about',
   '/intelligence-hub',
   '/executive-conversations',

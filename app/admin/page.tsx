@@ -18,6 +18,11 @@ const ADMIN_SECTIONS: AdminSection[] = [
     href: '/admin/articles',
   },
   {
+    label: 'Manage News',
+    description: 'File, edit, and review dated industry reporting.',
+    href: '/admin/news',
+  },
+  {
     label: 'Manage Conversations',
     description: 'Create, edit, and review executive conversations.',
     href: '/admin/conversations',
