@@ -565,14 +565,13 @@ qa:
       engine of
 
       industrialisation in Africa.<o:p></o:p></p>
-status: draft
+status: published
 introduction: >-
   <p class="MsoNormal"><img
-  src="https://n0jyvquhgs2welj7.public.blob.vercel-storage.com/uploads/1787630759387-cb63a227-chatgpt-image-aug-25-2026-04-44-38-am.webp"
-  alt=""></p><p class="MsoNormal">Africa has the market. It has the resources.
-  It has the
+  src="https://n0jyvquhgs2welj7.public.blob.vercel-storage.com/uploads/1787642791444-7e3fa12a-chatgpt-image-aug-25-2026-08-23-44-am.webp"
+  alt="">Africa has the market. It has the resources. It has the
 
-  ambition to deepen intra-African trade.<o:p></o:p></p>
+  ambition to deepen intra-African trade.</p>
 
 
   <p class="MsoNormal">But the harder question is whether Africa has built the
