@@ -625,6 +625,10 @@ pullQuote: >-
 closingQuote: >-
   “The objective is not simply to move more African goods. The objective is to
   create African value before those goods reach the market.”
-editorsNote: <p class="MsoNormal"><br></p>
+editorsNote: |-
+  <p class="MsoNormal">This conversation has been edited for clarity, grammar,
+  length and flow while preserving the substance, arguments and perspective of
+  Dr. Obiora Madu. Repetitions and verbal fillers have been removed where
+  necessary to improve readability and editorial flow.<o:p></o:p></p>
 ---
 
