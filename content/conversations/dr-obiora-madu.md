@@ -565,7 +565,7 @@ qa:
       engine of
 
       industrialisation in Africa.<o:p></o:p></p>
-status: published
+status: draft
 introduction: >-
   <p class="MsoNormal"><img
   src="https://n0jyvquhgs2welj7.public.blob.vercel-storage.com/uploads/1787630759387-cb63a227-chatgpt-image-aug-25-2026-04-44-38-am.webp"
