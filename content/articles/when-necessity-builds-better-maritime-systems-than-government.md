@@ -7,7 +7,7 @@ excerpt: >-
 
   That distinction could determine the success or failure of Africa’s next
   generation of maritime investments.
-category: Executive Perspectives
+category: Ports & Infrastructure
 author: Nneoma Blessing Obi-Asualo
 date: '2026-08-26'
 readingTime: 22 min read
