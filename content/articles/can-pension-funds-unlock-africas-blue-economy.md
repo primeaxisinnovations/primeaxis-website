@@ -12,7 +12,7 @@ author: Nneoma Blessing Obi-Asualo
 date: '2026-08-27'
 readingTime: 15 min read
 featuredImage: >-
-  https://n0jyvquhgs2welj7.public.blob.vercel-storage.com/uploads/1787797070999-96772426-whatsapp-image-2026-08-26-at-21-21-50.webp
+  https://n0jyvquhgs2welj7.public.blob.vercel-storage.com/uploads/1787797432501-513ac5fb-whatsapp-image-2026-08-26-at-21-22-01.webp
 tags: []
 referenceCode: BE-2026-006
 status: published
@@ -91,7 +91,7 @@ because Africa needs money.<o:p></o:p></p>
 <p class="MsoNormal">Can Africa build maritime assets that pension funds can
 actually invest in?&nbsp;</p>
 
-<h3><img src="https://n0jyvquhgs2welj7.public.blob.vercel-storage.com/uploads/1787797008340-4559c5cc-whatsapp-image-2026-08-26-at-21-22-01.webp" alt=""></h3><h3>THE MONEY EXISTS. THE INVESTABLE ASSETS ARE THE PROBLEM.</h3>
+<h3><img src="https://n0jyvquhgs2welj7.public.blob.vercel-storage.com/uploads/1787797070999-96772426-whatsapp-image-2026-08-26-at-21-21-50.webp" alt=""></h3><h3>THE MONEY EXISTS. THE INVESTABLE ASSETS ARE THE PROBLEM.</h3>
 
 <p class="MsoNormal">Africa’s infrastructure financing challenge is enormous.</p>
 
