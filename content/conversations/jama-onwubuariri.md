@@ -4,7 +4,7 @@ title: >-
   From Ètò to Intelligent Mobility: Building Digital Infrastructure for African
   Trade
 position: Managing Director
-organisation: Truck Transit Parks Limited (TTP)
+organisation: TTP Ltd
 photo: >-
   https://n0jyvquhgs2welj7.public.blob.vercel-storage.com/uploads/1788486790200-7a652355-whatsapp-image-2026-09-03-at-17-43-51.webp
 initials: MD
