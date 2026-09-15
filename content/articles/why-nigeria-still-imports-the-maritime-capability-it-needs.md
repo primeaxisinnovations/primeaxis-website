@@ -30,13 +30,7 @@ tags:
 referenceCode: BE-2026-008
 status: published
 ---
-<p class="MsoNormal"><span style="color: rgb(21, 28, 46); font-family: &quot;Playfair Display&quot;, &quot;Playfair Display Fallback&quot;, Georgia, serif; font-size: 26px; font-weight: 600;">WHY NIGERIA STILL IMPORTS THE MARITIME CAPABILITY IT NEEDS</span></p>
-
-<p class="MsoNormal"><o:p>&nbsp;</o:p></p>
-
-<p class="MsoNormal">Nigeria does not have a maritime demand problem.<o:p></o:p></p>
-
-<p class="MsoNormal">It has a conversion problem.<o:p></o:p></p>
+<p class="MsoNormal">Nigeria does not have a maritime demand problem. It has a conversion problem.</p>
 
 <p class="MsoNormal">The country generates demand for vessels, marine logistics,
 offshore services, engineering, fabrication, surveying, inspection, repairs and
