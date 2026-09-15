@@ -40,17 +40,13 @@ deliver them is still developed, financed or controlled elsewhere. That creates
 a more difficult question than whether Nigeria has maritime potential.<o:p></o:p></p>
 
 <p class="MsoNormal">Why has one of Africa’s largest maritime markets not
-produced a deeper base of globally competitive maritime companies?<o:p></o:p></p>
-
-<p class="MsoNormal">The answer is not simply a shortage of talent, vessels or
-infrastructure. Nigeria has all three in varying degrees.<o:p></o:p></p>
+produced a deeper base of globally competitive maritime companies?</p><p class="MsoNormal">The answer is not simply a shortage of talent, vessels or
+infrastructure. Nigeria has all three in varying degrees.</p>
 
 <p class="MsoNormal">The deeper problem is that these resources have not been
 connected into a system that allows Nigerian businesses to move from
 participation to ownership, from subcontracting to principal contracting, and
-from domestic activity to regional competitiveness. That is the capability gap.<o:p></o:p></p>
-
-<p class="MsoNormal"><o:p>&nbsp;</o:p></p>
+from domestic activity to regional competitiveness. That is the capability gap.</p>
 
 <h2>THE MARKET IS THERE. THE INDUSTRIAL DEPTH IS NOT<o:p></o:p></h2>
 
@@ -69,20 +65,16 @@ are weak, the market remains active without becoming sufficiently deep.<o:p></o:
 while still relying on foreign companies for higher-value services. That
 distinction matters.<o:p></o:p></p>
 
-<p class="MsoNormal"><o:p>&nbsp;</o:p></p>
-
-<p class="MsoNormal">The objective of maritime policy should not simply be to
+<p class="MsoNormal"><o:p>&nbsp;</o:p>The objective of maritime policy should not simply be to
 increase the number of Nigerians participating in projects. It should be to
 increase the number of Nigerian companies capable of owning, financing,
-executing and exporting sophisticated maritime services.<o:p></o:p></p>
+executing and exporting sophisticated maritime services.</p>
 
 <h2>LOCAL CONTENT MUST PRODUCE COMPETITIVE COMPANIES<o:p></o:p></h2>
 
 <p class="MsoNormal">Nigeria's local-content framework has played an important
 role in increasing indigenous participation, particularly in the oil and gas
-industry. But participation cannot be the final measure of success.<o:p></o:p></p>
-
-<p class="MsoNormal"><o:p>&nbsp;</o:p></p>
+industry. But participation cannot be the final measure of success.</p>
 
 <p class="MsoNormal">The Nigerian Content Development and Monitoring Board,
 NCDMB, has increasingly placed capacity development, technology transfer,
@@ -90,10 +82,8 @@ industrialisation and global competitiveness at the center of its agenda. In
 2026, NCDMB, NUPRC and other stakeholders also began work towards a more
 harmonised assessment of in country capacities and capabilities.<o:p></o:p></p>
 
-<p class="MsoNormal"><o:p>&nbsp;</o:p></p>
-
-<p class="MsoNormal">That direction is significant because it changes the
-question from who participated to what capability was actually developed.<o:p></o:p></p>
+<p class="MsoNormal"><o:p>&nbsp;</o:p>That direction is significant because it changes the
+question from who participated to what capability was actually developed.</p>
 
 <p class="MsoNormal">A local contractor may execute part of a project while
 critical engineering, equipment, technology or intellectual property remain
@@ -133,9 +123,7 @@ another market?<o:p></o:p></p>
 operates it. Ship repair requires facilities, equipment and working capital.
 Offshore engineering requires specialist tools, certification and experienced
 personnel. Marine technology requires investment long before it generates
-commercial returns.<o:p></o:p></p>
-
-<p class="MsoNormal"><o:p>&nbsp;</o:p></p>
+commercial returns.</p>
 
 <p class="MsoNormal">This is where financing policy needs to become more
 sophisticated.<o:p></o:p></p>
@@ -152,9 +140,7 @@ have technical and commercial capacity. The financing structure must reflect
 the vessel's revenue model. And the business must have a pathway to remain
 productive beyond a single contract.<o:p></o:p></p>
 
-<p class="MsoNormal"><o:p>&nbsp;</o:p></p>
-
-<p class="MsoNormal">The question should therefore move from:<o:p></o:p></p>
+<p class="MsoNormal"><o:p>&nbsp;</o:p>The question should therefore move from:</p>
 
 <p class="MsoNormal"><b>How do we finance more vessels?<o:p></o:p></b></p>
 
@@ -167,14 +153,10 @@ maritime businesses?<o:p></o:p></i></b></p>
 contracted cargo, offshore service demand, asset utilisation, operator
 competence and long term cash flow.<o:p></o:p></p>
 
-<p class="MsoNormal"><o:p>&nbsp;</o:p></p>
+<p class="MsoNormal"><o:p>&nbsp;</o:p>Otherwise, asset financing can create ownership without
+competitiveness.</p>
 
-<p class="MsoNormal">Otherwise, asset financing can create ownership without
-competitiveness.<o:p></o:p></p>
-
-<p class="MsoNormal"><o:p>&nbsp;</o:p></p>
-
-<h2>SKILLS HAVE TO BE CONNECTED TO INDUSTRY<o:p></o:p></h2>
+<p class="MsoNormal"><o:p>&nbsp;</o:p><span style="color: rgb(21, 28, 46); font-family: &quot;Playfair Display&quot;, &quot;Playfair Display Fallback&quot;, Georgia, serif; font-size: 21px; font-weight: 600;">SKILLS HAVE TO BE CONNECTED TO INDUSTRY</span></p>
 
 <p class="MsoNormal">The skills challenge is similar.<o:p></o:p></p>
 
@@ -188,12 +170,8 @@ and inland waterways.<o:p></o:p></p>
 Complex maritime work requires professionals who have operated equipment,
 solved problems, worked safely in demanding environments and accumulated
 sufficient experience to take responsibility for increasingly sophisticated
-assignments.<o:p></o:p></p>
-
-<p class="MsoNormal"><o:p>&nbsp;</o:p></p>
-
-<p class="MsoNormal">The policy response should therefore go beyond training
-numbers.<o:p></o:p></p>
+assignments. The policy response should therefore go beyond training
+numbers.</p>
 
 <p class="MsoNormal">Training programmes should be tied to identified industry
 demand, sea-time opportunities, certification pathways and actual projects.<o:p></o:p></p>
@@ -201,9 +179,7 @@ demand, sea-time opportunities, certification pathways and actual projects.<o:p>
 <p class="MsoNormal">Companies receiving major contracts should have measurable
 workforce development obligations linked to the technical work being performed.<o:p></o:p></p>
 
-<p class="MsoNormal"><o:p>&nbsp;</o:p></p>
-
-<p class="MsoNormal">The goal should not be to produce more certificates.<o:p></o:p></p>
+<p class="MsoNormal"><o:p>&nbsp;</o:p>The goal should not be to produce more certificates.</p>
 
 <p class="MsoNormal">It should be to produce professionals and companies capable
 of executing increasingly complex work without permanent external dependence.<o:p></o:p></p>
@@ -216,11 +192,9 @@ can become too vague.<o:p></o:p></p>
 <p class="MsoNormal">A foreign company working in Nigeria does not automatically
 transfer technology because Nigerians are employed on the project.<o:p></o:p></p>
 
-<p class="MsoNormal"><o:p>&nbsp;</o:p></p>
-
-<p class="MsoNormal">Transfer becomes meaningful when Nigerian companies acquire
+<p class="MsoNormal"><o:p>&nbsp;</o:p>Transfer becomes meaningful when Nigerian companies acquire
 the knowledge, systems, processes, equipment, intellectual property or
-technical competence required to perform more of the work themselves.<o:p></o:p></p>
+technical competence required to perform more of the work themselves.</p>
 
 <p class="MsoNormal">That means technology transfer obligations should be tied to
 specific outcomes.<o:p></o:p></p>
@@ -252,11 +226,9 @@ contracts but lack the scale required for larger projects. It may have domestic
 expertise without the certification or commercial relationships needed to enter
 regional markets.<o:p></o:p></p>
 
-<p class="MsoNormal"><o:p>&nbsp;</o:p></p>
-
-<p class="MsoNormal">This creates a cycle in which companies remain small because
+<p class="MsoNormal"><o:p>&nbsp;</o:p>This creates a cycle in which companies remain small because
 they cannot win larger work, while larger contracts continue to go to companies
-that already possess the scale to execute them.<o:p></o:p></p>
+that already possess the scale to execute them.</p>
 
 <p class="MsoNormal">Breaking that cycle requires deliberate market development.<o:p></o:p></p>
 
@@ -268,9 +240,7 @@ principal contractors.<o:p></o:p></p>
 capability, asset ownership, safety performance and delivery history rather
 than treating local participation as a box to be checked.<o:p></o:p></p>
 
-<p class="MsoNormal"><o:p>&nbsp;</o:p></p>
-
-<h2>The objective should be to create maritime companies that can graduate:<o:p></o:p></h2>
+<p class="MsoNormal"><o:p>&nbsp;</o:p><span style="color: rgb(21, 28, 46); font-family: &quot;Playfair Display&quot;, &quot;Playfair Display Fallback&quot;, Georgia, serif; font-size: 21px; font-weight: 600;">The objective should be to create maritime companies that can graduate:</span></p>
 
 <p class="MsoNormal">From subcontractor to principal contractor.<o:p></o:p></p>
 
@@ -289,9 +259,7 @@ solutions.<o:p></o:p></p>
 Nigeria should be able to identify more than the immediate economic activity it
 generated.<o:p></o:p></p>
 
-<p class="MsoNormal"><o:p>&nbsp;</o:p></p>
-
-<p class="MsoNormal">There should be stronger companies.<o:p></o:p></p>
+<p class="MsoNormal"><o:p>&nbsp;</o:p>There should be stronger companies.</p>
 
 <p class="MsoNormal">More capable professionals.<o:p></o:p></p>
 
@@ -312,11 +280,9 @@ building maritime industry.<o:p></o:p></p>
 <p class="MsoNormal">Foreign participation is not the problem. Nigeria needs
 international capital, expertise, technology and partnerships.<o:p></o:p></p>
 
-<p class="MsoNormal"><o:p>&nbsp;</o:p></p>
-
-<p class="MsoNormal">The strategic objective should be to ensure that
+<p class="MsoNormal"><o:p>&nbsp;</o:p>The strategic objective should be to ensure that
 international participation strengthens the domestic ecosystem rather than
-leaving it permanently dependent on external capability.<o:p></o:p></p>
+leaving it permanently dependent on external capability.</p>
 
 <p class="MsoNormal"><o:p>&nbsp;</o:p></p>
 
@@ -325,20 +291,14 @@ leaving it permanently dependent on external capability.<o:p></o:p></p>
 <p class="MsoNormal">The next stage of Nigeria's maritime policy should therefore
 be judged against a more ambitious standard.<o:p></o:p></p>
 
-<p class="MsoNormal"><o:p>&nbsp;</o:p></p>
+<p class="MsoNormal"><o:p>&nbsp;</o:p>Local content asks how much of a project can be delivered in
+Nigeria.</p>
 
-<p class="MsoNormal">Local content asks how much of a project can be delivered in
-Nigeria.<o:p></o:p></p>
+<p class="MsoNormal"><o:p>&nbsp;</o:p>Industrial policy should ask what Nigerian companies become
+capable of doing because the project happened in Nigeria.</p>
 
-<p class="MsoNormal"><o:p>&nbsp;</o:p></p>
-
-<p class="MsoNormal">Industrial policy should ask what Nigerian companies become
-capable of doing because the project happened in Nigeria.<o:p></o:p></p>
-
-<p class="MsoNormal"><o:p>&nbsp;</o:p></p>
-
-<p class="MsoQuote" align="left">That distinction changes
-the end goal.<o:p></o:p></p>
+<p class="MsoNormal"><o:p>&nbsp;</o:p>That distinction changes
+the end goal.</p>
 
 <p class="MsoNormal">A Nigerian marine survey company should eventually be able
 to work across African waters.<o:p></o:p></p>
@@ -358,23 +318,17 @@ access to domestic work.<o:p></o:p></p>
 <p class="MsoNormal">And that is when Nigeria's maritime market begins producing
 companies with value beyond Nigeria's coastline.<o:p></o:p></p>
 
-<p class="MsoNormal"><o:p>&nbsp;</o:p></p>
-
-<h2>WHAT NIGERIA SHOULD DO NEXT<o:p></o:p></h2>
+<p class="MsoNormal"><o:p>&nbsp;</o:p><span style="color: rgb(21, 28, 46); font-family: &quot;Playfair Display&quot;, &quot;Playfair Display Fallback&quot;, Georgia, serif; font-size: 21px; font-weight: 600;">WHAT NIGERIA SHOULD DO NEXT</span></p>
 
 <p class="MsoNormal">The policy response does not require another broad maritime
 strategy document.<o:p></o:p></p>
 
-<p class="MsoNormal"><o:p>&nbsp;</o:p></p>
+<p class="MsoNormal"><o:p>&nbsp;</o:p>It requires tighter execution.</p>
 
-<p class="MsoNormal">It requires tighter execution.<o:p></o:p></p>
-
-<p class="MsoNormal"><o:p>&nbsp;</o:p></p>
-
-<p class="MsoNormal">First, measure capability, not just participation. Major
+<p class="MsoNormal"><o:p>&nbsp;</o:p>First, measure capability, not just participation. Major
 maritime and offshore projects should have clear indicators for Nigerian asset
 ownership, technical work performed locally, technology transfer,
-certification, workforce development and progression of local suppliers.<o:p></o:p></p>
+certification, workforce development and progression of local suppliers.</p>
 
 <p class="MsoNormal">Second, connect finance to viable maritime businesses.
 Vessel and equipment financing should be assessed alongside contracts,
@@ -385,12 +339,10 @@ asset acquisition as the end goal.<o:p></o:p></p>
 Training, sea time, certification and technical exposure should be tied to the
 actual capabilities required by major projects.<o:p></o:p></p>
 
-<p class="MsoNormal"><o:p>&nbsp;</o:p></p>
-
-<p class="MsoNormal">Fourth, create pathways for Nigerian firms to graduate.
+<p class="MsoNormal"><o:p>&nbsp;</o:p>Fourth, create pathways for Nigerian firms to graduate.
 Procurement and local content frameworks should deliberately identify qualified
 firms that can move from subcontracting into principal contracting and regional
-markets.<o:p></o:p></p>
+markets.</p>
 
 <p class="MsoNormal">Fifth, measure what remains. Every major maritime or
 offshore investment should be assessed not only by capital committed or
