@@ -6,7 +6,7 @@ title: >-
 position: General Manager & Special Adviser to the Lagos State Governor on Blue Economy
 organisation: Lagos State Waterways Authority (LASWA)
 photo: >-
-  https://n0jyvquhgs2welj7.public.blob.vercel-storage.com/uploads/1789631105593-53d80c8b-whatsapp-image-2026-09-17-at-8-13-20-2k-20260917084002.webp
+  https://n0jyvquhgs2welj7.public.blob.vercel-storage.com/uploads/1789636086414-8510a84a-oluwadamilola-emmanuel.webp
 initials: OE
 excerpt: >-
   With the Blue Economy becoming a more defined part of Lagos State development
@@ -304,10 +304,7 @@ qa:
       place to ensure that cleaner marine mobility can operate reliably and
       economically at scale?
     answer: >-
-      <p class="MsoNormal">This is a very important question.<o:p></o:p></p>
-
-
-      <p class="MsoNormal"><o:p>&nbsp;</o:p></p>
+      <p class="MsoNormal">This is a very important question.</p>
 
 
       <p class="MsoNormal">When we think about electric transportation, we think
@@ -325,10 +322,7 @@ qa:
       the power infrastructure supporting it provides useful experience as we
       think
 
-      about the requirements for water transportation.<o:p></o:p></p>
-
-
-      <p class="MsoNormal"><o:p>&nbsp;</o:p></p>
+      about the requirements for water transportation.</p>
 
 
       <p class="MsoNormal">The same principle has to apply to water
@@ -350,18 +344,12 @@ qa:
       power gets to each of these jetties so that the charging infrastructure
       can
 
-      operate effectively.<o:p></o:p></p>
-
-
-      <p class="MsoNormal"><o:p>&nbsp;</o:p></p>
+      operate effectively.&nbsp;</p>
 
 
       <p class="MsoNormal">For electric water transportation to work at scale,
 
-      therefore, it is not enough to procure electric vessels.<o:p></o:p></p>
-
-
-      <p class="MsoNormal"><o:p>&nbsp;</o:p></p>
+      therefore, it is not enough to procure electric vessels.</p>
 
 
       <p class="MsoNormal">The supporting infrastructure has to be in place,
@@ -386,73 +374,54 @@ qa:
       gone through similar transitions.<o:p></o:p></p>
 
 
-      <p class="MsoNormal"><o:p>&nbsp;</o:p></p>
-
-
-      <p class="MsoNormal">When those systems were being implemented, there were
+      <p class="MsoNormal"><o:p>&nbsp;</o:p>When those systems were being
+      implemented, there were
 
       challenges. We look at what has worked and what has not worked, and we
 
-      replicate the approaches that are relevant to the
-      waterways.<o:p></o:p></p>
+      replicate the approaches that are relevant to the waterways.</p>
 
 
-      <p class="MsoNormal"><o:p>&nbsp;</o:p></p>
-
-
-      <p class="MsoNormal">There is something called the Bus Industry Transition
-      Plan.
+      <p class="MsoNormal"><o:p>&nbsp;</o:p>There is something called the Bus
+      Industry Transition Plan.
 
       This is where you have seen Danfo buses being phased out in tandem with
       their
 
-      unions and replaced with more standard buses.<o:p></o:p></p>
+      unions and replaced with more standard buses.</p>
 
 
-      <p class="MsoNormal"><o:p>&nbsp;</o:p></p>
-
-
-      <p class="MsoNormal">A similar process is happening on the waterways
-      through the
+      <p class="MsoNormal"><o:p>&nbsp;</o:p>A similar process is happening on
+      the waterways through the
 
       Vessel Industry Transition Plan, or VITP. The objective is to help
       formalise
 
-      the informal sector rather than simply remove them from the
-      system.<o:p></o:p></p>
+      the informal sector rather than simply remove them from the system.</p>
 
 
-      <p class="MsoNormal"><o:p>&nbsp;</o:p></p>
-
-
-      <p class="MsoNormal">They will be given options. One option is to come
-      into the
+      <p class="MsoNormal"><o:p>&nbsp;</o:p>They will be given options. One
+      option is to come into the
 
       new system as part of consortiums that will operate the boats being
       purchased.
 
       Another option is a buyout plan. A third option is to move to other feeder
 
-      routes, with some form of compensation.<o:p></o:p></p>
+      routes, with some form of compensation.</p>
 
 
-      <p class="MsoNormal"><o:p>&nbsp;</o:p></p>
+      <p class="MsoNormal"><o:p>&nbsp;</o:p>The principle is that the project
+      should not simply displace
+
+      people who have depended on the waterways for their livelihoods.</p>
 
 
-      <p class="MsoNormal">The principle is that the project should not simply
-      displace
-
-      people who have depended on the waterways for their
-      livelihoods.<o:p></o:p></p>
-
-
-      <p class="MsoNormal"><o:p>&nbsp;</o:p></p>
-
-
-      <p class="MsoNormal">Our foreign partners have also made it clear that no
+      <p class="MsoNormal"><o:p>&nbsp;</o:p>Our foreign partners have also made
+      it clear that no
 
       Lagosian should lose their source of livelihood because of a new
-      project.<o:p></o:p></p>
+      project.</p>
 
 
       <p class="MsoNormal">Local knowledge is also extremely important. Even
@@ -468,11 +437,8 @@ qa:
       operates.<o:p></o:p></p>
 
 
-      <p class="MsoNormal"><o:p>&nbsp;</o:p></p>
-
-
-      <p class="MsoNormal">So, there is a detailed plan behind the transition,
-      with
+      <p class="MsoNormal"><o:p>&nbsp;</o:p>So, there is a detailed plan behind
+      the transition, with
 
       significant stakeholder engagement and consultation. The objective is to
       ensure
@@ -480,7 +446,7 @@ qa:
       that existing operators are not simply phased out without a solid process
       for
 
-      managing the transition.<o:p></o:p></p>
+      managing the transition.</p>
   - question: >-
       If the objective is to build an investable Blue Economy rather than simply
       expand water transport, where should private capital and institutional
@@ -499,11 +465,8 @@ qa:
       the different components of the Blue Economy.<o:p></o:p></p>
 
 
-      <p class="MsoNormal"><o:p>&nbsp;</o:p></p>
-
-
-      <p class="MsoNormal">Those feasibility studies will help identify where
-      the
+      <p class="MsoNormal"><o:p>&nbsp;</o:p>Those feasibility studies will help
+      identify where the
 
       revenue opportunities are and how the different components can generate
 
@@ -512,19 +475,16 @@ qa:
 
       of each area before we can speak confidently about specific revenue
 
-      projections.<o:p></o:p></p>
+      projections.</p>
 
 
-      <p class="MsoNormal"><o:p>&nbsp;</o:p></p>
-
-
-      <p class="MsoNormal">We also have to ensure that what Lagos State is
-      planning is
+      <p class="MsoNormal"><o:p>&nbsp;</o:p>We also have to ensure that what
+      Lagos State is planning is
 
       in alignment with what the Federal Government is doing. That synergy
       between
 
-      the state and federal levels is extremely important.<o:p></o:p></p>
+      the state and federal levels is extremely important.</p>
 
 
       <p class="MsoNormal">I cannot speak to the numbers at this point, but I
@@ -535,34 +495,27 @@ qa:
       mentioned earlier.<o:p></o:p></p>
 
 
-      <p class="MsoNormal"><o:p>&nbsp;</o:p></p>
-
-
-      <p class="MsoNormal">A lot of infrastructure is already being developed
-      through
+      <p class="MsoNormal"><o:p>&nbsp;</o:p>A lot of infrastructure is already
+      being developed through
 
       Omi Èkó for water transportation. We are also looking at fisheries and
       coastal
 
-      tourism, as well as additional port infrastructure.<o:p></o:p></p>
+      tourism, as well as additional port infrastructure.</p>
 
 
-      <p class="MsoNormal"><o:p>&nbsp;</o:p></p>
-
-
-      <p class="MsoNormal">Badagry Deep Sea Port is another development that
-      Lagos
+      <p class="MsoNormal"><o:p>&nbsp;</o:p>Badagry Deep Sea Port is another
+      development that Lagos
 
       State needs to position itself around. As these developments progress, we
       need
 
       to ensure that Lagos is properly positioned to take advantage of the
 
-      opportunities they create.<o:p></o:p></p>
+      opportunities they create.</p>
 
 
-      <p class="MsoNormal"><o:p><br></o:p></p><p
-      class="MsoNormal"><o:p>&nbsp;</o:p>The objective is to understand the
+      <p class="MsoNormal"><o:p>&nbsp;</o:p>The objective is to understand the
       different components of
 
       the Blue Economy, identify where value can be created, and then position
@@ -571,10 +524,7 @@ qa:
       to capture that value.</p>
 
 
-      <p class="MsoNormal"><o:p>&nbsp;</o:p></p>
-
-
-      <p class="MsoNormal"><br></p><p class="MsoNormal"><br></p><blockquote><p
+      <p class="MsoNormal"><o:p>&nbsp;</o:p></p><blockquote><p
       class="MsoNormal">The objective is to understand the different components
       of
 
@@ -595,23 +545,17 @@ qa:
       State.<o:p></o:p></p>
 
 
-      <p class="MsoNormal"><o:p>&nbsp;</o:p></p>
-
-
-      <p class="MsoNormal">As you know, Lagos is a hub, and a significant amount
-      of
+      <p class="MsoNormal"><o:p>&nbsp;</o:p>As you know, Lagos is a hub, and a
+      significant amount of
 
       maritime activity in Nigeria is centred here. We need a blueprint that
       reflects
 
-      that reality.<o:p></o:p></p>
+      that reality.</p>
 
 
-      <p class="MsoNormal"><o:p>&nbsp;</o:p></p>
-
-
-      <p class="MsoNormal">The blueprint must also be aligned with the policy
-      direction
+      <p class="MsoNormal"><o:p>&nbsp;</o:p>The blueprint must also be aligned
+      with the policy direction
 
       of the Federal Ministry of Marine and Blue Economy. We do not want to
       deviate
@@ -619,77 +563,60 @@ qa:
       from the federal direction. We want to collaborate, align and work in
       tandem
 
-      with it.<o:p></o:p></p>
+      with it.</p>
 
 
-      <p class="MsoNormal"><o:p>&nbsp;</o:p></p>
-
-
-      <p class="MsoNormal">In the short term, the priority is to develop the
-      Lagos Blue
+      <p class="MsoNormal"><o:p>&nbsp;</o:p>In the short term, the priority is
+      to develop the Lagos Blue
 
       Economy blueprint. The Omi Èkó project also falls within the short to
       medium
 
-      term as we begin to expand water transportation.<o:p></o:p></p>
+      term as we begin to expand water transportation.</p>
 
 
-      <p class="MsoNormal"><o:p>&nbsp;</o:p></p>
-
-
-      <p class="MsoNormal">Beyond that, we will look at additional harbours
-      across
+      <p class="MsoNormal"><o:p>&nbsp;</o:p>Beyond that, we will look at
+      additional harbours across
 
       Lagos State. Marina and Five Cowries are among the areas being considered
       as
 
-      the system develops.<o:p></o:p></p>
+      the system develops.</p>
 
 
-      <p class="MsoNormal"><o:p>&nbsp;</o:p></p>
+      <p class="MsoNormal"><o:p>&nbsp;</o:p>In the longer term, there is a need
+      to fully regulate the
+
+      fishing industry in Lagos State.</p>
 
 
-      <p class="MsoNormal">In the longer term, there is a need to fully regulate
-      the
-
-      fishing industry in Lagos State.<o:p></o:p></p>
-
-
-      <p class="MsoNormal"><o:p>&nbsp;</o:p></p>
-
-
-      <p class="MsoNormal">We also want to work more closely with the Nigerian
-      Ports
+      <p class="MsoNormal"><o:p>&nbsp;</o:p>We also want to work more closely
+      with the Nigerian Ports
 
       Authority on port development and on how cargo can move seamlessly on the
 
       waterways from point A to point B, whether the cargo is moving externally
       from
 
-      Lagos or internally within Lagos.<o:p></o:p></p>
+      Lagos or internally within Lagos.</p>
 
 
-      <p class="MsoNormal"><o:p>&nbsp;</o:p></p>
-
-
-      <p class="MsoNormal">Finally, we need to look closely at our coastal
-      areas,
+      <p class="MsoNormal"><o:p>&nbsp;</o:p>Finally, we need to look closely at
+      our coastal areas,
 
       including Ibeshe and Ilashe, and consider how these locations can be
       developed
 
-      into full tourism hubs for Lagos State.<o:p></o:p></p>
+      into full tourism hubs for Lagos State.</p>
 
 
-      <p class="MsoNormal"><o:p>&nbsp;</o:p></p>
-
-
-      <p class="MsoNormal">Ultimately, the objective is to create a Blue Economy
+      <p class="MsoNormal"><o:p>&nbsp;</o:p>Ultimately, the objective is to
+      create a Blue Economy
 
       ecosystem that connects transportation, ports, fisheries, tourism,
 
       infrastructure and the wider economic opportunities around the
-      waterways.<o:p></o:p></p>
+      waterways.</p>
 status: published
 introduction: >-
   <p class="MsoNormal">Lagos is increasingly looking at its waterways not simply
@@ -779,8 +706,8 @@ editorsNote: >-
   mobility,
 
   maritime infrastructure and the wider Blue Economy.<o:p></o:p></p><p
-  class="MsoNormal"><o:p>&nbsp;</o:p></p><p class="MsoNormal">The transformation
-  underway is therefore about more than
+  class="MsoNormal"><o:p>&nbsp;</o:p>The transformation underway is therefore
+  about more than
 
   increasing the number of passengers travelling by water. It raises broader
 
@@ -788,48 +715,37 @@ editorsNote: >-
 
   environmental sustainability, cargo movement and the ability of Lagos to
 
-  convert its extensive aquatic resources into sustained economic
-  value.<o:p></o:p></p><p class="MsoNormal"><o:p>&nbsp;</o:p></p><p
-  class="MsoNormal">As Lagos develops its Blue Economy framework, the challenge
+  convert its extensive aquatic resources into sustained economic value.</p><p
+  class="MsoNormal"><o:p>&nbsp;</o:p>As Lagos develops its Blue Economy
+  framework, the challenge
 
   will be to connect individual projects into a coherent ecosystem in which
 
   waterways support mobility, commerce, tourism, fisheries and investment, while
 
-  existing communities and operators remain part of the
-  transition.<o:p></o:p></p><p class="MsoNormal"><o:p>&nbsp;</o:p></p><p
-  class="MsoNormal">
-
-
-
-
-
-
-
-
-
-
-
-
-  </p><p class="MsoNormal">The direction outlined by Emmanuel points towards a
-  model in
+  existing communities and operators remain part of the transition.</p><p
+  class="MsoNormal"><o:p>&nbsp;</o:p>The direction outlined by Emmanuel points
+  towards a model in
 
   which water transportation functions not only as a transport solution, but as
 
-  an enabler of wider economic activity across
-  Lagos.<br><br><br><br></p><h3>ABOUT EXECUTIVE CONVERSATION<o:p></o:p></h3><p
-  class="MsoNormal">Executive Conversation is PrimeAxis’ flagship interview
+  an enabler of wider economic activity across Lagos.</p><p
+  class="MsoNormal"><span style="color: rgb(21, 28, 46); font-family:
+  &quot;Playfair Display&quot;, &quot;Playfair Display Fallback&quot;, Georgia,
+  serif; font-size: 18px; font-weight: 600;">ABOUT EXECUTIVE
+  CONVERSATION</span></p><p class="MsoNormal">Executive Conversation is
+  PrimeAxis’ flagship interview
 
   series featuring policymakers, regulators, industry leaders and innovators
 
   shaping Africa’s maritime, trade, logistics and Blue Economy
-  sectors.<o:p></o:p></p><p class="MsoNormal"><o:p>&nbsp;</o:p></p><p
-  class="MsoNormal">The series goes beyond headlines to examine the decisions,
+  sectors.<o:p></o:p></p><p class="MsoNormal"><o:p>&nbsp;</o:p>The series goes
+  beyond headlines to examine the decisions,
 
   systems, investments and ideas shaping the future of the continent’s maritime
 
-  economy.<o:p></o:p></p><p class="MsoNormal"><o:p>&nbsp;</o:p></p><p
-  class="MsoNormal">Through direct conversations with the people responsible for
+  economy.</p><p class="MsoNormal"><o:p>&nbsp;</o:p>Through direct conversations
+  with the people responsible for
 
   policy, infrastructure, regulation and industry development, PrimeAxis seeks
   to
@@ -837,6 +753,6 @@ editorsNote: >-
   make complex developments intelligible to the executives, investors,
 
   policymakers and professionals whose decisions will shape what comes
-  next.<o:p></o:p></p><p class="MsoNormal"><o:p>&nbsp;</o:p></p><h3><br></h3>
+  next.</p><p class="MsoNormal"><o:p>&nbsp;</o:p></p><h3><br></h3>
 ---
 
