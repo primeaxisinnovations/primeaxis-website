@@ -30,11 +30,8 @@ qa:
       congratulations once again.<o:p></o:p></p>
 
 
-      <p class="MsoNormal"><o:p>&nbsp;</o:p></p>
-
-
-      <p class="MsoNormal">For Lagos State, it is more than just putting
-      together a
+      <p class="MsoNormal"><o:p>&nbsp;</o:p>For Lagos State, it is more than
+      just putting together a
 
       policy. It is really about implementation. When you think about the
       maritime
@@ -48,14 +45,11 @@ qa:
       water transportation, port development, fisheries, coastal tourism or
       coastal
 
-      communities. All of these areas are very important.<o:p></o:p></p>
+      communities. All of these areas are very important.</p>
 
 
-      <p class="MsoNormal"><o:p>&nbsp;</o:p></p>
-
-
-      <p class="MsoNormal">In terms of opportunities, I would particularly
-      highlight
+      <p class="MsoNormal"><o:p>&nbsp;</o:p>In terms of opportunities, I would
+      particularly highlight
 
       fisheries. There is a lot of illegal, unregulated and unreported fishing
       in
@@ -66,40 +60,29 @@ qa:
       for not just the state but the nation. I believe a lot more can be done in
       this
 
-      area.<o:p></o:p></p>
+      area.</p>
 
 
-      <p class="MsoNormal"><o:p>&nbsp;</o:p></p>
-
-
-      <p class="MsoNormal">I also believe local tourism provides significant
-      value. It
+      <p class="MsoNormal"><o:p>&nbsp;</o:p>I also believe local tourism
+      provides significant value. It
 
       is not only about economic revenue. It also creates opportunities for
       young
 
-      people to participate in the maritime ecosystem and gain
-      employment.<o:p></o:p></p>
+      people to participate in the maritime ecosystem and gain employment.</p>
 
 
-      <p class="MsoNormal"><o:p>&nbsp;</o:p></p>
-
-
-      <p class="MsoNormal">Water transportation then becomes an enabler for
-      these
+      <p class="MsoNormal"><o:p>&nbsp;</o:p>Water transportation then becomes an
+      enabler for these
 
       sectors. Transportation is something that is often subsidised because it
       is an
 
-      enabler for the economy and helps other parts of the economy to
-      grow.<o:p></o:p></p>
+      enabler for the economy and helps other parts of the economy to grow.</p>
 
 
-      <p class="MsoNormal"><o:p>&nbsp;</o:p></p>
-
-
-      <p class="MsoNormal">Passenger transport will usually require some level
-      of
+      <p class="MsoNormal"><o:p>&nbsp;</o:p>Passenger transport will usually
+      require some level of
 
       support, but when you think about cargo transport, that is where the state
       can
@@ -107,14 +90,11 @@ qa:
       potentially generate revenue beyond infrastructure, where the
       infrastructure
 
-      exists.<o:p></o:p></p>
+      exists.</p>
 
 
-      <p class="MsoNormal"><o:p>&nbsp;</o:p></p>
-
-
-      <p class="MsoNormal">Cargo currently falls within the remit of the
-      Nigerian Ports
+      <p class="MsoNormal"><o:p>&nbsp;</o:p>Cargo currently falls within the
+      remit of the Nigerian Ports
 
       Authority, and Lagos State wants to work in tandem with the NPA. Lagos is
       not
@@ -122,14 +102,11 @@ qa:
       trying to take on federal duties because there are important
       jurisdictional
 
-      issues. What we want to ensure is collaboration.<o:p></o:p></p>
+      issues. What we want to ensure is collaboration.</p>
 
 
-      <p class="MsoNormal"><o:p>&nbsp;</o:p></p>
-
-
-      <p class="MsoNormal">As the ports operate within Lagos, we want to ensure
-      that
+      <p class="MsoNormal"><o:p>&nbsp;</o:p>As the ports operate within Lagos,
+      we want to ensure that
 
       they adhere to safety measures while also creating an enabling environment
       for
@@ -140,14 +117,11 @@ qa:
       The question is how we ensure that these ports are properly integrated
       into the
 
-      plans for Lagos State.<o:p></o:p></p>
+      plans for Lagos State.</p>
 
 
-      <p class="MsoNormal"><o:p>&nbsp;</o:p></p>
-
-
-      <p class="MsoNormal">So, that is where I currently see cargo sitting. The
-      NPA
+      <p class="MsoNormal"><o:p>&nbsp;</o:p>So, that is where I currently see
+      cargo sitting. The NPA
 
       drives that area for now, while Lagos State provides the enabling
       environment.
@@ -155,7 +129,7 @@ qa:
       What happens in the future may evolve, but collaboration between the state
       and
 
-      federal authorities is essential.<o:p></o:p></p>
+      federal authorities is essential.</p>
 
 
       <p class="MsoNormal"><br></p>
@@ -175,24 +149,18 @@ qa:
       isolation.<o:p></o:p></p>
 
 
-      <p class="MsoNormal"><o:p>&nbsp;</o:p></p>
+      <p class="MsoNormal"><o:p>&nbsp;</o:p>Connectivity is now part of the
+      planning process.</p>
 
 
-      <p class="MsoNormal">Connectivity is now part of the planning
-      process.<o:p></o:p></p>
-
-
-      <p class="MsoNormal"><o:p>&nbsp;</o:p></p>
-
-
-      <p class="MsoNormal">You are seeing that come into play at Marina, where
-      there is
+      <p class="MsoNormal"><o:p>&nbsp;</o:p>You are seeing that come into play
+      at Marina, where there is
 
       a major interchange, and Lagos has plans to implement two major
       interchanges,
 
       at Marina and Mile 2, bringing together bus, rail and water
-      transportation.<o:p></o:p></p>
+      transportation.</p>
 
 
       <p class="MsoNormal">Looking closely at water transportation, Omi Èkó is
@@ -219,50 +187,37 @@ qa:
       translate into economic benefits.<o:p></o:p></p>
 
 
-      <p class="MsoNormal"><o:p>&nbsp;</o:p></p>
-
-
-      <p class="MsoNormal">However, we also have to think about what happens
-      after
+      <p class="MsoNormal"><o:p>&nbsp;</o:p>However, we also have to think about
+      what happens after
 
       people get off the ferry. How do they reach their final destination? That
       is
 
-      where first-mile and last-mile connectivity becomes
-      important.<o:p></o:p></p>
+      where first-mile and last-mile connectivity becomes important.</p>
 
 
-      <p class="MsoNormal"><o:p>&nbsp;</o:p></p>
-
-
-      <p class="MsoNormal">Lagos has first-mile and last-mile bus services that
-      can
+      <p class="MsoNormal"><o:p>&nbsp;</o:p>Lagos has first-mile and last-mile
+      bus services that can
 
       connect passengers to the BRT network where it is available, particularly
       along
 
-      major routes.<o:p></o:p></p>
+      major routes.</p>
 
 
-      <p class="MsoNormal"><o:p>&nbsp;</o:p></p>
-
-
-      <p class="MsoNormal">The way Lagos looks at it is that road and water
+      <p class="MsoNormal"><o:p>&nbsp;</o:p>The way Lagos looks at it is that
+      road and water
 
       transportation must work in tandem, with rail also connected where it is
 
       available. The good thing is that there is one payment system through the
       Cowry
 
-      card, which is used across road, rail and water
-      transportation.<o:p></o:p></p>
+      card, which is used across road, rail and water transportation.</p>
 
 
-      <p class="MsoNormal"><o:p>&nbsp;</o:p></p>
-
-
-      <p class="MsoNormal">At the moment, the main connections are between road
-      and
+      <p class="MsoNormal"><o:p>&nbsp;</o:p>At the moment, the main connections
+      are between road and
 
       water transportation. Lagos has also prioritised roads leading to major
 
@@ -272,29 +227,22 @@ qa:
       the Ministry of Transportation to prioritise roads leading to jetties
       because,
 
-      ultimately, the objective is to aid mobility across the
-      state.<o:p></o:p></p>
+      ultimately, the objective is to aid mobility across the state.</p>
 
 
-      <p class="MsoNormal"><o:p>&nbsp;</o:p></p>
+      <p class="MsoNormal"><o:p>&nbsp;</o:p>It is working, but there is still a
+      lot more to be done,
+
+      particularly as we look to revamp terminals and jetties.</p>
 
 
-      <p class="MsoNormal">It is working, but there is still a lot more to be
-      done,
-
-      particularly as we look to revamp terminals and jetties.<o:p></o:p></p>
-
-
-      <p class="MsoNormal"><o:p>&nbsp;</o:p></p>
-
-
-      <p class="MsoNormal">We are also looking at park-and-ride facilities. The
-      future
+      <p class="MsoNormal"><o:p>&nbsp;</o:p>We are also looking at park-and-ride
+      facilities. The future
 
       of the water transportation system we are building is one where people can
       park
 
-      their cars and continue their journey by water.<o:p></o:p></p>
+      their cars and continue their journey by water.</p>
   - question: >-
       Modernising the fleet is only one part of the transition. Lagos is also
       moving towards cleaner marine transportation, including electric vessels,
@@ -626,11 +574,8 @@ introduction: >-
   asset.<o:p></o:p></p>
 
 
-  <p class="MsoNormal"><o:p>&nbsp;</o:p></p>
-
-
-  <p class="MsoNormal">With the Blue Economy becoming a more defined part of
-  Lagos
+  <p class="MsoNormal"><o:p>&nbsp;</o:p>With the Blue Economy becoming a more
+  defined part of Lagos
 
   State development agenda, the opportunity extends beyond water transportation
 
@@ -639,7 +584,7 @@ introduction: >-
 
   environmental sustainability and the creation of new economic value around the
 
-  state extensive aquatic resources.<o:p></o:p></p>
+  state extensive aquatic resources.</p>
 
 
   <p class="MsoNormal">At the same time, transforming Lagos waterways into a
@@ -669,21 +614,17 @@ introduction: >-
   value.<o:p></o:p></p>
 
 
-  <p class="MsoNormal"><o:p>&nbsp;</o:p></p>
-
-
-  <p class="MsoNormal">Emmanuel operates at the intersection of two closely
+  <p class="MsoNormal"><o:p>&nbsp;</o:p>Emmanuel operates at the intersection of
+  two closely
 
   connected mandates: the practical transformation and regulation of Lagos
 
   waterways, and the wider policy ambition to develop the state Blue
-  Economy.<o:p></o:p></p>
+  Economy.</p>
 
 
-  <p class="MsoNormal"><o:p>&nbsp;</o:p></p>
-
-
-  <p class="MsoNormal">In this PrimeAxis Executive Conversation, we examine the
+  <p class="MsoNormal"><o:p>&nbsp;</o:p>In this PrimeAxis Executive
+  Conversation, we examine the
 
   economic architecture emerging around Lagos waterways, the scale and
 
@@ -695,7 +636,7 @@ introduction: >-
 
   policy framework needed to turn Lagos maritime assets into a competitive Blue
 
-  Economy platform.<o:p></o:p></p>
+  Economy platform.</p>
 pullQuote: Water transportation then becomes an enabler for these sectors.
 closingQuote: >-
   The objective is to understand the different components of the Blue Economy,
