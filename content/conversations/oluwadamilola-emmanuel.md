@@ -771,9 +771,9 @@ introduction: >-
   Economy platform.<o:p></o:p></p>
 pullQuote: Water transportation then becomes an enabler for these sectors.
 closingQuote: >-
-  This conversation has been edited for clarity, length and flow. The edits
-  preserve the substance of the interview while removing repetitions and verbal
-  interruptions inherent in spoken conversation.
+  The objective is to understand the different components of the Blue Economy,
+  identify where value can be created, and then position Lagos to capture that
+  value.
 editorsNote: >-
   <p class="MsoNormal">Lagos waterways sit at the intersection of urban
   mobility,
