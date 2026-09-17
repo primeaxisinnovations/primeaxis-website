@@ -6,7 +6,7 @@ title: >-
 position: General Manager & Special Adviser to the Lagos State Governor on Blue Economy
 organisation: Lagos State Waterways Authority (LASWA)
 photo: >-
-  https://n0jyvquhgs2welj7.public.blob.vercel-storage.com/uploads/1789626005887-b2b8ef0a-oluwadamilola-emmanuel.webp
+  https://n0jyvquhgs2welj7.public.blob.vercel-storage.com/uploads/1789631105593-53d80c8b-whatsapp-image-2026-09-17-at-8-13-20-2k-20260917084002.webp
 initials: OE
 excerpt: >-
   With the Blue Economy becoming a more defined part of Lagos State development
