@@ -19,28 +19,17 @@ tags: []
 referenceCode: BE-2026-009
 status: published
 ---
-<p class="MsoNormal">Ehingbeti: From Maritime Heritage to the Architecture of
-Nigeria’s Blue Economy<o:p></o:p></p>
-
 <p class="MsoNormal">Nigeria's blue economy conversation is moving beyond the
 recognition of maritime potential towards the harder question of what
 institutions, infrastructure, financing and security are required to convert
-that potential into sustainable economic value.<o:p></o:p></p>
+that potential into sustainable economic value.</p>
 
-<p class="MsoNormal"><o:p>&nbsp;</o:p></p>
+<p class="MsoNormal"><o:p>&nbsp;</o:p>Nigeria has spent years identifying the scale of its
+maritime opportunity.</p>
 
-<p class="MsoNormal">By Nneoma Blessing Obi Asualo<o:p></o:p></p>
-
-<p class="MsoNormal"><o:p>&nbsp;</o:p></p>
-
-<p class="MsoNormal">Nigeria has spent years identifying the scale of its
-maritime opportunity.<o:p></o:p></p>
-
-<p class="MsoNormal"><o:p>&nbsp;</o:p></p>
-
-<p class="MsoNormal">The country has an extensive coastline, major ports, inland
+<p class="MsoNormal"><o:p>&nbsp;</o:p>The country has an extensive coastline, major ports, inland
 waterways, coastal communities, marine resources and a large population whose
-livelihoods are connected directly or indirectly to the water.<o:p></o:p></p>
+livelihoods are connected directly or indirectly to the water.</p>
 
 <p class="MsoNormal">Yet possessing maritime assets is not the same as building a
 maritime economy.<o:p></o:p></p>
