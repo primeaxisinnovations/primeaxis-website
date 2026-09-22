@@ -16,7 +16,7 @@ author: Nneoma Blessing Obi Asualo
 date: '2026-09-22'
 readingTime: 4 min read
 featuredImage: >-
-  https://n0jyvquhgs2welj7.public.blob.vercel-storage.com/uploads/1790054881108-33c7fd33-patrol-vessel-cutting-through-waves-2k-20260922062319.webp
+  https://n0jyvquhgs2welj7.public.blob.vercel-storage.com/uploads/1790061393782-bd4f8fc1-whatsapp-image-2026-09-21-at-6-40-30-pm.webp
 tags: []
 referenceCode: BE-2026-011
 status: published
