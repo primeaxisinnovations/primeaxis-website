@@ -14,7 +14,7 @@ author: Nneoma Blessing Obi Asualo
 date: '2026-09-19'
 readingTime: 9 min read
 featuredImage: >-
-  https://n0jyvquhgs2welj7.public.blob.vercel-storage.com/uploads/1789809427072-6e43371d-whatsapp-image-2026-09-19-2-at-10-00-29-am.webp
+  https://n0jyvquhgs2welj7.public.blob.vercel-storage.com/uploads/1790179884621-30361662-whatsapp-image-2026-09-23-at-5-03-50-pm-1.webp
 tags: []
 referenceCode: BE-2026-009
 status: published
