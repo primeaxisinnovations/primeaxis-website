@@ -7,7 +7,7 @@ excerpt: >-
   The Federal Government has approved the modernisation and upgrade of the Onne,
   Rivers, Delta and Calabar ports, reopening a strategic question that has
   shaped the country’s maritime economy for decades.
-category: Blue Economy
+category: Ports & Infrastructure
 author: NNEOMA BLESSING OBI ASUALO
 date: '2026-09-28'
 readingTime: 11 min read
