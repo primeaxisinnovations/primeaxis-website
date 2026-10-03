@@ -6,7 +6,7 @@ excerpt: >-
   digitalisation, stronger inter-agency coordination and streamlined trade
   processes to improve Nigeria’s competitiveness in regional and international
   trade.
-category: Blue Economy
+category: Ports & Infrastructure
 author: Nneoma Blessing Obi-Asualo
 date: '2026-09-26'
 readingTime: 5 min read
