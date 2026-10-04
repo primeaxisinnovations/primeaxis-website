@@ -2,7 +2,6 @@ import { NextResponse, type NextRequest } from 'next/server'
 import { cookies } from 'next/headers'
 import { randomUUID } from 'crypto'
 import { put } from '@vercel/blob'
-import sharp from 'sharp'
 import { ADMIN_SESSION_COOKIE, verifySessionToken } from '@/lib/admin-session'
 
 // Always hits Vercel Blob live — never cached.
@@ -86,27 +85,54 @@ export async function POST(request: NextRequest) {
   try {
     // Images: compress + convert to WebP via sharp. Videos: upload as-is.
     if (IMAGE_TYPES.has(file.type)) {
-      const buffer = Buffer.from(await file.arrayBuffer())
+      // sharp is a native addon: it dlopen()s libvips at load time, which
+      // fails outright when the prebuilt binary doesn't match the runtime's
+      // shared libraries (ERR_DLOPEN_FAILED: libvips-cpp.so). Imported at
+      // module scope that took the whole route down before any of our code
+      // ran. Loaded lazily, the same failure costs only the optimization.
+      let sharpFactory: typeof import('sharp').default | null = null
+      try {
+        sharpFactory = (await import('sharp')).default
+      } catch (error) {
+        // First line only — a dlopen failure spans several lines of paths.
+        const message = error instanceof Error ? error.message : String(error)
+        console.error('[upload] sharp unavailable:', message.split('\n')[0])
+      }
 
-      const optimized = await sharp(buffer)
-        .resize(1600, null, {
-          withoutEnlargement: true, // never upscale small images
+      if (sharpFactory) {
+        const buffer = Buffer.from(await file.arrayBuffer())
+
+        const optimized = await sharpFactory(buffer)
+          .resize(1600, null, {
+            withoutEnlargement: true, // never upscale small images
+          })
+          .webp({ quality: 82 })
+          .toBuffer()
+
+        const webpPathname = pathname.replace(/\.(jpg|jpeg|png|webp)$/i, '.webp')
+
+        // In Vercel's runtime sharp's output Buffer can be backed by a
+        // SharedArrayBuffer, and @vercel/blob's put() sends it via fetch
+        // (undici), which rejects SharedArrayBuffer-backed bodies with
+        // "ArrayBuffer: SharedArrayBuffer is not allowed". new Uint8Array(...)
+        // copies the bytes into a fresh, non-shared ArrayBuffer; Buffer.from
+        // wraps that same buffer (no extra copy) so it satisfies put()'s type.
+        const safeBody = Buffer.from(new Uint8Array(optimized).buffer)
+        const blob = await put(webpPathname, safeBody, {
+          access: 'public',
+          contentType: 'image/webp',
+          token: BLOB_TOKEN,
         })
-        .webp({ quality: 82 })
-        .toBuffer()
+        return NextResponse.json({ url: blob.url })
+      }
 
-      const webpPathname = pathname.replace(/\.(jpg|jpeg|png|webp)$/i, '.webp')
-
-      // In Vercel's runtime sharp's output Buffer can be backed by a
-      // SharedArrayBuffer, and @vercel/blob's put() sends it via fetch
-      // (undici), which rejects SharedArrayBuffer-backed bodies with
-      // "ArrayBuffer: SharedArrayBuffer is not allowed". new Uint8Array(...)
-      // copies the bytes into a fresh, non-shared ArrayBuffer; Buffer.from
-      // wraps that same buffer (no extra copy) so it satisfies put()'s type.
-      const safeBody = Buffer.from(new Uint8Array(optimized).buffer)
-      const blob = await put(webpPathname, safeBody, {
+      // Degraded path: store the original bytes unmodified. Same `pathname`
+      // (so the same uploads/<id>-<slug>.<ext> scheme and the extension from
+      // ALLOWED_TYPES) and the file's own content type — an un-optimized
+      // image is served instead of the upload failing.
+      const blob = await put(pathname, file, {
         access: 'public',
-        contentType: 'image/webp',
+        contentType: file.type,
         token: BLOB_TOKEN,
       })
       return NextResponse.json({ url: blob.url })
