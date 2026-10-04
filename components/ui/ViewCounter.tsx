@@ -50,9 +50,31 @@ function InteractiveViewCounter({
 
   useEffect(() => {
     const key = `viewed:${type}:${slug}`
+
+    // View counts only ever go up, so a reply that is zero, non-numeric or
+    // lower than what's on screen is a stale read or a swallowed failure —
+    // never let it replace the displayed number. This is what keeps the badge
+    // from flashing 0 when a Blob read fails.
+    const applyCount = (value: unknown) => {
+      if (typeof value !== 'number' || !Number.isFinite(value) || value <= 0) return
+      setCount((current) => (value > current ? value : current))
+    }
+
     // Session dedupe: a refresh in the same tab session must not re-count.
     // sessionStorage (not localStorage) so a genuinely new session counts.
-    if (sessionStorage.getItem(key)) return
+    if (sessionStorage.getItem(key)) {
+      // Already counted this session. Previously this returned immediately and
+      // left initialCount on screen — which is the number frozen into the
+      // page's ISR render, so a returning reader saw the count appear to drop
+      // back. Read the live value instead. No increment.
+      fetch(`/api/views?type=${type}&slug=${encodeURIComponent(slug)}`)
+        .then((res) => (res.ok ? res.json() : null))
+        .then((data) => applyCount(data?.count))
+        .catch(() => {
+          // Keep whatever is displayed.
+        })
+      return
+    }
     sessionStorage.setItem(key, '1')
 
     // Optimistic: bump the visible number immediately, before the request
@@ -66,12 +88,10 @@ function InteractiveViewCounter({
     })
       .then((res) => (res.ok ? res.json() : null))
       .then((data) => {
-        // Reconcile with the server's authoritative count. Guard on > 0: the
-        // increment helper returns 0 on a Blob failure, and we must not let
-        // that stomp the optimistic value the reader is already seeing.
-        if (data && typeof data.count === 'number' && data.count > 0) {
-          setCount(data.count)
-        }
+        // Reconcile with the server's authoritative count. The > 0 guard the
+        // increment helper needs (it returns 0 on a Blob failure) now lives in
+        // applyCount, together with the monotonic check.
+        applyCount(data?.count)
       })
       .catch(() => {
         // Silent by design — this is a low-stakes endpoint. The count simply
