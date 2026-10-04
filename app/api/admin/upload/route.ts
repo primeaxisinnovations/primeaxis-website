@@ -42,7 +42,15 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
   }
 
-  const formData = await request.formData().catch(() => null)
+  const formData = await request.formData().catch((error: unknown) => {
+    // Previously swallowed silently, which made a body/parse failure
+    // indistinguishable from a genuinely absent file in the 400 below.
+    console.error(
+      '[upload] formData parse failed:',
+      error instanceof Error ? error.message : String(error)
+    )
+    return null
+  })
   const file = formData?.get('file')
 
   if (!file || !(file instanceof File)) {
@@ -102,6 +110,10 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ url: blob.url })
   } catch (error) {
     const message = error instanceof Error ? error.message : String(error)
+    // Surfaced to the admin UI below; logged here so it is also recoverable
+    // from the function logs when the browser response is lost. Message only,
+    // never the error object or any credential.
+    console.error(`[upload] put failed for ${pathname}:`, message)
     return NextResponse.json({ error: `Upload failed: ${message}` }, { status: 500 })
   }
 }

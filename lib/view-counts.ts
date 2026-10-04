@@ -34,7 +34,13 @@ export async function getAllViewCounts(
     const result = await get(pathFor(type), { access: 'public' })
     if (!result || result.statusCode !== 200) return {}
     return (await new Response(result.stream).json()) as Record<string, number>
-  } catch {
+  } catch (error) {
+    // Diagnostic only — the empty-map fallback below is unchanged. Logs the
+    // message alone, never the error object or any credential.
+    console.error(
+      `[view-counts] read failed for ${pathFor(type)}:`,
+      error instanceof Error ? error.message : String(error)
+    )
     return {}
   }
 }
@@ -46,7 +52,11 @@ export async function getViewCount(
   try {
     const counts = await getAllViewCounts(type)
     return counts[slug] ?? 0
-  } catch {
+  } catch (error) {
+    console.error(
+      `[view-counts] getViewCount failed for ${type}/${slug}:`,
+      error instanceof Error ? error.message : String(error)
+    )
     return 0
   }
 }
@@ -66,9 +76,15 @@ export async function incrementViewCount(
       allowOverwrite: true,
     })
     return next
-  } catch {
+  } catch (error) {
     // Match the newsletter code's resilience: a Blob failure returns a sane
     // fallback (0) instead of throwing, so the API route can still respond.
+    // The log is what makes that swallowed failure visible — a 0 returned to
+    // /api/views can ONLY come from here, since the success path is >= 1.
+    console.error(
+      `[view-counts] increment failed for ${type}/${slug}:`,
+      error instanceof Error ? error.message : String(error)
+    )
     return 0
   }
 }
