@@ -3,7 +3,7 @@ import Image from 'next/image'
 import { getAllConversations } from '@/lib/conversation-content'
 import { getAllViewCounts } from '@/lib/view-counts'
 import AnimatedSection from '@/components/ui/AnimatedSection'
-import ConversationCard from '@/components/ui/ConversationCard'
+import ConversationListLive from '@/components/sections/ConversationListLive'
 import BreakingBar from '@/components/sections/BreakingBar'
 
 export const metadata: Metadata = {
@@ -81,15 +81,10 @@ export default async function ExecutiveConversationsPage() {
       <section className="pt-[102px] pb-[72px] max-sm:pb-12">
         <div className="max-w-[1240px] mx-auto px-11 max-md:px-5">
           <AnimatedSection delay={100}>
-            <div className="flex flex-col gap-4">
-              {conversations.map((conversation) => (
-                <ConversationCard
-                  key={conversation.slug}
-                  conversation={conversation}
-                  viewCount={viewCounts[conversation.slug] ?? 0}
-                />
-              ))}
-            </div>
+            <ConversationListLive
+              conversations={conversations}
+              viewCounts={viewCounts}
+            />
           </AnimatedSection>
         </div>
       </section>

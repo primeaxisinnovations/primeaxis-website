@@ -4,6 +4,7 @@ import { useState } from 'react'
 import { useSearchParams } from 'next/navigation'
 import AnimatedSection from '@/components/ui/AnimatedSection'
 import ArticleCard from '@/components/ui/ArticleCard'
+import useLiveViewCounts from '@/components/ui/useLiveViewCounts'
 import Button from '@/components/ui/Button'
 import { CATEGORIES, categoryToSlug } from '@/lib/categories'
 import { cn } from '@/lib/utils'
@@ -18,6 +19,10 @@ interface IntelligenceHubGridProps {
 }
 
 export default function IntelligenceHubGrid({ articles, viewCounts }: IntelligenceHubGridProps) {
+  // One batch request on mount for every card on the grid, including cards
+  // revealed later by Load More or a category filter change.
+  const liveCounts = useLiveViewCounts('article', viewCounts)
+
   const searchParams = useSearchParams()
   const categoryParam = searchParams.get('category')
   const matchedCategory = CATEGORIES.find((cat) => categoryToSlug(cat) === categoryParam) ?? null
@@ -120,7 +125,7 @@ export default function IntelligenceHubGrid({ articles, viewCounts }: Intelligen
                 <ArticleCard
                   article={visible[0]}
                   variant="hero"
-                  viewCount={viewCounts[visible[0].slug] ?? 0}
+                  viewCount={liveCounts[visible[0].slug] ?? 0}
                 />
                 {visible.length > 1 && (
                   <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -129,7 +134,7 @@ export default function IntelligenceHubGrid({ articles, viewCounts }: Intelligen
                         key={article.slug}
                         article={article}
                         variant="standard"
-                        viewCount={viewCounts[article.slug] ?? 0}
+                        viewCount={liveCounts[article.slug] ?? 0}
                       />
                     ))}
                   </div>
