@@ -2,11 +2,28 @@ import { put, get } from '@vercel/blob'
 
 type ContentType = 'article' | 'conversation'
 
-// View counts live in the DEFAULT (public) Blob store — the same store image
-// uploads use (process.env.BLOB_READ_WRITE_TOKEN). Unlike lib/newsletter.ts,
-// no token is passed to put()/get(): these counts are non-sensitive,
-// public-facing data, so the SDK's fallback to the default store is exactly
-// what we want. One JSON map per content type, e.g. { "slug-1": 42 }.
+// View counts live in the public Blob store — the same store image uploads
+// use. Every get()/put() below passes `token` explicitly, the same way
+// lib/newsletter.ts does.
+//
+// This is NOT cosmetic. @vercel/blob 2.4.1 resolves credentials in this order
+// (dist/chunk-SH3U4PAV.js):
+//
+//   options.token -> VERCEL_OIDC_TOKEN + BLOB_STORE_ID -> BLOB_READ_WRITE_TOKEN
+//
+// With an OIDC Blob connection attached to the project, Vercel injects
+// VERCEL_OIDC_TOKEN, so the OIDC branch wins and BLOB_READ_WRITE_TOKEN is
+// never consulted. That broke writes while leaving reads intact: an
+// authenticated put() fails, but get({ access: 'public' }) only resolves the
+// public CDN URL, which needs no auth at all. The result was counts that
+// rendered correctly but never persisted. Passing the token short-circuits to
+// the first branch and pins the store explicitly.
+//
+// If BLOB_READ_WRITE_TOKEN is unset, BLOB_TOKEN is undefined; the SDK's check
+// is a truthiness test, so it falls through to the OIDC/env path exactly as
+// before. One JSON map per content type, e.g. { "slug-1": 42 }.
+const BLOB_TOKEN = process.env.BLOB_READ_WRITE_TOKEN
+
 function pathFor(type: ContentType): string {
   return type === 'article'
     ? 'view-counts/articles.json'
@@ -31,7 +48,7 @@ export async function getAllViewCounts(
   type: ContentType
 ): Promise<Record<string, number>> {
   try {
-    const result = await get(pathFor(type), { access: 'public' })
+    const result = await get(pathFor(type), { access: 'public', token: BLOB_TOKEN })
     if (!result || result.statusCode !== 200) return {}
     return (await new Response(result.stream).json()) as Record<string, number>
   } catch (error) {
@@ -74,6 +91,7 @@ export async function incrementViewCount(
       contentType: 'application/json',
       addRandomSuffix: false,
       allowOverwrite: true,
+      token: BLOB_TOKEN,
     })
     return next
   } catch (error) {

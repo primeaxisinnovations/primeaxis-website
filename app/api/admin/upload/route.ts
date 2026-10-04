@@ -8,6 +8,14 @@ import { ADMIN_SESSION_COOKIE, verifySessionToken } from '@/lib/admin-session'
 // Always hits Vercel Blob live — never cached.
 export const dynamic = 'force-dynamic'
 
+// Passed explicitly to every put() below, as lib/newsletter.ts does. The SDK
+// checks options.token BEFORE VERCEL_OIDC_TOKEN + BLOB_STORE_ID, and the OIDC
+// branch would otherwise win and ignore BLOB_READ_WRITE_TOKEN entirely —
+// which is what made uploads fail. See the comment in lib/view-counts.ts.
+// Undefined when the env var is unset, which the SDK skips, preserving the
+// previous fallback behaviour.
+const BLOB_TOKEN = process.env.BLOB_READ_WRITE_TOKEN
+
 const MAX_FILE_SIZE_BYTES = 50 * 1024 * 1024 // 50MB
 
 const ALLOWED_TYPES: Record<string, string> = {
@@ -99,6 +107,7 @@ export async function POST(request: NextRequest) {
       const blob = await put(webpPathname, safeBody, {
         access: 'public',
         contentType: 'image/webp',
+        token: BLOB_TOKEN,
       })
       return NextResponse.json({ url: blob.url })
     }
@@ -106,6 +115,7 @@ export async function POST(request: NextRequest) {
     const blob = await put(pathname, file, {
       access: 'public',
       contentType: file.type,
+      token: BLOB_TOKEN,
     })
     return NextResponse.json({ url: blob.url })
   } catch (error) {
