@@ -34,6 +34,18 @@ export interface Conversation {
   editorsNote?: string
 }
 
+export interface Profile {
+  slug: string
+  name: string
+  role: string
+  organisation: string
+  photo: string
+  bio: string
+  expertise: string[]
+  linkedin: string
+  status: 'draft' | 'published'
+}
+
 export interface EventGalleryItem {
   url: string
   type: 'image' | 'video'

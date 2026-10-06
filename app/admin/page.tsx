@@ -28,6 +28,11 @@ const ADMIN_SECTIONS: AdminSection[] = [
     href: '/admin/conversations',
   },
   {
+    label: 'Manage Profiles',
+    description: 'Create executive profiles for the PrimeAxis leadership and expert network.',
+    href: '/admin/profiles/new',
+  },
+  {
     label: 'Manage Events',
     description: 'Create, edit, and review conferences, summits, and press briefings.',
     href: '/admin/events',
