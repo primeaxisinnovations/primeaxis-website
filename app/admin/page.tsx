@@ -23,6 +23,11 @@ const ADMIN_SECTIONS: AdminSection[] = [
     href: '/admin/conversations',
   },
   {
+    label: 'Manage Profiles',
+    description: 'Create, edit, and publish people profiles with social links.',
+    href: '/admin/profiles',
+  },
+  {
     label: 'Manage Events',
     description: 'Create, edit, and review conferences, summits, and press briefings.',
     href: '/admin/events',
