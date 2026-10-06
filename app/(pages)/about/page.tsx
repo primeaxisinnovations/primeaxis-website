@@ -4,6 +4,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import AnimatedSection from '@/components/ui/AnimatedSection'
 import BreakingBar from '@/components/sections/BreakingBar'
+import { getAllProfiles } from '@/lib/profile-content'
 
 const FOUNDER_PHOTO_URL =
   'https://n0jyvquhgs2welj7.public.blob.vercel-storage.com/founder/nneoma-obi-asualo.jpg'
@@ -95,7 +96,8 @@ const PILLARS: Array<{
   },
 ]
 
-export default function AboutPage() {
+export default async function AboutPage() {
+  const profiles = await getAllProfiles()
   return (
     <div className="min-h-screen bg-cream">
 
@@ -530,6 +532,18 @@ export default function AboutPage() {
           </AnimatedSection>
         </div>
       </section>
+
+      {profiles.length > 0 && (
+        <section className="bg-cream px-14 py-[80px] max-sm:px-6">
+          <div className="max-w-[1240px] mx-auto">
+            <span className="block font-mono text-[10px] tracking-[0.22em] uppercase text-gold mb-4">The PrimeAxis Team</span>
+            <h2 className="font-display text-[clamp(26px,3vw,42px)] font-semibold text-deep mb-10">People shaping the conversation</h2>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              {profiles.map((profile) => <article key={profile.slug} className="bg-white border border-border p-5"><div className="aspect-[4/3] overflow-hidden mb-5 bg-deep/10">{profile.photo && <Image src={profile.photo} alt={profile.name} width={640} height={480} className="w-full h-full object-cover" />}</div><h3 className="font-display text-[22px] font-semibold text-deep">{profile.name}</h3><p className="font-mono text-[10px] uppercase tracking-[0.15em] text-gold mt-2">{profile.role}</p><p className="font-sans text-[14px] leading-[1.7] text-ink mt-4">{profile.bio}</p><div className="flex gap-4 mt-5 font-mono text-[10px] uppercase text-teal">{profile.linkedin && <a href={profile.linkedin} target="_blank" rel="noreferrer">LinkedIn</a>}{profile.twitter && <a href={profile.twitter} target="_blank" rel="noreferrer">X</a>}{profile.website && <a href={profile.website} target="_blank" rel="noreferrer">Website</a>}</div></article>)}
+            </div>
+          </div>
+        </section>
+      )}
 
     </div>
   )
