@@ -12,7 +12,7 @@ author: NNEOMA BLESSING OBI ASUALO
 date: '2026-10-06'
 readingTime: 7 min read
 featuredImage: >-
-  https://rxiov7wbzmvi55hb.public.blob.vercel-storage.com/uploads/1791272048404-0146b7b6-1000184338.jpg
+  https://rxiov7wbzmvi55hb.public.blob.vercel-storage.com/uploads/1791273908307-810d2ae6-1000184346.jpg
 tags: []
 referenceCode: MP-2026-007
 status: published
