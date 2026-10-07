@@ -1,6 +1,6 @@
 import { put, get } from '@vercel/blob'
 
-type ContentType = 'article' | 'conversation'
+type ContentType = 'article' | 'conversation' | 'profile'
 
 // View counts live in the public Blob store — the same store image uploads
 // use. Every get()/put() below passes `token` explicitly, the same way

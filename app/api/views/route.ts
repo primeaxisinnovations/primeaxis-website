@@ -17,7 +17,7 @@ export async function GET(request: Request) {
 
   // Same validation as POST.
   if (
-    (type !== 'article' && type !== 'conversation') ||
+    (type !== 'article' && type !== 'conversation' && type !== 'profile') ||
     typeof slug !== 'string' ||
     slug.length === 0
   ) {
@@ -45,7 +45,7 @@ export async function POST(request: Request) {
     const { type, slug } = body
 
     if (
-      (type !== 'article' && type !== 'conversation') ||
+      (type !== 'article' && type !== 'conversation' && type !== 'profile') ||
       typeof slug !== 'string' ||
       slug.length === 0
     ) {
