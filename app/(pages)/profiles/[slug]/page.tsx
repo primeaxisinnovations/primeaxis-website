@@ -5,25 +5,14 @@ import { notFound } from 'next/navigation'
 import BreakingBar from '@/components/sections/BreakingBar'
 import ViewCounter from '@/components/ui/ViewCounter'
 import ProfileShareButtons from '@/components/ui/ProfileShareButtons'
-import { getProfileBySlug } from '@/lib/profile-content'
-import { getViewCount } from '@/lib/view-counts'
+import { getAllProfiles, getProfileBySlug, getProfilePlainText } from '@/lib/profile-content'
+import { getAllViewCounts, getViewCount } from '@/lib/view-counts'
 
 export const dynamic = 'force-dynamic'
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://primeaxisinnovations.com.ng'
 const DEFAULT_PROFILE_DESCRIPTION =
   "Explore PrimeAxis profiles featuring the people shaping Africa's maritime intelligence and blue economy."
-
-function getPlainText(value: string) {
-  return value
-    .replace(/<[^>]*>/g, ' ')
-    .replace(/&nbsp;/gi, ' ')
-    .replace(/&amp;/gi, '&')
-    .replace(/&quot;/gi, '"')
-    .replace(/&#39;|&apos;/gi, "'")
-    .replace(/\\s+/g, ' ')
-    .trim()
-}
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
   const { slug } = await params
@@ -36,7 +25,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
     }
   }
 
-  const description = getPlainText(profile.bio).slice(0, 160) || DEFAULT_PROFILE_DESCRIPTION
+  const description = getProfilePlainText(profile.bio).slice(0, 160) || DEFAULT_PROFILE_DESCRIPTION
   const title = `Prime Axis Profile : ${profile.name}`
   const url = `${SITE_URL}/profiles/${profile.slug}`
   const image = profile.banner || profile.photo
@@ -74,9 +63,14 @@ export default async function ProfilePage({ params }: { params: Promise<{ slug: 
   const profile = await getProfileBySlug(slug)
   if (!profile) notFound()
 
-  const profileDescription = getPlainText(profile.bio) || DEFAULT_PROFILE_DESCRIPTION
+  const profileDescription = getProfilePlainText(profile.bio) || DEFAULT_PROFILE_DESCRIPTION
   const profileUrl = `${SITE_URL}/profiles/${profile.slug}`
-  const viewCount = await getViewCount('profile', profile.slug)
+  const [viewCount, recentProfiles, viewCounts] = await Promise.all([
+    getViewCount('profile', profile.slug),
+    getAllProfiles(),
+    getAllViewCounts('profile'),
+  ])
+  const relatedProfiles = recentProfiles.filter((item) => item.slug !== profile.slug).slice(0, 6)
   const sameAs = [profile.linkedin, profile.twitter, profile.website].filter(Boolean)
   const profileSchema = {
     '@context': 'https://schema.org',
@@ -107,5 +101,36 @@ export default async function ProfilePage({ params }: { params: Promise<{ slug: 
         </article>
       </div>
     </section>
+    {relatedProfiles.length > 0 && (
+      <section className="mt-16">
+        <div className="mb-7 flex items-end justify-between gap-4">
+          <div>
+            <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-gold">People shaping the conversation</p>
+            <h2 className="mt-2 font-display text-3xl font-semibold text-deep">More PrimeAxis profiles</h2>
+          </div>
+          <Link href="/about" className="font-mono text-[10px] uppercase tracking-[0.14em] text-teal hover:text-gold">View all</Link>
+        </div>
+        <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+          {relatedProfiles.map((item) => (
+            <article key={item.slug} className="overflow-hidden border border-deep/10 bg-white">
+              <Link href={`/profiles/${item.slug}`} className="block">
+                <div className="relative aspect-[16/9] bg-deep/10">
+                  {item.banner ? <Image src={item.banner} alt="" fill className="object-cover" /> : item.photo ? <Image src={item.photo} alt="" fill className="object-cover" /> : null}
+                </div>
+                <div className="p-5">
+                  <h3 className="font-display text-xl font-semibold text-deep">{item.name}</h3>
+                  <p className="mt-1 font-mono text-[10px] uppercase tracking-[0.14em] text-gold">{item.role}</p>
+                  <p className="mt-3 line-clamp-3 font-sans text-sm leading-6 text-ink">{getProfilePlainText(item.bio)}</p>
+                </div>
+              </Link>
+              <div className="flex items-center justify-between border-t border-deep/10 px-5 py-3">
+                <ViewCounter mode="display" count={viewCounts[item.slug] ?? 0} />
+                <Link href={`/profiles/${item.slug}`} className="font-mono text-[10px] uppercase tracking-[0.12em] text-teal hover:text-gold">View profile</Link>
+              </div>
+            </article>
+          ))}
+        </div>
+      </section>
+    )}
   </main></div>
 }
