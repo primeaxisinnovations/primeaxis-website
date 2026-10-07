@@ -20,6 +20,7 @@ export interface Profile {
   role: string
   bio: string
   photo: string
+  banner?: string
   email?: string
   linkedin?: string
   twitter?: string

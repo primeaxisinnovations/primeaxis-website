@@ -6,7 +6,7 @@ import type { Profile } from '@/types'
 const PROFILES_DIR = 'content/profiles'
 function parseProfile(slug: string, raw: string): Profile {
   const { data } = matter(raw)
-  return { slug, name: String(data.name ?? ''), role: String(data.role ?? ''), bio: String(data.bio ?? ''), photo: String(data.photo ?? ''), email: typeof data.email === 'string' ? data.email : undefined, linkedin: typeof data.linkedin === 'string' ? data.linkedin : undefined, twitter: typeof data.twitter === 'string' ? data.twitter : undefined, website: typeof data.website === 'string' ? data.website : undefined, status: data.status === 'published' ? 'published' : 'draft' }
+  return { slug, name: String(data.name ?? ''), role: String(data.role ?? ''), bio: String(data.bio ?? ''), photo: String(data.photo ?? ''), banner: String(data.banner ?? ''), email: typeof data.email === 'string' ? data.email : undefined, linkedin: typeof data.linkedin === 'string' ? data.linkedin : undefined, twitter: typeof data.twitter === 'string' ? data.twitter : undefined, website: typeof data.website === 'string' ? data.website : undefined, status: data.status === 'published' ? 'published' : 'draft' }
 }
 export const getAllProfiles = cache(async function getAllProfiles(): Promise<Profile[]> {
   let files: string[]

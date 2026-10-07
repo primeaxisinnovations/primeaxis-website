@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react'
 import { Eye } from 'lucide-react'
 import { cn } from '@/lib/utils'
 
-type ContentType = 'article' | 'conversation'
+type ContentType = 'article' | 'conversation' | 'profile'
 
 // Interactive: detail pages. On mount, records one view per visitor session.
 interface InteractiveProps {

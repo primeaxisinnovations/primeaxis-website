@@ -97,7 +97,7 @@ const PILLARS: Array<{
 ]
 
 export default async function AboutPage() {
-  const profiles = await getAllProfiles()
+  const profiles = (await getAllProfiles()).slice(0, 6)
   return (
     <div className="min-h-screen bg-cream">
 
