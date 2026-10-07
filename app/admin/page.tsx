@@ -29,8 +29,8 @@ const ADMIN_SECTIONS: AdminSection[] = [
   },
   {
     label: 'Manage Profiles',
-    description: 'Create executive profiles for the PrimeAxis leadership and expert network.',
-    href: '/admin/profiles/new',
+    description: 'Create, edit, and publish people profiles with social links.',
+    href: '/admin/profiles',
   },
   {
     label: 'Manage Events',
@@ -60,6 +60,14 @@ export default async function AdminDashboardPage() {
             <p className="font-mono text-[10px] tracking-[0.2em] uppercase text-gold mb-1">PrimeAxis Admin</p>
             <h1 className="font-display text-[28px] font-semibold text-deep">Dashboard</h1>
           </div>
+          <form action="/admin/" method="POST">
+            <button
+              type="submit"
+              className="font-sans text-[13px] font-semibold tracking-[.04em] text-gold border border-gold px-6 py-3 hover:bg-black hover:text-deep transition-all duration-200"
+            >
+            Dashboard
+            </button>
+          </form>
           <form action="/api/admin-logout" method="POST">
             <button
               type="submit"

@@ -83,6 +83,7 @@ export default function RootLayout({
           store (uploaded images) — so DNS/TLS is already done before the first
           request fires. */}
       <head>
+        <meta name="google-site-verification" content="Lz61jbm7zxLUmNHDidOIRH7GvYnYfUCgCOlqt3zXn6Y" />
         <link rel="preconnect" href="https://api.github.com" />
         <link rel="preconnect" href="https://n0jyvquhgs2welj7.public.blob.vercel-storage.com" />
         <link rel="dns-prefetch" href="https://api.github.com" />

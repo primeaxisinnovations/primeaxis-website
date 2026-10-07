@@ -31,6 +31,8 @@ export default function ContactForm() {
   useEffect(() => {
     const typeParam = searchParams.get('type')
     if (typeParam && VALID_VALUES.has(typeParam)) {
+      // Sync the deep-link inquiry type into the controlled form state.
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       setInquiryType(typeParam as InquiryValue)
     }
   }, [searchParams])

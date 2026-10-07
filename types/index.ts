@@ -14,6 +14,20 @@ export interface Article {
   status: 'draft' | 'published'
 }
 
+export interface Profile {
+  slug: string
+  name: string
+  role: string
+  bio: string
+  photo: string
+  banner?: string
+  email?: string
+  linkedin?: string
+  twitter?: string
+  website?: string
+  status: 'draft' | 'published'
+}
+
 export interface Conversation {
   slug: string
   executiveName: string

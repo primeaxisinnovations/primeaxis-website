@@ -6,6 +6,7 @@ import Image from "next/image";
 import { LayoutGrid } from "lucide-react";
 import ArticleCard from "@/components/ui/ArticleCard";
 import ViewCounter from "@/components/ui/ViewCounter";
+import useLiveViewCounts from "@/components/ui/useLiveViewCounts";
 import NewsletterForm from "@/components/ui/NewsletterForm";
 import { CATEGORIES, categoryToSlug } from "@/lib/categories";
 import { CATEGORY_ICONS } from "@/lib/category-icons";
@@ -96,6 +97,15 @@ export default function HomeContent({
   articleViewCounts,
   conversationViewCounts,
 }: HomeContentProps) {
+  // One batch request per content type on mount, never per card. Seeded with
+  // the server-rendered counts, which come from this page's ISR entry and can
+  // be up to an hour old; a live value is taken only when it is higher.
+  const liveArticleCounts = useLiveViewCounts("article", articleViewCounts);
+  const liveConversationCounts = useLiveViewCounts(
+    "conversation",
+    conversationViewCounts
+  );
+
   const [activeSlide, setActiveSlide] = useState(0);
   const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
 
@@ -428,7 +438,7 @@ export default function HomeContent({
                 article={article}
                 variant="standard"
                 className="fade-in"
-                viewCount={articleViewCounts[article.slug] ?? 0}
+                viewCount={liveArticleCounts[article.slug] ?? 0}
               />
             ))}
           </div>
@@ -488,7 +498,7 @@ export default function HomeContent({
                       overridden for the dark surface (twMerge lets it win). */}
                   <ViewCounter
                     mode="display"
-                    count={conversationViewCounts[featuredConversation.slug] ?? 0}
+                    count={liveConversationCounts[featuredConversation.slug] ?? 0}
                     className="mt-1.5 text-white/40"
                   />
                 </div>
