@@ -9,17 +9,90 @@ import { getProfileBySlug } from '@/lib/profile-content'
 
 export const dynamic = 'force-dynamic'
 
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://primeaxisinnovations.com.ng'
+const DEFAULT_PROFILE_DESCRIPTION =
+  "Explore PrimeAxis profiles featuring the people shaping Africa's maritime intelligence and blue economy."
+
+function getPlainText(value: string) {
+  return value
+    .replace(/<[^>]*>/g, ' ')
+    .replace(/&nbsp;/gi, ' ')
+    .replace(/&amp;/gi, '&')
+    .replace(/&quot;/gi, '"')
+    .replace(/&#39;|&apos;/gi, "'")
+    .replace(/\\s+/g, ' ')
+    .trim()
+}
+
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
   const { slug } = await params
   const profile = await getProfileBySlug(slug)
-  return profile ? { title: `${profile.name} | PrimeAxis`, description: profile.bio.replace(/<[^>]+>/g, '').slice(0, 160) } : { title: 'Profile | PrimeAxis' }
+  if (!profile) {
+    return {
+      title: 'Prime Axis Profile | PrimeAxis',
+      description: DEFAULT_PROFILE_DESCRIPTION,
+      robots: { index: false, follow: false },
+    }
+  }
+
+  const description = getPlainText(profile.bio).slice(0, 160) || DEFAULT_PROFILE_DESCRIPTION
+  const title = `Prime Axis Profile : ${profile.name}`
+  const url = `${SITE_URL}/profiles/${profile.slug}`
+  const image = profile.banner || profile.photo
+
+  return {
+    title,
+    description,
+    keywords: [profile.name, profile.role, 'PrimeAxis', 'Africa maritime intelligence', 'blue economy'].filter(Boolean),
+    alternates: { canonical: url },
+    authors: [{ name: profile.name, url }],
+    creator: 'PrimeAxis Innovations Limited',
+    publisher: 'PrimeAxis Innovations Limited',
+    robots: { index: true, follow: true, 'max-image-preview': 'large' },
+    openGraph: {
+      title,
+      description,
+      url,
+      siteName: 'PrimeAxis',
+      type: 'profile',
+      locale: 'en_NG',
+      firstName: profile.name.split(' ')[0],
+      images: image ? [{ url: image, alt: `${profile.name} — PrimeAxis profile` }] : undefined,
+    },
+    twitter: {
+      card: image ? 'summary_large_image' : 'summary',
+      title,
+      description,
+      images: image ? [image] : undefined,
+    },
+  }
 }
 
 export default async function ProfilePage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params
   const profile = await getProfileBySlug(slug)
   if (!profile) notFound()
-  return <div className="min-h-screen bg-cream"><BreakingBar /><main className="mx-auto max-w-[1120px] px-6 py-12 md:py-20">
+
+  const profileDescription = getPlainText(profile.bio) || DEFAULT_PROFILE_DESCRIPTION
+  const profileUrl = `${SITE_URL}/profiles/${profile.slug}`
+  const sameAs = [profile.linkedin, profile.twitter, profile.website].filter(Boolean)
+  const profileSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'Person',
+    name: profile.name,
+    jobTitle: profile.role || undefined,
+    description: profileDescription,
+    url: profileUrl,
+    image: [profile.photo, profile.banner].filter(Boolean),
+    sameAs,
+    worksFor: {
+      '@type': 'Organization',
+      name: 'PrimeAxis Innovations Limited',
+      url: SITE_URL,
+    },
+  }
+
+  return <div className="min-h-screen bg-cream"><script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(profileSchema) }} /><BreakingBar /><main className="mx-auto max-w-[1120px] px-6 py-12 md:py-20">
     <Link href="/about" className="font-mono text-[10px] uppercase tracking-[0.18em] text-gold hover:text-deep">Back to About</Link>
     <section className="mt-8 overflow-hidden border border-deep/10 bg-white shadow-[0_20px_60px_rgba(13,24,36,0.08)]">
       <div className="relative h-48 bg-deep md:h-64">{profile.banner && <Image src={profile.banner} alt="" fill className="object-cover opacity-80" priority />}<div className="absolute inset-0 bg-gradient-to-t from-deep/80 to-transparent" /></div>
