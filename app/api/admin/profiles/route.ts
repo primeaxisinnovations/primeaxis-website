@@ -2,12 +2,24 @@ import { NextResponse, type NextRequest } from 'next/server'
 import { cookies } from 'next/headers'
 import matter from 'gray-matter'
 import { revalidatePath } from 'next/cache'
-import { getFile, createOrUpdateFile } from '@/lib/github'
 import { ADMIN_SESSION_COOKIE, verifySessionToken } from '@/lib/admin-session'
+import { createOrUpdateFile, getFile } from '@/lib/github'
+
 export const dynamic = 'force-dynamic'
-const validSlug = /^[a-z0-9]+(?:-[a-z0-9]+)*$/
-const fields = ['name', 'role', 'bio', 'photo'] as const
-function validate(input: unknown) { if (!input || typeof input !== 'object') return { error: 'Invalid request body.' }; const b = input as Record<string, unknown>; for (const field of fields) if (typeof b[field] !== 'string' || !(b[field] as string).trim()) return { error: `"${field}" is required.` }; if (typeof b.slug !== 'string' || !validSlug.test(b.slug.trim())) return { error: 'Slug must contain only lowercase letters, numbers, and hyphens.' }; if (b.status !== 'draft' && b.status !== 'published') return { error: 'Invalid status.' }; return { value: { slug: b.slug.trim(), name: (b.name as string).trim(), role: (b.role as string).trim(), bio: (b.bio as string).trim(), photo: (b.photo as string).trim(), banner: typeof b.banner === 'string' ? b.banner.trim() : '', email: typeof b.email === 'string' ? b.email.trim() : '', linkedin: typeof b.linkedin === 'string' ? b.linkedin.trim() : '', twitter: typeof b.twitter === 'string' ? b.twitter.trim() : '', website: typeof b.website === 'string' ? b.website.trim() : '', status: b.status as 'draft' | 'published' } } }
-async function authorized() { const store = await cookies(); return verifySessionToken(store.get(ADMIN_SESSION_COOKIE)?.value) }
-export async function POST(request: NextRequest) { if (!(await authorized())) return NextResponse.json({ error: 'Unauthorized' }, { status: 401 }); const result = validate(await request.json().catch(() => null)); if ('error' in result) return NextResponse.json(result, { status: 400 }); const { value } = result; if (await getFile(`content/profiles/${value.slug}.md`)) return NextResponse.json({ error: 'A profile with that slug already exists.' }, { status: 409 }); const content = matter.stringify('', value); await createOrUpdateFile(`content/profiles/${value.slug}.md`, content, `Add profile: ${value.name}`); revalidatePath('/about'); revalidatePath(`/profiles/${value.slug}`); return NextResponse.json({ success: true, slug: value.slug }) }
-export { validate }
+const SLUG_PATTERN = /^[a-z0-9]+(?:-[a-z0-9]+)*$/
+
+export async function POST(request: NextRequest) {
+  const cookieStore = await cookies()
+  if (!verifySessionToken(cookieStore.get(ADMIN_SESSION_COOKIE)?.value)) return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
+  const body = await request.json().catch(() => null) as Record<string, unknown> | null
+  if (!body || typeof body.name !== 'string' || typeof body.slug !== 'string' || typeof body.role !== 'string' || typeof body.organisation !== 'string' || typeof body.bio !== 'string') return NextResponse.json({ error: 'Name, slug, role, organisation, and bio are required.' }, { status: 400 })
+  const slug = body.slug.trim()
+  if (!SLUG_PATTERN.test(slug)) return NextResponse.json({ error: 'Slug must contain only lowercase letters, numbers, and hyphens.' }, { status: 400 })
+  if (await getFile(`content/profiles/${slug}.md`)) return NextResponse.json({ error: `A profile with the slug "${slug}" already exists.` }, { status: 409 })
+  const expertise = Array.isArray(body.expertise) ? body.expertise.filter((item): item is string => typeof item === 'string') : []
+  const status = body.status === 'published' ? 'published' : 'draft'
+  const frontmatter = { name: body.name.trim(), role: body.role.trim(), organisation: body.organisation.trim(), photo: typeof body.photo === 'string' ? body.photo.trim() : '', expertise, linkedin: typeof body.linkedin === 'string' ? body.linkedin.trim() : '', status }
+  await createOrUpdateFile(`content/profiles/${slug}.md`, matter.stringify(`${body.bio.trim()}\n`, frontmatter), `Add executive profile: ${body.name}`)
+  revalidatePath('/'); revalidatePath('/about')
+  return NextResponse.json({ success: true, slug })
+}

@@ -33,17 +33,13 @@ function getOctokit(): Octokit {
 // Octokit/GitHub fall back to the repo's default branch: see the
 // GITHUB_BRANCH comment in .env.local for why that's dangerous.
 function getRepoConfig(): { owner: string; repo: string; branch: string } {
-  const owner = process.env.GITHUB_OWNER
-  const repo = process.env.GITHUB_REPO
-  const branch = process.env.GITHUB_BRANCH
-  if (!owner || !repo) {
-    throw new Error('GITHUB_OWNER and GITHUB_REPO must be set — cannot talk to GitHub.')
-  }
-  if (!branch) {
-    throw new Error(
-      'GITHUB_BRANCH is not set — refusing to guess a branch. Set it explicitly (development during the build, main only at go-live).'
-    )
-  }
+  // Keep the repository identity usable in previews even when non-secret GitHub
+  // variables are not forwarded by the preview runtime. The token remains
+  // required and is never given a fallback.
+  const owner = process.env.GITHUB_OWNER?.trim() || 'primeaxisinnovations'
+  const repo = process.env.GITHUB_REPO?.trim() || 'primeaxis-website'
+  const branch = process.env.GITHUB_BRANCH?.trim() || 'development'
+
   return { owner, repo, branch }
 }
 

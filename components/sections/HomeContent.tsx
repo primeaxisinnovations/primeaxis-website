@@ -11,6 +11,9 @@ import NewsletterForm from "@/components/ui/NewsletterForm";
 import { CATEGORIES, categoryToSlug } from "@/lib/categories";
 import { CATEGORY_ICONS } from "@/lib/category-icons";
 import { services } from "@/lib/placeholder-data";
+import { NEWS_CATEGORY_LABEL } from "@/lib/news-categories";
+import { formatDate } from "@/lib/utils";
+import type { NewsListItem } from "@/components/news/NewsBrowser";
 import type { Article, Conversation } from "@/types";
 
 function truncateText(text: string, maxLength: number): string {
@@ -79,6 +82,8 @@ interface HomeContentProps {
   featuredArticles: Article[];
   featuredConversation: Conversation | undefined;
   otherConversations: Conversation[];
+  // Excerpt-only news items — the rich body never crosses into the client.
+  latestNews: NewsListItem[];
   // slug → view count maps, fetched once by the server page. Read-only here.
   articleViewCounts: Record<string, number>;
   conversationViewCounts: Record<string, number>;
@@ -88,6 +93,7 @@ export default function HomeContent({
   featuredArticles,
   featuredConversation,
   otherConversations,
+  latestNews,
   articleViewCounts,
   conversationViewCounts,
 }: HomeContentProps) {
@@ -342,6 +348,70 @@ export default function HomeContent({
         </div>
 
       </div>
+
+      {/* ── LATEST NEWS ───────────────────────────────────────── */}
+      {/* Reporting, not analysis — sits between the beats strip and Featured
+          Intelligence so the newest dated filings are the first editorial
+          content on the page. Excerpts only; the full body lives on the
+          item's own page. Never padded: no published news, no section. */}
+      {latestNews.length > 0 && (
+        <section className="py-[72px] bg-deep max-sm:py-12 scroll-mt-[100px]" id="news">
+          <div className="max-w-[1240px] mx-auto px-11 max-md:px-5">
+            <div className="fade-in flex items-end justify-between mb-10 max-sm:flex-col max-sm:items-start max-sm:gap-4">
+              <div>
+                <span className="block w-8 h-0.5 bg-gold mb-[14px]" />
+                <span className="font-mono text-[10.5px] tracking-[.18em] uppercase text-gold">Latest News</span>
+                <h2 className="font-display text-[clamp(24px,2.6vw,36px)] font-semibold text-white leading-[1.15] mt-2.5">
+                  What&apos;s Moving Across
+                  <br />
+                  Africa&apos;s Maritime Industry
+                </h2>
+              </div>
+              <Link
+                href="/news"
+                className="font-mono text-[10.5px] tracking-[.14em] uppercase text-gold flex items-center gap-[7px] pb-1 whitespace-nowrap hover:gap-[13px] hover:text-gold-light transition-all duration-200"
+              >
+                View All News <ArrowRight size={14} />
+              </Link>
+            </div>
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+              {latestNews.map((item) => (
+                <Link
+                  key={item.slug}
+                  href={`/news/${item.slug}`}
+                  className="fade-in group flex flex-col border border-white/10 hover:border-gold/50 transition-colors duration-200"
+                >
+                  <div className="relative w-full aspect-[16/10] overflow-hidden bg-white/5">
+                    <Image
+                      src={item.coverImage}
+                      alt={item.title}
+                      fill
+                      quality={80}
+                      sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
+                      loading="lazy"
+                      className="object-cover transition-transform duration-500 group-hover:scale-[1.05]"
+                    />
+                  </div>
+                  <div className="flex flex-col gap-2 p-5 flex-1">
+                    <div className="flex items-center gap-2.5 font-mono text-[9px] tracking-[.14em] uppercase">
+                      <span className="text-gold">{NEWS_CATEGORY_LABEL[item.category]}</span>
+                      <span className="text-white/25" aria-hidden>·</span>
+                      <time dateTime={item.date} className="text-white/40">{formatDate(item.date)}</time>
+                    </div>
+                    <h3 className="font-display text-[15.5px] font-semibold text-white leading-[1.3] group-hover:text-gold transition-colors duration-200">
+                      {item.title}
+                    </h3>
+                    <p className="font-sans text-[12.5px] font-light text-white/50 leading-[1.6] line-clamp-3">
+                      {item.excerpt}
+                    </p>
+                  </div>
+                </Link>
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
 
       {/* ── INTELLIGENCE GRID ─────────────────────────────────── */}
       <section className="py-[88px] bg-cream max-sm:py-14 scroll-mt-[100px]" id="intelligence">

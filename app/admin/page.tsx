@@ -18,6 +18,11 @@ const ADMIN_SECTIONS: AdminSection[] = [
     href: '/admin/articles',
   },
   {
+    label: 'Manage News',
+    description: 'File, edit, and review dated industry reporting.',
+    href: '/admin/news',
+  },
+  {
     label: 'Manage Conversations',
     description: 'Create, edit, and review executive conversations.',
     href: '/admin/conversations',
@@ -55,6 +60,14 @@ export default async function AdminDashboardPage() {
             <p className="font-mono text-[10px] tracking-[0.2em] uppercase text-gold mb-1">PrimeAxis Admin</p>
             <h1 className="font-display text-[28px] font-semibold text-deep">Dashboard</h1>
           </div>
+          <form action="/admin/" method="POST">
+            <button
+              type="submit"
+              className="font-sans text-[13px] font-semibold tracking-[.04em] text-gold border border-gold px-6 py-3 hover:bg-black hover:text-deep transition-all duration-200"
+            >
+            Dashboard
+            </button>
+          </form>
           <form action="/api/admin-logout" method="POST">
             <button
               type="submit"

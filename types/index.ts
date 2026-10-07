@@ -48,6 +48,38 @@ export interface Conversation {
   editorsNote?: string
 }
 
-export interface EventGalleryItem { url: string; type: 'image' | 'video'; caption?: string }
-export interface Event { slug: string; title: string; date: string; category: 'conference' | 'summit' | 'press-briefing'; status: 'published' | 'draft'; coverImage: string; description: string; gallery: EventGalleryItem[] }
-export interface Service { title: string; description: string; icon: string; outcomes: string[] }
+export interface Profile {
+  slug: string
+  name: string
+  role: string
+  organisation: string
+  photo: string
+  bio: string
+  expertise: string[]
+  linkedin: string
+  status: 'draft' | 'published'
+}
+
+export interface EventGalleryItem {
+  url: string
+  type: 'image' | 'video'
+  caption?: string
+}
+
+export interface Event {
+  slug: string
+  title: string
+  date: string
+  category: 'conference' | 'summit' | 'press-briefing'
+  status: 'published' | 'draft'
+  coverImage: string
+  description: string
+  gallery: EventGalleryItem[]
+}
+
+export interface Service {
+  title: string
+  description: string
+  icon: string
+  outcomes: string[]
+}

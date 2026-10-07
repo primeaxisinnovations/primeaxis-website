@@ -958,13 +958,14 @@
 }
 
 /* ── SOFT COPY DETERRENT ─────────────────────────────────────────
-   Disables text selection on the prose body of article and conversation
-   detail pages ONLY (applied via ProtectedContent). Soft deterrent, not
-   security. Scoped to these two classes so headers, nav, buttons, share
-   links, forms, the newsletter signup, and the entire /admin panel remain
-   fully selectable — they never carry these classes. */
+   Disables text selection on the prose body of article, conversation, and
+   news detail pages ONLY (applied via ProtectedContent). Soft deterrent,
+   not security. Scoped to these three classes so headers, nav, buttons,
+   share links, forms, the newsletter signup, and the entire /admin panel
+   remain fully selectable — they never carry these classes. */
 .article-body,
-.conversation-body {
+.conversation-body,
+.news-body {
   user-select: none;
   -webkit-user-select: none;
   -moz-user-select: none;
