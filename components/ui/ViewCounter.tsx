@@ -79,6 +79,8 @@ function InteractiveViewCounter({
 
     // Optimistic: bump the visible number immediately, before the request
     // resolves, so the reader sees their own view reflected without a wait.
+    // The optimistic update intentionally runs from the view-recording effect.
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setCount((c) => c + 1)
 
     fetch('/api/views', {

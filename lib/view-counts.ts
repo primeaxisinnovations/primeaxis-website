@@ -25,9 +25,9 @@ type ContentType = 'article' | 'conversation' | 'profile'
 const BLOB_TOKEN = process.env.BLOB_READ_WRITE_TOKEN
 
 function pathFor(type: ContentType): string {
-  return type === 'article'
-    ? 'view-counts/articles.json'
-    : 'view-counts/conversations.json'
+  if (type === 'article') return 'view-counts/articles.json'
+  if (type === 'conversation') return 'view-counts/conversations.json'
+  return 'view-counts/profiles.json'
 }
 
 // KNOWN, ACCEPTED LIMITATION — incrementViewCount() is a read-modify-write over
