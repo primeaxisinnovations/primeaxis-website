@@ -6,6 +6,7 @@ import BreakingBar from '@/components/sections/BreakingBar'
 import ViewCounter from '@/components/ui/ViewCounter'
 import ProfileShareButtons from '@/components/ui/ProfileShareButtons'
 import { getProfileBySlug } from '@/lib/profile-content'
+import { getViewCount } from '@/lib/view-counts'
 
 export const dynamic = 'force-dynamic'
 
@@ -75,6 +76,7 @@ export default async function ProfilePage({ params }: { params: Promise<{ slug: 
 
   const profileDescription = getPlainText(profile.bio) || DEFAULT_PROFILE_DESCRIPTION
   const profileUrl = `${SITE_URL}/profiles/${profile.slug}`
+  const viewCount = await getViewCount('profile', profile.slug)
   const sameAs = [profile.linkedin, profile.twitter, profile.website].filter(Boolean)
   const profileSchema = {
     '@context': 'https://schema.org',
@@ -101,7 +103,7 @@ export default async function ProfilePage({ params }: { params: Promise<{ slug: 
         <article className="pt-2 md:pt-8"><p className="font-mono text-[10px] uppercase tracking-[0.2em] text-gold">PrimeAxis Profile</p><h1 className="mt-3 font-display text-[clamp(34px,5vw,58px)] leading-tight font-semibold text-deep">{profile.name}</h1><p className="mt-4 font-mono text-[11px] uppercase tracking-[0.16em] text-teal">{profile.role}</p>
           <div className="mt-7 font-sans text-[16px] leading-[1.8] text-ink [&_a]:text-teal [&_a]:underline [&_h2]:font-display [&_h2]:text-2xl" dangerouslySetInnerHTML={{ __html: profile.bio }} />
           <div className="mt-8 flex flex-wrap items-center gap-5 font-mono text-[10px] uppercase tracking-[0.1em] text-teal">{profile.email && <a href={`mailto:${profile.email}`} className="hover:text-gold">Email</a>}{profile.linkedin && <a href={profile.linkedin} target="_blank" rel="noreferrer" className="hover:text-gold">LinkedIn</a>}{profile.twitter && <a href={profile.twitter} target="_blank" rel="noreferrer" className="hover:text-gold">X</a>}{profile.website && <a href={profile.website} target="_blank" rel="noreferrer" className="hover:text-gold">Website</a>}</div>
-          <div className="mt-8 flex flex-wrap items-center justify-between gap-5 border-t border-deep/10 pt-6"><ViewCounter mode="interactive" type="profile" slug={profile.slug} initialCount={0} /><ProfileShareButtons name={profile.name} /></div>
+          <div className="mt-8 flex flex-wrap items-center justify-between gap-5 border-t border-deep/10 pt-6"><ViewCounter mode="interactive" type="profile" slug={profile.slug} initialCount={viewCount} /><ProfileShareButtons name={profile.name} /></div>
         </article>
       </div>
     </section>
