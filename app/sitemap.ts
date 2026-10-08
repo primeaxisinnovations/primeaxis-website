@@ -1,6 +1,10 @@
 import type { MetadataRoute } from 'next'
 import { getAllArticles } from '@/lib/content'
 import { getAllConversations } from '@/lib/conversation-content'
+import { getAllEvents } from '@/lib/events'
+import { getAllProfiles } from '@/lib/profile-content'
+import { getAllJobs } from '@/lib/jobs'
+import { CATEGORIES, categoryToSlug } from '@/lib/categories'
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://primeaxisinnovations.com.ng'
 
@@ -10,7 +14,13 @@ const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://primeaxisinnovatio
 export const dynamic = 'force-dynamic'
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const [articles, conversations] = await Promise.all([getAllArticles(), getAllConversations()])
+  const [articles, conversations, events, profiles, jobs] = await Promise.all([
+    getAllArticles(),
+    getAllConversations(),
+    getAllEvents(),
+    getAllProfiles(),
+    getAllJobs(),
+  ])
 
   const staticPages: MetadataRoute.Sitemap = [
     { url: SITE_URL, changeFrequency: 'daily', priority: 1.0 },
@@ -37,5 +47,13 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     priority: 0.6,
   }))
 
-  return [...staticPages, ...articlePages, ...conversationPages]
+  const contentPages: MetadataRoute.Sitemap = [
+    { url: `${SITE_URL}/jobs`, changeFrequency: 'weekly', priority: 0.6 },
+    ...events.map((event) => ({ url: `${SITE_URL}/events/${event.slug}`, changeFrequency: 'weekly' as const, priority: 0.6 })),
+    ...profiles.map((profile) => ({ url: `${SITE_URL}/profiles/${profile.slug}`, changeFrequency: 'monthly' as const, priority: 0.6 })),
+    ...jobs.map((job) => ({ url: `${SITE_URL}/jobs/${job.slug}`, changeFrequency: 'weekly' as const, priority: 0.6 })),
+    ...CATEGORIES.map((category) => ({ url: `${SITE_URL}/categories/${categoryToSlug(category)}`, changeFrequency: 'weekly' as const, priority: 0.5 })),
+  ]
+
+  return [...staticPages, ...articlePages, ...conversationPages, ...contentPages]
 }

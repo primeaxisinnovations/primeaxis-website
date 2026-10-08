@@ -51,3 +51,15 @@ export interface Conversation {
 export interface EventGalleryItem { url: string; type: 'image' | 'video'; caption?: string }
 export interface Event { slug: string; title: string; date: string; category: 'conference' | 'summit' | 'press-briefing'; status: 'published' | 'draft'; coverImage: string; description: string; gallery: EventGalleryItem[] }
 export interface Service { title: string; description: string; icon: string; outcomes: string[] }
+
+export interface Job {
+  slug: string
+  title: string
+  location: string
+  type: string
+  department: string
+  closingDate: string
+  summary: string
+  body: string
+  status: 'draft' | 'published'
+}
