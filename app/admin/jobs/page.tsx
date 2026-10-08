@@ -1,0 +1,8 @@
+import Link from 'next/link'
+import { cookies } from 'next/headers'
+import { redirect } from 'next/navigation'
+import { ADMIN_SESSION_COOKIE, verifySessionToken } from '@/lib/admin-session'
+import { getAllJobs } from '@/lib/jobs'
+
+export const dynamic = 'force-dynamic'
+export default async function JobsAdminPage() { const token = (await cookies()).get(ADMIN_SESSION_COOKIE)?.value; if (!verifySessionToken(token)) redirect('/admin/login'); const jobs = await getAllJobs(); return <div className="min-h-screen bg-cream px-8 py-10 max-sm:px-4"><div className="mx-auto max-w-6xl"><div className="mb-8 flex items-center justify-between"><div><p className="font-mono text-xs uppercase tracking-[0.2em] text-gold">PrimeAxis Admin</p><h1 className="font-display text-4xl text-deep">Jobs</h1></div><Link href="/admin/jobs/new" className="bg-gold px-6 py-3 text-sm font-semibold text-deep">+ New Job</Link></div><div className="overflow-x-auto border border-border bg-white"><table className="w-full text-left"><thead className="bg-cream"><tr>{['Title','Department','Location','Status'].map((head) => <th key={head} className="px-5 py-3 font-mono text-xs uppercase tracking-wider text-muted">{head}</th>)}</tr></thead><tbody>{jobs.map((job) => <tr key={job.slug} className="border-t border-border"><td className="px-5 py-4 text-sm text-ink">{job.title}</td><td className="px-5 py-4 text-sm text-muted">{job.department}</td><td className="px-5 py-4 text-sm text-muted">{job.location}</td><td className="px-5 py-4 font-mono text-xs uppercase text-teal">{job.status}</td></tr>)}</tbody></table></div></div></div> }
