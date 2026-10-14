@@ -17,7 +17,7 @@ featuredImage: >-
   https://rxiov7wbzmvi55hb.public.blob.vercel-storage.com/uploads/1791870656350-45ae9950-whatsapp-image-2026-10-12-at-12-08-20-am.jpg
 tags: []
 referenceCode: RG-2026-003
-status: draft
+status: published
 ---
 <p class="MsoNormal">Nigeria’s effort to establish a regional
 register of authorised fishing vessels has reached a stage where the quality of
