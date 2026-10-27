@@ -18,7 +18,7 @@ author: NNEOMA BLESSING OBI-ASUALO
 date: '2026-10-27'
 readingTime: 8 min read
 featuredImage: >-
-  https://rxiov7wbzmvi55hb.public.blob.vercel-storage.com/uploads/1793082154002-810a007e-whatsapp-image-2026-10-27-at-7-12-29-am-2.jpg
+  https://rxiov7wbzmvi55hb.public.blob.vercel-storage.com/uploads/1793101235606-4be5b4a4-1000158073.jpg
 tags: []
 referenceCode: RG-2026-005
 status: published
