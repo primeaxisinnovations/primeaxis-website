@@ -32,22 +32,20 @@ export default function ArticleCard({ article, variant = 'standard', className, 
         )}
       >
         {/* Image with category overlay */}
-        <div className="relative aspect-video overflow-hidden">
+        <div className="relative aspect-video overflow-hidden bg-deep">
           <Image
             src={article.featuredImage}
             alt={article.title}
             fill
             quality={80}
-            className="object-cover"
+            className="object-contain"
             sizes="(max-width: 768px) 100vw, 50vw"
           />
-          <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-deep/80 to-transparent pt-10 pb-4 px-5">
-            <Tag category={article.category} variant="dark" />
-          </div>
         </div>
 
         {/* Content */}
         <div className="p-6">
+          <Tag category={article.category} className="mb-3 block" />
           <h2
             className="font-display font-bold text-ink leading-snug mb-3"
             style={{ fontSize: 'clamp(1.3rem, 2vw, 1.8rem)' }}
@@ -90,13 +88,13 @@ export default function ArticleCard({ article, variant = 'standard', className, 
           className
         )}
       >
-        <div className="relative w-[40%] flex-shrink-0 min-h-[120px]">
+        <div className="relative w-[40%] flex-shrink-0 min-h-[120px] bg-deep">
           <Image
             src={article.featuredImage}
             alt={article.title}
             fill
             quality={80}
-            className="object-cover"
+            className="object-contain"
             sizes="40vw"
           />
         </div>
@@ -132,13 +130,13 @@ export default function ArticleCard({ article, variant = 'standard', className, 
         className
       )}
     >
-      <div className="relative h-[180px] overflow-hidden">
+      <div className="relative h-[180px] overflow-hidden bg-deep">
         <Image
           src={article.featuredImage}
           alt={article.title}
           fill
           quality={80}
-          className="object-cover"
+          className="object-contain"
           sizes="(max-width: 768px) 100vw, 33vw"
         />
       </div>

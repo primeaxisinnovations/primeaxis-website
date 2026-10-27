@@ -138,14 +138,14 @@ export default async function ArticlePage({ params }: PageProps) {
         </AnimatedSection>
 
         {/* ── Featured Image ─────────────────────────────────── */}
-        <div className="relative w-full aspect-video rounded-sm2 overflow-hidden mb-[60px] max-sm:mb-10">
+        <div className="relative w-full aspect-video rounded-sm2 overflow-hidden bg-deep mb-[60px] max-sm:mb-10">
           <Image
             src={article.featuredImage}
             alt={article.title}
             fill
             priority
             quality={80}
-            className="object-cover"
+            className="object-contain"
             sizes="(max-width: 768px) 100vw, 1240px"
           />
           {/* Source attribution watermark — text-shadow (not a background box)

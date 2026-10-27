@@ -98,12 +98,12 @@ export default function ImageUpload({ label, value, onUploadComplete, required }
         className="relative w-full border border-dashed border-border bg-cream hover:border-gold transition-colors duration-200 cursor-pointer flex flex-col items-center justify-center gap-3 px-4 py-6 text-center"
       >
         {preview ? (
-          <div className="relative w-full max-w-[220px] aspect-video overflow-hidden border border-border bg-white">
+          <div className="relative w-full max-w-[220px] aspect-video overflow-hidden border border-border bg-deep">
             {/* Plain <img>, not next/image — must render blob: object URLs
                 (instant local preview) and arbitrary pasted URLs, neither
                 of which next/image's optimizer can handle. */}
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src={preview} alt="Selected image preview" className="absolute inset-0 w-full h-full object-cover" />
+            <img src={preview} alt="Selected image preview" className="absolute inset-0 w-full h-full object-contain" />
             {isUploading && (
               <div className="absolute inset-0 bg-deep/60 flex items-center justify-center">
                 <span className="font-mono text-[10px] tracking-[0.12em] uppercase text-white">
