@@ -7,6 +7,7 @@ excerpt: >-
   dialogue held at Badore Ferry Terminal, Ajah, has brought this challenge into
   focus, placing grassroots participation at the centre of discussions on
   inclusive development.
+section: industry-news-reports
 category: Blue Economy
 author: NNEOMA BLESSING OBI-ASUALO
 date: '2026-10-30'
