@@ -8,6 +8,7 @@ excerpt: >-
   induction into the professional body since 2013 and reinforcing its investment
   in strategic communication as part of its ongoing modernisation agenda.
 category: Industry Intelligence
+section: industry-news-reports
 author: PrimeAxis Intelligence Desk
 date: '2026-07-14'
 readingTime: 2 min read

@@ -4,6 +4,7 @@ excerpt: >-
   Africa cannot fully control maritime value while remaining heavily dependent
   on external shipping capacity.
 category: Blue Economy
+section: intelligence
 author: PrimeAxis Insights
 date: '2026-06-29'
 readingTime: 3 min read

@@ -5,6 +5,8 @@ import { ADMIN_SESSION_COOKIE, verifySessionToken } from '@/lib/admin-session'
 import { revalidatePath } from 'next/cache'
 import { getFile, createOrUpdateFile, deleteFile } from '@/lib/github'
 import { CATEGORIES } from '@/lib/categories'
+import { isArticleSection } from '@/lib/article-sections'
+import type { ArticleSection } from '@/types'
 import { calculateReadingTime, stripHtml } from '@/lib/utils'
 
 // Always hits GitHub live — never cached.
@@ -12,6 +14,7 @@ export const dynamic = 'force-dynamic'
 
 interface UpdateArticleBody {
   title: string
+  section: ArticleSection
   category: string
   author: string
   date: string
@@ -37,6 +40,11 @@ function validateBody(input: unknown): { value: UpdateArticleBody } | { error: s
     }
   }
 
+  if (!isArticleSection(b.section)) {
+    return { error: 'Invalid section.' }
+  }
+  const section = b.section
+
   const category = b.category as string
   if (!(CATEGORIES as readonly string[]).includes(category)) {
     return { error: 'Invalid category.' }
@@ -54,6 +62,7 @@ function validateBody(input: unknown): { value: UpdateArticleBody } | { error: s
   return {
     value: {
       title: (b.title as string).trim(),
+      section,
       category,
       author: (b.author as string).trim(),
       date: (b.date as string).trim(),
@@ -84,7 +93,7 @@ export async function PUT(request: NextRequest, { params }: RouteParams) {
   if ('error' in validated) {
     return NextResponse.json({ error: validated.error }, { status: 400 })
   }
-  const { title, category, author, date, excerpt, featuredImage, tags, body, status } = validated.value
+  const { title, section, category, author, date, excerpt, featuredImage, tags, body, status } = validated.value
 
   let existing
   try {
@@ -107,6 +116,7 @@ export async function PUT(request: NextRequest, { params }: RouteParams) {
   const frontmatter = {
     title,
     excerpt,
+    section,
     category,
     author,
     date,
@@ -128,6 +138,7 @@ export async function PUT(request: NextRequest, { params }: RouteParams) {
   // On-demand ISR — reflect the edit on the live site immediately instead of
   // waiting for the 3600s fallback window to expire.
   revalidatePath('/intelligence-hub')
+  revalidatePath('/industry-news-reports')
   revalidatePath(`/intelligence-hub/${slug}`)
   revalidatePath('/')
 
@@ -166,6 +177,7 @@ export async function DELETE(_request: NextRequest, { params }: RouteParams) {
   // On-demand ISR — drop the deleted article from the live listings/detail
   // immediately instead of waiting for the 3600s fallback window to expire.
   revalidatePath('/intelligence-hub')
+  revalidatePath('/industry-news-reports')
   revalidatePath(`/intelligence-hub/${slug}`)
   revalidatePath('/')
 

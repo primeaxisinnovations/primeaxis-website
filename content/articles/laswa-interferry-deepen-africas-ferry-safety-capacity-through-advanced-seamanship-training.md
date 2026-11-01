@@ -11,6 +11,7 @@ excerpt: >-
   Development Programme (FSDP), further strengthening Africa's first structured
   professional development pathway for ferry operators.
 category: Blue Economy
+section: industry-news-reports
 author: PrimeAxis News
 date: '2026-07-09'
 readingTime: 4 min read

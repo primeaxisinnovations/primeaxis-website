@@ -3,10 +3,12 @@
 import { useState } from 'react'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
+import type { ArticleSection } from '@/types'
 
 interface ArticleRowActionsProps {
   slug: string
   title: string
+  section: ArticleSection
   category: string
   author: string
   date: string
@@ -32,6 +34,7 @@ export default function ArticleRowActions(props: ArticleRowActionsProps) {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           title: props.title,
+          section: props.section,
           category: props.category,
           author: props.author,
           date: props.date,

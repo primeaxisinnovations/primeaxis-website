@@ -6,6 +6,7 @@ import { getAllArticles, getArticleBySlug } from '@/lib/content'
 import { getAllViewCounts } from '@/lib/view-counts'
 import { formatDate } from '@/lib/utils'
 import { paragraphExcerpt, ogDescription } from '@/lib/share-excerpt'
+import { articleSectionLabel, articleSectionPath } from '@/lib/article-sections'
 import AnimatedSection from '@/components/ui/AnimatedSection'
 import Tag from '@/components/ui/Tag'
 import ArticleCard from '@/components/ui/ArticleCard'
@@ -38,7 +39,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   // Falls back to the hand-written excerpt if the body yields no text.
   const description = ogDescription(article.body) || article.excerpt
   return {
-    title: `${article.title} | PrimeAxis Maritime Intelligence`,
+    title: `${article.title} | ${articleSectionLabel(article.section)} | PrimeAxis`,
     description,
     openGraph: {
       title: article.title,
@@ -67,16 +68,18 @@ export default async function ArticlePage({ params }: PageProps) {
   const viewCounts = await getAllViewCounts('article')
   const viewCount = viewCounts[article.slug] ?? 0
 
-  // Related: same-category articles first, filled with most-recent others to reach 3
-  const sameCategory = allArticles.filter(
-    (a) => a.slug !== article.slug && a.category === article.category
+  const sameSectionArticles = allArticles.filter(
+    (a) => a.slug !== article.slug && a.section === article.section
   )
-  const otherRecent = allArticles
-    .filter((a) => a.slug !== article.slug && a.category !== article.category)
+  const sameCategory = sameSectionArticles.filter((a) => a.category === article.category)
+  const otherRecent = sameSectionArticles
+    .filter((a) => a.category !== article.category)
     .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
   const related = [...sameCategory, ...otherRecent].slice(0, 3)
 
   const pageUrl = `${SITE_URL}/intelligence-hub/${article.slug}`
+  const sectionLabel = articleSectionLabel(article.section)
+  const sectionPath = articleSectionPath(article.section)
   const encodedUrl = encodeURIComponent(pageUrl)
   const encodedTitle = encodeURIComponent(article.title)
 
@@ -97,7 +100,7 @@ export default async function ArticlePage({ params }: PageProps) {
           <nav className="flex items-center gap-2 font-mono text-[10px] tracking-[0.12em] uppercase text-muted flex-wrap">
             <Link href="/" className="hover:text-gold transition-colors duration-150">Home</Link>
             <span>/</span>
-            <Link href="/intelligence-hub" className="hover:text-gold transition-colors duration-150">Intelligence Hub</Link>
+            <Link href={sectionPath} className="hover:text-gold transition-colors duration-150">{sectionLabel}</Link>
             <span>/</span>
             <span className="text-ink/50 line-clamp-1 max-w-[300px]">{article.title}</span>
           </nav>
@@ -288,9 +291,9 @@ export default async function ArticlePage({ params }: PageProps) {
                   {article.author}
                 </p>
                 <p className="font-sans text-[13.5px] text-muted leading-relaxed">
-                  PrimeAxis Intelligence Desk delivers strategic analysis on Africa&apos;s maritime
-                  and blue economy sectors — informing the decisions of executives, regulators,
-                  and investors shaping the continent&apos;s maritime future.
+                  {article.section === 'industry-news-reports'
+                    ? 'PrimeAxis reports on current developments, official announcements, regulation and sector research shaping Africa’s maritime and blue economy.'
+                    : 'PrimeAxis Intelligence Desk delivers strategic analysis on Africa’s maritime and blue economy sectors — informing executives, regulators and investors.'}
                 </p>
               </div>
             </div>
@@ -305,11 +308,11 @@ export default async function ArticlePage({ params }: PageProps) {
               <div>
                 <span className="block w-6 h-0.5 bg-gold mb-3" />
                 <h2 className="font-display text-[clamp(20px,2vw,28px)] font-semibold text-deep">
-                  Related Intelligence
+                  More in {sectionLabel}
                 </h2>
               </div>
               <Link
-                href="/intelligence-hub"
+                href={sectionPath}
                 className="font-mono text-[10px] tracking-[0.15em] uppercase text-gold hover:text-gold-light transition-colors duration-150 hidden sm:block"
               >
                 All Articles →

@@ -11,7 +11,9 @@ export const revalidate = 3600;
 
 export default async function Home() {
   const articles = await getAllArticles();
-  const featuredArticles = articles.slice(0, 6);
+  const featuredArticles = articles
+    .filter((article) => article.section === "intelligence")
+    .slice(0, 6);
 
   // Most recently published conversation is the featured one; the next
   // three (if they exist — never padded) fill the list beside it.

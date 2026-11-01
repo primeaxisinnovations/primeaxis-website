@@ -5,6 +5,8 @@ import matter from 'gray-matter'
 import { ADMIN_SESSION_COOKIE, verifySessionToken } from '@/lib/admin-session'
 import { listFiles, getFile } from '@/lib/github'
 import { formatDate } from '@/lib/utils'
+import { articleSectionLabel, parseArticleSection } from '@/lib/article-sections'
+import type { ArticleSection } from '@/types'
 import ArticleRowActions from '@/components/admin/ArticleRowActions'
 
 // Always hits GitHub live — never cached. The admin must show the real,
@@ -14,6 +16,7 @@ export const dynamic = 'force-dynamic'
 interface ArticleListItem {
   slug: string
   title: string
+  section: ArticleSection
   category: string
   author: string
   date: string
@@ -42,6 +45,7 @@ async function fetchArticleRow(filename: string): Promise<ArticleListItem | Arti
     return {
       slug,
       title: String(data.title ?? ''),
+      section: parseArticleSection(data.section),
       category: String(data.category ?? ''),
       author: String(data.author ?? ''),
       date: String(data.date ?? ''),
@@ -127,6 +131,7 @@ export default async function ArticlesAdminPage({ searchParams }: PageProps) {
               <tr className="border-b border-border bg-cream">
                 <th className="font-mono text-[10px] tracking-[0.12em] uppercase text-muted px-5 py-3 whitespace-nowrap">Title</th>
                 <th className="font-mono text-[10px] tracking-[0.12em] uppercase text-muted px-5 py-3 whitespace-nowrap">Status</th>
+                <th className="font-mono text-[10px] tracking-[0.12em] uppercase text-muted px-5 py-3 whitespace-nowrap">Section</th>
                 <th className="font-mono text-[10px] tracking-[0.12em] uppercase text-muted px-5 py-3 whitespace-nowrap">Category</th>
                 <th className="font-mono text-[10px] tracking-[0.12em] uppercase text-muted px-5 py-3 whitespace-nowrap">Date</th>
                 <th className="font-mono text-[10px] tracking-[0.12em] uppercase text-muted px-5 py-3 whitespace-nowrap">Reference Code</th>
@@ -136,7 +141,7 @@ export default async function ArticlesAdminPage({ searchParams }: PageProps) {
             <tbody>
               {articles.length === 0 ? (
                 <tr>
-                  <td colSpan={6} className="px-5 py-10 text-center font-sans text-[14px] text-muted">
+                  <td colSpan={7} className="px-5 py-10 text-center font-sans text-[14px] text-muted">
                     No articles yet.
                   </td>
                 </tr>
@@ -144,7 +149,7 @@ export default async function ArticlesAdminPage({ searchParams }: PageProps) {
                 articles.map((article) =>
                   isArticleError(article) ? (
                     <tr key={article.slug} className="border-b border-border last:border-b-0 bg-red-50">
-                      <td colSpan={6} className="px-5 py-4 font-sans text-[13px] text-red-700">
+                      <td colSpan={7} className="px-5 py-4 font-sans text-[13px] text-red-700">
                         <span className="font-mono text-[10px] tracking-[0.1em] uppercase mr-2">Failed to load</span>
                         {article.slug}.md — {article.error}
                       </td>
@@ -166,6 +171,7 @@ export default async function ArticlesAdminPage({ searchParams }: PageProps) {
                         {article.status === 'published' ? 'Published' : 'Draft'}
                       </span>
                     </td>
+                    <td className="px-5 py-4 font-sans text-[13px] text-muted whitespace-nowrap">{articleSectionLabel(article.section)}</td>
                     <td className="px-5 py-4 font-sans text-[13px] text-muted whitespace-nowrap">{article.category}</td>
                     <td className="px-5 py-4 font-mono text-[12px] text-muted whitespace-nowrap">{formatDate(article.date)}</td>
                     <td className="px-5 py-4 font-mono text-[12px] text-gold whitespace-nowrap">{article.referenceCode}</td>
@@ -173,6 +179,7 @@ export default async function ArticlesAdminPage({ searchParams }: PageProps) {
                       <ArticleRowActions
                         slug={article.slug}
                         title={article.title}
+                        section={article.section}
                         category={article.category}
                         author={article.author}
                         date={article.date}

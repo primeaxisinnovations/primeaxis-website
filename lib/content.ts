@@ -12,6 +12,7 @@
 import { cache } from 'react'
 import matter from 'gray-matter'
 import { listFiles, getFile } from './github'
+import { parseArticleSection } from './article-sections'
 import type { Article } from '@/types'
 
 const ARTICLES_DIR = 'content/articles'
@@ -22,6 +23,7 @@ function parseArticle(slug: string, raw: string): Article {
     slug,
     title: data.title,
     excerpt: data.excerpt,
+    section: parseArticleSection(data.section),
     category: data.category,
     author: data.author,
     date: data.date,

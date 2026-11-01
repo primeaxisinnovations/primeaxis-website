@@ -8,6 +8,7 @@ excerpt: >-
   concealed inside a container carrying imported used vehicles, in an
   intelligence-led enforcement operation at Nigeria's busiest seaport.
 category: Ports & Infrastructure
+section: industry-news-reports
 author: PrimeAxis Intelligence Desk
 date: '2026-07-14'
 readingTime: 2 min read

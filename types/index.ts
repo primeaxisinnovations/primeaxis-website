@@ -1,7 +1,10 @@
+export type ArticleSection = 'intelligence' | 'industry-news-reports'
+
 export interface Article {
   slug: string
   title: string
   excerpt: string
+  section: ArticleSection
   category: string
   author: string
   date: string

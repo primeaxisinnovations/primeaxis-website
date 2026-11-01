@@ -5,6 +5,7 @@ excerpt: >-
   built on institutions, expertise, finance, technology, regulation, and
   professional services.
 category: Industry Intelligence
+section: intelligence
 author: Nneoma Obi-Asualo
 date: '2026-07-01'
 readingTime: 3 min read

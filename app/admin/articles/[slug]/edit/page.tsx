@@ -3,6 +3,7 @@ import { redirect, notFound } from 'next/navigation'
 import matter from 'gray-matter'
 import { ADMIN_SESSION_COOKIE, verifySessionToken } from '@/lib/admin-session'
 import { getFile } from '@/lib/github'
+import { parseArticleSection } from '@/lib/article-sections'
 import ArticleForm, { type ArticleFormValues } from '@/components/admin/ArticleForm'
 
 // Always hits GitHub live — never cached. The edit form must show the
@@ -28,6 +29,7 @@ export default async function EditArticlePage({ params }: PageProps) {
   const initialValues: ArticleFormValues = {
     title: String(data.title ?? ''),
     slug,
+    section: parseArticleSection(data.section),
     category: String(data.category ?? ''),
     author: String(data.author ?? ''),
     date: String(data.date ?? ''),

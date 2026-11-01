@@ -4,6 +4,7 @@ excerpt: |-
   The Intelligence Economy
   Africa's maritime economy generates enormous volumes of data every day.
 category: Industry Intelligence
+section: intelligence
 author: Nneoma Obi-Asualo
 date: '2026-06-22'
 readingTime: 4 min read

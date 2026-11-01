@@ -7,6 +7,7 @@ excerpt: >-
   that includes shipbuilding, dry-docking, repairs, maintenance, marine
   engineering, component manufacturing, and specialised technical services.
 category: Shipping & Logistics
+section: intelligence
 author: PrimeAxis Intelligence Desk
 date: '2026-06-26'
 readingTime: 3 min read

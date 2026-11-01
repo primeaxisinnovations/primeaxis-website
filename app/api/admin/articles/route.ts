@@ -5,6 +5,8 @@ import { ADMIN_SESSION_COOKIE, verifySessionToken } from '@/lib/admin-session'
 import { revalidatePath } from 'next/cache'
 import { listFiles, getFile, createOrUpdateFile } from '@/lib/github'
 import { CATEGORIES, CATEGORY_CODES, type Category } from '@/lib/categories'
+import { isArticleSection } from '@/lib/article-sections'
+import type { ArticleSection } from '@/types'
 import { calculateReadingTime, stripHtml } from '@/lib/utils'
 
 // Always hits GitHub live — never cached.
@@ -15,6 +17,7 @@ const SLUG_PATTERN = /^[a-z0-9]+(?:-[a-z0-9]+)*$/
 interface CreateArticleBody {
   title: string
   slug: string
+  section: ArticleSection
   category: string
   author: string
   date: string
@@ -45,6 +48,11 @@ function validateBody(input: unknown): { value: CreateArticleBody } | { error: s
     return { error: 'Slug must contain only lowercase letters, numbers, and hyphens.' }
   }
 
+  if (!isArticleSection(b.section)) {
+    return { error: 'Invalid section.' }
+  }
+  const section = b.section
+
   const category = b.category as string
   if (!(CATEGORIES as readonly string[]).includes(category)) {
     return { error: 'Invalid category.' }
@@ -63,6 +71,7 @@ function validateBody(input: unknown): { value: CreateArticleBody } | { error: s
     value: {
       title: (b.title as string).trim(),
       slug,
+      section,
       category,
       author: (b.author as string).trim(),
       date: (b.date as string).trim(),
@@ -88,7 +97,7 @@ export async function POST(request: NextRequest) {
   if ('error' in validated) {
     return NextResponse.json({ error: validated.error }, { status: 400 })
   }
-  const { title, slug, category, author, date, excerpt, featuredImage, tags, body, status } = validated.value
+  const { title, slug, section, category, author, date, excerpt, featuredImage, tags, body, status } = validated.value
 
   let filenames: string[]
   try {
@@ -136,6 +145,7 @@ export async function POST(request: NextRequest) {
   const frontmatter = {
     title,
     excerpt,
+    section,
     category,
     author,
     date,
@@ -157,6 +167,7 @@ export async function POST(request: NextRequest) {
   // On-demand ISR — push the new article live immediately instead of waiting
   // for the 3600s fallback window to expire.
   revalidatePath('/intelligence-hub')
+  revalidatePath('/industry-news-reports')
   revalidatePath(`/intelligence-hub/${slug}`)
   revalidatePath('/')
 

@@ -38,8 +38,10 @@ const YouTubeIcon = () => (
 const platformLinks = [
   { label: 'Home', href: '/' },
   { label: 'About', href: '/about' },
-  { label: 'Intelligence Hub', href: '/intelligence-hub' },
+  { label: 'Intelligence', href: '/intelligence-hub' },
+  { label: 'Industry News & Reports', href: '/industry-news-reports' },
   { label: 'Executive Conversations', href: '/executive-conversations' },
+  { label: 'Events', href: '/events' },
   { label: 'Services', href: '/services' },
   { label: 'Work With Us', href: '/work-with-us' },
   { label: 'Contact', href: '/contact' },

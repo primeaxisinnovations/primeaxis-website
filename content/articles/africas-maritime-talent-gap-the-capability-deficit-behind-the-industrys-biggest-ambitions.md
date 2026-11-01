@@ -14,6 +14,7 @@ excerpt: >-
 
   The result is a talent pipeline that leaks before it reaches the industry.
 category: Regulation & Governance
+section: intelligence
 author: PrimeAxis Intelligence Desk
 date: '2026-06-25'
 readingTime: 3 min read

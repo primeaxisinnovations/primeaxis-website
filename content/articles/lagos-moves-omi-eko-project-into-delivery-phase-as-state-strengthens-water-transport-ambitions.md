@@ -8,6 +8,7 @@ excerpt: >-
   and Design (PMOD) Consultancy, signalling a transition from infrastructure
   planning to project delivery.
 category: Maritime Policy
+section: industry-news-reports
 author: By Nneoma Blessing Obi-Asualo
 date: '2026-07-15'
 readingTime: 4 min read

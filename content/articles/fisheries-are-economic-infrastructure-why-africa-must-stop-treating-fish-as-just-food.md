@@ -8,6 +8,7 @@ excerpt: >-
   attract billions in public investment because they move goods, connect markets
   and drive economic growth.
 category: Blue Economy
+section: intelligence
 author: By Nneoma Blessing Obi-Asualo
 date: '2026-07-17'
 readingTime: 6 min read

@@ -9,6 +9,7 @@ excerpt: >-
   True maritime value comes from controlling a greater share of the commercial
   ecosystem.
 category: Shipping & Logistics
+section: intelligence
 author: PrimeAxis Insights
 date: '2026-06-28'
 readingTime: 3 min read

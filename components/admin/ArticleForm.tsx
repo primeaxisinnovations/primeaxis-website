@@ -4,6 +4,8 @@ import { useState, type FormEvent } from 'react'
 import { useRouter } from 'next/navigation'
 import { CATEGORIES } from '@/lib/categories'
 import { slugify } from '@/lib/utils'
+import { ARTICLE_SECTIONS } from '@/lib/article-sections'
+import type { ArticleSection } from '@/types'
 import RichTextEditor from '@/components/admin/RichTextEditor'
 import ImageUpload from '@/components/admin/ImageUpload'
 
@@ -18,6 +20,7 @@ const labelClasses = 'block font-mono text-[10px] tracking-[0.15em] uppercase te
 export interface ArticleFormValues {
   title: string
   slug: string
+  section: ArticleSection
   category: string
   author: string
   date: string
@@ -40,6 +43,7 @@ export default function ArticleForm({ mode, initialValues }: ArticleFormProps) {
   const [title, setTitle] = useState(initialValues?.title ?? '')
   const [slug, setSlug] = useState(initialValues?.slug ?? '')
   const [slugManuallyEdited, setSlugManuallyEdited] = useState(mode === 'edit')
+  const [section, setSection] = useState<ArticleSection | ''>(initialValues?.section ?? '')
   const [category, setCategory] = useState<string>(initialValues?.category ?? CATEGORIES[0])
   const [author, setAuthor] = useState(initialValues?.author ?? 'PrimeAxis Intelligence Desk')
   const [date, setDate] = useState(initialValues?.date ?? todayISODate())
@@ -70,6 +74,7 @@ export default function ArticleForm({ mode, initialValues }: ArticleFormProps) {
     const payload = {
       title,
       slug,
+      section,
       category,
       author,
       date,
@@ -154,6 +159,26 @@ export default function ArticleForm({ mode, initialValues }: ArticleFormProps) {
                 {initialValues?.referenceCode && ` Reference code: ${initialValues.referenceCode}.`}
               </p>
             )}
+          </div>
+
+          <div>
+            <label htmlFor="section" className={labelClasses}>Section</label>
+            <select
+              id="section"
+              required
+              value={section}
+              onChange={(e) => setSection(e.target.value as ArticleSection | '')}
+              className={inputClasses}
+            >
+              <option value="" disabled>Select a section</option>
+              {ARTICLE_SECTIONS.map((item) => (
+                <option key={item.value} value={item.value}>{item.label}</option>
+              ))}
+            </select>
+            <p className="font-sans text-[12px] text-muted mt-1.5">
+              Industry News &amp; Reports is for developments, announcements, reports and data.
+              Intelligence is for researched PrimeAxis analysis, policy interpretation and thought leadership.
+            </p>
           </div>
 
           <div>

@@ -9,6 +9,7 @@ excerpt: >-
   and strategic partnerships—a transition that could redefine border governance
   in Africa's largest economy.
 category: Trade & Facilitation
+section: industry-news-reports
 author: By Nneoma Blessing Obi-Asualo
 date: '2026-07-12'
 readingTime: 5 min read

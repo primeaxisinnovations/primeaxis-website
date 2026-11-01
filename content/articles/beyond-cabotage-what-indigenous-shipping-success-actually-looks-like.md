@@ -5,6 +5,7 @@ excerpt: |-
   It is how much value Africa captures from the movement of its own trade.
   Because indigenous shipping is not simply about participation.
 category: Shipping & Logistics
+section: intelligence
 author: PrimeAxis Intelligence Desk
 date: '2026-06-27'
 readingTime: 3 min read

@@ -8,7 +8,7 @@ import { getAllArticles } from '@/lib/content'
 import { getAllViewCounts } from '@/lib/view-counts'
 
 export const metadata: Metadata = {
-  title: 'Intelligence Hub | PrimeAxis Maritime Intelligence',
+  title: 'Intelligence | PrimeAxis Maritime Intelligence',
   description:
     "Strategic maritime analysis, industry intelligence, and policy perspectives shaping Africa's maritime future.",
 }
@@ -19,7 +19,7 @@ export const metadata: Metadata = {
 export const revalidate = 3600
 
 export default async function IntelligenceHubPage() {
-  const articles = await getAllArticles()
+  const articles = (await getAllArticles()).filter((article) => article.section === 'intelligence')
   // One Blob read for the whole page — every card's read-only badge, no
   // per-card fetch (getAllViewCounts is a single blob read of the slug→count map).
   const viewCounts = await getAllViewCounts('article')

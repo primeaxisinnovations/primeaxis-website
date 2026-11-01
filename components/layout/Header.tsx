@@ -12,7 +12,8 @@ const navLinks = [
   { label: 'About', href: '/about' },
   { label: 'Intelligence', href: '/intelligence-hub' },
   { label: 'Conversations', href: '/executive-conversations' },
-  { label: 'Sector Insights', href: '/events' },
+  { label: 'Industry News & Reports', href: '/industry-news-reports' },
+  { label: 'Events', href: '/events' },
   { label: 'Services', href: '/services' },
   { label: 'Work With Us', href: '/work-with-us' },
 ]
@@ -25,6 +26,7 @@ const BREAKING_BAR_ROUTES = [
   '/',
   '/about',
   '/intelligence-hub',
+  '/industry-news-reports',
   '/executive-conversations',
   '/events',
 ]
@@ -106,7 +108,7 @@ export default function Header() {
 
           {/* Desktop nav — pill switcher container */}
           <nav
-            className="hidden lg:flex items-center"
+            className="hidden xl:flex items-center"
             style={{
               background: 'rgba(255,255,255,0.06)',
               border: '1px solid rgba(255,255,255,0.10)',
@@ -136,7 +138,7 @@ export default function Header() {
           <div className="flex items-center gap-4">
             <form
               onSubmit={handleSearchSubmit}
-              className="hidden lg:flex items-center"
+              className="hidden xl:flex items-center"
             >
               <input
                 type="text"
@@ -163,7 +165,7 @@ export default function Header() {
 
             <button
               onClick={() => setIsOpen(true)}
-              className="btn-bare lg:hidden text-white p-1"
+              className="btn-bare xl:hidden text-white p-1"
               aria-label="Open navigation"
             >
               <Menu size={22} />

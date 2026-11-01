@@ -25,10 +25,11 @@ function TickerItems({ articles, copyKey }: { articles: Article[]; copyKey: stri
 }
 
 export default async function BreakingBar() {
-  // Mirror the homepage's previous behaviour: the five most recent published
-  // articles. Never show fake/placeholder headlines — if there's nothing real
-  // to show (no published articles), there's no bar at all.
-  const articles = (await getAllArticles()).slice(0, 5)
+  // Breaking headlines are current developments, so only news-section
+  // articles belong in the ticker.
+  const articles = (await getAllArticles())
+    .filter((article) => article.section === 'industry-news-reports')
+    .slice(0, 5)
   if (articles.length === 0) return null
 
   return (

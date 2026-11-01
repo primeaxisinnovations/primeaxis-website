@@ -10,6 +10,7 @@ excerpt: |-
   Some think about containers.
   Very few think about the services that make global shipping possible.
 category: Shipping & Logistics
+section: intelligence
 author: Maritime Intelligence Desk
 date: '2026-06-24'
 readingTime: 4 min read
