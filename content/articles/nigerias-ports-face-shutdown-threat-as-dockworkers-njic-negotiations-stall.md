@@ -5,6 +5,7 @@ excerpt: >-
   of the Maritime Workers Union of Nigeria (MWUN) threatens industrial action
   over delays in negotiating revised conditions of service with terminal
   operators under the National Joint Industrial Council (NJIC).
+section: industry-news-reports
 category: Ports & Infrastructure
 author: NNEOMA BLESSING OBI-ASUALO
 date: '2026-10-28'
