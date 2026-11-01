@@ -123,6 +123,14 @@
    Conversations header, Contact panel). box-shadow can't render a
    gradient, so the top highlight line is a ::before strip instead. */
 @layer components {
+  .site-header {
+    top: 0;
+  }
+
+  body:has(#breaking-news-bar) .site-header {
+    top: 38px;
+  }
+
   .glass-card {
     position: relative;
     background: rgba(255, 255, 255, 0.07);

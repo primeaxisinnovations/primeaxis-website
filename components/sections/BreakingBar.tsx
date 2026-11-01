@@ -33,7 +33,7 @@ export default async function BreakingBar() {
   if (articles.length === 0) return null
 
   return (
-    <div className="fixed top-0 left-0 right-0 z-[110] bg-gold h-[38px] overflow-hidden flex items-center">
+    <div id="breaking-news-bar" className="fixed top-0 left-0 right-0 z-[110] bg-gold h-[38px] overflow-hidden flex items-center">
       <div className="flex items-center gap-4 w-full">
         <span className="font-mono text-[9.5px] tracking-[0.18em] uppercase bg-deep text-gold px-3 py-[3px] whitespace-nowrap flex-shrink-0 ml-4">
           Latest
