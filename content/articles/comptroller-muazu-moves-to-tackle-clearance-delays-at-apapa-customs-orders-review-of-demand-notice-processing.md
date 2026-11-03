@@ -8,6 +8,7 @@ excerpt: >-
   port, ordering a review of demand notice delays while putting training,
   stakeholder compliance and engagement with shipping lines on the command’s
   immediate agenda.
+section: industry-news-reports
 category: Industry Intelligence
 author: NNEOMA BLESSING OBI ASUALO
 date: '2026-10-07'
