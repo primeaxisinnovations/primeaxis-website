@@ -10,6 +10,7 @@ excerpt: >-
   Interferry, has successfully completed the second module of the Ferry Safety
   Development Programme (FSDP), further strengthening Africa's first structured
   professional development pathway for ferry operators.
+section: industry-news-reports
 category: Blue Economy
 author: PrimeAxis News
 date: '2026-07-09'
