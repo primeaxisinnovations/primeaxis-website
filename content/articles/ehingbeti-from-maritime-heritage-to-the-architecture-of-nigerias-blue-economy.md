@@ -9,6 +9,7 @@ excerpt: >-
   The country has an extensive coastline, major ports, inland waterways, coastal
   communities, marine resources and a large population whose livelihoods are
   connected directly or indirectly to the water.
+section: industry-news-reports
 category: Blue Economy
 author: Nneoma Blessing Obi Asualo
 date: '2026-09-19'
