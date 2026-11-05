@@ -6,6 +6,7 @@ excerpt: >-
   Nigeria's ambition to unlock the economic potential of its inland waterways
   will depend not only on infrastructure and policy reforms but also on the
   safety standards that underpin public confidence in water transportation.
+section: industry-news-reports
 category: Maritime Security
 author: Nneoma Blessing Obi-Asualo
 date: '2026-07-31'
