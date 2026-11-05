@@ -9,7 +9,7 @@ excerpt: >-
   Murtala Mu’azu, prioritises stakeholder collaboration, operational efficiency
   and trade facilitation in his first month in office.
 section: industry-news-reports
-category: Industry Intelligence
+category: Trade & Facilitation
 author: NNEOMA BLESSING OBI-ASUALO
 date: '2026-11-05'
 readingTime: 5 min read
