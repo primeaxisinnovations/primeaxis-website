@@ -11,6 +11,7 @@ excerpt: >-
   The unveiling took place on Friday, 16 October 2026, at the Federal Ministry
   of Marine and Blue Economy’s Third Quarter 2026 Citizens’ and Stakeholders’
   Engagement in Victoria Island, Lagos.
+section: industry-news-reports
 category: Regulation & Governance
 author: NNEOMA BLESSING OBI ASUALO
 date: '2026-10-24'
