@@ -11,6 +11,7 @@ excerpt: >-
 
   Codenamed Operation Blue Green, the operation combined intelligence gathering,
   analysis and target development with coordinated enforcement at sea.
+section: industry-news-reports
 category: Blue Economy
 author: Nneoma Blessing Obi Asualo
 date: '2026-09-22'
