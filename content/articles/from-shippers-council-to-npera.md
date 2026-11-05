@@ -5,6 +5,7 @@ excerpt: >-
   formal transition of the Nigerian Shippers’ Council into the Nigeria Ports
   Economic Regulatory Agency (NPERA), creating a permanent statutory framework
   for regulating the commercial environment of the country’s ports.
+section: industry-news-reports
 category: Executive Perspectives
 author: Nneoma Blessing Obi-Asualo
 date: '2026-08-20'
