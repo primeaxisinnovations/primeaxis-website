@@ -7,6 +7,7 @@ excerpt: >-
   execution phase with the commencement of the Project Management, Operations
   and Design (PMOD) Consultancy, signalling a transition from infrastructure
   planning to project delivery.
+section: industry-news-reports
 category: Maritime Policy
 author: By Nneoma Blessing Obi-Asualo
 date: '2026-07-15'
