@@ -5,6 +5,7 @@ excerpt: >-
   the digital transformation of the Nigerian Ship Registry with a new automated
   platform designed to make ship registration services faster, more secure and
   transparent.
+section: industry-news-reports
 category: Maritime Policy
 author: NNEOMA BLESSING OBI ASUALO
 date: '2026-10-05'
