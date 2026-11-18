@@ -40,12 +40,16 @@ interface ArticleFormProps {
 
 export default function ArticleForm({ mode, initialValues, initialSection }: ArticleFormProps) {
   const router = useRouter()
+  const isBeyondTheHeadlines = initialValues?.section === 'beyond-the-headlines'
+    || initialSection === 'beyond-the-headlines'
 
   const [title, setTitle] = useState(initialValues?.title ?? '')
   const [slug, setSlug] = useState(initialValues?.slug ?? '')
   const [slugManuallyEdited, setSlugManuallyEdited] = useState(mode === 'edit')
   const [section, setSection] = useState<ArticleSection | ''>(
-    initialValues?.section ?? initialSection ?? ''
+    initialValues?.section
+      ?? initialSection
+      ?? (isBeyondTheHeadlines ? 'beyond-the-headlines' : '')
   )
   const [category, setCategory] = useState<string>(initialValues?.category ?? CATEGORIES[0])
   const [author, setAuthor] = useState(initialValues?.author ?? 'PrimeAxis Intelligence Desk')
@@ -171,26 +175,27 @@ export default function ArticleForm({ mode, initialValues, initialSection }: Art
             )}
           </div>
 
-          <div>
-            <label htmlFor="section" className={labelClasses}>Section</label>
-            <select
-              id="section"
-              required
-              value={section}
-              onChange={(e) => setSection(e.target.value as ArticleSection | '')}
-              className={inputClasses}
-            >
-              <option value="" disabled>Select a section</option>
-              {ARTICLE_SECTIONS.map((item) => (
-                <option key={item.value} value={item.value}>{item.label}</option>
-              ))}
-            </select>
-            <p className="font-sans text-[12px] text-muted mt-1.5">
-              Industry News &amp; Reports is for developments, announcements, reports and data.
-              Intelligence is for researched PrimeAxis analysis, policy interpretation and thought leadership.
-              Beyond the Headlines is for the Friday Edition and its archived articles.
-            </p>
-          </div>
+          {!isBeyondTheHeadlines && (
+            <div>
+              <label htmlFor="section" className={labelClasses}>Section</label>
+              <select
+                id="section"
+                required
+                value={section}
+                onChange={(e) => setSection(e.target.value as ArticleSection | '')}
+                className={inputClasses}
+              >
+                <option value="" disabled>Select a section</option>
+                {ARTICLE_SECTIONS.map((item) => (
+                  <option key={item.value} value={item.value}>{item.label}</option>
+                ))}
+              </select>
+              <p className="font-sans text-[12px] text-muted mt-1.5">
+                Industry News &amp; Reports is for developments, announcements, reports and data.
+                Intelligence is for researched PrimeAxis analysis, policy interpretation and thought leadership.
+              </p>
+            </div>
+          )}
 
           <div>
             <label htmlFor="category" className={labelClasses}>Category</label>

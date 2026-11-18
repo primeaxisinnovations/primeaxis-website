@@ -3,7 +3,6 @@ import type { ArticleSection } from '@/types'
 export const ARTICLE_SECTIONS = [
   { value: 'intelligence', label: 'Intelligence' },
   { value: 'industry-news-reports', label: 'Industry News & Reports' },
-  { value: 'beyond-the-headlines', label: 'Beyond the Headlines' },
 ] as const
 
 export function isArticleSection(value: unknown): value is ArticleSection {
