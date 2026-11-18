@@ -19,16 +19,10 @@ const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://primeaxisinnovatio
 
 type PageProps = { params: Promise<{ slug: string }> }
 
-// ISR: pre-built for every known slug at deploy time, then served from the
-// CDN cache and regenerated in the background at most once an hour (3600s) — a
-// Publish/Unpublish/Save shows up within ~an hour. Raised from 60s to cut
-// GitHub-API cold-load latency on cache misses.
-export const revalidate = 3600
-
-export async function generateStaticParams() {
-  const articles = await getAllArticles()
-  return articles.map((article) => ({ slug: article.slug }))
-}
+// CMS-backed dynamic detail route: do not prerender or freeze these against
+// GitHub API availability. The route fetches the published article at runtime
+// so publishing, edits, and unpublishing remain immediately visible.
+export const dynamic = 'force-dynamic'
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { slug } = await params

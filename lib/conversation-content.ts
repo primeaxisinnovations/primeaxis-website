@@ -59,7 +59,13 @@ async function fetchConversation(filename: string): Promise<Conversation | null>
 // Public-facing pages only ever see published conversations — drafts are
 // visible solely through the admin list, which reads lib/github.ts directly.
 export async function getAllConversations(): Promise<Conversation[]> {
-  const filenames = (await listFiles(CONVERSATIONS_DIR)).filter((name) => name.endsWith('.md'))
+  let filenames: string[]
+  try {
+    filenames = (await listFiles(CONVERSATIONS_DIR)).filter((name) => name.endsWith('.md'))
+  } catch (error) {
+    console.error('getAllConversations: failed to list conversation files', error)
+    return []
+  }
   // allSettled, not all — fetchConversation already catches its own errors
   // and never rejects, but this is the belt-and-suspenders guarantee that
   // one file can never take the rest of the batch down even if that changes.
@@ -78,8 +84,13 @@ export async function getAllConversations(): Promise<Conversation[]> {
 // Fetches the single file directly rather than scanning getAllConversations()
 // — a detail page view should cost one GitHub request, not one-per-conversation.
 export async function getConversationBySlug(slug: string): Promise<Conversation | undefined> {
-  const file = await getFile(`${CONVERSATIONS_DIR}/${slug}.md`)
-  if (!file) return undefined
-  const conversation = parseConversation(slug, file.content)
-  return conversation.status === 'published' ? conversation : undefined
+  try {
+    const file = await getFile(`${CONVERSATIONS_DIR}/${slug}.md`)
+    if (!file) return undefined
+    const conversation = parseConversation(slug, file.content)
+    return conversation.status === 'published' ? conversation : undefined
+  } catch (error) {
+    console.error(`getConversationBySlug: failed to fetch "${slug}"`, error)
+    return undefined
+  }
 }

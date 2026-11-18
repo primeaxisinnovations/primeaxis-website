@@ -61,7 +61,13 @@ async function fetchArticle(filename: string): Promise<Article | null> {
 // (e.g. a page plus its self-fetching <BreakingBar />) share one GitHub call
 // instead of each hitting the API.
 export const getAllArticles = cache(async function getAllArticles(): Promise<Article[]> {
-  const filenames = (await listFiles(ARTICLES_DIR)).filter((name) => name.endsWith('.md'))
+  let filenames: string[]
+  try {
+    filenames = (await listFiles(ARTICLES_DIR)).filter((name) => name.endsWith('.md'))
+  } catch (error) {
+    console.error('getAllArticles: failed to list article files', error)
+    return []
+  }
   // allSettled, not all — fetchArticle already catches its own errors and
   // never rejects, but this is the belt-and-suspenders guarantee that one
   // file can never take the rest of the batch down even if that changes.
@@ -80,8 +86,13 @@ export const getAllArticles = cache(async function getAllArticles(): Promise<Art
 // Fetches the single file directly rather than scanning getAllArticles() —
 // a detail page view should cost one GitHub request, not one-per-article.
 export async function getArticleBySlug(slug: string): Promise<Article | undefined> {
-  const file = await getFile(`${ARTICLES_DIR}/${slug}.md`)
-  if (!file) return undefined
-  const article = parseArticle(slug, file.content)
-  return article.status === 'published' ? article : undefined
+  try {
+    const file = await getFile(`${ARTICLES_DIR}/${slug}.md`)
+    if (!file) return undefined
+    const article = parseArticle(slug, file.content)
+    return article.status === 'published' ? article : undefined
+  } catch (error) {
+    console.error(`getArticleBySlug: failed to fetch "${slug}"`, error)
+    return undefined
+  }
 }
