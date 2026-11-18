@@ -139,6 +139,8 @@ export async function PUT(request: NextRequest, { params }: RouteParams) {
   // waiting for the 3600s fallback window to expire.
   revalidatePath('/intelligence-hub')
   revalidatePath('/industry-news-reports')
+  revalidatePath('/beyond-the-headlines')
+  revalidatePath('/sitemap.xml')
   revalidatePath(`/intelligence-hub/${slug}`)
   revalidatePath('/')
 
@@ -178,6 +180,8 @@ export async function DELETE(_request: NextRequest, { params }: RouteParams) {
   // immediately instead of waiting for the 3600s fallback window to expire.
   revalidatePath('/intelligence-hub')
   revalidatePath('/industry-news-reports')
+  revalidatePath('/beyond-the-headlines')
+  revalidatePath('/sitemap.xml')
   revalidatePath(`/intelligence-hub/${slug}`)
   revalidatePath('/')
 

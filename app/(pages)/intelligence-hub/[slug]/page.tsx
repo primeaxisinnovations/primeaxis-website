@@ -77,9 +77,9 @@ export default async function ArticlePage({ params }: PageProps) {
     .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
   const related = [...sameCategory, ...otherRecent].slice(0, 3)
 
-  const pageUrl = `${SITE_URL}/intelligence-hub/${article.slug}`
   const sectionLabel = articleSectionLabel(article.section)
   const sectionPath = articleSectionPath(article.section)
+  const pageUrl = `${SITE_URL}${sectionPath}/${article.slug}`
   const encodedUrl = encodeURIComponent(pageUrl)
   const encodedTitle = encodeURIComponent(article.title)
 

@@ -5,6 +5,7 @@ import type { Article } from '@/types'
 import Tag from './Tag'
 import ViewCounter from './ViewCounter'
 import { cn, formatDate } from '@/lib/utils'
+import { articleSectionPath } from '@/lib/article-sections'
 
 type CardVariant = 'hero' | 'standard' | 'horizontal'
 
@@ -20,10 +21,11 @@ interface ArticleCardProps {
 }
 
 export default function ArticleCard({ article, variant = 'standard', className, viewCount }: ArticleCardProps) {
+  const articlePath = `${articleSectionPath(article.section)}/${article.slug}`
   if (variant === 'hero') {
     return (
       <Link
-        href={`/intelligence-hub/${article.slug}`}
+        href={articlePath}
         className={cn(
           'group block bg-white shadow-card border-t-2 border-transparent',
           'hover:border-gold hover:-translate-y-[3px] hover:shadow-card-hover',
@@ -81,7 +83,7 @@ export default function ArticleCard({ article, variant = 'standard', className, 
   if (variant === 'horizontal') {
     return (
       <Link
-        href={`/intelligence-hub/${article.slug}`}
+        href={articlePath}
         className={cn(
           'group flex bg-white shadow-card border-t border-border hover:border-gold',
           'hover:shadow-card-hover transition-all duration-200 overflow-hidden',
@@ -122,7 +124,7 @@ export default function ArticleCard({ article, variant = 'standard', className, 
   // standard
   return (
     <Link
-      href={`/intelligence-hub/${article.slug}`}
+      href={articlePath}
       className={cn(
         'group block bg-white shadow-card border-t-2 border-transparent',
         'hover:border-gold hover:-translate-y-[3px] hover:shadow-card-hover',

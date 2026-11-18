@@ -5,6 +5,7 @@ import { getAllEvents } from '@/lib/events'
 import { getAllProfiles } from '@/lib/profile-content'
 import { getAllJobs } from '@/lib/jobs'
 import { CATEGORIES, categoryToSlug } from '@/lib/categories'
+import { articleSectionPath } from '@/lib/article-sections'
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://primeaxisinnovations.com.ng'
 
@@ -26,6 +27,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { url: SITE_URL, changeFrequency: 'daily', priority: 1.0 },
     { url: `${SITE_URL}/intelligence-hub`, changeFrequency: 'daily', priority: 0.8 },
     { url: `${SITE_URL}/industry-news-reports`, changeFrequency: 'daily', priority: 0.8 },
+    { url: `${SITE_URL}/beyond-the-headlines`, changeFrequency: 'weekly', priority: 0.8 },
     { url: `${SITE_URL}/executive-conversations`, changeFrequency: 'daily', priority: 0.8 },
     { url: `${SITE_URL}/events`, changeFrequency: 'weekly', priority: 0.6 },
     { url: `${SITE_URL}/profiles`, changeFrequency: 'weekly', priority: 0.7 },
@@ -36,7 +38,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   ]
 
   const articlePages: MetadataRoute.Sitemap = articles.map((article) => ({
-    url: `${SITE_URL}/intelligence-hub/${article.slug}`,
+    url: `${SITE_URL}${articleSectionPath(article.section)}/${article.slug}`,
     lastModified: article.date,
     changeFrequency: 'monthly',
     priority: 0.6,

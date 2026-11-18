@@ -35,15 +35,18 @@ export interface ArticleFormValues {
 interface ArticleFormProps {
   mode: 'create' | 'edit'
   initialValues?: ArticleFormValues
+  initialSection?: ArticleSection
 }
 
-export default function ArticleForm({ mode, initialValues }: ArticleFormProps) {
+export default function ArticleForm({ mode, initialValues, initialSection }: ArticleFormProps) {
   const router = useRouter()
 
   const [title, setTitle] = useState(initialValues?.title ?? '')
   const [slug, setSlug] = useState(initialValues?.slug ?? '')
   const [slugManuallyEdited, setSlugManuallyEdited] = useState(mode === 'edit')
-  const [section, setSection] = useState<ArticleSection | ''>(initialValues?.section ?? '')
+  const [section, setSection] = useState<ArticleSection | ''>(
+    initialValues?.section ?? initialSection ?? ''
+  )
   const [category, setCategory] = useState<string>(initialValues?.category ?? CATEGORIES[0])
   const [author, setAuthor] = useState(initialValues?.author ?? 'PrimeAxis Intelligence Desk')
   const [date, setDate] = useState(initialValues?.date ?? todayISODate())
@@ -106,7 +109,12 @@ export default function ArticleForm({ mode, initialValues }: ArticleFormProps) {
       }
 
       const data = await res.json()
-      router.push(`/admin/articles?saved=${encodeURIComponent(data.slug ?? slug)}`)
+      const returnPath =
+        section === 'beyond-the-headlines'
+          ? '/admin/articles?section=beyond-the-headlines'
+          : '/admin/articles'
+      const querySeparator = returnPath.includes('?') ? '&' : '?'
+      router.push(`${returnPath}${querySeparator}saved=${encodeURIComponent(data.slug ?? slug)}`)
     } catch {
       setError('Something went wrong. Please try again.')
       setIsSubmitting(false)
@@ -126,7 +134,9 @@ export default function ArticleForm({ mode, initialValues }: ArticleFormProps) {
       <div className="max-w-[760px] mx-auto">
         <p className="font-mono text-[10px] tracking-[0.2em] uppercase text-gold mb-1">PrimeAxis Admin</p>
         <h1 className="font-display text-[28px] font-semibold text-deep mb-8">
-          {mode === 'create' ? 'New Article' : 'Edit Article'}
+          {mode === 'create'
+            ? section === 'beyond-the-headlines' ? 'New Beyond the Headlines Article' : 'New Article'
+            : section === 'beyond-the-headlines' ? 'Edit Beyond the Headlines Article' : 'Edit Article'}
         </h1>
 
         <form onSubmit={handleSubmit} className="bg-white border border-border p-8 max-sm:p-5 flex flex-col gap-6">
@@ -178,6 +188,7 @@ export default function ArticleForm({ mode, initialValues }: ArticleFormProps) {
             <p className="font-sans text-[12px] text-muted mt-1.5">
               Industry News &amp; Reports is for developments, announcements, reports and data.
               Intelligence is for researched PrimeAxis analysis, policy interpretation and thought leadership.
+              Beyond the Headlines is for the Friday Edition and its archived articles.
             </p>
           </div>
 
@@ -277,7 +288,7 @@ export default function ArticleForm({ mode, initialValues }: ArticleFormProps) {
               {isSubmitting ? 'Saving…' : 'Publish'}
             </button>
             <a
-              href="/admin/articles"
+              href={section === 'beyond-the-headlines' ? '/admin/articles?section=beyond-the-headlines' : '/admin/articles'}
               className="font-mono text-[10.5px] tracking-[0.1em] uppercase text-muted hover:text-ink transition-colors duration-150"
             >
               Cancel

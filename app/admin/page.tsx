@@ -20,6 +20,7 @@ interface AdminSection {
 
 const ADMIN_SECTIONS: AdminSection[] = [
   { label: 'Articles', description: 'Maritime intelligence and strategic commentary.', href: '/admin/articles' },
+  { label: 'Beyond the Headlines', description: 'The Friday Edition — weekly perspectives and editorial analysis.', href: '/admin/articles?section=beyond-the-headlines' },
   { label: 'Conversations', description: 'Executive interviews and leadership perspectives.', href: '/admin/conversations' },
   { label: 'Profiles', description: 'People profiles with social links and biographies.', href: '/admin/profiles' },
   { label: 'Events', description: 'Conferences, summits, and press briefings.', href: '/admin/events' },
@@ -29,6 +30,7 @@ const ADMIN_SECTIONS: AdminSection[] = [
 
 const STAT_CONFIG = [
   { key: 'articles', label: 'Published articles', href: '/admin/articles' },
+  { key: 'beyondTheHeadlines', label: 'Published Friday editions', href: '/admin/articles?section=beyond-the-headlines' },
   { key: 'conversations', label: 'Executive conversations', href: '/admin/conversations' },
   { key: 'profiles', label: 'People profiles', href: '/admin/profiles' },
   { key: 'events', label: 'Upcoming events', href: '/admin/events' },
@@ -53,6 +55,9 @@ export default async function AdminDashboardPage() {
   const value = <T,>(index: number, fallback: T): T => results[index]?.status === 'fulfilled' ? results[index].value as T : fallback
   const counts = {
     articles: value(0, []).length,
+    beyondTheHeadlines: value(0, [] as Array<{ section?: string }>).filter(
+      (article) => article.section === 'beyond-the-headlines'
+    ).length,
     conversations: value(1, []).length,
     profiles: value(2, []).length,
     events: value(3, []).length,
@@ -79,7 +84,7 @@ export default async function AdminDashboardPage() {
             <h2 id="overview-heading" className="font-display text-xl font-semibold text-deep">Content overview</h2>
             <span className="font-mono text-[10px] uppercase tracking-[0.14em] text-muted">Published content</span>
           </div>
-          <div className="grid grid-cols-2 gap-3 md:grid-cols-5">
+          <div className="grid grid-cols-2 gap-3 md:grid-cols-3 lg:grid-cols-6">
             {STAT_CONFIG.map((stat) => (
               <Link key={stat.key} href={stat.href} className="border border-border bg-white p-4 transition-colors hover:border-gold">
                 <p className="font-mono text-3xl text-deep">{counts[stat.key]}</p>

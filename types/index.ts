@@ -1,4 +1,7 @@
-export type ArticleSection = 'intelligence' | 'industry-news-reports'
+export type ArticleSection =
+  | 'intelligence'
+  | 'industry-news-reports'
+  | 'beyond-the-headlines'
 
 export interface Article {
   slug: string

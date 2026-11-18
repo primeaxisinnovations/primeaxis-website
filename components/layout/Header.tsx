@@ -11,11 +11,16 @@ const navLinks = [
   { label: 'Home', href: '/' },
   { label: 'About', href: '/about' },
   { label: 'Intelligence', href: '/intelligence-hub' },
-  { label: 'Conversations', href: '/executive-conversations' },
+  { label: 'Executive Conversations', href: '/executive-conversations' },
   { label: 'Industry News & Reports', href: '/industry-news-reports' },
+  { label: 'Beyond the Headlines – The Friday Edition', href: '/beyond-the-headlines' },
+]
+
+const moreLinks = [
   { label: 'Events', href: '/events' },
   { label: 'Services', href: '/services' },
   { label: 'Work With Us', href: '/work-with-us' },
+  { label: 'Contact', href: '/contact' },
 ]
 
 export default function Header() {
@@ -24,6 +29,7 @@ export default function Header() {
   const [searchOpen, setSearchOpen] = useState(false)
   const [searchQuery, setSearchQuery] = useState('')
   const [mobileSearchQuery, setMobileSearchQuery] = useState('')
+  const [moreOpen, setMoreOpen] = useState(false)
   const pathname = usePathname()
   const router = useRouter()
 
@@ -110,12 +116,36 @@ export default function Header() {
                 {link.label}
               </Link>
             ))}
-            <Link
-              href="/contact"
-              className={cn('nav-pill-link', isActive('/contact') && 'active')}
-            >
-              Contact
-            </Link>
+            <div className="relative">
+              <button
+                type="button"
+                onClick={() => setMoreOpen((open) => !open)}
+                aria-expanded={moreOpen}
+                className={cn(
+                  'nav-pill-link',
+                  moreLinks.some((link) => isActive(link.href)) && 'active'
+                )}
+              >
+                More
+              </button>
+              {moreOpen && (
+                <div className="absolute right-0 top-[calc(100%+10px)] w-[210px] border border-gold/25 bg-deep p-2 shadow-card">
+                  {moreLinks.map((link) => (
+                    <Link
+                      key={link.href}
+                      href={link.href}
+                      onClick={() => setMoreOpen(false)}
+                      className={cn(
+                        'block px-4 py-2.5 font-sans text-[13px] transition-colors',
+                        isActive(link.href) ? 'text-gold' : 'text-white/75 hover:text-gold'
+                      )}
+                    >
+                      {link.label}
+                    </Link>
+                  ))}
+                </div>
+              )}
+            </div>
           </nav>
 
           {/* Right — desktop search + contact, mobile hamburger */}
@@ -207,7 +237,7 @@ export default function Header() {
         </form>
 
         {/* Overlay nav links */}
-        <nav className="flex-1 flex flex-col items-center justify-center gap-2">
+        <nav className="flex-1 flex flex-col items-center justify-center gap-2 overflow-y-auto py-4">
           {navLinks.map((link) => (
             <Link
               key={link.href}
@@ -221,13 +251,21 @@ export default function Header() {
               {link.label}
             </Link>
           ))}
-          <Link
-            href="/contact"
-            onClick={() => setIsOpen(false)}
-            className="mt-8 font-sans font-semibold text-sm tracking-wide text-gold border border-gold px-8 py-3 hover:bg-gold hover:text-deep transition-all duration-200"
-          >
-            Contact
-          </Link>
+          <div className="mt-4 border-t border-white/10 pt-4 flex flex-wrap justify-center gap-x-5 gap-y-2 px-6">
+            {moreLinks.map((link) => (
+              <Link
+                key={link.href}
+                href={link.href}
+                onClick={() => setIsOpen(false)}
+                className={cn(
+                  'font-sans text-sm py-1 transition-colors duration-200',
+                  isActive(link.href) ? 'text-gold' : 'text-white/70 hover:text-gold'
+                )}
+              >
+                {link.label}
+              </Link>
+            ))}
+          </div>
         </nav>
       </div>
     </>

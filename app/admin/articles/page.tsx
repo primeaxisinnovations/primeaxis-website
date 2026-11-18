@@ -6,6 +6,7 @@ import { ADMIN_SESSION_COOKIE, verifySessionToken } from '@/lib/admin-session'
 import { listFiles, getFile } from '@/lib/github'
 import { formatDate } from '@/lib/utils'
 import { articleSectionLabel, parseArticleSection } from '@/lib/article-sections'
+import { isArticleSection } from '@/lib/article-sections'
 import type { ArticleSection } from '@/types'
 import ArticleRowActions from '@/components/admin/ArticleRowActions'
 
@@ -90,7 +91,7 @@ async function fetchArticleList(): Promise<(ArticleListItem | ArticleListError)[
   })
 }
 
-type PageProps = { searchParams: Promise<{ saved?: string }> }
+type PageProps = { searchParams: Promise<{ saved?: string; section?: string }> }
 
 export default async function ArticlesAdminPage({ searchParams }: PageProps) {
   // Defense in depth — verify independently of proxy.ts, see lib/admin-session.ts.
@@ -100,8 +101,13 @@ export default async function ArticlesAdminPage({ searchParams }: PageProps) {
     redirect('/admin/login')
   }
 
-  const { saved } = await searchParams
+  const { saved, section: sectionParam } = await searchParams
+  const section = isArticleSection(sectionParam) ? sectionParam : undefined
   const articles = await fetchArticleList()
+  const visibleArticles = section
+    ? articles.filter((article) => isArticleError(article) || article.section === section)
+    : articles
+  const sectionLabel = section ? articleSectionLabel(section) : 'Articles'
 
   return (
     <div className="min-h-screen bg-cream px-8 py-10 max-sm:px-4">
@@ -109,19 +115,19 @@ export default async function ArticlesAdminPage({ searchParams }: PageProps) {
         <div className="flex items-center justify-between mb-8 flex-wrap gap-4">
           <div>
             <p className="font-mono text-[10px] tracking-[0.2em] uppercase text-gold mb-1">PrimeAxis Admin</p>
-            <h1 className="font-display text-[28px] font-semibold text-deep">Articles</h1>
+            <h1 className="font-display text-[28px] font-semibold text-deep">{sectionLabel}</h1>
           </div>
           <Link
-            href="/admin/articles/new"
+            href={section ? `/admin/articles/new?section=${section}` : '/admin/articles/new'}
             className="font-sans text-[13px] font-semibold tracking-[.04em] bg-gold text-deep px-6 py-3 hover:bg-gold-light transition-colors duration-200"
           >
-            + New Article
+            + New {section === 'beyond-the-headlines' ? 'Beyond the Headlines Article' : 'Article'}
           </Link>
         </div>
 
         {saved && (
           <div className="mb-6 border border-gold/40 bg-gold/10 text-deep px-5 py-4 font-sans text-[13.5px]">
-            Article saved. Your site is rebuilding now; this change will be live in a minute or two.
+            {section === 'beyond-the-headlines' ? 'Beyond the Headlines article' : 'Article'} saved. Your site is rebuilding now; this change will be live in a minute or two.
           </div>
         )}
 
@@ -139,14 +145,16 @@ export default async function ArticlesAdminPage({ searchParams }: PageProps) {
               </tr>
             </thead>
             <tbody>
-              {articles.length === 0 ? (
+              {visibleArticles.length === 0 ? (
                 <tr>
                   <td colSpan={7} className="px-5 py-10 text-center font-sans text-[14px] text-muted">
-                    No articles yet.
+                    {section === 'beyond-the-headlines'
+                      ? 'No Beyond the Headlines articles yet.'
+                      : 'No articles yet.'}
                   </td>
                 </tr>
               ) : (
-                articles.map((article) =>
+                visibleArticles.map((article) =>
                   isArticleError(article) ? (
                     <tr key={article.slug} className="border-b border-border last:border-b-0 bg-red-50">
                       <td colSpan={7} className="px-5 py-4 font-sans text-[13px] text-red-700">

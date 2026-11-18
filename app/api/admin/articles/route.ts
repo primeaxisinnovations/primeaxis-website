@@ -168,6 +168,8 @@ export async function POST(request: NextRequest) {
   // for the 3600s fallback window to expire.
   revalidatePath('/intelligence-hub')
   revalidatePath('/industry-news-reports')
+  revalidatePath('/beyond-the-headlines')
+  revalidatePath('/sitemap.xml')
   revalidatePath(`/intelligence-hub/${slug}`)
   revalidatePath('/')
 
