@@ -13,7 +13,7 @@ const navLinks = [
   { label: 'Intelligence', href: '/intelligence-hub' },
   { label: 'Executive Conversations', href: '/executive-conversations' },
   { label: 'Industry News & Reports', href: '/industry-news-reports' },
-  { label: 'Beyond the Headlines – The Friday Edition', href: '/beyond-the-headlines' },
+  { label: 'Beyond the Headlines', href: '/beyond-the-headlines' },
 ]
 
 const moreLinks = [
