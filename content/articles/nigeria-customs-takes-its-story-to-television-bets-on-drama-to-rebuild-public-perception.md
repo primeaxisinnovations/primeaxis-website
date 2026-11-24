@@ -20,7 +20,7 @@ author: NNEOMA OBI-ASUALO
 date: '2026-11-24'
 readingTime: 6 min read
 featuredImage: >-
-  https://rxiov7wbzmvi55hb.public.blob.vercel-storage.com/uploads/1795529395009-7b742fe7-1000012580.jpg
+  https://rxiov7wbzmvi55hb.public.blob.vercel-storage.com/uploads/1795533231856-a2fab96c-1000231088.jpg
 tags:
   - Custom Nigeria
   - News
