@@ -5,7 +5,6 @@ excerpt: >-
   alone, but by ownership, control, and integration across the entire maritime
   value chain.
 category: Industry Intelligence
-section: intelligence
 author: PrimeAxis Intelligence Desk
 date: '2026-06-30'
 readingTime: 3 min read
