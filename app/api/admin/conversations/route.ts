@@ -3,7 +3,8 @@ import { cookies } from 'next/headers'
 import matter from 'gray-matter'
 import { revalidatePath } from 'next/cache'
 import { ADMIN_SESSION_COOKIE, verifySessionToken } from '@/lib/admin-session'
-import { listFiles, getFile, createOrUpdateFile } from '@/lib/github'
+import { getFile, getProductionBranch, listFiles } from '@/lib/github'
+import { saveContentToBranches } from '@/lib/content-branches'
 
 // Always hits GitHub live — never cached.
 export const dynamic = 'force-dynamic'
@@ -144,6 +145,17 @@ export async function POST(request: NextRequest) {
       { status: 409 }
     )
   }
+  try {
+    if (await getFile(`content/conversations/${slug}.md`, getProductionBranch())) {
+      return NextResponse.json(
+        { error: `A conversation with the slug "${slug}" already exists in Production. Choose a different slug.` },
+        { status: 409 }
+      )
+    }
+  } catch (error) {
+    const message = error instanceof Error ? error.message : String(error)
+    return NextResponse.json({ error: message }, { status: 500 })
+  }
 
   // Transcript ref = EC + year + (highest existing number across all years +
   // 1). Using the max rather than a count avoids collisions if a
@@ -192,17 +204,20 @@ export async function POST(request: NextRequest) {
   const fileContent = matter.stringify('', frontmatter)
 
   try {
-    await createOrUpdateFile(`content/conversations/${slug}.md`, fileContent, `Add conversation: ${executiveName}`)
+    const result = await saveContentToBranches(
+      `content/conversations/${slug}.md`,
+      fileContent,
+      `Add conversation draft: ${executiveName}`,
+      `Publish conversation: ${executiveName}`,
+      `Unpublish conversation: ${executiveName}`,
+      status
+    )
+    revalidatePath('/executive-conversations')
+    revalidatePath(`/executive-conversations/${slug}`)
+    revalidatePath('/')
+    return NextResponse.json({ success: true, slug, transcriptRef, status, ...result })
   } catch (error) {
     const message = error instanceof Error ? error.message : String(error)
     return NextResponse.json({ error: message }, { status: 500 })
   }
-
-  // On-demand ISR — push the new conversation live immediately instead of
-  // waiting for the 3600s fallback window to expire.
-  revalidatePath('/executive-conversations')
-  revalidatePath(`/executive-conversations/${slug}`)
-  revalidatePath('/')
-
-  return NextResponse.json({ success: true, slug, transcriptRef })
 }

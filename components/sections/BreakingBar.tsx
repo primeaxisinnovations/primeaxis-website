@@ -1,13 +1,13 @@
 import Link from 'next/link'
-import { getAllArticles } from '@/lib/content'
+import { getPublicArticles } from '@/lib/public-content'
 import type { Article } from '@/types'
 
 // Self-contained Server Component: fetches its own published articles via
-// getAllArticles() so it can be dropped into any Server Component page with no
+// getPublicArticles() so it can be dropped into any Server Component page with no
 // props. The markup is purely presentational (Links + a CSS-only ticker
-// animation), so it ships no client JS. getAllArticles() is request-memoized
+// animation), so it ships no client JS. getPublicArticles() is request-memoized
 // (React cache()), so rendering this alongside a page that already calls it
-// costs a single GitHub request, not two.
+// reuses the same parsed Markdown collection.
 
 function TickerItems({ articles, copyKey }: { articles: Article[]; copyKey: string }) {
   return (
@@ -27,7 +27,7 @@ function TickerItems({ articles, copyKey }: { articles: Article[]; copyKey: stri
 export default async function BreakingBar() {
   // Breaking headlines are current developments, so only news-section
   // articles belong in the ticker.
-  const articles = (await getAllArticles())
+  const articles = (await getPublicArticles())
     .filter((article) => article.section === 'industry-news-reports')
     .slice(0, 5)
   if (articles.length === 0) return null

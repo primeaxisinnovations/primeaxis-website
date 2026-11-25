@@ -1,44 +1,11 @@
-// SERVER-ONLY MODULE — reads conversations live from GitHub via lib/github.ts,
-// the same source of truth the admin panel reads from and writes to. There
-// is no local git checkout in this path, so there is no sync gap: an admin
-// Publish/Unpublish/Delete/Save action is visible here on the very next
-// request, on localhost or in production, with no rebuild or git pull.
-//
-// Trade-off this implies: every call below is a live GitHub API request,
-// not a local file read. See the page components that call these functions
-// for the `export const dynamic = 'force-dynamic'` this requires, and the
-// rate-limit/latency/availability notes recorded alongside it.
+// SERVER-ONLY MODULE — GitHub-backed reads used by the authenticated admin.
+// Public pages use lib/public-content.ts and the Markdown bundled at build time.
 
-import matter from 'gray-matter'
 import { listFiles, getFile } from './github'
+import { parseConversation } from './content-parsers'
 import type { Conversation } from '@/types'
 
 const CONVERSATIONS_DIR = 'content/conversations'
-
-function parseConversation(slug: string, raw: string): Conversation {
-  const { data } = matter(raw)
-  return {
-    slug,
-    executiveName: data.executiveName,
-    title: data.title,
-    position: data.position,
-    organisation: data.organisation,
-    photo: data.photo,
-    initials: data.initials,
-    excerpt: data.excerpt,
-    date: data.date,
-    transcriptRef: data.transcriptRef,
-    qa: Array.isArray(data.qa) ? data.qa : [],
-    // Fail closed: anything missing or malformed is treated as a draft,
-    // never as published, so a bad frontmatter value can't accidentally
-    // expose unfinished content on the live site.
-    status: data.status === 'published' ? 'published' : 'draft',
-    introduction: typeof data.introduction === 'string' ? data.introduction : undefined,
-    pullQuote: typeof data.pullQuote === 'string' ? data.pullQuote : undefined,
-    closingQuote: typeof data.closingQuote === 'string' ? data.closingQuote : undefined,
-    editorsNote: typeof data.editorsNote === 'string' ? data.editorsNote : undefined,
-  }
-}
 
 // One file's network error or malformed frontmatter must never take down
 // the whole listing for every visitor — log it and drop that one
@@ -56,8 +23,8 @@ async function fetchConversation(filename: string): Promise<Conversation | null>
   }
 }
 
-// Public-facing pages only ever see published conversations — drafts are
-// visible solely through the admin list, which reads lib/github.ts directly.
+// Admin-facing dashboard reads only published conversations; CMS management
+// routes use lib/github.ts directly when they need drafts.
 export async function getAllConversations(): Promise<Conversation[]> {
   let filenames: string[]
   try {

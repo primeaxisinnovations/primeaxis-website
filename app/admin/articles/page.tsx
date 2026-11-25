@@ -91,7 +91,14 @@ async function fetchArticleList(): Promise<(ArticleListItem | ArticleListError)[
   })
 }
 
-type PageProps = { searchParams: Promise<{ saved?: string; section?: string }> }
+type PageProps = {
+  searchParams: Promise<{
+    saved?: string
+    section?: string
+    status?: string
+    productionUpdated?: string
+  }>
+}
 
 export default async function ArticlesAdminPage({ searchParams }: PageProps) {
   // Defense in depth — verify independently of proxy.ts, see lib/admin-session.ts.
@@ -101,7 +108,7 @@ export default async function ArticlesAdminPage({ searchParams }: PageProps) {
     redirect('/admin/login')
   }
 
-  const { saved, section: sectionParam } = await searchParams
+  const { saved, section: sectionParam, status, productionUpdated } = await searchParams
   const section = isArticleSection(sectionParam) ? sectionParam : undefined
   const articles = await fetchArticleList()
   const visibleArticles = section
@@ -127,7 +134,11 @@ export default async function ArticlesAdminPage({ searchParams }: PageProps) {
 
         {saved && (
           <div className="mb-6 border border-gold/40 bg-gold/10 text-deep px-5 py-4 font-sans text-[13.5px]">
-            {section === 'beyond-the-headlines' ? 'Beyond the Headlines article' : 'Article'} saved. Your site is rebuilding now; this change will be live in a minute or two.
+            {status === 'published'
+              ? 'Published to Production. Vercel will make it live after the Production deployment succeeds.'
+              : productionUpdated === 'true'
+                ? 'Moved to Draft. A Production deployment will remove it from the live site when the build succeeds.'
+                : 'Draft saved to Preview. It will not appear on Production until you publish it.'}
           </div>
         )}
 

@@ -1,26 +1,22 @@
 import type { MetadataRoute } from 'next'
-import { getAllArticles } from '@/lib/content'
-import { getAllConversations } from '@/lib/conversation-content'
-import { getAllEvents } from '@/lib/events'
-import { getAllProfiles } from '@/lib/profile-content'
-import { getAllJobs } from '@/lib/jobs'
+import {
+  getPublicArticles,
+  getPublicConversations,
+  getPublicEvents,
+  getPublicJobs,
+  getPublicProfiles,
+} from '@/lib/public-content'
 import { CATEGORIES, categoryToSlug } from '@/lib/categories'
-import { articleSectionPath } from '@/lib/article-sections'
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://primeaxisinnovations.com.ng'
 
-// Reads live from GitHub on every request (see lib/content.ts /
-// lib/conversation-content.ts) — a newly published article must appear here
-// immediately, not after the next deploy.
-export const dynamic = 'force-dynamic'
-
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const [articles, conversations, events, profiles, jobs] = await Promise.all([
-    getAllArticles(),
-    getAllConversations(),
-    getAllEvents(),
-    getAllProfiles(),
-    getAllJobs(),
+    getPublicArticles(),
+    getPublicConversations(),
+    getPublicEvents(),
+    getPublicProfiles(),
+    getPublicJobs(),
   ])
 
   const staticPages: MetadataRoute.Sitemap = [
@@ -38,7 +34,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   ]
 
   const articlePages: MetadataRoute.Sitemap = articles.map((article) => ({
-    url: `${SITE_URL}${articleSectionPath(article.section)}/${article.slug}`,
+    url: `${SITE_URL}/intelligence-hub/${article.slug}`,
     lastModified: article.date,
     changeFrequency: 'monthly',
     priority: 0.6,

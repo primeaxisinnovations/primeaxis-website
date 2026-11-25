@@ -1,6 +1,6 @@
 import type { Metadata } from 'next'
 import Image from 'next/image'
-import { getAllConversations } from '@/lib/conversation-content'
+import { getPublicConversations } from '@/lib/public-content'
 import { getAllViewCounts } from '@/lib/view-counts'
 import AnimatedSection from '@/components/ui/AnimatedSection'
 import ConversationListLive from '@/components/sections/ConversationListLive'
@@ -15,10 +15,8 @@ export const metadata: Metadata = {
 // ISR: served from the CDN cache, regenerated in the background at most
 // once an hour (3600s) — a Publish/Unpublish/Save shows up within ~an hour.
 // Raised from 60s to cut GitHub-API cold-load latency on cache misses.
-export const revalidate = 3600
-
 export default async function ExecutiveConversationsPage() {
-  const conversations = await getAllConversations()
+  const conversations = await getPublicConversations()
   // One Blob read for the whole page — every card's read-only badge.
   const viewCounts = await getAllViewCounts('conversation')
 

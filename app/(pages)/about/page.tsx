@@ -4,7 +4,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import AnimatedSection from '@/components/ui/AnimatedSection'
 import BreakingBar from '@/components/sections/BreakingBar'
-import { getAllProfiles } from '@/lib/profile-content'
+import { getPublicProfiles } from '@/lib/public-content'
 import { getAllViewCounts } from '@/lib/view-counts'
 import ViewCounter from '@/components/ui/ViewCounter'
 
@@ -99,7 +99,7 @@ const PILLARS: Array<{
 ]
 
 export default async function AboutPage() {
-  const [allProfiles, viewCounts] = await Promise.all([getAllProfiles(), getAllViewCounts('profile')])
+  const [allProfiles, viewCounts] = await Promise.all([getPublicProfiles(), getAllViewCounts('profile')])
   const profiles = allProfiles.slice(0, 6)
   return (
     <div className="min-h-screen bg-cream">

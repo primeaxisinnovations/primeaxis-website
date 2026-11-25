@@ -28,23 +28,29 @@ function getOctokit(): Octokit {
   return octokit
 }
 
-// Every read goes through `ref`, every write goes through `branch` — both
-// always set explicitly from GITHUB_BRANCH. Never omit this and let
-// Octokit/GitHub fall back to the repo's default branch: see the
-// GITHUB_BRANCH comment in .env.local for why that's dangerous.
-function getRepoConfig(): { owner: string; repo: string; branch: string } {
+// Branches are always set explicitly. CMS reads/writes default to
+// GITHUB_BRANCH; publishing may pass GITHUB_PRODUCTION_BRANCH.
+function getRepoConfig(branchOverride?: string): { owner: string; repo: string; branch: string } {
   const owner = process.env.GITHUB_OWNER
   const repo = process.env.GITHUB_REPO
-  const branch = process.env.GITHUB_BRANCH
+  const branch = (branchOverride ?? process.env.GITHUB_BRANCH)?.trim()
   if (!owner || !repo) {
     throw new Error('GITHUB_OWNER and GITHUB_REPO must be set — cannot talk to GitHub.')
   }
   if (!branch) {
     throw new Error(
-      'GITHUB_BRANCH is not set — refusing to guess a branch. Set it explicitly (development during the build, main only at go-live).'
+      'GITHUB_BRANCH is not set — refusing to guess a branch. Set it explicitly to the CMS Preview branch.'
     )
   }
   return { owner, repo, branch }
+}
+
+export function getProductionBranch(): string {
+  const branch = (process.env.GITHUB_PRODUCTION_BRANCH ?? 'main').trim()
+  if (!branch) {
+    throw new Error('GITHUB_PRODUCTION_BRANCH cannot be empty.')
+  }
+  return branch
 }
 
 function isNotFoundError(error: unknown): boolean {
@@ -115,9 +121,9 @@ function isTransientError(error: unknown): boolean {
 // backoff) because we've directly observed GitHub API connect timeouts from
 // this environment that succeed on a bare retry seconds later. Genuine
 // 401/403/404 fail on the first attempt, same as before this change.
-export async function getFile(path: string): Promise<GitHubFile | null> {
+export async function getFile(path: string, branch?: string): Promise<GitHubFile | null> {
   const client = getOctokit()
-  const { owner, repo, branch } = getRepoConfig()
+  const { owner, repo, branch: ref } = getRepoConfig(branch)
   const timeoutMs = getRequestTimeoutMs()
 
   for (let attempt = 1; attempt <= RETRY_ATTEMPTS; attempt++) {
@@ -126,7 +132,7 @@ export async function getFile(path: string): Promise<GitHubFile | null> {
         owner,
         repo,
         path,
-        ref: branch,
+        ref,
         request: { signal: AbortSignal.timeout(timeoutMs) },
       })
 
@@ -157,11 +163,16 @@ export async function getFile(path: string): Promise<GitHubFile | null> {
 }
 
 // Creates the file if it doesn't exist, or updates it in place if it does.
-export async function createOrUpdateFile(path: string, content: string, commitMessage: string): Promise<{ sha: string }> {
-  const { owner, repo, branch } = getRepoConfig()
+export async function createOrUpdateFile(
+  path: string,
+  content: string,
+  commitMessage: string,
+  branch?: string
+): Promise<{ sha: string }> {
+  const { owner, repo, branch: targetBranch } = getRepoConfig(branch)
   const client = getOctokit()
 
-  const existing = await getFile(path)
+  const existing = await getFile(path, targetBranch)
 
   try {
     const response = await client.rest.repos.createOrUpdateFileContents({
@@ -170,7 +181,7 @@ export async function createOrUpdateFile(path: string, content: string, commitMe
       path,
       message: commitMessage,
       content: Buffer.from(content, 'utf-8').toString('base64'),
-      branch,
+      branch: targetBranch,
       ...(existing ? { sha: existing.sha } : {}),
     })
 
@@ -184,25 +195,25 @@ export async function createOrUpdateFile(path: string, content: string, commitMe
   }
 }
 
-export async function deleteFile(path: string, sha: string, commitMessage: string): Promise<void> {
-  const { owner, repo, branch } = getRepoConfig()
+export async function deleteFile(path: string, sha: string, commitMessage: string, branch?: string): Promise<void> {
+  const { owner, repo, branch: targetBranch } = getRepoConfig(branch)
   const client = getOctokit()
 
   try {
-    await client.rest.repos.deleteFile({ owner, repo, path, message: commitMessage, sha, branch })
+    await client.rest.repos.deleteFile({ owner, repo, path, message: commitMessage, sha, branch: targetBranch })
   } catch (error) {
     throw wrapGitHubError('deleteFile', path, error)
   }
 }
 
 // Returns the filenames (not full paths) of every file directly inside `directory`.
-export async function listFiles(directory: string): Promise<string[]> {
-  const { owner, repo, branch } = getRepoConfig()
+export async function listFiles(directory: string, branch?: string): Promise<string[]> {
+  const { owner, repo, branch: ref } = getRepoConfig(branch)
   const client = getOctokit()
 
   let response
   try {
-    response = await client.rest.repos.getContent({ owner, repo, path: directory, ref: branch })
+    response = await client.rest.repos.getContent({ owner, repo, path: directory, ref })
   } catch (error) {
     throw wrapGitHubError('listFiles', directory, error)
   }

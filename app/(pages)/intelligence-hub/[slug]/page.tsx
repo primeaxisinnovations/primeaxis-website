@@ -2,7 +2,7 @@ import { notFound } from 'next/navigation'
 import type { Metadata } from 'next'
 import Image from 'next/image'
 import Link from 'next/link'
-import { getAllArticles, getArticleBySlug } from '@/lib/content'
+import { getPublicArticles, getPublicArticleBySlug } from '@/lib/public-content'
 import { getAllViewCounts } from '@/lib/view-counts'
 import { formatDate } from '@/lib/utils'
 import { paragraphExcerpt, ogDescription } from '@/lib/share-excerpt'
@@ -19,14 +19,16 @@ const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://primeaxisinnovatio
 
 type PageProps = { params: Promise<{ slug: string }> }
 
-// CMS-backed dynamic detail route: do not prerender or freeze these against
-// GitHub API availability. The route fetches the published article at runtime
-// so publishing, edits, and unpublishing remain immediately visible.
-export const dynamic = 'force-dynamic'
+export const dynamicParams = false
+
+export async function generateStaticParams() {
+  const articles = await getPublicArticles()
+  return articles.map((article) => ({ slug: article.slug }))
+}
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { slug } = await params
-  const article = await getArticleBySlug(slug)
+  const article = await getPublicArticleBySlug(slug)
   if (!article) return {}
   // Strongest OG excerpt: first paragraph of the (HTML) body, cleaned and
   // truncated to the ~200-char window these platforms actually display.
@@ -52,10 +54,10 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 
 export default async function ArticlePage({ params }: PageProps) {
   const { slug } = await params
-  const article = await getArticleBySlug(slug)
+  const article = await getPublicArticleBySlug(slug)
   if (!article) notFound()
 
-  const allArticles = await getAllArticles()
+  const allArticles = await getPublicArticles()
 
   // One Blob read for the whole map: seeds this article's interactive counter
   // AND every related card's read-only badge without a per-card fetch.
@@ -73,7 +75,7 @@ export default async function ArticlePage({ params }: PageProps) {
 
   const sectionLabel = articleSectionLabel(article.section)
   const sectionPath = articleSectionPath(article.section)
-  const pageUrl = `${SITE_URL}${sectionPath}/${article.slug}`
+  const pageUrl = `${SITE_URL}/intelligence-hub/${article.slug}`
   const encodedUrl = encodeURIComponent(pageUrl)
   const encodedTitle = encodeURIComponent(article.title)
 

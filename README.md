@@ -20,6 +20,12 @@ You can start editing the page by modifying `app/page.tsx`. The page auto-update
 
 This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
 
+## CMS publishing
+
+The admin CMS saves drafts to the branch configured by `GITHUB_BRANCH` (the Preview branch). Choosing **Publish** also writes the published content to `GITHUB_PRODUCTION_BRANCH`, which defaults to `main`; Vercel then builds Production from that branch. Saving an already-published item as a draft updates its Production copy to draft, and deleting an item removes it from both branches.
+
+The GitHub token must have Contents read/write permission on both branches, and branch rules must allow the CMS to commit directly. Keep `GITHUB_BRANCH` set to a branch distinct from `GITHUB_PRODUCTION_BRANCH` so draft saves cannot reach Production. Production writes are allowed only from Vercel's Production deployment; Preview deployments can save drafts but cannot publish, unpublish, or delete Production content.
+
 ## Learn More
 
 To learn more about Next.js, take a look at the following resources:

@@ -4,7 +4,7 @@ import Image from 'next/image'
 import AnimatedSection from '@/components/ui/AnimatedSection'
 import IntelligenceHubGrid from '@/components/sections/IntelligenceHubGrid'
 import BreakingBar from '@/components/sections/BreakingBar'
-import { getAllArticles } from '@/lib/content'
+import { getPublicArticles } from '@/lib/public-content'
 import { getAllViewCounts } from '@/lib/view-counts'
 
 export const metadata: Metadata = {
@@ -13,13 +13,8 @@ export const metadata: Metadata = {
     "Strategic maritime analysis, industry intelligence, and policy perspectives shaping Africa's maritime future.",
 }
 
-// ISR: served from the CDN cache, regenerated in the background at most
-// once an hour (3600s) — a Publish/Unpublish/Save shows up within ~an hour.
-// Raised from 60s to cut GitHub-API cold-load latency on cache misses.
-export const revalidate = 3600
-
 export default async function IntelligenceHubPage() {
-  const articles = (await getAllArticles()).filter((article) => article.section === 'intelligence')
+  const articles = (await getPublicArticles()).filter((article) => article.section === 'intelligence')
   // One Blob read for the whole page — every card's read-only badge, no
   // per-card fetch (getAllViewCounts is a single blob read of the slug→count map).
   const viewCounts = await getAllViewCounts('article')

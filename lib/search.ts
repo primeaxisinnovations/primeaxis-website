@@ -1,11 +1,6 @@
-// SERVER-ONLY MODULE — calls getAllArticles()/getAllConversations(), which
-// read live from GitHub (see lib/content.ts / lib/conversation-content.ts).
-// Same trade-off applies here: every search is a live GitHub read, not a
-// cached index. No caching is added deliberately — see the earlier note in
-// lib/github.ts about the stale-data bug a cache would risk reintroducing.
+// SERVER-ONLY MODULE — searches the Markdown bundled with the deployment.
 
-import { getAllArticles } from './content'
-import { getAllConversations } from './conversation-content'
+import { getPublicArticles, getPublicConversations } from './public-content'
 import type { Article, Conversation } from '@/types'
 
 export type SearchResult =
@@ -39,14 +34,12 @@ function rankConversation(conversation: Conversation, query: string): number | n
   return fields.some((field) => includesQuery(field, query)) ? RANK_OTHER_MATCH : null
 }
 
-// Searches only published articles/conversations — getAllArticles() and
-// getAllConversations() already filter to published, matching every other
-// public-facing read in this codebase.
+// Public readers expose published content only.
 export async function searchContent(query: string): Promise<SearchResult[]> {
   const normalizedQuery = query.trim().toLowerCase()
   if (!normalizedQuery) return []
 
-  const [articles, conversations] = await Promise.all([getAllArticles(), getAllConversations()])
+  const [articles, conversations] = await Promise.all([getPublicArticles(), getPublicConversations()])
 
   const matches: { result: SearchResult; rank: number; date: string }[] = []
 
