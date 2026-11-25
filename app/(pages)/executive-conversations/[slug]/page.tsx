@@ -2,7 +2,7 @@ import { notFound } from 'next/navigation'
 import type { Metadata } from 'next'
 import Image from 'next/image'
 import Link from 'next/link'
-import { getAllConversations, getConversationBySlug } from '@/lib/conversation-content'
+import { getPublicConversations, getPublicConversationBySlug } from '@/lib/public-content'
 import { getAllViewCounts } from '@/lib/view-counts'
 import { formatDate } from '@/lib/utils'
 import { paragraphExcerpt, ogDescription } from '@/lib/share-excerpt'
@@ -17,13 +17,16 @@ const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://primeaxisinnovatio
 
 type PageProps = { params: Promise<{ slug: string }> }
 
-// CMS-backed dynamic detail route: fetch content at runtime instead of
-// prerendering GitHub-backed slugs during the deployment build.
-export const dynamic = 'force-dynamic'
+export const dynamicParams = false
+
+export async function generateStaticParams() {
+  const conversations = await getPublicConversations()
+  return conversations.map((conversation) => ({ slug: conversation.slug }))
+}
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { slug } = await params
-  const conversation = await getConversationBySlug(slug)
+  const conversation = await getPublicConversationBySlug(slug)
   if (!conversation) return {}
   // Conversations have no article body. Prefer the first paragraph of the
   // (optional, HTML) introduction; otherwise keep the hand-written standfirst
@@ -69,10 +72,10 @@ function PullQuoteSection({ text }: { text: string }) {
 
 export default async function ConversationPage({ params }: PageProps) {
   const { slug } = await params
-  const conversation = await getConversationBySlug(slug)
+  const conversation = await getPublicConversationBySlug(slug)
   if (!conversation) notFound()
 
-  const others = (await getAllConversations()).filter((c) => c.slug !== conversation.slug)
+  const others = (await getPublicConversations()).filter((c) => c.slug !== conversation.slug)
 
   // One Blob read for the whole map: seeds this conversation's interactive
   // counter AND every "More Conversations" card's read-only badge.

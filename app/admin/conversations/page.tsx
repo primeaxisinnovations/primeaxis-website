@@ -134,7 +134,7 @@ export default async function ConversationsAdminPage({ searchParams }: PageProps
 
         {saved && (
           <div className="mb-6 border border-gold/40 bg-gold/10 text-deep px-5 py-4 font-sans text-[13.5px]">
-            Conversation saved. Your site is rebuilding now; this change will be live in a minute or two.
+            Saved. Drafts stay in Preview; publishing sends the conversation to Production and starts a Vercel deployment.
           </div>
         )}
 

@@ -5,7 +5,6 @@ import type { Article } from '@/types'
 import Tag from './Tag'
 import ViewCounter from './ViewCounter'
 import { cn, formatDate } from '@/lib/utils'
-import { articleSectionPath } from '@/lib/article-sections'
 
 type CardVariant = 'hero' | 'standard' | 'horizontal'
 
@@ -21,7 +20,7 @@ interface ArticleCardProps {
 }
 
 export default function ArticleCard({ article, variant = 'standard', className, viewCount }: ArticleCardProps) {
-  const articlePath = `${articleSectionPath(article.section)}/${article.slug}`
+  const articlePath = `/intelligence-hub/${article.slug}`
   if (variant === 'hero') {
     return (
       <Link

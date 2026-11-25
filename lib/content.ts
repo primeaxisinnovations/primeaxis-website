@@ -1,43 +1,12 @@
-// SERVER-ONLY MODULE — reads articles live from GitHub via lib/github.ts,
-// the same source of truth the admin panel reads from and writes to. There
-// is no local git checkout in this path, so there is no sync gap: an admin
-// Publish/Unpublish/Delete/Save action is visible here on the very next
-// request, on localhost or in production, with no rebuild or git pull.
-//
-// Trade-off this implies: every call below is a live GitHub API request,
-// not a local file read. See the page components that call these functions
-// for the `export const dynamic = 'force-dynamic'` this requires, and the
-// rate-limit/latency/availability notes recorded alongside it.
+// SERVER-ONLY MODULE — GitHub-backed reads used by the authenticated admin.
+// Public pages use lib/public-content.ts and the Markdown bundled at build time.
 
 import { cache } from 'react'
-import matter from 'gray-matter'
 import { listFiles, getFile } from './github'
-import { parseArticleSection } from './article-sections'
+import { parseArticle } from './content-parsers'
 import type { Article } from '@/types'
 
 const ARTICLES_DIR = 'content/articles'
-
-function parseArticle(slug: string, raw: string): Article {
-  const { data, content } = matter(raw)
-  return {
-    slug,
-    title: data.title,
-    excerpt: data.excerpt,
-    section: parseArticleSection(data.section),
-    category: data.category,
-    author: data.author,
-    date: data.date,
-    readingTime: data.readingTime,
-    featuredImage: data.featuredImage,
-    referenceCode: data.referenceCode,
-    tags: data.tags,
-    body: content.trim(),
-    // Fail closed: anything missing or malformed is treated as a draft,
-    // never as published, so a bad frontmatter value can't accidentally
-    // expose unfinished content on the live site.
-    status: data.status === 'published' ? 'published' : 'draft',
-  }
-}
 
 // One file's network error or malformed frontmatter must never take down
 // the whole listing for every visitor — log it and drop that one article,
@@ -54,12 +23,12 @@ async function fetchArticle(filename: string): Promise<Article | null> {
   }
 }
 
-// Public-facing pages only ever see published articles — drafts are visible
-// solely through the admin list, which reads lib/github.ts directly.
+// Admin-facing dashboard reads only published articles; CMS management routes
+// use lib/github.ts directly when they need drafts.
 //
 // Wrapped in React cache() so multiple server components in the same request
 // (e.g. a page plus its self-fetching <BreakingBar />) share one GitHub call
-// instead of each hitting the API.
+// instead of each repeating the repository read.
 export const getAllArticles = cache(async function getAllArticles(): Promise<Article[]> {
   let filenames: string[]
   try {

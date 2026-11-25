@@ -3,7 +3,8 @@ import { cookies } from 'next/headers'
 import matter from 'gray-matter'
 import { revalidatePath } from 'next/cache'
 import { ADMIN_SESSION_COOKIE, verifySessionToken } from '@/lib/admin-session'
-import { getFile, createOrUpdateFile, deleteFile } from '@/lib/github'
+import { getFile } from '@/lib/github'
+import { deleteContentFromBranches, saveContentToBranches } from '@/lib/content-branches'
 
 // Always hits GitHub live — never cached.
 export const dynamic = 'force-dynamic'
@@ -160,19 +161,22 @@ export async function PUT(request: NextRequest, { params }: RouteParams) {
   const fileContent = matter.stringify('', frontmatter)
 
   try {
-    await createOrUpdateFile(path, fileContent, `Update conversation: ${executiveName}`)
+    const result = await saveContentToBranches(
+      path,
+      fileContent,
+      `Save conversation draft: ${executiveName}`,
+      `Publish conversation update: ${executiveName}`,
+      `Unpublish conversation: ${executiveName}`,
+      status
+    )
+    revalidatePath('/executive-conversations')
+    revalidatePath(`/executive-conversations/${slug}`)
+    revalidatePath('/')
+    return NextResponse.json({ success: true, slug, transcriptRef, status, ...result })
   } catch (error) {
     const message = error instanceof Error ? error.message : String(error)
     return NextResponse.json({ error: message }, { status: 500 })
   }
-
-  // On-demand ISR — reflect the edit on the live site immediately instead of
-  // waiting for the 3600s fallback window to expire.
-  revalidatePath('/executive-conversations')
-  revalidatePath(`/executive-conversations/${slug}`)
-  revalidatePath('/')
-
-  return NextResponse.json({ success: true, slug, transcriptRef })
 }
 
 export async function DELETE(_request: NextRequest, { params }: RouteParams) {
@@ -198,14 +202,13 @@ export async function DELETE(_request: NextRequest, { params }: RouteParams) {
   }
 
   try {
-    await deleteFile(path, existing.sha, `Delete conversation: ${slug}`)
+    await deleteContentFromBranches(path, `Delete conversation: ${slug}`)
   } catch (error) {
     const message = error instanceof Error ? error.message : String(error)
     return NextResponse.json({ error: message }, { status: 500 })
   }
 
-  // On-demand ISR — drop the deleted conversation from the live listings/detail
-  // immediately instead of waiting for the 3600s fallback window to expire.
+  // Preview requests can reuse cached content; Production rebuilds from main.
   revalidatePath('/executive-conversations')
   revalidatePath(`/executive-conversations/${slug}`)
   revalidatePath('/')

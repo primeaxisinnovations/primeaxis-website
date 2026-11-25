@@ -3,7 +3,8 @@ import { cookies } from 'next/headers'
 import matter from 'gray-matter'
 import { ADMIN_SESSION_COOKIE, verifySessionToken } from '@/lib/admin-session'
 import { revalidatePath } from 'next/cache'
-import { getFile, createOrUpdateFile, deleteFile } from '@/lib/github'
+import { getFile } from '@/lib/github'
+import { deleteContentFromBranches, saveContentToBranches } from '@/lib/content-branches'
 import { CATEGORIES } from '@/lib/categories'
 import { isArticleSection } from '@/lib/article-sections'
 import type { ArticleSection } from '@/types'
@@ -129,22 +130,25 @@ export async function PUT(request: NextRequest, { params }: RouteParams) {
   const fileContent = matter.stringify(`${body}\n`, frontmatter)
 
   try {
-    await createOrUpdateFile(path, fileContent, `Update article: ${title}`)
+    const result = await saveContentToBranches(
+      path,
+      fileContent,
+      `Save article draft: ${title}`,
+      `Publish article update: ${title}`,
+      `Unpublish article: ${title}`,
+      status
+    )
+    revalidatePath('/intelligence-hub')
+    revalidatePath('/industry-news-reports')
+    revalidatePath('/beyond-the-headlines')
+    revalidatePath('/sitemap.xml')
+    revalidatePath(`/intelligence-hub/${slug}`)
+    revalidatePath('/')
+    return NextResponse.json({ success: true, slug, referenceCode, status, ...result })
   } catch (error) {
     const message = error instanceof Error ? error.message : String(error)
     return NextResponse.json({ error: message }, { status: 500 })
   }
-
-  // On-demand ISR — reflect the edit on the live site immediately instead of
-  // waiting for the 3600s fallback window to expire.
-  revalidatePath('/intelligence-hub')
-  revalidatePath('/industry-news-reports')
-  revalidatePath('/beyond-the-headlines')
-  revalidatePath('/sitemap.xml')
-  revalidatePath(`/intelligence-hub/${slug}`)
-  revalidatePath('/')
-
-  return NextResponse.json({ success: true, slug, referenceCode })
 }
 
 export async function DELETE(_request: NextRequest, { params }: RouteParams) {
@@ -170,14 +174,13 @@ export async function DELETE(_request: NextRequest, { params }: RouteParams) {
   }
 
   try {
-    await deleteFile(path, existing.sha, `Delete article: ${slug}`)
+    await deleteContentFromBranches(path, `Delete article: ${slug}`)
   } catch (error) {
     const message = error instanceof Error ? error.message : String(error)
     return NextResponse.json({ error: message }, { status: 500 })
   }
 
-  // On-demand ISR — drop the deleted article from the live listings/detail
-  // immediately instead of waiting for the 3600s fallback window to expire.
+  // Preview requests can reuse cached content; Production rebuilds from main.
   revalidatePath('/intelligence-hub')
   revalidatePath('/industry-news-reports')
   revalidatePath('/beyond-the-headlines')

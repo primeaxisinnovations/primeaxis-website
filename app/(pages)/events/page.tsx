@@ -1,6 +1,6 @@
 import type { Metadata } from 'next'
 import Image from 'next/image'
-import { getAllEvents } from '@/lib/events'
+import { getPublicEvents } from '@/lib/public-content'
 import EventsBrowser from '@/components/events/EventsBrowser'
 import BreakingBar from '@/components/sections/BreakingBar'
 
@@ -10,13 +10,8 @@ export const metadata: Metadata = {
     "Conferences, summits, and press briefings shaping Africa's maritime agenda — captured by the PrimeAxis intelligence desk.",
 }
 
-// ISR: served from the CDN cache, regenerated in the background at most
-// once an hour (3600s) — a Publish/Unpublish/Save shows up within ~an hour.
-// Raised from 60s to cut GitHub-API cold-load latency on cache misses.
-export const revalidate = 3600
-
 export default async function EventsPage() {
-  const events = await getAllEvents()
+  const events = await getPublicEvents()
 
   return (
     <div className="min-h-screen" style={{ background: '#0D1824' }}>

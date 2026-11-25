@@ -4,7 +4,7 @@ import Image from 'next/image'
 import AnimatedSection from '@/components/ui/AnimatedSection'
 import IntelligenceHubGrid from '@/components/sections/IntelligenceHubGrid'
 import BreakingBar from '@/components/sections/BreakingBar'
-import { getAllArticles } from '@/lib/content'
+import { getPublicArticles } from '@/lib/public-content'
 import { getAllViewCounts } from '@/lib/view-counts'
 
 export const metadata: Metadata = {
@@ -13,10 +13,8 @@ export const metadata: Metadata = {
     "PrimeAxis's Friday editorial edition: context, strategic analysis and the stories shaping Africa's maritime future.",
 }
 
-export const revalidate = 3600
-
 export default async function BeyondTheHeadlinesPage() {
-  const articles = (await getAllArticles()).filter(
+  const articles = (await getPublicArticles()).filter(
     (article) => article.section === 'beyond-the-headlines'
   )
   const viewCounts = await getAllViewCounts('article')

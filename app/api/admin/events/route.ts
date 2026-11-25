@@ -3,7 +3,8 @@ import { cookies } from 'next/headers'
 import matter from 'gray-matter'
 import { revalidatePath } from 'next/cache'
 import { ADMIN_SESSION_COOKIE, verifySessionToken } from '@/lib/admin-session'
-import { listFiles, createOrUpdateFile } from '@/lib/github'
+import { getFile, getProductionBranch, listFiles } from '@/lib/github'
+import { saveContentToBranches } from '@/lib/content-branches'
 import { validateEventBody, buildEventFrontmatter } from '@/lib/event-validation'
 
 // Always hits GitHub live — never cached.
@@ -48,20 +49,34 @@ export async function POST(request: NextRequest) {
       { status: 409 }
     )
   }
-
-  const fileContent = matter.stringify('', buildEventFrontmatter(validated.value))
-
   try {
-    await createOrUpdateFile(`content/events/${slug}.md`, fileContent, `Add event: ${title}`)
+    if (await getFile(`content/events/${slug}.md`, getProductionBranch())) {
+      return NextResponse.json(
+        { error: `An event with the slug "${slug}" already exists in Production. Choose a different slug.` },
+        { status: 409 }
+      )
+    }
   } catch (error) {
     const message = error instanceof Error ? error.message : String(error)
     return NextResponse.json({ error: message }, { status: 500 })
   }
 
-  // On-demand ISR — push the new event live immediately instead of waiting
-  // for the 3600s fallback window to expire.
-  revalidatePath('/events')
-  revalidatePath('/')
+  const fileContent = matter.stringify('', buildEventFrontmatter(validated.value))
 
-  return NextResponse.json({ success: true, slug })
+  try {
+    const result = await saveContentToBranches(
+      `content/events/${slug}.md`,
+      fileContent,
+      `Add event draft: ${title}`,
+      `Publish event: ${title}`,
+      `Unpublish event: ${title}`,
+      validated.value.status
+    )
+    revalidatePath('/events')
+    revalidatePath('/')
+    return NextResponse.json({ success: true, slug, status: validated.value.status, ...result })
+  } catch (error) {
+    const message = error instanceof Error ? error.message : String(error)
+    return NextResponse.json({ error: message }, { status: 500 })
+  }
 }

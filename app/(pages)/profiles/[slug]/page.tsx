@@ -5,10 +5,15 @@ import { notFound } from 'next/navigation'
 import BreakingBar from '@/components/sections/BreakingBar'
 import ViewCounter from '@/components/ui/ViewCounter'
 import ProfileShareButtons from '@/components/ui/ProfileShareButtons'
-import { getAllProfiles, getProfileBySlug, getProfilePlainText } from '@/lib/profile-content'
+import { getPublicProfiles, getPublicProfileBySlug, getProfilePlainText } from '@/lib/public-content'
 import { getAllViewCounts, getViewCount } from '@/lib/view-counts'
 
-export const dynamic = 'force-dynamic'
+export const dynamicParams = false
+
+export async function generateStaticParams() {
+  const profiles = await getPublicProfiles()
+  return profiles.map((profile) => ({ slug: profile.slug }))
+}
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://primeaxisinnovations.com.ng'
 const DEFAULT_PROFILE_DESCRIPTION =
@@ -16,7 +21,7 @@ const DEFAULT_PROFILE_DESCRIPTION =
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
   const { slug } = await params
-  const profile = await getProfileBySlug(slug)
+  const profile = await getPublicProfileBySlug(slug)
   if (!profile) {
     return {
       title: 'Prime Axis Profile | PrimeAxis',
@@ -60,14 +65,14 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
 
 export default async function ProfilePage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params
-  const profile = await getProfileBySlug(slug)
+  const profile = await getPublicProfileBySlug(slug)
   if (!profile) notFound()
 
   const profileDescription = getProfilePlainText(profile.bio) || DEFAULT_PROFILE_DESCRIPTION
   const profileUrl = `${SITE_URL}/profiles/${profile.slug}`
   const [viewCount, recentProfiles, viewCounts] = await Promise.all([
     getViewCount('profile', profile.slug),
-    getAllProfiles(),
+    getPublicProfiles(),
     getAllViewCounts('profile'),
   ])
   const relatedProfiles = recentProfiles.filter((item) => item.slug !== profile.slug).slice(0, 6)

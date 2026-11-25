@@ -1,23 +1,8 @@
-import matter from 'gray-matter'
 import { listFiles, getFile } from './github'
+import { parseJob } from './content-parsers'
 import type { Job } from '@/types'
 
 const JOBS_DIR = 'content/jobs'
-
-function parseJob(slug: string, raw: string): Job {
-  const { data, content } = matter(raw)
-  return {
-    slug,
-    title: String(data.title ?? ''),
-    location: String(data.location ?? ''),
-    type: String(data.type ?? ''),
-    department: String(data.department ?? ''),
-    closingDate: String(data.closingDate ?? ''),
-    summary: String(data.summary ?? ''),
-    body: content.trim(),
-    status: data.status === 'published' ? 'published' : 'draft',
-  }
-}
 
 export async function getAllJobs(): Promise<Job[]> {
   let files: string[]

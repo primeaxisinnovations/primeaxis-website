@@ -117,8 +117,13 @@ export default function ArticleForm({ mode, initialValues, initialSection }: Art
         section === 'beyond-the-headlines'
           ? '/admin/articles?section=beyond-the-headlines'
           : '/admin/articles'
+      const params = new URLSearchParams({
+        saved: data.slug ?? slug,
+        status,
+        productionUpdated: String(data.productionUpdated),
+      })
       const querySeparator = returnPath.includes('?') ? '&' : '?'
-      router.push(`${returnPath}${querySeparator}saved=${encodeURIComponent(data.slug ?? slug)}`)
+      router.push(`${returnPath}${querySeparator}${params.toString()}`)
     } catch {
       setError('Something went wrong. Please try again.')
       setIsSubmitting(false)
@@ -299,6 +304,9 @@ export default function ArticleForm({ mode, initialValues, initialSection }: Art
               Cancel
             </a>
           </div>
+          <p className="font-sans text-[12px] text-muted">
+            Drafts are saved to Preview. Publish from the Production admin to send the article to the Production branch and start a Vercel deployment.
+          </p>
         </form>
       </div>
     </div>

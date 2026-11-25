@@ -3,7 +3,8 @@ import { cookies } from 'next/headers'
 import matter from 'gray-matter'
 import { revalidatePath } from 'next/cache'
 import { ADMIN_SESSION_COOKIE, verifySessionToken } from '@/lib/admin-session'
-import { getFile, createOrUpdateFile, deleteFile } from '@/lib/github'
+import { getFile } from '@/lib/github'
+import { deleteContentFromBranches, saveContentToBranches } from '@/lib/content-branches'
 import { validateEventBody, buildEventFrontmatter } from '@/lib/event-validation'
 
 // Always hits GitHub live — never cached.
@@ -43,18 +44,21 @@ export async function PUT(request: NextRequest, { params }: RouteParams) {
   const fileContent = matter.stringify('', buildEventFrontmatter(validated.value))
 
   try {
-    await createOrUpdateFile(path, fileContent, `Update event: ${title}`)
+    const result = await saveContentToBranches(
+      path,
+      fileContent,
+      `Save event draft: ${title}`,
+      `Publish event update: ${title}`,
+      `Unpublish event: ${title}`,
+      validated.value.status
+    )
+    revalidatePath('/events')
+    revalidatePath('/')
+    return NextResponse.json({ success: true, slug, status: validated.value.status, ...result })
   } catch (error) {
     const message = error instanceof Error ? error.message : String(error)
     return NextResponse.json({ error: message }, { status: 500 })
   }
-
-  // On-demand ISR — reflect the edit on the live site immediately instead of
-  // waiting for the 3600s fallback window to expire.
-  revalidatePath('/events')
-  revalidatePath('/')
-
-  return NextResponse.json({ success: true, slug })
 }
 
 export async function DELETE(_request: NextRequest, { params }: RouteParams) {
@@ -80,14 +84,13 @@ export async function DELETE(_request: NextRequest, { params }: RouteParams) {
   }
 
   try {
-    await deleteFile(path, existing.sha, `Delete event: ${slug}`)
+    await deleteContentFromBranches(path, `Delete event: ${slug}`)
   } catch (error) {
     const message = error instanceof Error ? error.message : String(error)
     return NextResponse.json({ error: message }, { status: 500 })
   }
 
-  // On-demand ISR — drop the deleted event from the live listing immediately
-  // instead of waiting for the 3600s fallback window to expire.
+  // Preview requests can reuse cached content; Production rebuilds from main.
   revalidatePath('/events')
   revalidatePath('/')
 
