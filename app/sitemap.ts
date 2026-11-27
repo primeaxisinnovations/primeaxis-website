@@ -8,7 +8,7 @@ import {
 } from '@/lib/public-content'
 import { CATEGORIES, categoryToSlug } from '@/lib/categories'
 
-const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://primeaxisinnovations.com.ng'
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://www.primeaxisinnovations.com.ng'
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const [articles, conversations, events, profiles, jobs] = await Promise.all([

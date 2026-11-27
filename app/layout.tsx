@@ -27,6 +27,8 @@ const gaMeasurementId = process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID
 // a broken/empty <meta> tag.
 const googleSiteVerification = process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION
 
+
+
 const playfair = Playfair_Display({
   subsets: ['latin'],
   variable: '--font-playfair',
@@ -45,6 +47,8 @@ const dmMono = DM_Mono({
   variable: '--font-dm-mono',
   weight: ['400', '500'],
 })
+
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://www.primeaxisinnovations.com.ng'
 
 export const metadata: Metadata = {
   title: 'PrimeAxis | Maritime Intelligence & Strategic Communications Platform',
